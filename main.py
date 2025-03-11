@@ -1,121 +1,585 @@
-import asyncio
-import uuid
-import json
+from rich.console import Console
+from rich.markdown import Markdown
+console = Console()
+import ollama
+import threading
+import queue
 import logging
-from legosquare import *
+import colorlog
+import uuid
+from typing import List, Dict, Any
+import networkx as nx
+import matplotlib.pyplot as plt
+import json
 
-# Set up logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+# Constants for prompts (unchanged)
+THOUGHT_GENERATOR_SYSTEM_PROMPT = """Generate an appropriate number of sub-prompts to solve the given problem and explore the problem from specific perspectives and personality traits that are unique
+- the point of the prompts is when their answers are summarized, the main propmt is very well explained, design them with that in mind.
+- make sure each prompt is very unique, dont make the prompts tasks.
+- the goal is to aswer the question cohesively and focus on all essential perspectives.
+- the prompts you give after defining personalities and perspective should be as close to main prompt as possible. phrase the prompt as a question 
+- boldly give personalities
+- the personality should bring unique perspective but shouldn't be TOO creative so you know roles that contribute is the priority
+- personalities could be designed taking into perspective what other personalities may need to complement them
+- do not ask questions that can be answered by yes or no
+- ensure there is a new line between points 
+- do not include any introductory messages
+- DO NOT GIVE THEM NAMES
+- format start:
+    1)personality:prompt
+    2)personality:prompt
+    3)personality:prompt
+    4)personality:prompt
+    ..
+- format end
+do not deviate from format at all 
+"""
+
+SUB_THOUGHT_GENERATOR_SYSTEM_PROMPT = """
+IF you feel like this needs further deliberation, you can simply respond with what personalities should deliberate it and what prompt they should use. they will already be given your current answer, you can ask them further questoins on it
+PLEASE NOTE: there is no need to generate them, if you think the depth of exploration here is sufficient you are not required to further elaborate
+Generate a MAXIMUM of 3 sub-prompts to solve the given problem and explore the problem from specific perspectives and personality traits that are unique
+- the point of the prompts is when their answers are summarized, the main propmt is very well explained, design them with that in mind.
+- make sure each prompt is very unique, dont make the prompts tasks.
+- the goal is to aswer the question cohesively and focus on all essential perspectives.
+- the prompts you give after defining personalities and perspective should be as close to main prompt as possible. phrase the prompt as a question 
+- boldly give personalities
+- DO NOT GIVE THEM NAMES
+- the personality should bring unique perspective but shouldn't be TOO creative so you know roles that contribute is the priority
+- personalities could be designed taking into perspective what other personalities may need to complement them
+- do not ask questions that can be answered by yes or no
+- ensure there is a new line between points if given
+- do not include any introductory messages
+- format start:
+    1)personality:prompt
+    2)personality:prompt
+    ..
+- format end
+do not deviate from format at all 
+"""
+
+SUB_PROMPT_SYSTEM_INSTRUCTION = "You are an AI assistant. Provide EXTREMELY CONCISE and PRECISE responses. Do not answer with yes or no, build unique content. Provide strong tangible solutions to the task at hand. do not include any introductory messages or conclusive messages"
+
+COMBINER_SYSTEM_PROMPT = 'You have been given several perspectives from many different people.INCLUDE EVERY GOOD POINT ANYONE HAS MENTIONED. You will now create a formal plan with all the work everyone has done. Dont summarize, synthesize a coherent synchronous answer that is a final answer to the original prompt, not just a summary of the answers you have. DO NOT GIVE ANY TOPICS. JUST GIVE IT INSTRUCTIONS ON HOW TO DO NOT WHAT TO DO IT ON. do not include any introductory messages or conclusive messages. You do not need to be concise.'
+
+# Configure Colorful Logging
+handler = colorlog.StreamHandler()
+handler.setFormatter(colorlog.ColoredFormatter(
+    '%(log_color)s[%(levelname)s][%(threadName)s] %(message)s',
+    log_colors={
+        'DEBUG': 'cyan',
+        'INFO': 'green',
+        'WARNING': 'yellow',
+        'ERROR': 'red',
+        'CRITICAL': 'red,bg_white',
+    }
+))
+logging.basicConfig(level=logging.INFO, handlers=[handler])
 logger = logging.getLogger(__name__)
 
+# Graph for tracking prompt relationships
+class PromptGraph:
+    def __init__(self):
+        self.graph = nx.DiGraph()
+        self.lock = threading.Lock()
+        
+    def add_node(self, node_id, **attributes):
+        with self.lock:
+            self.graph.add_node(node_id, **attributes)
+    
+    def add_edge(self, parent_id, child_id):
+        with self.lock:
+            self.graph.add_edge(parent_id, child_id)
+    
+    def get_children(self, node_id):
+        with self.lock:
+            return list(self.graph.successors(node_id))
+    
+    def get_parent(self, node_id):
+        with self.lock:
+            parents = list(self.graph.predecessors(node_id))
+            return parents[0] if parents else None
+    
+    
+    def visualize(self, output_file="prompt_graph.png"):
+        with self.lock:
+            plt.figure(figsize=(12, 10))
+            
+            # Create node colors based on depth
+            node_colors = []
+            for node in self.graph.nodes():
+                if node == 'root':
+                    node_colors.append('red')
+                else:
+                    depth = self.graph.nodes[node].get('depth', 0)
+                    if depth == 0:
+                        node_colors.append('orange')
+                    elif depth == 1:
+                        node_colors.append('yellow')
+                    else:
+                        node_colors.append('green')
+            
+            # Create node labels
+            node_labels = {}
+            for node in self.graph.nodes():
+                if node == 'root':
+                    node_labels[node] = 'Main Prompt'
+                else:
+                    label = self.graph.nodes[node].get('prompt', '')
+                    if label and len(label) > 20:
+                        label = label[:17] + "..."
+                    node_labels[node] = f"{node[:4]}...: {label}"
+            
+            pos = nx.spring_layout(self.graph, seed=42)
+            nx.draw(self.graph, pos, with_labels=False, node_color=node_colors, 
+                    node_size=500, arrows=True, arrowsize=15)
+            nx.draw_networkx_labels(self.graph, pos, labels=node_labels, font_size=8)
 
-async def run_demo():
-    logger.info("Starting collaborative agent demo")
+            d = nx.json_graph.node_link_data(self.graph)  # node-link format to serialize
+            json.dump(d, open("out.json", "w"))
+            
+            plt.title("Prompt Hierarchy Graph")
+            plt.savefig(output_file)
+            plt.close()
+            logger.info(f"Graph visualization saved to {output_file}")
+            
+    def to_dict(self):
+        with self.lock:
+            nodes = {}
+            for node in self.graph.nodes():
+                nodes[node] = {
+                    'attributes': dict(self.graph.nodes[node]),
+                    'children': list(self.graph.successors(node)),
+                    'parent': list(self.graph.predecessors(node))
+                }
+            return nodes
+
+def generate_system_prompts(query: str, model: str = "llama3.2"):
+    global THOUGHT_GENERATOR_SYSTEM_PROMPT, SUB_PROMPT_SYSTEM_INSTRUCTION, COMBINER_SYSTEM_PROMPT
     
-    # Create a team
-    team = AgentTeam(str(uuid.uuid4()), "Research Team")
+    try:
+        thought_generator_response = ollama.chat(
+            model=model,
+            messages=[
+                {"role": "system", "content": "You are a prompt engineer. Create a system prompt for generating diverse thought approaches. BE VERY CONCISE. SHORT ANSWERS ONLY. LIKE 3 SENTENCES MAX. DO NOT USE HEADINGS AS THE LLM WILL BE DIRECTLY FED YOUR ANSWER"},
+                {"role": "user", "content": f"Based on this question: '{query}', create a DIRECTION for team members to be made in. Do not tell what team members should be chosen just make reccomendations and hints. You are writing system instructions for the recruiter of the team"}
+            ]
+        )
+        new_thought_generator = thought_generator_response.message.content
+        
+        # Generate the sub-prompt system instruction
+        sub_prompt_response = ollama.chat(
+            model=model,
+            messages=[
+                {"role": "system", "content": "You are a prompt engineer. Create VERY concise system instruction. LIKE 4 SENTENCES MAX. DO NOT USE HEADINGS AS THE LLM WILL BE DIRECTLY FED YOUR ANSWER"},
+                {"role": "user", "content": f"Based on this question: '{query}', create a brief system instruction for responding to sub-prompts. Your prompt should be in the ddirection of HOW to answer, not WHAT to answer. Each system has very specific tasks so this is a guideline of HOW to answer, not what topics to mention. do NOT be generic"}
+            ]
+        )
+        new_sub_prompt = sub_prompt_response.message.content
+        
+        # Generate the combiner prompt
+        combiner_response = ollama.chat(
+            model=model,
+            messages=[
+                {"role": "system", "content": "You are a prompt engineer. Create a system prompt for synthesizing multiple perspectives. LIKE 4 SENTENCES MAX. DO NOT USE HEADINGS AS THE LLM WILL BE DIRECTLY FED YOUR ANSWER"},
+                {"role": "user", "content": f"Based on this question: '{query}', create a system prompt for combining multiple perspectives into one coherent answer. Your system prompt should be more like on how to plan the answer NOT on what to write"}
+            ]
+        )
+        new_combiner = combiner_response.message.content
+        
+        if new_thought_generator.strip():
+            THOUGHT_GENERATOR_SYSTEM_PROMPT = f"""
+            Generate an appropriate number of sub-prompts to solve the given problem and explore the problem from specific perspectives and personality traits that are unique
+            {new_thought_generator}
+            - the point of the prompts is when their answers are summarized, the main propmt is very well explained, design them with that in mind.
+            - make sure each prompt is very unique, dont make the prompts tasks.
+            - the goal is to aswer the question cohesively and focus on all essential perspectives.
+            - the prompts you give after defining personalities and perspective should be as close to main prompt as possible. phrase the prompt as a question 
+            - boldly give personalities
+            - the personality should bring unique perspective but shouldn't be TOO creative so you know roles that contribute is the priority
+            - personalities could be designed taking into perspective what other personalities may need to complement them
+            - do not ask questions that can be answered by yes or no
+            - do not include any introductory messages
+            - format start:
+                1)personality:prompt
+                2)personality:prompt
+                3)personality:prompt
+                4)personality:prompt
+                ..
+            - format end
+            do not deviate from format at all 
+            """
+            
+        if new_sub_prompt.strip():
+            SUB_PROMPT_SYSTEM_INSTRUCTION += new_sub_prompt
+            
+        if new_combiner.strip():
+            COMBINER_SYSTEM_PROMPT += new_combiner
+            
+    except Exception as e:
+        logging.error(f"Error generating system prompts: {e}")
+
+    return f"Modifications to prompts\nTHOUGHT_GENERATOR_SYSTEM_PROMPT: {new_thought_generator}\nSUB_PROMPT_SYSTEM_INSTRUCTION: {new_sub_prompt}\nCOMBINER_SYSTEM_PROMPT: {new_combiner}"
+
+def mprint(string):
+    print("\n\n")
+    console.print(Markdown(string))
+    print("\n\n")
+
+class OllamaPromptProcessor:
+    def __init__(self, base_model='llama3.2'):
+        self.base_model = base_model
+        self.thread_results = {}
+        self.combined_result = None
+        self.task_queue = queue.Queue()
+        self.all_results = []
+        self.result_queue = queue.Queue()
+        self.max_depth = 2  # Limit recursion depth to prevent infinite loops
+        self.colors = [
+            '\033[31m',  # Red
+            '\033[91m',  # Bright Red
+            '\033[33m',  # Yellow
+            '\033[93m',  # Bright Yellow
+            '\033[34m',  # Blue
+            '\033[94m',  # Bright Blue
+            '\033[35m',  # Magenta
+            '\033[95m',  # Bright Magenta
+            '\033[36m',  # Cyan
+            '\033[96m',  # Bright Cyan
+            '\033[32m',  # Green
+            '\033[92m',  # Bright Green
+            '\033[37m',  # White
+            '\033[97m',  # Bright White
+        ]
+        self.color_lock = threading.Lock()
+        self.color_index = 0
+        self.active_threads = 0
+        self.active_threads_lock = threading.Lock()
+        self.all_tasks_completed = threading.Event()
+        
+        # Initialize our graph tracking system
+        self.prompt_graph = PromptGraph()
+        # Add root node
+        self.prompt_graph.add_node('root', prompt='Main Prompt', depth=-1)
     
-    # Create specialized agents with different capabilities
-    researcher = SpecializedAgent(
-        agent_id=str(uuid.uuid4()),
-        name="ResearchBot",
-        specialization="research",
-        skills={"data_analysis": 0.9, "information_retrieval": 0.8, "critical_thinking": 0.7},
-        specialty_areas={"academic_research": 0.9, "literature_review": 0.8}
-    )
+    def get_next_color(self):
+        with self.color_lock:
+            color = self.colors[self.color_index % len(self.colors)]
+            self.color_index += 1
+            return color
     
-    writer = SpecializedAgent(
-        agent_id=str(uuid.uuid4()),
-        name="WriterBot",
-        specialization="writing",
-        skills={"writing": 0.9, "editing": 0.8, "storytelling": 0.7},
-        specialty_areas={"technical_writing": 0.9, "creative_writing": 0.6}
-    )
+    def add_to_queue(self, sub_prompt, parent_id, depth=0):
+        if depth >= self.max_depth:
+            logger.warning(f"Max depth limit reached for task: {sub_prompt}")
+            return False
+        
+        color = self.get_next_color()
+        new_id = str(uuid.uuid4())
+        logger.info(f"{color}Adding new task to queue from parent {parent_id}: {sub_prompt}\033[0m")
+        
+        # Add to our graph
+        if len(sub_prompt.split("\n")) > 1:
+            self.prompt_graph.add_node(new_id, prompt=sub_prompt.split("\n")[-1], depth=depth, color=color)
+        self.prompt_graph.add_node(new_id, prompt=sub_prompt, depth=depth, color=color)
+        self.prompt_graph.add_edge(parent_id, new_id)
+        
+        self.task_queue.put({
+            'id': new_id,
+            'sub_prompt': sub_prompt,
+            'parent_id': parent_id,
+            'depth': depth + 1,
+            'color': color
+        })
+        
+        return True
     
-    analyst = SpecializedAgent(
-        agent_id=str(uuid.uuid4()),
-        name="AnalystBot",
-        specialization="analysis",
-        skills={"data_analysis": 0.9, "critical_thinking": 0.8, "problem_solving": 0.9},
-        specialty_areas={"statistical_analysis": 0.9, "pattern_recognition": 0.8}
-    )
+    def generate_thought_approaches(self, main_prompt: str) -> List[Dict[str, str]]:
+        try:
+            approaches = ollama.chat(model=self.base_model, messages=[
+                {'role': 'system', 'content': THOUGHT_GENERATOR_SYSTEM_PROMPT},
+                {'role': 'user', 'content': f"Main Prompt: how to fix {main_prompt}\nGenerate unique sub-prompts. one per line "}
+            ])
+            mprint(approaches.message.content)
+            
+            approach_list = []
+            for line in approaches.message.content.split('\n'):
+                if line.strip():
+                    node_id = str(uuid.uuid4())
+                    # Add to our graph
+                    self.prompt_graph.add_node(node_id, prompt=line.strip(), depth=0)
+                    self.prompt_graph.add_edge('root', node_id)
+                    
+                    approach_list.append({
+                        'id': node_id,
+                        'prompt': line.strip()
+                    })
+            
+            return approach_list
+        except Exception as e:
+            logger.error(f"Error generating thought approaches: {e}")
+            # Return some fallback approaches with IDs for testing
+            fallbacks = ["a", "b", "c", "d"]
+            approach_list = []
+            for fallback in fallbacks:
+                node_id = str(uuid.uuid4())
+                self.prompt_graph.add_node(node_id, prompt=fallback, depth=0)
+                self.prompt_graph.add_edge('root', node_id)
+                approach_list.append({
+                    'id': node_id,
+                    'prompt': fallback
+                })
+            return approach_list
+
+    def process_sub_prompt(self, task_info: Dict[str, Any]) -> Dict[str, Any]:
+        sub_prompt = task_info['sub_prompt']
+        depth = task_info.get('depth', 0)
+        parent_id = task_info.get('parent_id', 'root')
+        color = task_info.get('color', '\033[37m')  # Default to white
+        node_id = task_info.get('id', str(uuid.uuid4()))
+        
+        thread_logger = colorlog.getLogger(node_id)
+        thread_logger.setLevel(logging.INFO)
+        
+        try:
+            with self.active_threads_lock:
+                self.active_threads += 1
+            
+            thread_logger.info(f"{color}Starting processing of task (depth: {depth}, parent: {parent_id})\033[0m")
+            
+            response = ollama.chat(model=self.base_model, messages=[
+                {'role': 'system', 'content': SUB_PROMPT_SYSTEM_INSTRUCTION},
+                {'role': 'user', 'content': sub_prompt}
+            ])
+
+
+            if depth < self.max_depth:
+                context = [
+                    {'role': 'system', 'content': SUB_THOUGHT_GENERATOR_SYSTEM_PROMPT},
+                    {'role': 'user', 'content': f"Previous response: {response.message.content}"},
+                    {'role': 'user', 'content': "Generate a maximum of three sub prompts, reply with JUST NO if you dont need sub prompts at all"}
+                ]
+                response2 = ollama.chat(model=self.base_model, messages=context)
+                r2 = response2.message.content
+                if len(r2.split("\n")) == 1 and "no" in r2.lower():
+                    mprint(f"Thread {node_id} did not require further analysis")
+                else:
+                    for new_prompt in r2.split("\n"):
+                        self.add_to_queue(response.message.content + "\n" + new_prompt, node_id, depth)
+            
+            result = {
+                'id': node_id,
+                'parent_id': parent_id,
+                'sub_prompt': sub_prompt,
+                'response': response.message.content,
+                'depth': depth,
+                'color': color
+            }
+            
+            # Update node with response
+            self.prompt_graph.add_node(node_id, response=response.message.content)
+            
+            mprint(f"{color}[DEPTH: {depth}] {sub_prompt}"+ "\n\n" + response.message.content+"\033[0m")
+            
+            return result
+        except Exception as e:
+            thread_logger.error(f"{color}Error processing sub-prompt: {e}\033[0m")
+            # Update node with error
+            self.prompt_graph.add_node(node_id, error=str(e))
+            
+            return {
+                'id': node_id,
+                'parent_id': parent_id,
+                'sub_prompt': sub_prompt,
+                'error': str(e),
+                'depth': depth,
+                'color': color
+            }
+        finally:
+            with self.active_threads_lock:
+                self.active_threads -= 1
+                if self.active_threads == 0 and self.task_queue.empty():
+                    self.all_tasks_completed.set()
+
+    def worker(self):
+        """Worker function that processes tasks from the queue."""
+        while True:
+            try:
+                task = self.task_queue.get(block=False)
+                result = self.process_sub_prompt(task)
+                self.result_queue.put(result)
+                self.task_queue.task_done()
+            except queue.Empty:
+                # Check if we should exit
+                if self.all_tasks_completed.is_set():
+                    import time
+                    time.sleep(3)
+                    if self.all_tasks_completed.is_set():
+                        break
+                # No tasks available, wait a bit
+                import time
+                time.sleep(0.1)
+            except Exception as e:
+                logger.error(f"Worker error: {e}")
+                self.task_queue.task_done()
+
+    def combine_responses(self, responses: List[Dict[str, Any]], main_prompt: str) -> Dict[str, Any]:
+        """Combine all responses with a hierarchical approach."""
+        # Our graph already has the hierarchy, so we just need to extract it
+        
+        # Format responses using our graph
+        formatted_responses = []
+        
+        # Helper function to recursively format responses using the graph
+        def format_responses_from_graph(node_id='root', depth=0):
+            children = self.prompt_graph.get_children(node_id)
+            if not children:
+                return []
+            
+            results = []
+            for i, child_id in enumerate(children, 1):
+                indent = "  " * depth
+                node_data = self.prompt_graph.graph.nodes[child_id]
+                prompt = node_data.get('prompt', 'N/A')
+                response_text = node_data.get('response', 'No response')
+                
+                results.append(f"{indent}Perspective {i} (Level {depth}): {prompt}\n{indent}Response: {response_text}")
+                
+                # Process children
+                child_results = format_responses_from_graph(child_id, depth + 1)
+                results.extend(child_results)
+            
+            return results
+        
+        # Start with root responses
+        formatted_responses = format_responses_from_graph('root')
+        
+        combination_prompt = (
+            f"Main Prompt: {main_prompt}\n\n"
+            f"Hierarchical Responses:\n" + 
+            "\n".join(formatted_responses) + 
+            "\n\nSynthesize these responses into a comprehensive summary. "
+            "Pay attention to the hierarchy of responses, where deeper levels "
+            "are more specific explorations of their parent perspectives. "
+            "Create a cohesive narrative that incorporates insights from all levels."
+        )
+        
+        try:
+            combined_response = ollama.chat(model=self.base_model, messages=[
+                {'role': 'system', 'content': COMBINER_SYSTEM_PROMPT},
+                {'role': 'user', 'content': combination_prompt}
+            ])
+            
+            logger.info("\033[37m[COMBINER] Comprehensive synthesis complete\033[0m")
+            
+            # Visualize the graph before returning
+            self.prompt_graph.visualize()
+            
+            return {
+                'main_prompt': main_prompt,
+                'combined_response': combined_response.message.content,
+                'graph': self.prompt_graph.to_dict()
+            }
+        except Exception as e:
+            logger.error(f"Response combination error: {e}")
+            return {'error': str(e)}
+
+    def process_main_prompt(self, main_prompt: str):
+        """Main orchestration method for prompt processing with dynamic thread creation."""
+        import time
+        
+        # Reset state for new run
+        self.all_results = []
+        self.task_queue = queue.Queue()
+        self.result_queue = queue.Queue()
+        self.all_tasks_completed = threading.Event()
+        self.active_threads = 0
+        
+        # Reset the graph
+        self.prompt_graph = PromptGraph()
+        self.prompt_graph.add_node('root', prompt=main_prompt, depth=-1)
+        
+        # Generate thought approach sub-prompts
+        print(generate_system_prompts(main_prompt))
+        sub_prompts = self.generate_thought_approaches(main_prompt)
+        
+        # Initialize the task queue with root tasks
+        for i, sub_prompt_info in enumerate(sub_prompts):
+            color = self.colors[i % len(self.colors)]
+            self.task_queue.put({
+                'id': sub_prompt_info['id'],
+                'sub_prompt': sub_prompt_info['prompt'],
+                'parent_id': 'root',
+                'depth': 0,
+                'color': color
+            })
+        
+        # Create worker threads
+        num_workers = min(10, len(sub_prompts) * 2)  # Adjust as needed
+        workers = []
+        
+        for _ in range(num_workers):
+            worker = threading.Thread(target=self.worker)
+            worker.daemon = True
+            worker.start()
+            workers.append(worker)
+        
+        # Wait for completion or timeout
+        max_wait_time = 6000  # 10 minutes
+        start_time = time.time()
+        
+        import time
+        while time.time() - start_time < max_wait_time:
+            # Check if all tasks are completed
+            with self.active_threads_lock:
+                if self.active_threads == 0 and self.task_queue.empty():
+                    self.all_tasks_completed.set()
+                    time.sleep(3)
+                    if self.active_threads == 0 and self.task_queue.empty():
+                        break
+            
+            # Get results
+            while not self.result_queue.empty():
+                self.all_results.append(self.result_queue.get())
+            
+        
+        # Signal workers to exit
+        self.all_tasks_completed.set()
+        
+        # Get any remaining results
+        while not self.result_queue.empty():
+            self.all_results.append(self.result_queue.get())
+        
+        # Wait for workers to complete
+        for worker in workers:
+            worker.join(timeout=1)
+        
+        # Combine responses
+        mprint("# Final response is getting evaluated")
+        combined_result = self.combine_responses(self.all_results, main_prompt)
+        
+        return self.all_results, combined_result
+
+def main():
+    import time  # Add this import
     
-    # Add agents to the team with their subscriptions
-    await team.add_agent(researcher, ["research", "information", "data_collection"])
-    await team.add_agent(writer, ["writing", "content", "documentation"])
-    await team.add_agent(analyst, ["analysis", "data", "evaluation"])
-    
-    # Start the team
-    await team.start()
-    
-    # Send a message to the team
-    await team.send_message_to_team("Hello team! I need help with a research project on climate change.")
-    
-    # Submit a simple task
-    simple_task_id = await team.submit_task(
-        "Find 3 recent studies on rising sea levels",
-        complexity=0.6,
-        priority=2
-    )
-    
-    # Submit a complex task
-    complex_task_id = await team.submit_complex_task(
-        "Create a comprehensive report on climate change impacts in coastal cities"
-    )
-    
-    # Wait a moment for the system to process
-    await asyncio.sleep(2)
-    
-    # Check task statuses
-    simple_task_status = await team.get_task_status(simple_task_id)
-    logger.info(f"Simple task status: {simple_task_status}")
-    
-    complex_task_status = await team.get_task_status(complex_task_id)
-    logger.info(f"Complex task status: {complex_task_status}")
-    
-    # Simulate agents bidding on tasks
-    for agent_id, agent in team.agents.items():
-        available_tasks = await agent.check_task_market()
-        for task in available_tasks:
-            await agent.bid_on_task(task["id"])
-    
-    # Wait for bids to be processed
-    await asyncio.sleep(1)
-    
-    # Simulate task awards - award to highest bidder
-    for task_id in [simple_task_id]:
-        bids = await team.task_market.get_bids_for_task(task_id)
-        if bids:
-            # Sort by confidence
-            sorted_bids = sorted(bids, key=lambda x: x["confidence"], reverse=True)
-            best_bid = sorted_bids[0]
-            await team.task_market.award_task(task_id, best_bid["agent_id"])
-            logger.info(f"Task {task_id} awarded to {best_bid['agent_id']}")
-    
-    # Simulate task completion
-    for agent_id, agent in team.agents.items():
-        available_tasks = await agent.check_task_market()
-        for task in available_tasks:
-            if task.get("assigned_to") == agent_id and task.get("status") == "assigned":
-                # Agent completes the task
-                result = await agent.reason(task["description"])
-                await agent.complete_task(task["id"], result)
-    
-    # Wait for the system to process
-    await asyncio.sleep(2)
-    
-    # Get team performance
-    performance = await team.get_team_performance()
-    logger.info(f"Team performance: {json.dumps(performance, indent=2)}")
-    
-    # Check final task statuses
-    simple_task_status = await team.get_task_status(simple_task_id)
-    logger.info(f"Final simple task status: {simple_task_status}")
-    
-    complex_task_status = await team.get_task_status(complex_task_id)
-    logger.info(f"Final complex task status: {complex_task_status}")
-    
-    logger.info("Demo completed")
+    processor = OllamaPromptProcessor()
+    while True:
+        console.clear()
+        main_prompt = input("Enter a problem that can be solved via planning: ")
+        mprint(f"# {main_prompt}?")
+        results, combined_output = processor.process_main_prompt(main_prompt)
+        
+        # Final output processing
+        logger.info("\033[37m[FINAL RESULT] Comprehensive Analysis Complete\033[0m")
+        mprint(combined_output['combined_response'])
+        
+        # Show graph info
+        logger.info("\033[37m[GRAPH] Graph structure saved and visualized\033[0m")
+        
+        while True:
+            choice = input("Would you like to enter a new question? [y/n]:")
+            if choice.lower() == 'y':
+                break
 
 if __name__ == "__main__":
-    asyncio.run(run_demo()) 
+    main()
