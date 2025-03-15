@@ -163,29 +163,46 @@ class RateLimiter:
 class KnowledgeBase:
     """
     Vector database for semantic search of previous responses.
-    Uses TF-IDF and cosine similarity for retrieval.
+    Uses TF-IDF and cosine similarity for retrieval with improved uniqueness.
     """
     def __init__(self):
         self.documents = []
-        self.vectorizer = TfidfVectorizer()
+        self.vectorizer = TfidfVectorizer(
+            min_df=1, 
+            max_df=0.9,             # Ignore terms that appear in >90% of documents
+            stop_words='english',    # Remove common English stopwords
+            ngram_range=(1, 2)       # Include unigrams and bigrams
+        )
         self.vectors = None
         self.lock = threading.Lock()
+        self.node_id_to_index = {}   # Maps node_ids to their indices in documents
         
     def add_document(self, text: str, node_id: str):
-        """Add document to knowledge base and update vector index."""
+        """
+        Add document to knowledge base and update vector index.
+        If node already exists, update it instead of creating a duplicate.
+        """
         with self.lock:
-            self.documents.append({"text": text, "node_id": node_id})
-            # Recompute vectors
-            if len(self.documents) > 1:
+            # Check if node already exists
+            if node_id in self.node_id_to_index:
+                # Update existing document
+                index = self.node_id_to_index[node_id]
+                self.documents[index]["text"] = text
+                logger.debug(f"Updated existing document for node {node_id}")
+            else:
+                # Add new document
+                self.documents.append({"text": text, "node_id": node_id})
+                self.node_id_to_index[node_id] = len(self.documents) - 1
+                logger.debug(f"Added new document for node {node_id}")
+            
+            # Recompute vectors if we have documents
+            if self.documents:
                 texts = [doc["text"] for doc in self.documents]
-                self.vectors = self.vectorizer.fit_transform(texts)
-            elif len(self.documents) == 1:
-                texts = [self.documents[0]["text"]]
                 self.vectors = self.vectorizer.fit_transform(texts)
     
     def query(self, query_text: str, top_k: int = 1) -> List[Dict[str, Any]]:
         """
-        Find most similar documents to the query.
+        Find most similar documents to the query, ensuring unique results.
         
         Args:
             query_text: The search query
@@ -201,18 +218,54 @@ class KnowledgeBase:
             query_vector = self.vectorizer.transform([query_text])
             similarities = cosine_similarity(query_vector, self.vectors).flatten()
             
-            # Get top-k most similar documents
-            top_indices = similarities.argsort()[-top_k:][::-1]
-            
+            # Track used node_ids to avoid duplicates
+            used_nodes = set()
             results = []
-            for idx in top_indices:
+            
+            # Get indices sorted by similarity (descending)
+            sorted_indices = similarities.argsort()[::-1]
+            
+            # Add top results ensuring uniqueness
+            for idx in sorted_indices:
+                node_id = self.documents[idx]["node_id"]
+                similarity = similarities[idx]
+                
+                # Skip if we've already used this node or if similarity is too low
+                if node_id in used_nodes or similarity < 0.1:
+                    continue
+                    
+                used_nodes.add(node_id)
                 results.append({
                     "text": self.documents[idx]["text"],
-                    "node_id": self.documents[idx]["node_id"],
-                    "similarity": similarities[idx]
+                    "node_id": node_id,
+                    "similarity": similarity
                 })
+                
+                # Stop when we have enough unique results
+                if len(results) >= top_k:
+                    break
             
+            # Log information about the query results
+            if results:
+                logger.debug(f"Query found {len(results)} unique results from {len(self.documents)} documents")
+                for i, result in enumerate(results):
+                    logger.debug(f"Result {i+1}: node={result['node_id']}, similarity={result['similarity']:.2f}")
+            else:
+                logger.debug(f"Query found no results from {len(self.documents)} documents")
+                
             return results
+            
+    def get_document_count(self) -> int:
+        """Get the number of documents in the knowledge base."""
+        with self.lock:
+            return len(self.documents)
+            
+    def clear(self):
+        """Clear all documents from the knowledge base."""
+        with self.lock:
+            self.documents = []
+            self.vectors = None
+            self.node_id_to_index = {}
 
 class PromptGraph:
     """
@@ -311,6 +364,144 @@ class PromptGraph:
                 if attrs.get('depth') == depth
             ]
     
+    def visualize_hierarchical(self, output_file: str = "prompt_graph_hierarchical.png"):
+        """
+        Visualize the graph as a strict hierarchical tree with proper depth relationships.
+        Ensures that nodes are organized by their depth levels.
+        """
+        with self.lock:
+            # Create a directed graph for visualization
+            G = nx.DiGraph()
+            
+            # First pass: Add nodes with depth info and colors
+            node_colors = []
+            node_sizes = []
+            labels = {}
+            
+            for node_id, attrs in self.graph.nodes(data=True):
+                # Get node depth
+                depth = attrs.get('depth', 0)
+                
+                # Determine node color based on depth
+                if node_id == 'root' or depth == -1:
+                    color = "darkred"
+                    size = 800
+                elif depth == 0:
+                    color = "orange"
+                    size = 600
+                elif depth == 1:
+                    color = "green"
+                    size = 500
+                elif depth == 2:
+                    color = "blue"
+                    size = 400
+                else:
+                    color = "purple"
+                    size = 300
+                
+                # Create short label from prompt
+                prompt = attrs.get('prompt', '')
+                if prompt:
+                    short_label = (prompt[:25] + '...') if len(prompt) > 25 else prompt
+                else:
+                    short_label = node_id
+                    
+                # Add node to graph
+                G.add_node(node_id, depth=depth)
+                node_colors.append(color)
+                node_sizes.append(size)
+                labels[node_id] = short_label
+            
+            # Second pass: Add edges with hierarchy enforcement
+            for u, v, attrs in self.graph.edges(data=True):
+                # Get depths
+                u_depth = self.graph.nodes[u].get('depth', 0)
+                v_depth = self.graph.nodes[v].get('depth', 0)
+                
+                # Only add edges that maintain hierarchy (lower depth to higher depth)
+                if u_depth <= v_depth:
+                    G.add_edge(u, v)
+                else:
+                    G.add_edge(v, u)  # Reverse the edge
+            
+            # Create hierarchical layout
+            try:
+                # Try to use graphviz for better hierarchical layout
+                pos = nx.nx_agraph.graphviz_layout(G, prog="dot")
+            except:
+                # Fall back to networkx's built-in layout
+                logger.warning("Graphviz not available, using alternative layout")
+                
+                # Custom positioning based on depth
+                pos = {}
+                depths = {}
+                
+                # Group nodes by depth
+                for node, data in G.nodes(data=True):
+                    depth = data.get('depth', 0)
+                    if depth not in depths:
+                        depths[depth] = []
+                    depths[depth].append(node)
+                
+                # Position nodes by depth (y-axis) and evenly spread on x-axis
+                sorted_depths = sorted(depths.keys())
+                for i, depth in enumerate(sorted_depths):
+                    nodes = depths[depth]
+                    y = -i * 2  # Vertical position by depth
+                    
+                    for j, node in enumerate(nodes):
+                        # Spread nodes horizontally
+                        width = max(6, len(nodes) * 0.5)
+                        x = (j - len(nodes)/2) * width / max(1, len(nodes)-1)
+                        pos[node] = (x, y)
+            
+            # Create the figure with sufficient size
+            plt.figure(figsize=(20, 16))
+            
+            # Draw the nodes
+            nx.draw_networkx_nodes(G, pos, 
+                                node_size=node_sizes, 
+                                node_color=node_colors,
+                                alpha=0.9)
+            
+            # Draw the edges with arrows
+            nx.draw_networkx_edges(G, pos, 
+                                arrows=True, 
+                                arrowsize=15, 
+                                width=1.5, 
+                                alpha=0.7)
+            
+            # Draw the labels
+            nx.draw_networkx_labels(G, pos, 
+                                labels=labels,
+                                font_size=9, 
+                                font_weight='bold',
+                                font_color='black')
+            
+            # Add legend
+            import matplotlib.patches as mpatches
+            
+            legend_elements = [
+                mpatches.Patch(color="darkred", label="Root Node (Depth -1)"),
+                mpatches.Patch(color="orange", label="Depth 0"),
+                mpatches.Patch(color="green", label="Depth 1"),
+                mpatches.Patch(color="blue", label="Depth 2"),
+                mpatches.Patch(color="purple", label="Depth 3+")
+            ]
+            
+            plt.legend(handles=legend_elements, loc='upper right')
+            
+            # Remove axes and set title
+            plt.axis('off')
+            plt.title("Hierarchical Prompt Graph", fontsize=16)
+            plt.tight_layout()
+            
+            # Save the figure
+            plt.savefig(output_file, dpi=150, bbox_inches='tight')
+            plt.close()
+            
+            logger.info(f"Hierarchical visualization saved to {output_file}")
+            
     def visualize(self, output_file: str = "prompt_graph.png"):
         """
         Create a visualization of the graph and save to file with RAG connections.
@@ -457,6 +648,361 @@ class PromptGraph:
             
             logger.info(f"Graph saved to {filename} with {rag_connections_added} enhanced RAG connections")
     
+    def save_to_json1(self, filename: str = "./prompt_graph1.json"):
+        """Just dump everything - duplicates are allowed."""
+        with self.lock:
+            data = {
+                "directed": True,
+                "multigraph": True,
+                "graph": {},
+                "nodes": [],
+                "links": []
+            }
+            
+            # Add all nodes
+            for node_id, attrs in self.graph.nodes(data=True):
+                node_data = {"id": node_id}
+                for key, value in attrs.items():
+                    # Ensure serializable
+                    try:
+                        json.dumps({key: value})
+                        node_data[key] = value
+                    except:
+                        node_data[key] = str(value)
+                data["nodes"].append(node_data)
+            
+            # Add ALL edges - don't worry about duplicates
+            for u, v, attrs in self.graph.edges(data=True):
+                link_data = {"source": u, "target": v}
+                for key, value in attrs.items():
+                    try:
+                        json.dumps({key: value})
+                        link_data[key] = value
+                    except:
+                        link_data[key] = str(value)
+                data["links"].append(link_data)
+            
+            # EXPLICITLY add ALL RAG connections too
+            for u, v, attrs in list(self.graph.edges(data=True)):
+                if 'origins' in attrs and attrs['origins']:
+                    for origin in attrs['origins']:
+                        # Add regardless of whether it exists
+                        data["links"].append({
+                            "source": origin,
+                            "target": v, 
+                            "rag_connection": True,
+                            "explicit_rag": True
+                        })
+            
+            # Save the messy but complete graph
+            with open(filename, 'w') as f:
+                json.dump(data, f, indent=2)
+            
+            logger.info(f"Graph saved with {len(data['nodes'])} nodes and {len(data['links'])} links")
+
+    def save_to_json2(self, filename: str = "./prompt_graph2.json"):
+        """Bypass NetworkX and create raw dictionaries."""
+        # Create direct dictionaries that match visualizer.html format
+        nodes = []
+        links = []
+        
+        # First convert all graph nodes to dictionaries
+        for node_id in self.graph.nodes():
+            node_dict = {"id": node_id}
+            # Copy all attributes
+            for key, value in self.graph.nodes[node_id].items():
+                try:
+                    json.dumps({key: value})  # Test JSON serialization
+                    node_dict[key] = value
+                except:
+                    node_dict[key] = str(value)
+            nodes.append(node_dict)
+        
+        # Then convert all edges and explicitly add RAG connections
+        added_edges = set()  # Track edges we've added
+        
+        # First add all direct edges
+        for u, v, data in self.graph.edges(data=True):
+            edge_key = (u, v)
+            added_edges.add(edge_key)
+            
+            edge_dict = {"source": u, "target": v}
+            for key, value in data.items():
+                try:
+                    json.dumps({key: value})
+                    edge_dict[key] = value
+                except:
+                    edge_dict[key] = str(value)
+            links.append(edge_dict)
+        
+        # Then explicitly add all RAG connections
+        for u, v, data in self.graph.edges(data=True):
+            if 'origins' in data and data['origins']:
+                for origin in data['origins']:
+                    # Always add these RAG connections
+                    rag_edge = {
+                        "source": origin,
+                        "target": v,
+                        "rag_connection": True,
+                        "type": "rag"
+                    }
+                    links.append(rag_edge)
+        
+        # Create final output
+        output = {
+            "directed": True,
+            "multigraph": True,
+            "graph": {},
+            "nodes": nodes,
+            "links": links
+        }
+        
+        # Write to file
+        with open(filename, 'w') as f:
+            json.dump(output, f, indent=2)
+        
+        logger.info(f"Saved raw dictionary graph: {len(nodes)} nodes, {len(links)} links")
+        
+    def save_to_json3(self, filename: str = "./prompt_graph3.json"):
+        """Keep original structure but transform to JSON."""
+        with self.lock:
+            # Create simple data dicts with no special handling
+            node_data = []
+            for node_id, attrs in self.graph.nodes(data=True):
+                node = {"id": node_id}
+                # Add all attributes as-is
+                for k, v in attrs.items():
+                    node[k] = v  # Let JSON encoder handle serialization
+                node_data.append(node)
+            
+            link_data = []
+            # Add all original links
+            for u, v, attrs in self.graph.edges(data=True):
+                link = {"source": u, "target": v}
+                for k, v in attrs.items():
+                    link[k] = v
+                link_data.append(link)
+            
+            # Add all RAG connections
+            for u, v, attrs in self.graph.edges(data=True):
+                if 'origins' in attrs and attrs['origins']:
+                    for origin in attrs['origins']:
+                        link_data.append({
+                            "source": origin,
+                            "target": v,
+                            "rag_connection": True
+                        })
+            
+            # Create the output structure
+            output = {
+                "directed": True,
+                "multigraph": True,
+                "graph": {},
+                "nodes": node_data,
+                "links": link_data
+            }
+            
+            # Save to file with a custom encoder to handle non-serializable objects
+            class CustomEncoder(json.JSONEncoder):
+                def default(self, obj):
+                    try:
+                        return super().default(obj)
+                    except:
+                        return str(obj)
+            
+            with open(filename, 'w') as f:
+                json.dump(output, f, indent=2, cls=CustomEncoder)
+    
+    def save_to_json4(self, filename: str = "./prompt_graph4.json"):
+        """Create a modified structure with link types."""
+        # Structure with explicit types
+        data = {
+            "directed": True,
+            "multigraph": True,
+            "graph": {},
+            "nodes": [],
+            "links": []
+        }
+        
+        # Process all nodes
+        for node_id, attrs in self.graph.nodes(data=True):
+            node = {"id": node_id}
+            for k, v in attrs.items():
+                try:
+                    json.dumps({k: v})
+                    node[k] = v
+                except:
+                    node[k] = str(v)
+            data["nodes"].append(node)
+        
+        # Process all links with types
+        for u, v, attrs in self.graph.edges(data=True):
+            # Determine link type
+            if 'rag_connection' in attrs and attrs['rag_connection']:
+                link_type = "rag"
+            elif 'origins' in attrs and attrs['origins']:
+                link_type = "hybrid"
+            else:
+                link_type = "standard"
+            
+            # Create base link
+            link = {
+                "source": u,
+                "target": v,
+                "link_type": link_type
+            }
+            
+            # Add all attributes
+            for k, v in attrs.items():
+                try:
+                    json.dumps({k: v})
+                    link[k] = v
+                except:
+                    link[k] = str(v)
+            
+            data["links"].append(link)
+        
+        # Add all RAG connections explicitly
+        for u, v, attrs in self.graph.edges(data=True):
+            if 'origins' in attrs and attrs['origins']:
+                for origin in attrs['origins']:
+                    data["links"].append({
+                        "source": origin,
+                        "target": v,
+                        "link_type": "explicit_rag",
+                        "rag_connection": True
+                    })
+        
+        # Save with custom encoder
+        class CustomEncoder(json.JSONEncoder):
+            def default(self, obj):
+                try:
+                    return super().default(obj)
+                except:
+                    return str(obj)
+        
+        with open(filename, 'w') as f:
+            json.dump(data, f, indent=2, cls=CustomEncoder)
+            
+    def save_to_json5(self, filename: str = "./prompt_graph5.json"):
+        """
+        Save the graph to a JSON file with strict hierarchical structure enforcement.
+        Ensures that connections between nodes of different depths are properly maintained.
+        """
+        with self.lock:
+            # Create basic structure
+            data = {
+                "directed": True,
+                "multigraph": False,
+                "graph": {},
+                "nodes": [],
+                "links": []
+            }
+            
+            # First pass: Add all nodes and organize by depth
+            nodes_by_depth = {}
+            node_map = {}
+            
+            # Process all nodes and organize by depth
+            for node_id, attrs in self.graph.nodes(data=True):
+                # Create clean node data
+                node_data = {"id": node_id}
+                for k, v in attrs.items():
+                    try:
+                        # Test serialization
+                        json.dumps({k: v})
+                        node_data[k] = v
+                    except:
+                        node_data[k] = str(v)
+                
+                # Store in our output
+                data["nodes"].append(node_data)
+                node_map[node_id] = node_data
+                
+                # Organize by depth for hierarchical processing
+                depth = attrs.get('depth', 0)
+                if depth not in nodes_by_depth:
+                    nodes_by_depth[depth] = []
+                nodes_by_depth[depth].append(node_id)
+            
+            # Second pass: Add all existing edges from the graph, enforcing hierarchy
+            edges_to_add = set()
+            for u, v, attrs in self.graph.edges(data=True):
+                # Get depths to determine correct direction
+                u_depth = self.graph.nodes[u].get('depth', 0)
+                v_depth = self.graph.nodes[v].get('depth', 0)
+                
+                # Make sure edge goes from lower depth to higher depth
+                if u_depth <= v_depth:
+                    source, target = u, v
+                    edge_attrs = attrs
+                else:
+                    # Reverse the edge direction to maintain hierarchy
+                    source, target = v, u
+                    edge_attrs = attrs  # Keep original attributes
+                
+                # Add to our set of edges to create
+                edges_to_add.add((source, target, json.dumps(edge_attrs)))
+            
+            # Third pass: Ensure every node has at least one parent from the previous depth
+            depths = sorted(nodes_by_depth.keys())
+            
+            for i in range(1, len(depths)):
+                current_depth = depths[i]
+                parent_depth = depths[i-1]
+                
+                # Process all nodes at current depth
+                for child_id in nodes_by_depth[current_depth]:
+                    # Check if this node has a parent from previous depth
+                    has_proper_parent = False
+                    
+                    for edge in edges_to_add:
+                        source, target, _ = edge
+                        if target == child_id and source in nodes_by_depth[parent_depth]:
+                            has_proper_parent = True
+                            break
+                    
+                    # If no proper parent exists, create a synthetic parent connection
+                    if not has_proper_parent and nodes_by_depth[parent_depth]:
+                        # Find first available parent
+                        parent_id = nodes_by_depth[parent_depth][0]
+                        
+                        # Add synthetic connection
+                        synthetic_attrs = {"synthetic": True}
+                        edges_to_add.add((parent_id, child_id, json.dumps(synthetic_attrs)))
+            
+            # Fourth pass: Create all links from our processed edges
+            for source, target, attrs_json in edges_to_add:
+                # Create the link
+                link_data = {
+                    "source": source,
+                    "target": target
+                }
+                
+                # Add attributes
+                attrs = json.loads(attrs_json)
+                for k, v in attrs.items():
+                    link_data[k] = v
+                
+                data["links"].append(link_data)
+            
+            # Fifth pass: Add RAG connections
+            for u, v, attrs in self.graph.edges(data=True):
+                if 'origins' in attrs and attrs['origins']:
+                    for origin in attrs['origins']:
+                        # Always add RAG connections
+                        data["links"].append({
+                            "source": origin,
+                            "target": v,
+                            "rag_connection": True
+                        })
+            
+            # Save to file
+            with open(filename, 'w') as f:
+                json.dump(data, f, indent=2)
+            
+            logger.info(f"Hierarchical graph saved to {filename} with {len(data['nodes'])} nodes and {len(data['links'])} links")
+            
     def load_from_json(self, filename: str) -> bool:
         """
         Load graph from a JSON file.
@@ -916,7 +1462,37 @@ class GeminiPromptProcessor:
             
             # Visualize and save the graph
             self.prompt_graph.visualize()
-            self.prompt_graph.save_to_json()
+            
+            try:
+                self.prompt_graph.save_to_json()
+            except:
+                print("approach 0 didnt work")
+            try:
+                self.prompt_graph.save_to_json1()
+            except:
+                print("approach 1 didnt work")
+            try:
+                self.prompt_graph.save_to_json2()
+            except:
+                print("approach 2 didnt work")
+            try:
+                self.prompt_graph.save_to_json3()
+            except:
+                print("approach 3 didnt work")
+            try:
+                self.prompt_graph.save_to_json4()
+            except:
+                print("approach 4 didnt work")
+            try:
+                self.prompt_graph.save_to_json5()
+            except:
+                print("approach 5 didnt work")
+            try:
+                self.prompt_graph.visualize_hierarchical()
+            except:
+                print("visualize_hierarachal didnt work")
+
+            
             
             return {
                 'main_prompt': main_prompt,
@@ -1091,7 +1667,7 @@ class GeminiPromptProcessor:
 
 def main():
     """Main function to run the prompt processor."""
-    api_key = "AIzaSyBe8kjRD-siRLDQh30xVRka5TmrsAZVwYc"  # Replace with environment variable in production
+    api_key = "AIzaSyBgjwc8ihSASWnCm1qiRUYdEu1jtWuzcW4"  # Replace with environment variable in production
     processor = GeminiPromptProcessor(api_key)
     
     try:
