@@ -342,7 +342,7 @@ class PromptGraph:
             plt.close()
             logger.info(f"Graph visualization saved to {output_file}")
     
-    def save_to_json(self, filename: str = "prompt_graph.json"):
+    def save_to_json(self, filename: str = "./prompt_graph.json"):
         """
         Save the graph to a JSON file for later analysis or visualization.
         
