@@ -7,7 +7,6 @@ import concurrent.futures
 import threading
 import time
 from google import genai
-from google.generativeai import types
 import time
 
 class PromptGraph:
