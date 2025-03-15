@@ -467,7 +467,7 @@ class PromptGraph:
                 if attrs.get('depth') == depth
             ]
     
-    def save_to_json(self, filename: str = "./prompt_graph.json"):
+    def save_to_json(self, filename: str = "./expand.json"):
         """
         Save the graph to a JSON file with explicit RAG connections.
         

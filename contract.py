@@ -633,9 +633,9 @@ class PromptGraph:
 if __name__ == "__main__":
     # Load an existing graph, create the synthesis structure, and run synthesis
     api_key = "AIzaSyBe8kjRD-siRLDQh30xVRka5TmrsAZVwYc"  # Replace with your actual API key
-    graph = PromptGraph("./MODIFIED_CLEANED_out.json", api_key=api_key)
+    graph = PromptGraph("./expand.json", api_key=api_key)
     graph.create_synthesis_structure()
     graph.run_synthesis(model="gemini-2.0-flash-lite")
     time.sleep(60)
     graph.visualize_hierarchical()
-    graph.save_to_json("synthesized_graph_with_final.json")
+    graph.save_to_json("contract.json")

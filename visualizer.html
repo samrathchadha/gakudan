@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Graph Visualization</title>
+    <title>Graph Visualization with Enhanced RAG Connections</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
     <style>
         body {
@@ -26,9 +26,15 @@
             fill: #333;
         }
         .link {
-            stroke: #999;
             stroke-opacity: 0.6;
             stroke-width: 1.5px;
+        }
+        .hierarchy-link {
+            stroke: #999;
+        }
+        .rag-link {
+            stroke: #0066cc;
+            stroke-dasharray: 5,5;
         }
         .tooltip {
             position: absolute;
@@ -66,6 +72,16 @@
             border-radius: 50%;
             margin-right: 5px;
         }
+        .legend-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .legend-line-sample {
+            width: 30px;
+            height: 2px;
+            margin-right: 5px;
+        }
         .error-message {
             color: red;
             background-color: #ffeeee;
@@ -97,13 +113,24 @@
             padding: 10px;
             border-radius: 4px;
             border: 1px solid #ccc;
-            max-width: 300px;
+            max-width: 400px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .toggle-button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .connection-count {
+            margin-left: 10px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-<h1>Graph Visualization</h1>
+<h1>Graph Visualization with Enhanced RAG Connections</h1>
 
 <div id="error" class="error-message" style="display:none;"></div>
 
@@ -113,6 +140,9 @@
     <button id="zoomOut">Zoom Out</button>
     <button id="resetZoom">Reset View</button>
     <button id="fixMalformedJSON">Fix Malformed JSON</button>
+    <button id="toggleRagLinks" class="toggle-button">Toggle RAG Links</button>
+    <button id="toggleHierarchyLinks" class="toggle-button">Toggle Hierarchy Links</button>
+    <span id="connectionCount" class="connection-count"></span>
 </div>
 
 <div id="stats"></div>
@@ -127,6 +157,7 @@
     const statsDiv = document.getElementById('stats');
     const errorDiv = document.getElementById('error');
     const nodeInfoDiv = document.getElementById('nodeInfo');
+    const connectionCountSpan = document.getElementById('connectionCount');
     
     // Graph dimensions
     const width = graph.clientWidth;
@@ -150,6 +181,10 @@
     // Tooltip
     const tooltip = d3.select("#tooltip");
 
+    // Visibility toggles
+    let showRagLinks = true;
+    let showHierarchyLinks = true;
+
     // Color palette for depth visualization
     const colorPalette = [
         "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", 
@@ -161,6 +196,10 @@
     let colorMap = {};
     let simulation;
     let rawData = null;
+    let currentNodes = [];
+    let currentLinks = [];
+    let hierarchyLinks = [];
+    let ragLinks = [];
 
     // Event listeners
     document.getElementById('jsonFileInput').addEventListener('change', handleFileSelect);
@@ -168,6 +207,68 @@
     document.getElementById('zoomOut').addEventListener('click', () => svg.transition().call(zoom.scaleBy, 0.75));
     document.getElementById('resetZoom').addEventListener('click', () => svg.transition().call(zoom.transform, d3.zoomIdentity));
     document.getElementById('fixMalformedJSON').addEventListener('click', attemptToFixJSON);
+    document.getElementById('toggleRagLinks').addEventListener('click', toggleRagLinks);
+    document.getElementById('toggleHierarchyLinks').addEventListener('click', toggleHierarchyLinks);
+
+    // Toggle RAG links
+    function toggleRagLinks() {
+        showRagLinks = !showRagLinks;
+        updateLinkVisibility();
+    }
+
+    // Toggle hierarchy links
+    function toggleHierarchyLinks() {
+        showHierarchyLinks = !showHierarchyLinks;
+        updateLinkVisibility();
+    }
+
+    // Update link visibility based on toggles
+    function updateLinkVisibility() {
+        if (simulation) {
+            // Update visible links based on toggles
+            const visibleLinks = [];
+            
+            if (showHierarchyLinks) {
+                visibleLinks.push(...hierarchyLinks);
+            }
+            
+            if (showRagLinks) {
+                visibleLinks.push(...ragLinks);
+            }
+            
+            // Update link data
+            const link = g.selectAll(".link")
+                .data(visibleLinks);
+            
+            // Remove links not in the updated data
+            link.exit().remove();
+            
+            // Add new links
+            const linkEnter = link.enter()
+                .append("line")
+                .attr("class", d => {
+                    const isRag = isRagConnection(d);
+                    return `link ${isRag ? 'rag-link' : 'hierarchy-link'}`;
+                });
+            
+            // Merge and update all links
+            link.merge(linkEnter)
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+            
+            // Update connection count display
+            updateConnectionCount();
+        }
+    }
+
+    // Update connection count display
+    function updateConnectionCount() {
+        const hierarchyCount = showHierarchyLinks ? hierarchyLinks.length : 0;
+        const ragCount = showRagLinks ? ragLinks.length : 0;
+        connectionCountSpan.textContent = `Showing: ${hierarchyCount} hierarchy, ${ragCount} RAG connections`;
+    }
 
     // File handling
     function handleFileSelect(event) {
@@ -237,8 +338,8 @@
             if (nodes.length > 0) {
                 hideError();
                 // Filter nodes to only include those with prompts
-                nodes = nodes.filter(node => node && node.prompt && node.response);
-                showMessage(`Fixed JSON data: Found ${nodes.length} nodes with prompts.`);
+                nodes = nodes.filter(node => node && node.id);
+                showMessage(`Fixed JSON data: Found ${nodes.length} nodes.`);
                 processGraphData({ nodes, links });
             } else {
                 showError("Could not extract valid nodes from the JSON data.");
@@ -266,6 +367,14 @@
         statsDiv.style.display = 'block';
     }
 
+    // Check if a link is a RAG connection
+    function isRagConnection(link) {
+        return link.edge_type === "rag" || 
+               link.link_type === "rag" || 
+               link.rag_connection === true ||
+               link.type === "rag";
+    }
+
     // Process graph data
     function processGraphData(data) {
         // Clear the graph
@@ -275,8 +384,8 @@
         let nodes = data.nodes || [];
         let links = data.links || [];
 
-        // Filter out nodes without prompts
-        nodes = nodes.filter(node => node && node.id && node.prompt);
+        // Filter out nodes without IDs
+        nodes = nodes.filter(node => node && node.id);
         
         // Create nodemap for faster lookups
         const nodeMap = new Map();
@@ -289,8 +398,15 @@
             return nodeMap.has(sourceId) && nodeMap.has(targetId);
         });
 
+        // Categorize links by type
+        hierarchyLinks = links.filter(link => !isRagConnection(link));
+        ragLinks = links.filter(link => isRagConnection(link));
+
         // Display stats
-        showMessage(`Visualizing ${nodes.length} nodes with prompts and ${links.length} relevant links.`);
+        const hierarchyCount = hierarchyLinks.length;
+        const ragCount = ragLinks.length;
+        showMessage(`Visualizing ${nodes.length} nodes with ${hierarchyCount} hierarchy connections and ${ragCount} RAG connections.`);
+        updateConnectionCount();
 
         // Map colors to depths
         const uniqueDepths = [...new Set(nodes.map(node => node.depth))].sort((a, b) => a - b);
@@ -299,9 +415,13 @@
             return map;
         }, {});
 
+        // Store current data
+        currentNodes = nodes;
+        currentLinks = links;
+
         // Create legend and visualize graph
         createLegend(colorMap);
-        visualizeGraph(nodes, links, colorMap);
+        visualizeGraph(nodes);
     }
 
     // Create color legend
@@ -310,6 +430,7 @@
         legend.innerHTML = '';
         legend.style.display = 'block';
 
+        // Add depth colors
         Object.entries(colorMap).forEach(([depth, color]) => {
             const item = document.createElement('div');
             item.className = 'legend-item';
@@ -319,24 +440,56 @@
             `;
             legend.appendChild(item);
         });
+
+        // Add separator
+        legend.appendChild(document.createElement('hr'));
+
+        // Add link types
+        const hierarchyLine = document.createElement('div');
+        hierarchyLine.className = 'legend-line';
+        hierarchyLine.innerHTML = `
+            <div class="legend-line-sample hierarchy-link" style="background-color: #999;"></div>
+            Hierarchy Connection
+        `;
+        legend.appendChild(hierarchyLine);
+
+        const ragLine = document.createElement('div');
+        ragLine.className = 'legend-line';
+        ragLine.innerHTML = `
+            <div class="legend-line-sample rag-link" style="background-color: #0066cc;"></div>
+            RAG Connection
+        `;
+        legend.appendChild(ragLine);
     }
 
     // Visualize the graph
-    function visualizeGraph(nodes, links, colorMap) {
+    function visualizeGraph(nodes) {
         // Configure simulation
         simulation = d3.forceSimulation(nodes)
-            .force("link", d3.forceLink(links)
+            .force("link", d3.forceLink()
                 .id(d => d.id)
                 .distance(100))
             .force("charge", d3.forceManyBody().strength(-300))
             .force("center", d3.forceCenter(width / 2, height / 2))
             .force("collide", d3.forceCollide(20));
 
-        // Create links
+        // Determine which links to show initially
+        const initialLinks = [];
+        if (showHierarchyLinks) {
+            initialLinks.push(...hierarchyLinks);
+        }
+        if (showRagLinks) {
+            initialLinks.push(...ragLinks);
+        }
+
+        // Create links with proper styling
         const link = g.selectAll(".link")
-            .data(links)
+            .data(initialLinks)
             .enter().append("line")
-            .attr("class", "link");
+            .attr("class", d => {
+                const isRag = isRagConnection(d);
+                return `link ${isRag ? 'rag-link' : 'hierarchy-link'}`;
+            });
 
         // Create nodes
         const node = g.selectAll(".node")
@@ -357,7 +510,13 @@
         node.append("text")
             .attr("dx", 12)
             .attr("dy", ".35em")
-            .text(d => d.prompt.substring(0, 25) + (d.prompt.length > 25 ? '...' : ''));
+            .text(d => {
+                if (d.prompt) {
+                    return (d.prompt.substring(0, 20) + (d.prompt.length > 20 ? '...' : ''));
+                } else {
+                    return d.id.substring(0, 8) + '...';
+                }
+            });
 
         // Add tooltips
         node.on("mouseover", (event, d) => {
@@ -365,7 +524,7 @@
                 .html(`
                     <strong>ID:</strong> ${d.id}<br>
                     <strong>Depth:</strong> ${d.depth}<br>
-                    <strong>Prompt:</strong> ${d.prompt}
+                    ${d.prompt ? `<strong>Prompt:</strong> ${d.prompt.substring(0, 100)}${d.prompt.length > 100 ? '...' : ''}` : ''}
                 `)
                 .style("left", (event.pageX + 10) + "px")
                 .style("top", (event.pageY - 10) + "px");
@@ -377,13 +536,56 @@
                 <h3>Node Details</h3>
                 <p><strong>ID:</strong> ${d.id}</p>
                 <p><strong>Depth:</strong> ${d.depth}</p>
-                <p><strong>Prompt:</strong> ${d.prompt}</p>
-                ${d.response ? `<p><strong>Response:</strong> ${d.response.substring(0, 200)}${d.response.length > 200 ? '...' : ''}</p>` : ''}
+                ${d.prompt ? `<p><strong>Prompt:</strong> ${d.prompt}</p>` : ''}
+                ${d.response ? `<p><strong>Response:</strong> ${d.response.substring(0, 300)}${d.response.length > 300 ? '...' : ''}</p>` : ''}
+                ${d.rag_results ? `<p><strong>RAG Results:</strong> ${d.rag_results.length} sources</p>` : ''}
             `;
+            
+            // Show incoming RAG connections
+            const incomingRag = ragLinks.filter(link => 
+                (typeof link.target === 'object' ? link.target.id : link.target) === d.id
+            );
+            
+            if (incomingRag.length > 0) {
+                nodeInfoDiv.innerHTML += `<p><strong>Incoming RAG connections:</strong> ${incomingRag.length}</p>`;
+            }
+            
+            // Show outgoing RAG connections
+            const outgoingRag = ragLinks.filter(link => 
+                (typeof link.source === 'object' ? link.source.id : link.source) === d.id
+            );
+            
+            if (outgoingRag.length > 0) {
+                nodeInfoDiv.innerHTML += `<p><strong>Outgoing RAG connections:</strong> ${outgoingRag.length}</p>`;
+            }
+            
             nodeInfoDiv.style.display = "block";
+            
+            // Highlight connections
+            highlightConnections(d.id);
         });
 
+        // Function to highlight connections for a node
+        function highlightConnections(nodeId) {
+            // Reset all links
+            g.selectAll(".link")
+                .style("opacity", 0.3)
+                .style("stroke-width", 1.5);
+                
+            // Highlight links connected to this node
+            g.selectAll(".link")
+                .filter(d => {
+                    const sourceId = typeof d.source === 'object' ? d.source.id : d.source;
+                    const targetId = typeof d.target === 'object' ? d.target.id : d.target;
+                    return sourceId === nodeId || targetId === nodeId;
+                })
+                .style("opacity", 1)
+                .style("stroke-width", 3);
+        }
+
         // Update positions on simulation tick
+        simulation.force("link").links(initialLinks);
+        
         simulation.on("tick", () => {
             link
                 .attr("x1", d => d.source.x)
@@ -408,7 +610,7 @@
 
         function dragended(event, d) {
             if (!event.active) simulation.alphaTarget(0);
-            // Uncomment to unpin nodes after dragging:
+            // Pin nodes after dragging (comment these out to unpin)
             // d.fx = null;
             // d.fy = null;
         }
