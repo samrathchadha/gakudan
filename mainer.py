@@ -269,11 +269,11 @@ class KnowledgeBase:
 
 class PromptGraph:
     """
-    Graph data structure for tracking relationships between prompts.
-    Includes visualization capabilities and knowledge base integration.
+    Enhanced graph data structure for tracking relationships between prompts.
+    RAG connections are treated as first-class citizens, ensuring they're always visible.
     """
     def __init__(self):
-        self.graph = nx.DiGraph()
+        self.graph = nx.MultiDiGraph()  # Changed to MultiDiGraph to support multiple edge types
         self.lock = threading.Lock()
         self.knowledge_base = KnowledgeBase()
         
@@ -301,40 +301,143 @@ class PromptGraph:
                 combined_text = f"{prompt_text}\n{response_text}"
                 self.knowledge_base.add_document(combined_text, node_id)
     
-    def add_edge(self, parent_id: str, child_id: str, edge_attrs: Dict = None):
+    def add_edge(self, parent_id: str, child_id: str, edge_attrs: Dict = None, edge_type: str = "hierarchy"):
         """
-        Add an edge between nodes, maintaining proper depth hierarchy.
+        Add an edge between nodes with explicit edge type.
         
         Args:
             parent_id: ID of the parent node
             child_id: ID of the child node
-            edge_attrs: Optional attributes for the edge (e.g., origins)
+            edge_attrs: Optional attributes for the edge
+            edge_type: Type of edge ("hierarchy" or "rag")
         """
         with self.lock:
-            # Add edge with attributes if provided
-            if edge_attrs:
-                self.graph.add_edge(parent_id, child_id, **edge_attrs)
-            else:
-                self.graph.add_edge(parent_id, child_id)
+            if edge_attrs is None:
+                edge_attrs = {}
+                
+            # Always set the edge type explicitly
+            edge_attrs["edge_type"] = edge_type
             
-            # Fix depth: ensure child depth is greater than parent
-            if parent_id in self.graph and child_id in self.graph:
+            # Add edge with attributes
+            self.graph.add_edge(parent_id, child_id, **edge_attrs)
+            
+            logger.debug(f"Added {edge_type} edge: {parent_id} -> {child_id}")
+            
+            # Fix depth for hierarchy edges: ensure child depth is greater than parent
+            if edge_type == "hierarchy" and parent_id in self.graph and child_id in self.graph:
                 parent_depth = self.graph.nodes[parent_id].get('depth', 0)
                 child_depth = self.graph.nodes[child_id].get('depth', 0)
                 
                 if child_depth <= parent_depth:
                     self.graph.nodes[child_id]['depth'] = parent_depth + 1
-
-    def get_children(self, node_id: str) -> List[str]:
-        """Get all child nodes of the given node."""
-        with self.lock:
-            return list(self.graph.successors(node_id))
     
-    def get_parent(self, node_id: str) -> Optional[str]:
-        """Get parent node of the given node (if any)."""
+    def add_rag_connection(self, source_id: str, target_id: str, similarity: float = None):
+        """
+        Add an explicit RAG connection between nodes.
+        
+        Args:
+            source_id: ID of the source node (providing context)
+            target_id: ID of the target node (receiving context)
+            similarity: Optional similarity score
+        """
         with self.lock:
-            parents = list(self.graph.predecessors(node_id))
-            return parents[0] if parents else None
+            # Create attributes for the RAG connection
+            attrs = {
+                "rag_connection": True,
+                "edge_type": "rag"
+            }
+            
+            if similarity is not None:
+                attrs["similarity"] = similarity
+                
+            # Add the RAG edge
+            self.graph.add_edge(source_id, target_id, **attrs)
+            logger.debug(f"Added explicit RAG edge: {source_id} -> {target_id} (similarity: {similarity})")
+
+    def get_children(self, node_id: str, edge_type: str = None) -> List[str]:
+        """
+        Get child nodes of the given node, optionally filtered by edge type.
+        
+        Args:
+            node_id: ID of the parent node
+            edge_type: Optional edge type to filter by ("hierarchy" or "rag")
+            
+        Returns:
+            List of child node IDs
+        """
+        with self.lock:
+            children = []
+            
+            for _, child, data in self.graph.out_edges(node_id, data=True):
+                if edge_type is None or data.get("edge_type") == edge_type:
+                    children.append(child)
+                    
+            return children
+    
+    def to_dict(self) -> Dict[str, Dict]:
+        """Convert graph to dictionary format for serialization."""
+        with self.lock:
+            nodes = {}
+            for node in self.graph.nodes():
+                # Get hierarchy connections
+                hierarchy_children = [target for target, data in self.graph.adj[node].items() 
+                                    for _, edge_data in data.items() 
+                                    if edge_data.get('edge_type') == 'hierarchy']
+                
+                hierarchy_parents = [source for source, edges in self.graph.pred[node].items() 
+                                    for _, edge_data in edges.items() 
+                                    if edge_data.get('edge_type') == 'hierarchy']
+                
+                # Get RAG connections
+                rag_sources = [source for source, edges in self.graph.pred[node].items() 
+                            for _, edge_data in edges.items() 
+                            if edge_data.get('edge_type') == 'rag' or edge_data.get('rag_connection', False)]
+                
+                rag_targets = [target for target, data in self.graph.adj[node].items() 
+                            for _, edge_data in data.items() 
+                            if edge_data.get('edge_type') == 'rag' or edge_data.get('rag_connection', False)]
+                
+                # Store in dictionary format
+                nodes[node] = {
+                    'attributes': dict(self.graph.nodes[node]),
+                    'children': hierarchy_children,
+                    'parents': hierarchy_parents,
+                    'rag_sources': rag_sources,
+                    'rag_targets': rag_targets
+                }
+            return nodes
+
+    def get_parents(self, node_id: str, edge_type: str = None) -> List[str]:
+        """
+        Get parent nodes of the given node, optionally filtered by edge type.
+        
+        Args:
+            node_id: ID of the child node
+            edge_type: Optional edge type to filter by ("hierarchy" or "rag")
+            
+        Returns:
+            List of parent node IDs
+        """
+        with self.lock:
+            parents = []
+            
+            for parent, _, data in self.graph.in_edges(node_id, data=True):
+                if edge_type is None or data.get("edge_type") == edge_type:
+                    parents.append(parent)
+                    
+            return parents
+    
+    def get_rag_sources(self, node_id: str) -> List[str]:
+        """
+        Get all RAG source nodes for the given node.
+        
+        Args:
+            node_id: ID of the target node
+            
+        Returns:
+            List of source node IDs providing RAG context
+        """
+        return self.get_parents(node_id, edge_type="rag")
     
     def query_knowledge_base(self, query_text: str, top_k: int = 1) -> List[Dict[str, Any]]:
         """
@@ -366,14 +469,13 @@ class PromptGraph:
     
     def visualize_hierarchical(self, output_file: str = "prompt_graph_hierarchical.png"):
         """
-        Visualize the graph as a strict hierarchical tree with proper depth relationships.
-        Ensures that nodes are organized by their depth levels.
+        Visualize the graph as a hierarchical tree with distinct RAG connections.
         """
         with self.lock:
             # Create a directed graph for visualization
             G = nx.DiGraph()
             
-            # First pass: Add nodes with depth info and colors
+            # First pass: Add all nodes
             node_colors = []
             node_sizes = []
             labels = {}
@@ -399,7 +501,7 @@ class PromptGraph:
                     color = "purple"
                     size = 300
                 
-                # Create short label from prompt
+                # Create short label
                 prompt = attrs.get('prompt', '')
                 if prompt:
                     short_label = (prompt[:25] + '...') if len(prompt) > 25 else prompt
@@ -412,17 +514,23 @@ class PromptGraph:
                 node_sizes.append(size)
                 labels[node_id] = short_label
             
-            # Second pass: Add edges with hierarchy enforcement
+            # Second pass: Add edges with different styles for hierarchy and RAG
+            hierarchy_edges = []
+            rag_edges = []
+            
             for u, v, attrs in self.graph.edges(data=True):
-                # Get depths
-                u_depth = self.graph.nodes[u].get('depth', 0)
-                v_depth = self.graph.nodes[v].get('depth', 0)
+                edge_type = attrs.get("edge_type", "hierarchy")
                 
-                # Only add edges that maintain hierarchy (lower depth to higher depth)
-                if u_depth <= v_depth:
-                    G.add_edge(u, v)
+                if edge_type == "rag" or attrs.get("rag_connection", False):
+                    rag_edges.append((u, v))
                 else:
-                    G.add_edge(v, u)  # Reverse the edge
+                    # Only add hierarchy edges if they maintain proper hierarchy
+                    u_depth = self.graph.nodes[u].get('depth', 0)
+                    v_depth = self.graph.nodes[v].get('depth', 0)
+                    if u_depth <= v_depth:
+                        hierarchy_edges.append((u, v))
+                    else:
+                        hierarchy_edges.append((v, u))  # Reverse it
             
             # Create hierarchical layout
             try:
@@ -455,188 +563,124 @@ class PromptGraph:
                         x = (j - len(nodes)/2) * width / max(1, len(nodes)-1)
                         pos[node] = (x, y)
             
-            # Create the figure with sufficient size
+            # Create the figure
             plt.figure(figsize=(20, 16))
             
             # Draw the nodes
             nx.draw_networkx_nodes(G, pos, 
-                                node_size=node_sizes, 
-                                node_color=node_colors,
-                                alpha=0.9)
+                                  node_size=node_sizes, 
+                                  node_color=node_colors,
+                                  alpha=0.9)
             
-            # Draw the edges with arrows
+            # Draw the hierarchy edges
             nx.draw_networkx_edges(G, pos, 
-                                arrows=True, 
-                                arrowsize=15, 
-                                width=1.5, 
-                                alpha=0.7)
+                                  edgelist=hierarchy_edges,
+                                  arrows=True, 
+                                  arrowsize=15, 
+                                  width=1.5,
+                                  alpha=0.7,
+                                  edge_color='black')
+            
+            # Draw the RAG edges with distinct style
+            nx.draw_networkx_edges(G, pos, 
+                                  edgelist=rag_edges,
+                                  arrows=True, 
+                                  arrowsize=15,
+                                  width=1.5,
+                                  alpha=0.7,
+                                  edge_color='blue',
+                                  style='dashed')
             
             # Draw the labels
             nx.draw_networkx_labels(G, pos, 
-                                labels=labels,
-                                font_size=9, 
-                                font_weight='bold',
-                                font_color='black')
+                                   labels=labels,
+                                   font_size=9, 
+                                   font_weight='bold',
+                                   font_color='black')
             
             # Add legend
             import matplotlib.patches as mpatches
+            from matplotlib.lines import Line2D
             
             legend_elements = [
                 mpatches.Patch(color="darkred", label="Root Node (Depth -1)"),
                 mpatches.Patch(color="orange", label="Depth 0"),
                 mpatches.Patch(color="green", label="Depth 1"),
                 mpatches.Patch(color="blue", label="Depth 2"),
-                mpatches.Patch(color="purple", label="Depth 3+")
+                mpatches.Patch(color="purple", label="Depth 3+"),
+                Line2D([0], [0], color='black', lw=1.5, label='Hierarchy Connection'),
+                Line2D([0], [0], color='blue', lw=1.5, ls='--', label='RAG Connection')
             ]
             
             plt.legend(handles=legend_elements, loc='upper right')
             
             # Remove axes and set title
             plt.axis('off')
-            plt.title("Hierarchical Prompt Graph", fontsize=16)
+            plt.title("Hierarchical Prompt Graph with RAG Connections", fontsize=16)
             plt.tight_layout()
             
             # Save the figure
             plt.savefig(output_file, dpi=150, bbox_inches='tight')
             plt.close()
             
-            logger.info(f"Hierarchical visualization saved to {output_file}")
-            
-    def visualize(self, output_file: str = "prompt_graph.png"):
-        """
-        Create a visualization of the graph and save to file with RAG connections.
-        """
-        with self.lock:
-            plt.figure(figsize=(15, 12))  # Larger figure for better visibility
-            
-            # Create a copy of the graph with explicit RAG connections
-            temp_graph = self.graph.copy()
-            
-            # Add explicit edges for RAG connections
-            for u, v, data in list(temp_graph.edges(data=True)):
-                if 'origins' in data and data['origins']:
-                    for origin in data['origins']:
-                        # Add direct RAG connection edges if they don't already exist
-                        if not temp_graph.has_edge(origin, v):
-                            temp_graph.add_edge(origin, v, rag_connection=True)
-            
-            # Create node colors based on depth
-            node_colors = []
-            for node in temp_graph.nodes():
-                if node == 'root':
-                    node_colors.append('red')
-                else:
-                    depth = temp_graph.nodes[node].get('depth', 0)
-                    if depth == 0:
-                        node_colors.append('orange')
-                    elif depth == 1:
-                        node_colors.append('yellow')
-                    else:
-                        node_colors.append('green')
-            
-            # Create node labels
-            node_labels = {}
-            for node in temp_graph.nodes():
-                if node == 'root':
-                    node_labels[node] = 'Main Prompt'
-                else:
-                    label = temp_graph.nodes[node].get('prompt', '')
-                    if label and len(label) > 20:
-                        label = label[:17] + "..."
-                    node_labels[node] = f"{node[:4]}...: {label}"
-            
-            # Get edge colors and styles
-            edge_colors = []
-            edge_styles = []
-            for u, v, data in temp_graph.edges(data=True):
-                if data.get('rag_connection', False):
-                    edge_colors.append('blue')  # RAG connection
-                    edge_styles.append('dashed')  # Dashed line for RAG
-                elif data and 'origins' in data and data['origins']:
-                    edge_colors.append('purple')  # Edge with RAG origins
-                    edge_styles.append('solid')
-                else:
-                    edge_colors.append('black')  # Regular edge
-                    edge_styles.append('solid')
-            
-            # Generate layout and draw the graph
-            pos = nx.spring_layout(temp_graph, seed=42)
-            
-            # Draw edges with different styles
-            for i, (u, v, data) in enumerate(temp_graph.edges(data=True)):
-                if edge_styles[i] == 'dashed':
-                    nx.draw_networkx_edges(
-                        temp_graph, pos, edgelist=[(u, v)], 
-                        edge_color=[edge_colors[i]], style='dashed',
-                        width=1.5, alpha=0.7, arrowsize=15
-                    )
-                else:
-                    nx.draw_networkx_edges(
-                        temp_graph, pos, edgelist=[(u, v)], 
-                        edge_color=[edge_colors[i]], style='solid',
-                        width=2.0, arrowsize=15
-                    )
-            
-            # Draw nodes
-            nx.draw_networkx_nodes(temp_graph, pos, node_color=node_colors, node_size=500)
-            nx.draw_networkx_labels(temp_graph, pos, labels=node_labels, font_size=8)
-            
-            # Add legend for edge types
-            import matplotlib.patches as mpatches
-            from matplotlib.lines import Line2D
-            
-            legend_elements = [
-                Line2D([0], [0], color='black', lw=2, label='Regular Connection'),
-                Line2D([0], [0], color='purple', lw=2, label='Edge with RAG Origins'),
-                Line2D([0], [0], color='blue', ls='--', lw=1.5, label='RAG Connection')
-            ]
-            
-            plt.legend(handles=legend_elements, loc='upper right')
-            plt.title("Prompt Hierarchy Graph with Enhanced RAG Connections")
-            plt.savefig(output_file)
-            plt.close()
-            logger.info(f"Enhanced graph visualization saved to {output_file}")
+            logger.info(f"Hierarchical visualization with RAG connections saved to {output_file}")
     
     def save_to_json(self, filename: str = "./prompt_graph.json"):
         """
-        Save the graph to a JSON file with enhanced RAG connections.
+        Save the graph to a JSON file with explicit RAG connections.
         
         Args:
             filename: Path to save the JSON file
         """
         with self.lock:
-            # Make a copy of the graph to avoid modifying the original
-            temp_graph = self.graph.copy()
-            
-            # Add explicit edges for RAG connections
-            rag_connections_added = 0
-            for u, v, data in list(temp_graph.edges(data=True)):
-                if 'origins' in data and data['origins']:
-                    for origin in data['origins']:
-                        # Add direct RAG connection edges if they don't already exist
-                        if not temp_graph.has_edge(origin, v):
-                            temp_graph.add_edge(origin, v, rag_connection=True)
-                            rag_connections_added += 1
-            
-            # Format the data explicitly to match what visualizer.html expects
+            # Format the data explicitly for visualization
             data = {
                 "directed": True,
-                "multigraph": False,
+                "multigraph": True,  # Changed to True to support multiple edge types
                 "graph": {},
                 "nodes": [],
                 "links": []
             }
             
             # Add nodes with all their attributes
-            for node_id, attrs in temp_graph.nodes(data=True):
+            for node_id, attrs in self.graph.nodes(data=True):
                 node_data = {"id": node_id}
-                node_data.update(attrs)  # Add all attributes
+                # Add all attributes, ensuring they're JSON serializable
+                for key, value in attrs.items():
+                    try:
+                        json.dumps({key: value})  # Test JSON serialization
+                        node_data[key] = value
+                    except:
+                        node_data[key] = str(value)
                 data["nodes"].append(node_data)
             
-            # Add links with all their attributes
-            for u, v, attrs in temp_graph.edges(data=True):
-                link_data = {"source": u, "target": v}
-                link_data.update(attrs)  # Add all attributes
+            # Add all edges, explicitly marking edge types
+            for u, v, attrs in self.graph.edges(data=True):
+                link_data = {
+                    "source": u, 
+                    "target": v
+                }
+                
+                # Determine edge type and set appropriate flags
+                edge_type = attrs.get("edge_type", "hierarchy")
+                
+                if edge_type == "rag":
+                    link_data["rag_connection"] = True
+                    link_data["edge_type"] = "rag"
+                    link_data["link_type"] = "rag"  # For visualizer compatibility
+                else:
+                    link_data["edge_type"] = "hierarchy"
+                    link_data["link_type"] = "hierarchy"  # For visualizer compatibility
+                
+                # Add all other attributes
+                for key, value in attrs.items():
+                    if key not in link_data:  # Don't overwrite
+                        try:
+                            json.dumps({key: value})  # Test serialization
+                            link_data[key] = value
+                        except:
+                            link_data[key] = str(value)
+                
                 data["links"].append(link_data)
             
             # Ensure directory exists
@@ -646,418 +690,12 @@ class PromptGraph:
             with open(filename, 'w') as f:
                 json.dump(data, f, indent=2)
             
-            logger.info(f"Graph saved to {filename} with {rag_connections_added} enhanced RAG connections")
-    
-    def save_to_json1(self, filename: str = "./prompt_graph1.json"):
-        """Just dump everything - duplicates are allowed."""
-        with self.lock:
-            data = {
-                "directed": True,
-                "multigraph": True,
-                "graph": {},
-                "nodes": [],
-                "links": []
-            }
+            hierarchy_count = sum(1 for link in data["links"] if link.get("edge_type") == "hierarchy")
+            rag_count = sum(1 for link in data["links"] if link.get("edge_type") == "rag")
             
-            # Add all nodes
-            for node_id, attrs in self.graph.nodes(data=True):
-                node_data = {"id": node_id}
-                for key, value in attrs.items():
-                    # Ensure serializable
-                    try:
-                        json.dumps({key: value})
-                        node_data[key] = value
-                    except:
-                        node_data[key] = str(value)
-                data["nodes"].append(node_data)
+            logger.info(f"Graph saved to {filename} with {len(data['nodes'])} nodes, "
+                       f"{hierarchy_count} hierarchy connections, and {rag_count} RAG connections")
             
-            # Add ALL edges - don't worry about duplicates
-            for u, v, attrs in self.graph.edges(data=True):
-                link_data = {"source": u, "target": v}
-                for key, value in attrs.items():
-                    try:
-                        json.dumps({key: value})
-                        link_data[key] = value
-                    except:
-                        link_data[key] = str(value)
-                data["links"].append(link_data)
-            
-            # EXPLICITLY add ALL RAG connections too
-            for u, v, attrs in list(self.graph.edges(data=True)):
-                if 'origins' in attrs and attrs['origins']:
-                    for origin in attrs['origins']:
-                        # Add regardless of whether it exists
-                        data["links"].append({
-                            "source": origin,
-                            "target": v, 
-                            "rag_connection": True,
-                            "explicit_rag": True
-                        })
-            
-            # Save the messy but complete graph
-            with open(filename, 'w') as f:
-                json.dump(data, f, indent=2)
-            
-            logger.info(f"Graph saved with {len(data['nodes'])} nodes and {len(data['links'])} links")
-
-    def save_to_json2(self, filename: str = "./prompt_graph2.json"):
-        """Bypass NetworkX and create raw dictionaries."""
-        # Create direct dictionaries that match visualizer.html format
-        nodes = []
-        links = []
-        
-        # First convert all graph nodes to dictionaries
-        for node_id in self.graph.nodes():
-            node_dict = {"id": node_id}
-            # Copy all attributes
-            for key, value in self.graph.nodes[node_id].items():
-                try:
-                    json.dumps({key: value})  # Test JSON serialization
-                    node_dict[key] = value
-                except:
-                    node_dict[key] = str(value)
-            nodes.append(node_dict)
-        
-        # Then convert all edges and explicitly add RAG connections
-        added_edges = set()  # Track edges we've added
-        
-        # First add all direct edges
-        for u, v, data in self.graph.edges(data=True):
-            edge_key = (u, v)
-            added_edges.add(edge_key)
-            
-            edge_dict = {"source": u, "target": v}
-            for key, value in data.items():
-                try:
-                    json.dumps({key: value})
-                    edge_dict[key] = value
-                except:
-                    edge_dict[key] = str(value)
-            links.append(edge_dict)
-        
-        # Then explicitly add all RAG connections
-        for u, v, data in self.graph.edges(data=True):
-            if 'origins' in data and data['origins']:
-                for origin in data['origins']:
-                    # Always add these RAG connections
-                    rag_edge = {
-                        "source": origin,
-                        "target": v,
-                        "rag_connection": True,
-                        "type": "rag"
-                    }
-                    links.append(rag_edge)
-        
-        # Create final output
-        output = {
-            "directed": True,
-            "multigraph": True,
-            "graph": {},
-            "nodes": nodes,
-            "links": links
-        }
-        
-        # Write to file
-        with open(filename, 'w') as f:
-            json.dump(output, f, indent=2)
-        
-        logger.info(f"Saved raw dictionary graph: {len(nodes)} nodes, {len(links)} links")
-        
-    def save_to_json3(self, filename: str = "./prompt_graph3.json"):
-        """Keep original structure but transform to JSON."""
-        with self.lock:
-            # Create simple data dicts with no special handling
-            node_data = []
-            for node_id, attrs in self.graph.nodes(data=True):
-                node = {"id": node_id}
-                # Add all attributes as-is
-                for k, v in attrs.items():
-                    node[k] = v  # Let JSON encoder handle serialization
-                node_data.append(node)
-            
-            link_data = []
-            # Add all original links
-            for u, v, attrs in self.graph.edges(data=True):
-                link = {"source": u, "target": v}
-                for k, v in attrs.items():
-                    link[k] = v
-                link_data.append(link)
-            
-            # Add all RAG connections
-            for u, v, attrs in self.graph.edges(data=True):
-                if 'origins' in attrs and attrs['origins']:
-                    for origin in attrs['origins']:
-                        link_data.append({
-                            "source": origin,
-                            "target": v,
-                            "rag_connection": True
-                        })
-            
-            # Create the output structure
-            output = {
-                "directed": True,
-                "multigraph": True,
-                "graph": {},
-                "nodes": node_data,
-                "links": link_data
-            }
-            
-            # Save to file with a custom encoder to handle non-serializable objects
-            class CustomEncoder(json.JSONEncoder):
-                def default(self, obj):
-                    try:
-                        return super().default(obj)
-                    except:
-                        return str(obj)
-            
-            with open(filename, 'w') as f:
-                json.dump(output, f, indent=2, cls=CustomEncoder)
-    
-    def save_to_json4(self, filename: str = "./prompt_graph4.json"):
-        """Create a modified structure with link types."""
-        # Structure with explicit types
-        data = {
-            "directed": True,
-            "multigraph": True,
-            "graph": {},
-            "nodes": [],
-            "links": []
-        }
-        
-        # Process all nodes
-        for node_id, attrs in self.graph.nodes(data=True):
-            node = {"id": node_id}
-            for k, v in attrs.items():
-                try:
-                    json.dumps({k: v})
-                    node[k] = v
-                except:
-                    node[k] = str(v)
-            data["nodes"].append(node)
-        
-        # Process all links with types
-        for u, v, attrs in self.graph.edges(data=True):
-            # Determine link type
-            if 'rag_connection' in attrs and attrs['rag_connection']:
-                link_type = "rag"
-            elif 'origins' in attrs and attrs['origins']:
-                link_type = "hybrid"
-            else:
-                link_type = "standard"
-            
-            # Create base link
-            link = {
-                "source": u,
-                "target": v,
-                "link_type": link_type
-            }
-            
-            # Add all attributes
-            for k, v in attrs.items():
-                try:
-                    json.dumps({k: v})
-                    link[k] = v
-                except:
-                    link[k] = str(v)
-            
-            data["links"].append(link)
-        
-        # Add all RAG connections explicitly
-        for u, v, attrs in self.graph.edges(data=True):
-            if 'origins' in attrs and attrs['origins']:
-                for origin in attrs['origins']:
-                    data["links"].append({
-                        "source": origin,
-                        "target": v,
-                        "link_type": "explicit_rag",
-                        "rag_connection": True
-                    })
-        
-        # Save with custom encoder
-        class CustomEncoder(json.JSONEncoder):
-            def default(self, obj):
-                try:
-                    return super().default(obj)
-                except:
-                    return str(obj)
-        
-        with open(filename, 'w') as f:
-            json.dump(data, f, indent=2, cls=CustomEncoder)
-            
-    def save_to_json5(self, filename: str = "./prompt_graph5.json"):
-        """
-        Save the graph to a JSON file with strict hierarchical structure enforcement.
-        Ensures that connections between nodes of different depths are properly maintained.
-        """
-        with self.lock:
-            # Create basic structure
-            data = {
-                "directed": True,
-                "multigraph": False,
-                "graph": {},
-                "nodes": [],
-                "links": []
-            }
-            
-            # First pass: Add all nodes and organize by depth
-            nodes_by_depth = {}
-            node_map = {}
-            
-            # Process all nodes and organize by depth
-            for node_id, attrs in self.graph.nodes(data=True):
-                # Create clean node data
-                node_data = {"id": node_id}
-                for k, v in attrs.items():
-                    try:
-                        # Test serialization
-                        json.dumps({k: v})
-                        node_data[k] = v
-                    except:
-                        node_data[k] = str(v)
-                
-                # Store in our output
-                data["nodes"].append(node_data)
-                node_map[node_id] = node_data
-                
-                # Organize by depth for hierarchical processing
-                depth = attrs.get('depth', 0)
-                if depth not in nodes_by_depth:
-                    nodes_by_depth[depth] = []
-                nodes_by_depth[depth].append(node_id)
-            
-            # Second pass: Add all existing edges from the graph, enforcing hierarchy
-            edges_to_add = set()
-            for u, v, attrs in self.graph.edges(data=True):
-                # Get depths to determine correct direction
-                u_depth = self.graph.nodes[u].get('depth', 0)
-                v_depth = self.graph.nodes[v].get('depth', 0)
-                
-                # Make sure edge goes from lower depth to higher depth
-                if u_depth <= v_depth:
-                    source, target = u, v
-                    edge_attrs = attrs
-                else:
-                    # Reverse the edge direction to maintain hierarchy
-                    source, target = v, u
-                    edge_attrs = attrs  # Keep original attributes
-                
-                # Add to our set of edges to create
-                edges_to_add.add((source, target, json.dumps(edge_attrs)))
-            
-            # Third pass: Ensure every node has at least one parent from the previous depth
-            depths = sorted(nodes_by_depth.keys())
-            
-            for i in range(1, len(depths)):
-                current_depth = depths[i]
-                parent_depth = depths[i-1]
-                
-                # Process all nodes at current depth
-                for child_id in nodes_by_depth[current_depth]:
-                    # Check if this node has a parent from previous depth
-                    has_proper_parent = False
-                    
-                    for edge in edges_to_add:
-                        source, target, _ = edge
-                        if target == child_id and source in nodes_by_depth[parent_depth]:
-                            has_proper_parent = True
-                            break
-                    
-                    # If no proper parent exists, create a synthetic parent connection
-                    if not has_proper_parent and nodes_by_depth[parent_depth]:
-                        # Find first available parent
-                        parent_id = nodes_by_depth[parent_depth][0]
-                        
-                        # Add synthetic connection
-                        synthetic_attrs = {"synthetic": True}
-                        edges_to_add.add((parent_id, child_id, json.dumps(synthetic_attrs)))
-            
-            # Fourth pass: Create all links from our processed edges
-            for source, target, attrs_json in edges_to_add:
-                # Create the link
-                link_data = {
-                    "source": source,
-                    "target": target
-                }
-                
-                # Add attributes
-                attrs = json.loads(attrs_json)
-                for k, v in attrs.items():
-                    link_data[k] = v
-                
-                data["links"].append(link_data)
-            
-            # Fifth pass: Add RAG connections
-            for u, v, attrs in self.graph.edges(data=True):
-                if 'origins' in attrs and attrs['origins']:
-                    for origin in attrs['origins']:
-                        # Always add RAG connections
-                        data["links"].append({
-                            "source": origin,
-                            "target": v,
-                            "rag_connection": True
-                        })
-            
-            # Save to file
-            with open(filename, 'w') as f:
-                json.dump(data, f, indent=2)
-            
-            logger.info(f"Hierarchical graph saved to {filename} with {len(data['nodes'])} nodes and {len(data['links'])} links")
-            
-    def load_from_json(self, filename: str) -> bool:
-        """
-        Load graph from a JSON file.
-        
-        Args:
-            filename: Path to the JSON file
-            
-        Returns:
-            Success status
-        """
-        try:
-            with open(filename, 'r') as f:
-                data = json.load(f)
-            
-            # Create a new DiGraph
-            with self.lock:
-                self.graph = nx.DiGraph()
-                
-                # Add nodes with attributes
-                if "nodes" in data:
-                    for node_data in data["nodes"]:
-                        node_id = node_data.pop("id")
-                        self.graph.add_node(node_id, **node_data)
-                
-                # Add edges with attributes
-                if "links" in data:
-                    for link in data["links"]:
-                        source = link.pop("source")
-                        target = link.pop("target")
-                        self.graph.add_edge(source, target, **link)
-            
-            # Rebuild knowledge base
-            for node_id, attrs in self.graph.nodes(data=True):
-                if 'prompt' in attrs and 'response' in attrs:
-                    combined_text = f"{attrs['prompt']}\n{attrs['response']}"
-                    self.knowledge_base.add_document(combined_text, node_id)
-            
-            logger.info(f"Graph loaded from {filename}")
-            return True
-        except Exception as e:
-            logger.error(f"Error loading graph from {filename}: {e}")
-            return False
-    
-    def to_dict(self) -> Dict[str, Dict]:
-        """Convert graph to dictionary format for serialization."""
-        with self.lock:
-            nodes = {}
-            for node in self.graph.nodes():
-                nodes[node] = {
-                    'attributes': dict(self.graph.nodes[node]),
-                    'children': list(self.graph.successors(node)),
-                    'parent': list(self.graph.predecessors(node))
-                }
-            return nodes
-
 class GeminiPromptProcessor:
     """
     Main processor for handling prompt analysis using Google's Generative AI.
@@ -1125,62 +763,6 @@ class GeminiPromptProcessor:
             self.color_index += 1
             return color
     
-    def add_to_queue(self, sub_prompt: str, parent_id: str, depth: int = 0) -> bool:
-        """
-        Add a new task to the processing queue with enhanced RAG information.
-        """
-        if depth >= self.max_depth:
-            logger.warning(f"Max depth limit reached for task: {sub_prompt}")
-            return False
-        
-        color = self.get_next_color()
-        new_id = str(uuid.uuid4())
-        logger.info(f"{color}Adding new task to queue from parent {parent_id}: {sub_prompt}\033[0m")
-        
-        # Enhanced: Get RAG results from the parent node
-        parent_node_data = self.prompt_graph.get_node_data(parent_id)
-        rag_results = parent_node_data.get('rag_results', [])
-        
-        # Format RAG context for the new prompt
-        rag_context = ""
-        rag_sources = []
-        
-        if rag_results:
-            rag_context = "Previous relevant information:\n"
-            for i, result in enumerate(rag_results, 1):
-                relevant_node = result["node_id"]
-                relevant_text = result["text"]
-                similarity = result["similarity"]
-                rag_context += f"Source {i} (relevance: {similarity:.2f}): {relevant_text}\n\n"
-                rag_sources.append(relevant_node)
-        
-        # Add to prompt graph
-        if len(sub_prompt.split("\n")) > 1:
-            # Include the RAG context in the prompt
-            enhanced_prompt = sub_prompt.split("\n")[-1]
-            self.prompt_graph.add_node(new_id, prompt=enhanced_prompt, depth=depth, color=color, 
-                                    rag_context=rag_context if rag_context else None)
-        else:
-            return "not so skibidi...."
-        
-        # Enhanced: Add edge with origins information
-        self.prompt_graph.add_edge(parent_id, new_id, {'origins': rag_sources})
-        
-        # Add to processing queue with enhanced RAG context
-        enhanced_sub_prompt = rag_context + sub_prompt if rag_context else sub_prompt
-        
-        self.task_queue.put({
-            'id': new_id,
-            'sub_prompt': enhanced_sub_prompt,
-            'parent_id': parent_id,
-            'depth': depth + 1,
-            'color': color,
-            'rag_sources': rag_sources
-        })
-        
-        return True
-
-
     def rate_limited_generate_content(self, model: str, config: Any, contents: List[str]) -> Any:
         """
         Generate content with rate limiting applied.
@@ -1269,6 +851,7 @@ class GeminiPromptProcessor:
     def process_sub_prompt(self, task_info: Dict[str, Any]) -> Dict[str, Any]:
         """
         Process a single sub-prompt task with enhanced RAG capabilities.
+        Creates explicit RAG connections in the graph.
         """
         sub_prompt = task_info['sub_prompt']
         depth = task_info.get('depth', 0)
@@ -1286,9 +869,19 @@ class GeminiPromptProcessor:
             
             thread_logger.info(f"{color}Starting processing of task (depth: {depth}, parent: {parent_id})\033[0m")
             
-            # Enhanced: Query knowledge base for top-k (k=2) relevant information
+            # Add hierarchy edge from parent to this node
+            if parent_id != node_id:  # Avoid self-loops
+                self.prompt_graph.add_edge(parent_id, node_id, edge_type="hierarchy")
+            
+            # Add RAG connections from existing sources
+            for source_id in rag_sources:
+                if source_id != node_id:  # Avoid self-loops
+                    self.prompt_graph.add_rag_connection(source_id, node_id)
+            
+            # Query knowledge base for additional context
             kb_results = self.prompt_graph.query_knowledge_base(sub_prompt, top_k=2)
             additional_context = ""
+            new_rag_sources = []
             
             if kb_results:
                 # Format all results into the additional context
@@ -1298,6 +891,14 @@ class GeminiPromptProcessor:
                     relevant_text = result["text"]
                     similarity = result["similarity"]
                     additional_context += f"Source {i} (relevance: {similarity:.2f}): {relevant_text}\n\n"
+                    
+                    # Add to RAG sources and create explicit connection
+                    new_rag_sources.append(relevant_node)
+                    
+                    # Create explicit RAG connection with similarity score
+                    if relevant_node != node_id:  # Avoid self-loops
+                        self.prompt_graph.add_rag_connection(relevant_node, node_id, similarity)
+                    
                     thread_logger.info(f"{color}Found relevant information from node {relevant_node} (similarity: {similarity:.2f})\033[0m")
             
             # Generate response using Gemini with rate limiting
@@ -1310,9 +911,15 @@ class GeminiPromptProcessor:
             )
             response_text = response.text
 
-            # Enhanced: Immediately update the knowledge base with the new response
+            # Update the node with the response and RAG results
             self.prompt_graph.add_node(node_id, response=response_text, rag_results=kb_results)
             prompt_text = self.prompt_graph.get_node_data(node_id).get('prompt', '')
+            
+            # If prompt is missing (which shouldn't happen), set it
+            if not prompt_text:
+                prompt_text = sub_prompt
+                self.prompt_graph.add_node(node_id, prompt=prompt_text)
+                
             combined_text = f"{prompt_text}\n{response_text}"
             self.prompt_graph.knowledge_base.add_document(combined_text, node_id)
 
@@ -1334,17 +941,17 @@ class GeminiPromptProcessor:
                 else:
                     for new_prompt in r2.split("\n"):
                         if new_prompt.strip():
-                            # Enhanced: Include RAG information when adding to queue
+                            # Include RAG information when adding to queue
                             enhanced_prompt = response_text + "\n" + new_prompt
+                            
+                            # Combine existing and new RAG sources
+                            all_rag_sources = list(set(rag_sources + new_rag_sources))
+                            
                             if kb_results:
                                 similarity_info = "\n".join([f"Similarity source {r['node_id']}: {r['similarity']:.2f}" for r in kb_results])
                                 enhanced_prompt = similarity_info + "\n" + enhanced_prompt
+                                
                             self.add_to_queue(enhanced_prompt, node_id, depth)
-            else:
-                # Ensure max depth responses are stored
-                logger.info(f"{color}Max depth reached for node {node_id}, ensuring response is stored\033[0m")
-                # We've already added it to the knowledge base above, so just confirm
-                thread_logger.info(f"{color}Confirmed max depth response stored for node {node_id}\033[0m")
             
             result = {
                 'id': node_id,
@@ -1353,7 +960,7 @@ class GeminiPromptProcessor:
                 'response': response_text,
                 'depth': depth,
                 'color': color,
-                'rag_sources': rag_sources,
+                'rag_sources': list(set(rag_sources + new_rag_sources)),
                 'rag_results': kb_results
             }
             
@@ -1379,6 +986,69 @@ class GeminiPromptProcessor:
                 self.active_threads -= 1
                 if self.active_threads == 0 and self.task_queue.empty():
                     self.all_tasks_completed.set()
+
+    def add_to_queue(self, sub_prompt: str, parent_id: str, depth: int = 0) -> bool:
+        """
+        Add a new task to the processing queue with enhanced RAG information.
+        Ensures all RAG connections are explicitly created.
+        """
+        if depth >= self.max_depth:
+            logger.warning(f"Max depth limit reached for task: {sub_prompt}")
+            return False
+        
+        color = self.get_next_color()
+        new_id = str(uuid.uuid4())
+        logger.info(f"{color}Adding new task to queue from parent {parent_id}: {sub_prompt}\033[0m")
+        
+        # Get RAG results from the parent node
+        parent_node_data = self.prompt_graph.get_node_data(parent_id)
+        rag_results = parent_node_data.get('rag_results', [])
+        
+        # Format RAG context for the new prompt
+        rag_context = ""
+        rag_sources = []
+        
+        if rag_results:
+            rag_context = "Previous relevant information:\n"
+            for i, result in enumerate(rag_results, 1):
+                relevant_node = result["node_id"]
+                relevant_text = result["text"]
+                similarity = result["similarity"]
+                rag_context += f"Source {i} (relevance: {similarity:.2f}): {relevant_text}\n\n"
+                rag_sources.append(relevant_node)
+        
+        # Extract the actual prompt from multi-line prompts
+        if len(sub_prompt.split("\n")) > 1:
+            prompt_text = sub_prompt.split("\n")[-1]
+        else:
+            prompt_text = sub_prompt
+            
+        # Add to prompt graph with explicit RAG context
+        self.prompt_graph.add_node(new_id, prompt=prompt_text, depth=depth, color=color, 
+                                rag_context=rag_context if rag_context else None)
+        
+        # Create hierarchical edge from parent
+        self.prompt_graph.add_edge(parent_id, new_id, edge_type="hierarchy")
+        
+        # Create explicit RAG connections for each source
+        for source_id in rag_sources:
+            if source_id != new_id:  # Avoid self-loops
+                similarity = next((r["similarity"] for r in rag_results if r["node_id"] == source_id), None)
+                self.prompt_graph.add_rag_connection(source_id, new_id, similarity)
+        
+        # Add to processing queue with enhanced RAG context
+        enhanced_sub_prompt = rag_context + sub_prompt if rag_context else sub_prompt
+        
+        self.task_queue.put({
+            'id': new_id,
+            'sub_prompt': enhanced_sub_prompt,
+            'parent_id': parent_id,
+            'depth': depth + 1,
+            'color': color,
+            'rag_sources': rag_sources
+        })
+        
+        return True
 
     def worker(self):
         """Worker function that processes tasks from the queue."""
@@ -1459,9 +1129,6 @@ class GeminiPromptProcessor:
             )
             
             logger.info("\033[37m[COMBINER] Comprehensive synthesis complete\033[0m")
-            
-            # Visualize and save the graph
-            self.prompt_graph.visualize()
             
             try:
                 self.prompt_graph.save_to_json()
