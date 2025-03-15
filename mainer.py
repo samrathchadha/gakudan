@@ -471,7 +471,7 @@ class GeminiPromptProcessor:
             self.color_index += 1
             return color
     
-    def add_to_queue(self, prompt: str, parent_id: str, depth: int = 0) -> bool:
+    def add_to_queue(self, sub_prompt: str, parent_id: str, depth: int = 0) -> bool:
         """
         Add a new task to the processing queue.
         
@@ -484,18 +484,19 @@ class GeminiPromptProcessor:
             Whether the task was added successfully
         """
         if depth >= self.max_depth:
-            logger.warning(f"Max depth limit reached for task: {prompt}")
+            logger.warning(f"Max depth limit reached for task: {sub_prompt}")
             return False
         
         color = self.get_next_color()
         new_id = str(uuid.uuid4())
-        logger.info(f"{color}Adding new task to queue from parent {parent_id}: {prompt}\033[0m")
+        logger.info(f"{color}Adding new task to queue from parent {parent_id}: {sub_prompt}\033[0m")
         
         # Add to prompt graph
         if len(sub_prompt.split("\n")) > 1:
-            return False
-        self.prompt_graph.add_node(new_id, prompt=prompt, depth=depth, color=color)
-
+            self.prompt_graph.add_node(new_id, prompt=sub_prompt.split("\n")[-1], depth=depth, color=color)
+        else:
+            return "not so skibidi...."
+            
         self.prompt_graph.add_edge(parent_id, new_id)
         
         # Add to processing queue
@@ -537,7 +538,7 @@ class GeminiPromptProcessor:
             logger.error(f"API call failed: {e}")
             # Implement exponential backoff for transient errors
             if "429" in str(e) or "timeout" in str(e).lower():
-                retry_wait = mknowledge_basein(wait_time * 2 + 1, 30)  # Cap at 30 seconds
+                retry_wait = min(wait_time * 2 + 1, 30)  # Cap at 30 seconds
                 logger.warning(f"Rate limit or timeout error, retrying in {retry_wait}s")
                 time.sleep(retry_wait)
                 return self.rate_limited_generate_content(model, config, contents)
@@ -655,7 +656,7 @@ class GeminiPromptProcessor:
                 else:
                     for new_prompt in r2.split("\n"):
                         if new_prompt.strip():
-                            self.add_to_queue(response_text, new_prompt, node_id, depth)
+                            self.add_to_queue(response_text + "\n" + new_prompt, node_id, depth)
             
             result = {
                 'id': node_id,
