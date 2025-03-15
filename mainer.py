@@ -272,8 +272,6 @@ class PromptGraph:
                 if child_depth <= parent_depth:
                     self.graph.nodes[child_id]['depth'] = parent_depth + 1
 
-
-    
     def get_children(self, node_id: str) -> List[str]:
         """Get all child nodes of the given node."""
         with self.lock:
@@ -320,13 +318,24 @@ class PromptGraph:
         with self.lock:
             plt.figure(figsize=(15, 12))  # Larger figure for better visibility
             
+            # Create a copy of the graph with explicit RAG connections
+            temp_graph = self.graph.copy()
+            
+            # Add explicit edges for RAG connections
+            for u, v, data in list(temp_graph.edges(data=True)):
+                if 'origins' in data and data['origins']:
+                    for origin in data['origins']:
+                        # Add direct RAG connection edges if they don't already exist
+                        if not temp_graph.has_edge(origin, v):
+                            temp_graph.add_edge(origin, v, rag_connection=True)
+            
             # Create node colors based on depth
             node_colors = []
-            for node in self.graph.nodes():
+            for node in temp_graph.nodes():
                 if node == 'root':
                     node_colors.append('red')
                 else:
-                    depth = self.graph.nodes[node].get('depth', 0)
+                    depth = temp_graph.nodes[node].get('depth', 0)
                     if depth == 0:
                         node_colors.append('orange')
                     elif depth == 1:
@@ -336,50 +345,108 @@ class PromptGraph:
             
             # Create node labels
             node_labels = {}
-            for node in self.graph.nodes():
+            for node in temp_graph.nodes():
                 if node == 'root':
                     node_labels[node] = 'Main Prompt'
                 else:
-                    label = self.graph.nodes[node].get('prompt', '')
+                    label = temp_graph.nodes[node].get('prompt', '')
                     if label and len(label) > 20:
                         label = label[:17] + "..."
                     node_labels[node] = f"{node[:4]}...: {label}"
             
-            # Get edge colors based on whether they have RAG origins
+            # Get edge colors and styles
             edge_colors = []
-            for u, v, data in self.graph.edges(data=True):
-                if data and 'origins' in data and data['origins']:
-                    edge_colors.append('blue')  # RAG-enhanced edge
+            edge_styles = []
+            for u, v, data in temp_graph.edges(data=True):
+                if data.get('rag_connection', False):
+                    edge_colors.append('blue')  # RAG connection
+                    edge_styles.append('dashed')  # Dashed line for RAG
+                elif data and 'origins' in data and data['origins']:
+                    edge_colors.append('purple')  # Edge with RAG origins
+                    edge_styles.append('solid')
                 else:
                     edge_colors.append('black')  # Regular edge
+                    edge_styles.append('solid')
             
             # Generate layout and draw the graph
-            pos = nx.spring_layout(self.graph, seed=42)
-            nx.draw(self.graph, pos, with_labels=False, node_color=node_colors, 
-                    node_size=500, arrows=True, arrowsize=15, edge_color=edge_colors)
-            nx.draw_networkx_labels(self.graph, pos, labels=node_labels, font_size=8)
+            pos = nx.spring_layout(temp_graph, seed=42)
+            
+            # Draw edges with different styles
+            for i, (u, v, data) in enumerate(temp_graph.edges(data=True)):
+                if edge_styles[i] == 'dashed':
+                    nx.draw_networkx_edges(
+                        temp_graph, pos, edgelist=[(u, v)], 
+                        edge_color=[edge_colors[i]], style='dashed',
+                        width=1.5, alpha=0.7, arrowsize=15
+                    )
+                else:
+                    nx.draw_networkx_edges(
+                        temp_graph, pos, edgelist=[(u, v)], 
+                        edge_color=[edge_colors[i]], style='solid',
+                        width=2.0, arrowsize=15
+                    )
+            
+            # Draw nodes
+            nx.draw_networkx_nodes(temp_graph, pos, node_color=node_colors, node_size=500)
+            nx.draw_networkx_labels(temp_graph, pos, labels=node_labels, font_size=8)
             
             # Add legend for edge types
             import matplotlib.patches as mpatches
-            rag_patch = mpatches.Patch(color='blue', label='RAG Enhanced')
-            reg_patch = mpatches.Patch(color='black', label='Regular')
-            plt.legend(handles=[rag_patch, reg_patch], loc='upper right')
+            from matplotlib.lines import Line2D
             
-            plt.title("Prompt Hierarchy Graph with RAG Connections")
+            legend_elements = [
+                Line2D([0], [0], color='black', lw=2, label='Regular Connection'),
+                Line2D([0], [0], color='purple', lw=2, label='Edge with RAG Origins'),
+                Line2D([0], [0], color='blue', ls='--', lw=1.5, label='RAG Connection')
+            ]
+            
+            plt.legend(handles=legend_elements, loc='upper right')
+            plt.title("Prompt Hierarchy Graph with Enhanced RAG Connections")
             plt.savefig(output_file)
             plt.close()
-            logger.info(f"Graph visualization saved to {output_file}")
+            logger.info(f"Enhanced graph visualization saved to {output_file}")
     
     def save_to_json(self, filename: str = "./prompt_graph.json"):
         """
-        Save the graph to a JSON file for later analysis or visualization.
+        Save the graph to a JSON file with enhanced RAG connections.
         
         Args:
             filename: Path to save the JSON file
         """
         with self.lock:
-            # Convert to node-link format for JSON serialization
-            data = nx.node_link_data(self.graph)
+            # Make a copy of the graph to avoid modifying the original
+            temp_graph = self.graph.copy()
+            
+            # Add explicit edges for RAG connections
+            rag_connections_added = 0
+            for u, v, data in list(temp_graph.edges(data=True)):
+                if 'origins' in data and data['origins']:
+                    for origin in data['origins']:
+                        # Add direct RAG connection edges if they don't already exist
+                        if not temp_graph.has_edge(origin, v):
+                            temp_graph.add_edge(origin, v, rag_connection=True)
+                            rag_connections_added += 1
+            
+            # Format the data explicitly to match what visualizer.html expects
+            data = {
+                "directed": True,
+                "multigraph": False,
+                "graph": {},
+                "nodes": [],
+                "links": []
+            }
+            
+            # Add nodes with all their attributes
+            for node_id, attrs in temp_graph.nodes(data=True):
+                node_data = {"id": node_id}
+                node_data.update(attrs)  # Add all attributes
+                data["nodes"].append(node_data)
+            
+            # Add links with all their attributes
+            for u, v, attrs in temp_graph.edges(data=True):
+                link_data = {"source": u, "target": v}
+                link_data.update(attrs)  # Add all attributes
+                data["links"].append(link_data)
             
             # Ensure directory exists
             os.makedirs(os.path.dirname(filename) if os.path.dirname(filename) else '.', exist_ok=True)
@@ -388,7 +455,7 @@ class PromptGraph:
             with open(filename, 'w') as f:
                 json.dump(data, f, indent=2)
             
-            logger.info(f"Graph saved to {filename}")
+            logger.info(f"Graph saved to {filename} with {rag_connections_added} enhanced RAG connections")
     
     def load_from_json(self, filename: str) -> bool:
         """
@@ -404,9 +471,22 @@ class PromptGraph:
             with open(filename, 'r') as f:
                 data = json.load(f)
             
-            # Convert from node-link format
+            # Create a new DiGraph
             with self.lock:
-                self.graph = nx.node_link_graph(data)
+                self.graph = nx.DiGraph()
+                
+                # Add nodes with attributes
+                if "nodes" in data:
+                    for node_data in data["nodes"]:
+                        node_id = node_data.pop("id")
+                        self.graph.add_node(node_id, **node_data)
+                
+                # Add edges with attributes
+                if "links" in data:
+                    for link in data["links"]:
+                        source = link.pop("source")
+                        target = link.pop("target")
+                        self.graph.add_edge(source, target, **link)
             
             # Rebuild knowledge base
             for node_id, attrs in self.graph.nodes(data=True):
