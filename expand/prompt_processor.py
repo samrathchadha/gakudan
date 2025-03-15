@@ -6,6 +6,7 @@ Features:
 - Hierarchical prompt exploration
 - Knowledge base integration for context retrieval
 - Graph-based tracking of prompt relationships
+- Enhanced RAG with relationship awareness to avoid parent/sibling nodes
 """
 
 import threading
@@ -27,24 +28,6 @@ from system_prompts import (
     COMBINER_SYSTEM_PROMPT
 )
 
-import threading
-import queue
-import logging
-import uuid
-import time
-import json
-from typing import List, Dict, Any, Tuple
-from google import genai
-
-from prompt_graph import PromptGraph
-from rate_limiter import RateLimiter
-from system_prompts import (
-    THOUGHT_GENERATOR_SYSTEM_PROMPT,
-    SUB_THOUGHT_GENERATOR_SYSTEM_PROMPT,
-    SUB_PROMPT_SYSTEM_INSTRUCTION,
-    COMBINER_SYSTEM_PROMPT
-)
-
 class GeminiPromptProcessor:
     """
     Main processor for handling prompt analysis using Google's Generative AI.
@@ -54,13 +37,15 @@ class GeminiPromptProcessor:
     - Hierarchical prompt exploration
     - Knowledge base integration for context retrieval
     - Graph-based tracking of prompt relationships
+    - Enhanced RAG with relationship awareness
     """
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, use_transformer: bool = True):
         """
         Initialize the prompt processor.
         
         Args:
             api_key: Google API key for Generative AI
+            use_transformer: Whether to use Sentence Transformers for better semantic search
         """
         # Initialize Google Generative AI client
         self.client = genai.Client(api_key=api_key)
@@ -98,8 +83,8 @@ class GeminiPromptProcessor:
         self.color_lock = threading.Lock()
         self.color_index = 0
         
-        # Graph tracking system
-        self.prompt_graph = PromptGraph()
+        # Graph tracking system with enhanced vectorization
+        self.prompt_graph = PromptGraph(use_transformer=use_transformer)
         self.prompt_graph.add_node('root', prompt='Main Prompt', depth=-1)
         
         # Rate limiter - 30 requests per minute
@@ -390,7 +375,7 @@ class GeminiPromptProcessor:
     def process_sub_prompt(self, task_info: Dict[str, Any]) -> Dict[str, Any]:
         """
         Process a single sub-prompt task with enhanced RAG capabilities.
-        Creates explicit RAG connections in the graph.
+        Creates explicit RAG connections in the graph and avoids parent/sibling nodes.
         """
         sub_prompt = task_info['sub_prompt']
         depth = task_info.get('depth', 0)
@@ -417,8 +402,15 @@ class GeminiPromptProcessor:
                 if source_id != node_id:  # Avoid self-loops
                     self.prompt_graph.add_rag_connection(source_id, node_id)
             
-            # Query knowledge base for additional context
-            kb_results = self.prompt_graph.query_knowledge_base(sub_prompt, top_k=2)
+            # Query knowledge base for additional context with relationship awareness
+            # This will avoid retrieving parent and sibling nodes
+            kb_results = self.prompt_graph.query_knowledge_base(
+                sub_prompt, 
+                top_k=2,
+                exclude_related=True,
+                current_node_id=node_id
+            )
+            
             additional_context = ""
             new_rag_sources = []
             
@@ -460,7 +452,13 @@ class GeminiPromptProcessor:
                 self.prompt_graph.add_node(node_id, prompt=prompt_text)
                 
             combined_text = f"{prompt_text}\n{response_text}"
-            self.prompt_graph.knowledge_base.add_document(combined_text, node_id)
+            
+            # Update knowledge base with parent relationship for better filtering
+            self.prompt_graph.knowledge_base.add_document(
+                combined_text, 
+                node_id, 
+                parent_id=parent_id
+            )
 
             # Check if we should generate sub-prompts for deeper exploration
             if depth < self.max_depth:
