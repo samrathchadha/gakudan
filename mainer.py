@@ -195,7 +195,7 @@ class KnowledgeBase:
             List of matches with text, node_id and similarity score
         """
         with self.lock:
-            if not self.documents:
+            if not self.documents or len(self.documents) <= 5:
                 return []
             
             query_vector = self.vectorizer.transform([query_text])
@@ -248,16 +248,22 @@ class PromptGraph:
                 combined_text = f"{prompt_text}\n{response_text}"
                 self.knowledge_base.add_document(combined_text, node_id)
     
-    def add_edge(self, parent_id: str, child_id: str):
+    def add_edge(self, parent_id: str, child_id: str, edge_attrs: Dict = None):
         """
         Add an edge between nodes, maintaining proper depth hierarchy.
         
         Args:
             parent_id: ID of the parent node
             child_id: ID of the child node
+            edge_attrs: Optional attributes for the edge (e.g., origins)
         """
         with self.lock:
-            self.graph.add_edge(parent_id, child_id)
+            # Add edge with attributes if provided
+            if edge_attrs:
+                self.graph.add_edge(parent_id, child_id, **edge_attrs)
+            else:
+                self.graph.add_edge(parent_id, child_id)
+            
             # Fix depth: ensure child depth is greater than parent
             if parent_id in self.graph and child_id in self.graph:
                 parent_depth = self.graph.nodes[parent_id].get('depth', 0)
@@ -265,6 +271,8 @@ class PromptGraph:
                 
                 if child_depth <= parent_depth:
                     self.graph.nodes[child_id]['depth'] = parent_depth + 1
+
+
     
     def get_children(self, node_id: str) -> List[str]:
         """Get all child nodes of the given node."""
@@ -277,9 +285,18 @@ class PromptGraph:
             parents = list(self.graph.predecessors(node_id))
             return parents[0] if parents else None
     
-    def query_knowledge_base(self, query_text: str) -> List[Dict[str, Any]]:
-        """Query the knowledge base for relevant information."""
-        return self.knowledge_base.query(query_text)
+    def query_knowledge_base(self, query_text: str, top_k: int = 1) -> List[Dict[str, Any]]:
+        """
+        Query the knowledge base for relevant information.
+        
+        Args:
+            query_text: The search query text
+            top_k: Number of results to return (default: 1)
+            
+        Returns:
+            List of matches with text, node_id and similarity score
+        """
+        return self.knowledge_base.query(query_text, top_k)
     
     def get_node_data(self, node_id: str) -> Dict[str, Any]:
         """Get all attributes for a specific node."""
@@ -298,13 +315,10 @@ class PromptGraph:
     
     def visualize(self, output_file: str = "prompt_graph.png"):
         """
-        Create a visualization of the graph and save to file.
-        
-        Args:
-            output_file: Path to save the visualization
+        Create a visualization of the graph and save to file with RAG connections.
         """
         with self.lock:
-            plt.figure(figsize=(12, 10))
+            plt.figure(figsize=(15, 12))  # Larger figure for better visibility
             
             # Create node colors based on depth
             node_colors = []
@@ -331,13 +345,27 @@ class PromptGraph:
                         label = label[:17] + "..."
                     node_labels[node] = f"{node[:4]}...: {label}"
             
+            # Get edge colors based on whether they have RAG origins
+            edge_colors = []
+            for u, v, data in self.graph.edges(data=True):
+                if data and 'origins' in data and data['origins']:
+                    edge_colors.append('blue')  # RAG-enhanced edge
+                else:
+                    edge_colors.append('black')  # Regular edge
+            
             # Generate layout and draw the graph
             pos = nx.spring_layout(self.graph, seed=42)
             nx.draw(self.graph, pos, with_labels=False, node_color=node_colors, 
-                    node_size=500, arrows=True, arrowsize=15)
+                    node_size=500, arrows=True, arrowsize=15, edge_color=edge_colors)
             nx.draw_networkx_labels(self.graph, pos, labels=node_labels, font_size=8)
             
-            plt.title("Prompt Hierarchy Graph")
+            # Add legend for edge types
+            import matplotlib.patches as mpatches
+            rag_patch = mpatches.Patch(color='blue', label='RAG Enhanced')
+            reg_patch = mpatches.Patch(color='black', label='Regular')
+            plt.legend(handles=[rag_patch, reg_patch], loc='upper right')
+            
+            plt.title("Prompt Hierarchy Graph with RAG Connections")
             plt.savefig(output_file)
             plt.close()
             logger.info(f"Graph visualization saved to {output_file}")
@@ -473,15 +501,7 @@ class GeminiPromptProcessor:
     
     def add_to_queue(self, sub_prompt: str, parent_id: str, depth: int = 0) -> bool:
         """
-        Add a new task to the processing queue.
-        
-        Args:
-            sub_prompt: The prompt to process
-            parent_id: ID of the parent node
-            depth: Current depth in the prompt tree
-            
-        Returns:
-            Whether the task was added successfully
+        Add a new task to the processing queue with enhanced RAG information.
         """
         if depth >= self.max_depth:
             logger.warning(f"Max depth limit reached for task: {sub_prompt}")
@@ -491,25 +511,50 @@ class GeminiPromptProcessor:
         new_id = str(uuid.uuid4())
         logger.info(f"{color}Adding new task to queue from parent {parent_id}: {sub_prompt}\033[0m")
         
+        # Enhanced: Get RAG results from the parent node
+        parent_node_data = self.prompt_graph.get_node_data(parent_id)
+        rag_results = parent_node_data.get('rag_results', [])
+        
+        # Format RAG context for the new prompt
+        rag_context = ""
+        rag_sources = []
+        
+        if rag_results:
+            rag_context = "Previous relevant information:\n"
+            for i, result in enumerate(rag_results, 1):
+                relevant_node = result["node_id"]
+                relevant_text = result["text"]
+                similarity = result["similarity"]
+                rag_context += f"Source {i} (relevance: {similarity:.2f}): {relevant_text}\n\n"
+                rag_sources.append(relevant_node)
+        
         # Add to prompt graph
         if len(sub_prompt.split("\n")) > 1:
-            self.prompt_graph.add_node(new_id, prompt=sub_prompt.split("\n")[-1], depth=depth, color=color)
+            # Include the RAG context in the prompt
+            enhanced_prompt = sub_prompt.split("\n")[-1]
+            self.prompt_graph.add_node(new_id, prompt=enhanced_prompt, depth=depth, color=color, 
+                                    rag_context=rag_context if rag_context else None)
         else:
             return "not so skibidi...."
-            
-        self.prompt_graph.add_edge(parent_id, new_id)
         
-        # Add to processing queue
+        # Enhanced: Add edge with origins information
+        self.prompt_graph.add_edge(parent_id, new_id, {'origins': rag_sources})
+        
+        # Add to processing queue with enhanced RAG context
+        enhanced_sub_prompt = rag_context + sub_prompt if rag_context else sub_prompt
+        
         self.task_queue.put({
             'id': new_id,
-            'sub_prompt': sub_prompt,
+            'sub_prompt': enhanced_sub_prompt,
             'parent_id': parent_id,
             'depth': depth + 1,
-            'color': color
+            'color': color,
+            'rag_sources': rag_sources
         })
         
         return True
-    
+
+
     def rate_limited_generate_content(self, model: str, config: Any, contents: List[str]) -> Any:
         """
         Generate content with rate limiting applied.
@@ -594,21 +639,17 @@ class GeminiPromptProcessor:
                 })
             return approach_list
 
+
     def process_sub_prompt(self, task_info: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Process a single sub-prompt task.
-        
-        Args:
-            task_info: Dictionary with task details
-            
-        Returns:
-            Dictionary with processing results
+        Process a single sub-prompt task with enhanced RAG capabilities.
         """
         sub_prompt = task_info['sub_prompt']
         depth = task_info.get('depth', 0)
         parent_id = task_info.get('parent_id', 'root')
         color = task_info.get('color', '\033[37m')  # Default to white
         node_id = task_info.get('id', str(uuid.uuid4()))
+        rag_sources = task_info.get('rag_sources', [])
         
         thread_logger = colorlog.getLogger(node_id)
         thread_logger.setLevel(logging.INFO)
@@ -619,14 +660,19 @@ class GeminiPromptProcessor:
             
             thread_logger.info(f"{color}Starting processing of task (depth: {depth}, parent: {parent_id})\033[0m")
             
-            # Check knowledge base for relevant information
-            kb_results = self.prompt_graph.query_knowledge_base(sub_prompt)
+            # Enhanced: Query knowledge base for top-k (k=2) relevant information
+            kb_results = self.prompt_graph.query_knowledge_base(sub_prompt, top_k=2)
             additional_context = ""
+            
             if kb_results:
-                relevant_node = kb_results[0]["node_id"]
-                relevant_text = kb_results[0]["text"]
-                additional_context = f"Related information: {relevant_text}\n\n"
-                thread_logger.info(f"{color}Found relevant information from node {relevant_node}\033[0m")
+                # Format all results into the additional context
+                additional_context = "Related information:\n"
+                for i, result in enumerate(kb_results, 1):
+                    relevant_node = result["node_id"]
+                    relevant_text = result["text"]
+                    similarity = result["similarity"]
+                    additional_context += f"Source {i} (relevance: {similarity:.2f}): {relevant_text}\n\n"
+                    thread_logger.info(f"{color}Found relevant information from node {relevant_node} (similarity: {similarity:.2f})\033[0m")
             
             # Generate response using Gemini with rate limiting
             response = self.rate_limited_generate_content(
@@ -637,6 +683,12 @@ class GeminiPromptProcessor:
                 contents=[additional_context + sub_prompt]
             )
             response_text = response.text
+
+            # Enhanced: Immediately update the knowledge base with the new response
+            self.prompt_graph.add_node(node_id, response=response_text, rag_results=kb_results)
+            prompt_text = self.prompt_graph.get_node_data(node_id).get('prompt', '')
+            combined_text = f"{prompt_text}\n{response_text}"
+            self.prompt_graph.knowledge_base.add_document(combined_text, node_id)
 
             # Check if we should generate sub-prompts for deeper exploration
             if depth < self.max_depth:
@@ -656,7 +708,17 @@ class GeminiPromptProcessor:
                 else:
                     for new_prompt in r2.split("\n"):
                         if new_prompt.strip():
-                            self.add_to_queue(response_text + "\n" + new_prompt, node_id, depth)
+                            # Enhanced: Include RAG information when adding to queue
+                            enhanced_prompt = response_text + "\n" + new_prompt
+                            if kb_results:
+                                similarity_info = "\n".join([f"Similarity source {r['node_id']}: {r['similarity']:.2f}" for r in kb_results])
+                                enhanced_prompt = similarity_info + "\n" + enhanced_prompt
+                            self.add_to_queue(enhanced_prompt, node_id, depth)
+            else:
+                # Ensure max depth responses are stored
+                logger.info(f"{color}Max depth reached for node {node_id}, ensuring response is stored\033[0m")
+                # We've already added it to the knowledge base above, so just confirm
+                thread_logger.info(f"{color}Confirmed max depth response stored for node {node_id}\033[0m")
             
             result = {
                 'id': node_id,
@@ -664,11 +726,10 @@ class GeminiPromptProcessor:
                 'sub_prompt': sub_prompt,
                 'response': response_text,
                 'depth': depth,
-                'color': color
+                'color': color,
+                'rag_sources': rag_sources,
+                'rag_results': kb_results
             }
-            
-            # Update node with response
-            self.prompt_graph.add_node(node_id, response=response_text)
             
             mprint(f"{color}[DEPTH: {depth}] {sub_prompt}"+ "\n\n" + response_text+"\033[0m")
             
@@ -684,7 +745,8 @@ class GeminiPromptProcessor:
                 'sub_prompt': sub_prompt,
                 'error': str(e),
                 'depth': depth,
-                'color': color
+                'color': color,
+                'rag_sources': rag_sources
             }
         finally:
             with self.active_threads_lock:
