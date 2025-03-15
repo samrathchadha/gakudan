@@ -37,7 +37,7 @@ def main():
     """Main function to run the prompt processor."""
     # In a production environment, get API key from environment variable
     api_key = os.environ.get("GEMINI_API_KEY", "AIzaSyBgjwc8ihSASWnCm1qiRUYdEu1jtWuzcW4")
-    processor = GeminiPromptProcessor(api_key)
+    processor = GeminiPromptProcessor(api_key, False)
     
     try:
         while True:
