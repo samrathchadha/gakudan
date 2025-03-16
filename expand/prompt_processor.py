@@ -172,15 +172,7 @@ class GeminiPromptProcessor:
             
             logging.info("\033[37m[COMBINER] Comprehensive synthesis complete\033[0m")
             
-            try:
-                self.prompt_graph.save_to_json()
-            except:
-                print("Failed to save graph to JSON")
-            
-            try:
-                self.prompt_graph.visualize()
-            except:
-                print("Failed to visualize graph")
+
             
             return {
                 'main_prompt': main_prompt,
@@ -348,10 +340,18 @@ class GeminiPromptProcessor:
             worker.join(timeout=1)
         
         # Combine responses
-        print("# Final response is getting evaluated")
-        combined_result = self.combine_responses(self.all_results, main_prompt)
+        print("# Woohoo!! You're so sigma king!!!")
+        try:
+            self.prompt_graph.save_to_json()
+        except:
+            print("Failed to save graph to JSON")
         
-        return self.all_results, combined_result
+        try:
+            self.prompt_graph.visualize()
+        except:
+            print("Failed to visualize graph")
+        
+        return self.all_results
     
     def rate_limited_generate_content(self, model: str, config: Any, contents: List[str]) -> Any:
         """
@@ -386,11 +386,11 @@ class GeminiPromptProcessor:
                 time.sleep(retry_wait)
                 return self.rate_limited_generate_content(model, config, contents)
             raise
-    
+        
     def process_sub_prompt(self, task_info: Dict[str, Any]) -> Dict[str, Any]:
         """
         Process a single sub-prompt task with enhanced RAG capabilities.
-        Creates explicit RAG connections in the graph.
+        Creates explicit RAG connections in the graph and avoids parent/sibling nodes.
         """
         sub_prompt = task_info['sub_prompt']
         depth = task_info.get('depth', 0)
@@ -408,6 +408,9 @@ class GeminiPromptProcessor:
             
             thread_logger.info(f"{color}Starting processing of task (depth: {depth}, parent: {parent_id})\033[0m")
             
+            # Add node to the graph first to establish relationship
+            self.prompt_graph.add_node(node_id, prompt=sub_prompt, depth=depth)
+            
             # Add hierarchy edge from parent to this node
             if parent_id != node_id:  # Avoid self-loops
                 self.prompt_graph.add_edge(parent_id, node_id, edge_type="hierarchy")
@@ -417,8 +420,15 @@ class GeminiPromptProcessor:
                 if source_id != node_id:  # Avoid self-loops
                     self.prompt_graph.add_rag_connection(source_id, node_id)
             
-            # Query knowledge base for additional context
-            kb_results = self.prompt_graph.query_knowledge_base(sub_prompt, top_k=2)
+            # Query knowledge base for additional context with enhanced relationship awareness
+            # This will explicitly avoid retrieving parent and sibling nodes
+            kb_results = self.prompt_graph.query_knowledge_base(
+                sub_prompt, 
+                top_k=2,
+                exclude_related=True,  # Explicitly exclude parent and siblings
+                current_node_id=node_id
+            )
+            
             additional_context = ""
             new_rag_sources = []
             
@@ -452,6 +462,8 @@ class GeminiPromptProcessor:
 
             # Update the node with the response and RAG results
             self.prompt_graph.add_node(node_id, response=response_text, rag_results=kb_results)
+            
+            # Get the current prompt text
             prompt_text = self.prompt_graph.get_node_data(node_id).get('prompt', '')
             
             # If prompt is missing (which shouldn't happen), set it
@@ -460,7 +472,14 @@ class GeminiPromptProcessor:
                 self.prompt_graph.add_node(node_id, prompt=prompt_text)
                 
             combined_text = f"{prompt_text}\n{response_text}"
-            self.prompt_graph.knowledge_base.add_document(combined_text, node_id)
+            
+            # Update knowledge base with parent relationship for better filtering
+            # This is crucial for our enhanced relationship awareness
+            self.prompt_graph.knowledge_base.add_document(
+                combined_text, 
+                node_id, 
+                parent_id=parent_id
+            )
 
             # Check if we should generate sub-prompts for deeper exploration
             if depth < self.max_depth:
@@ -525,7 +544,7 @@ class GeminiPromptProcessor:
                 self.active_threads -= 1
                 if self.active_threads == 0 and self.task_queue.empty():
                     self.all_tasks_completed.set()
-
+                    
     def add_to_queue(self, sub_prompt: str, parent_id: str, depth: int = 0) -> bool:
         """
         Add a new task to the processing queue with enhanced RAG information.

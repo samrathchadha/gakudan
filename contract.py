@@ -632,7 +632,7 @@ class PromptGraph:
 # Example usage
 if __name__ == "__main__":
     # Load an existing graph, create the synthesis structure, and run synthesis
-    api_key = "AIzaSyBe8kjRD-siRLDQh30xVRka5TmrsAZVwYc"  # Replace with your actual API key
+    api_key = "AIzaSyBmJg-SksvZIPa0AxBcb8fFRX7CAfmLcd8"  # Replace with your actual API key
     graph = PromptGraph("./expand.json", api_key=api_key)
     graph.create_synthesis_structure()
     graph.run_synthesis(model="gemini-2.0-flash-lite")

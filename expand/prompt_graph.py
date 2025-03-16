@@ -184,18 +184,50 @@ class PromptGraph:
         """
         return self.get_parents(node_id, edge_type="rag")
     
-    def query_knowledge_base(self, query_text: str, top_k: int = 1) -> List[Dict[str, Any]]:
+    def query_knowledge_base(self, query_text: str, top_k: int = 1, 
+                                exclude_ids: List[str] = None, 
+                                exclude_related: bool = True,
+                                current_node_id: str = None) -> List[Dict[str, Any]]:
         """
         Query the knowledge base for relevant information.
+        With enhanced relationship awareness - explicitly excludes parent nodes and sibling nodes.
         
         Args:
             query_text: The search query text
             top_k: Number of results to return (default: 1)
+            exclude_ids: Specific node IDs to exclude
+            exclude_related: Whether to exclude parent and siblings
+            current_node_id: Current node ID for relationship exclusion
             
         Returns:
             List of matches with text, node_id and similarity score
         """
-        return self.knowledge_base.query(query_text, top_k)
+        # Ensure current_node_id has been added to the knowledge base's relationship tracking
+        if current_node_id and exclude_related:
+            # Get parent of current node from our graph
+            parents = self.get_parents(current_node_id, edge_type="hierarchy")
+            
+            # If we have a parent, ensure the knowledge base knows about this relationship
+            if parents and current_node_id not in self.knowledge_base.node_parent_map:
+                parent_id = parents[0]  # Use the first parent if there are multiple
+                node_data = self.get_node_data(current_node_id)
+                prompt = node_data.get('prompt', '')
+                response = node_data.get('response', '')
+                
+                # Make sure knowledge base knows about this relationship
+                if prompt:
+                    combined_text = f"{prompt}\n{response}" if response else prompt
+                    self.knowledge_base.add_document(combined_text, current_node_id, parent_id=parent_id)
+                    logging.debug(f"Updated KB relationship for {current_node_id} with parent {parent_id}")
+        
+        # Forward the query to the knowledge base with relationship exclusion
+        return self.knowledge_base.query(
+            query_text, 
+            top_k=top_k,
+            exclude_ids=exclude_ids,
+            exclude_related=exclude_related,
+            current_node_id=current_node_id
+        )
     
     def get_node_data(self, node_id: str) -> Dict[str, Any]:
         """Get all attributes for a specific node."""

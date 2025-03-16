@@ -36,7 +36,7 @@ def mprint(string):
 def main():
     """Main function to run the prompt processor."""
     # In a production environment, get API key from environment variable
-    api_key = os.environ.get("GEMINI_API_KEY", "AIzaSyBgjwc8ihSASWnCm1qiRUYdEu1jtWuzcW4")
+    api_key = os.environ.get("GEMINI_API_KEY", "AIzaSyCz5mTD7c7-mhWPDvyxlTXlb9JFWTzbvuY")
     processor = GeminiPromptProcessor(api_key)
     
     try:
@@ -47,15 +47,7 @@ def main():
                 continue
                 
             mprint(f"# {main_prompt}?")
-            results, combined_output = processor.process_main_prompt(main_prompt)
-            
-            # Final output processing
-            logger.info("\033[37m[FINAL RESULT] Comprehensive Analysis Complete\033[0m")
-            
-            if 'error' in combined_output and not combined_output.get('combined_response'):
-                mprint(f"Error occurred during analysis: {combined_output['error']}")
-            else:
-                mprint(combined_output['combined_response'])
+            results = processor.process_main_prompt(main_prompt)
             
             # Show graph info
             logger.info("\033[37m[GRAPH] Graph structure saved and visualized\033[0m")
