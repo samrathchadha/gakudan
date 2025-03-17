@@ -17,13 +17,12 @@ THOUGHT_GENERATOR_SYSTEM_PROMPT = """Generate an appropriate number of sub-promp
 - do not include any introductory messages
 - DO NOT GIVE THEM NAMES
 - format start:
-    1)personality:prompt
-    2)personality:prompt
-    3)personality:prompt
-    4)personality:prompt
-    ..
+    1)urban planner: how do we structure layouts to maximize security of citizens?
+    2) Data analyst: What metrics are crucial to measure to ensure maximum efficiency?
+    ...
 - format end
 do not deviate from format at all 
+under no circumstance can you ever deviate. no new lines, no weird formatting, only exactly how it is given
 """
 
 SUB_THOUGHT_GENERATOR_SYSTEM_PROMPT = """
@@ -42,11 +41,12 @@ Generate a MAXIMUM of 3 sub-prompts to solve the given problem and explore the p
 - ensure there is a new line between points if given
 - do not include any introductory messages
 - format start:
-    1)personality:prompt
-    2)personality:prompt
+    1)urban planner: how do we structure layouts to maximize security of citizens?
+    2) Data analyst: What metrics are crucial to measure to ensure maximum efficiency?
     ..
 - format end
 do not deviate from format at all 
+under no circumstance can you ever deviate. no new lines, no weird formatting, only exactly how it is given
 """
 
 SUB_PROMPT_SYSTEM_INSTRUCTION = "You are an AI assistant. Provide EXTREMELY CONCISE and PRECISE responses. Do not answer with yes or no, build unique content. Provide strong tangible solutions to the task at hand. do not include any introductory messages or conclusive messages"
