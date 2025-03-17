@@ -1,5 +1,5 @@
 """
-Main entry point for the Expand project with auto-search capabilities.
+Main entry point for the Expand project.
 """
 
 import os
@@ -7,10 +7,9 @@ import logging
 import colorlog
 from rich.console import Console
 from rich.markdown import Markdown
+from prompt_processor import GeminiPromptProcessor
 
-from integration import PromptProcessorExtension
-
-# Configure colorful logging
+# Configure Colorful Logging
 handler = colorlog.StreamHandler()
 handler.setFormatter(colorlog.ColoredFormatter(
     '%(log_color)s[%(levelname)s][%(threadName)s] %(message)s',
@@ -35,12 +34,10 @@ def mprint(string):
     print("\n\n")
 
 def main():
-    """Main function to run the prompt processor with auto-search."""
-    # Get API key from environment variable or default
+    """Main function to run the prompt processor."""
+    # In a production environment, get API key from environment variable
     api_key = os.environ.get("GEMINI_API_KEY", "AIzaSyCz5mTD7c7-mhWPDvyxlTXlb9JFWTzbvuY")
-    
-    # Create the extended prompt processor
-    processor = PromptProcessorExtension(api_key)
+    processor = GeminiPromptProcessor(api_key)
     
     try:
         while True:
@@ -50,8 +47,6 @@ def main():
                 continue
                 
             mprint(f"# {main_prompt}?")
-            
-            # Process with the extended processor
             results = processor.process_main_prompt(main_prompt)
             
             # Show graph info
