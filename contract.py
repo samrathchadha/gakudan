@@ -364,6 +364,7 @@ class PromptGraph:
             and use direct quotes where helpful. Maintain specific details, provide concrete solutions,
             and keep your response focused on the main question with specific details.
             Do not generalize the information or gentrify the emotion - maintain original tone and specificity.
+            Do not show the end user what insights you use to create your synthesis.
             """
         
         synthesis_prompt = f"""
@@ -381,6 +382,7 @@ class PromptGraph:
         4. Provide concrete, actionable solutions
         5. Keep your response focused on addressing the main question with specific details
         6. DO NOT gentrify the emotion - maintain the original tone and specificity
+        7. DO NOT show the end user what insights you use to create your synthesis.
 
         Synthesized response:
         """

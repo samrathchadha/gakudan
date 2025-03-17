@@ -36,7 +36,7 @@ def mprint(string):
 def main():
     """Main function to run the prompt processor."""
     # In a production environment, get API key from environment variable
-    api_key = os.environ.get("GEMINI_API_KEY", "AIzaSyCz5mTD7c7-mhWPDvyxlTXlb9JFWTzbvuY")
+    api_key = os.environ.get("GEMINI_API_KEY", "AIzaSyB6z0QzdzpPdsBDxP9956mNtwsyqKVhfsk")
     processor = GeminiPromptProcessor(api_key)
     
     try:
