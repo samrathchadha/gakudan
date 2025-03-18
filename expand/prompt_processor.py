@@ -346,10 +346,10 @@ class GeminiPromptProcessor:
         except:
             print("Failed to save graph to JSON")
         
-        try:
-            self.prompt_graph.visualize()
-        except:
-            print("Failed to visualize graph")
+        # try:
+        #     self.prompt_graph.visualize()
+        # except:
+        #     print("Failed to visualize graph")
         
         return self.all_results
     

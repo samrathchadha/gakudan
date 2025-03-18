@@ -687,7 +687,7 @@ def main():
     
     # Generate visualization if possible
     try:
-        graph.visualize_hierarchical()
+        # graph.visualize_hierarchical()
         logger.info("Generated hierarchical visualization")
     except Exception as e:
         logger.error(f"Error generating visualization: {e}")
