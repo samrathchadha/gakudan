@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+"""
+Modified contract.py to take command line inputs.
+"""
+
 import json
 import uuid
 import matplotlib.pyplot as plt
@@ -6,8 +11,15 @@ from typing import Dict, List, Optional
 import concurrent.futures
 import threading
 import time
+import argparse
+import os
+import logging
 from google import genai
-import time
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, 
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 class PromptGraph:
     def __init__(self, json_file=None, api_key=None):
@@ -497,7 +509,7 @@ class PromptGraph:
                 print(f"Warning: No successful syntheses at depth {depth}")
             
             processed_depths.add(depth)  # Mark this depth as processed
-        
+    
                     
     def visualize(self):
         """Visualize the graph using NetworkX and Matplotlib"""
@@ -544,7 +556,7 @@ class PromptGraph:
         pos = nx.multipartite_layout(G, subset_key=lambda x: depth_map.get(x, 0))
         
         # Draw the graph
-        plt.figure(figsize=(1500, 1000))
+        plt.figure(figsize=(15, 10))
         
         # Draw nodes
         nx.draw_networkx_nodes(G, pos, node_size=500, node_color=node_colors)
@@ -559,7 +571,7 @@ class PromptGraph:
         plt.axis("off")
         plt.tight_layout()
         plt.savefig("prompt_graph.png", dpi=300)
-        plt.show()
+        plt.close()
         
         print("Graph visualization saved as prompt_graph.png")
     
@@ -604,10 +616,14 @@ class PromptGraph:
         node_colors = [G.nodes[n]["color"] for n in G.nodes]
 
         # Create a more tree-like layout
-        pos = nx.nx_agraph.graphviz_layout(G, prog="dot")
+        try:
+            pos = nx.nx_agraph.graphviz_layout(G, prog="dot")
+        except:
+            # Fall back to spring layout if graphviz is not available
+            pos = nx.spring_layout(G, seed=42)
 
         # Draw the graph
-        plt.figure(figsize=(150, 150)) # Make plot 20 times bigger
+        plt.figure(figsize=(15, 10))
 
         # Draw nodes
         nx.draw_networkx_nodes(G, pos, node_size=500, node_color=node_colors)
@@ -621,6 +637,7 @@ class PromptGraph:
         plt.axis("off")
         plt.tight_layout()
         plt.savefig("prompt_graph_tree.png", dpi=150)
+        plt.close()
 
         print("Hierarchical visualization saved as prompt_graph_tree.png")
     
@@ -631,13 +648,52 @@ class PromptGraph:
         print(f"Graph saved to {filename}")
 
 
-# Example usage
-if __name__ == "__main__":
-    # Load an existing graph, create the synthesis structure, and run synthesis
-    api_key = "AIzaSyBmJg-SksvZIPa0AxBcb8fFRX7CAfmLcd8"  # Replace with your actual API key
-    graph = PromptGraph("./expand.json", api_key=api_key)
+def parse_arguments():
+    """Parse command line arguments."""
+    parser = argparse.ArgumentParser(description='Process expand.json into contract.json.')
+    parser.add_argument('--cwd', required=True, help='Working directory containing expand.json')
+    parser.add_argument('--input', default='expand.json', help='Input JSON file (default: expand.json)')
+    parser.add_argument('--output', default='contract.json', help='Output JSON file (default: contract.json)')
+    parser.add_argument('--api-key', required=True, help='API Key for Google Generative AI')
+    
+    return parser.parse_args()
+
+
+def main():
+    """Main entry point for the script."""
+    args = parse_arguments()
+    
+    # Change to the specified working directory
+    os.chdir(args.cwd)
+    logger.info(f"Changed working directory to: {args.cwd}")
+    
+    # Construct input and output paths
+    input_path = args.input
+    output_path = args.output
+    
+    logger.info(f"Processing {input_path} into {output_path}")
+    
+    # Initialize the PromptGraph with the input file and API key
+    graph = PromptGraph(json_file=input_path, api_key=args.api_key)
+    
+    # Create the synthesis structure
     graph.create_synthesis_structure()
+    
+    # Run the synthesis process
     graph.run_synthesis(model="gemini-2.0-flash-lite")
-    time.sleep(60)
-    graph.visualize_hierarchical()
-    graph.save_to_json("contract.json")
+    
+    # Save the results
+    graph.save_to_json(output_path)
+    
+    # Generate visualization if possible
+    try:
+        graph.visualize_hierarchical()
+        logger.info("Generated hierarchical visualization")
+    except Exception as e:
+        logger.error(f"Error generating visualization: {e}")
+    
+    logger.info(f"Processing complete. Results saved to {output_path}")
+
+
+if __name__ == "__main__":
+    main()

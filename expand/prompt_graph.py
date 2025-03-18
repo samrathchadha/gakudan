@@ -244,7 +244,7 @@ class PromptGraph:
                 if attrs.get('depth') == depth
             ]
     
-    def save_to_json(self, filename: str = "../expand.json"):
+    def save_to_json(self, filename: str = "./expand.json"):
         """
         Save the graph to a JSON file with explicit RAG connections.
         
@@ -315,7 +315,7 @@ class PromptGraph:
             logging.info(f"Graph saved to {filename} with {len(data['nodes'])} nodes, "
                        f"{hierarchy_count} hierarchy connections, and {rag_count} RAG connections")
             
-    def visualize(self, output_file: str = "../prompt_graph.png"):
+    def visualize(self, output_file: str = "./prompt_graph.png"):
         """
         Create a visualization of the graph and save to file with RAG connections.
         """
