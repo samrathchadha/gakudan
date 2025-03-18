@@ -1,0 +1,477 @@
+{
+  "directed": true,
+  "multigraph": true,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "root",
+      "prompt": "How do we fix world hunger",
+      "depth": -1
+    },
+    {
+      "id": "5c465575-ee52-4895-90d2-e2bc0e90b7c6",
+      "prompt": "1)Personality: The Pragmatic Economist: Considering global resource allocation and market inefficiencies.",
+      "depth": 0,
+      "response": "1.  **Data-Driven Analysis:** Prioritize metrics, statistics, and verifiable data to assess situations.\n2.  **Efficiency Focus:** Identify and eliminate waste; seek optimal resource utilization.\n3.  **Market-Oriented Solutions:** Favor market mechanisms to solve problems.\n4.  **Cost-Benefit Analysis:** Evaluate choices based on financial and economic returns.\n5.  **Long-Term Perspective:** Consider future impacts of present decisions.\n",
+      "rag_results": []
+    },
+    {
+      "id": "4266e06a-5aaa-40c3-af38-3cdfd90adbc4",
+      "prompt": "How can we restructure international trade policies and financial aid programs to ensure equitable food distribution and incentivize sustainable agricultural practices in food-insecure regions?",
+      "depth": 0,
+      "response": "1.  **Reform Trade Agreements:** Eliminate agricultural subsidies in developed nations, promoting fair market access for food-insecure regions.\n2.  **Conditional Aid:** Link financial aid to sustainable agricultural practices and land-use policies.\n3.  **Invest in Infrastructure:** Prioritize funding for transportation, storage, and distribution networks in food-insecure areas.\n4.  **Promote Diversification:** Encourage crop diversification to reduce reliance on single commodities and improve nutritional diversity.\n5.  **Support Local Farmers:** Provide training, microloans, and access to technology for smallholder farmers.\n",
+      "rag_results": []
+    },
+    {
+      "id": "a02d1c39-f5cd-4c5d-a232-1e697148803c",
+      "prompt": "2)Personality: The Data-Driven Technologist: Focusing on technological solutions and data analysis.",
+      "depth": 0,
+      "response": "*   **Prioritize Automation:** Implement automated systems for repetitive tasks.\n*   **Data-Driven Decisions:** Base choices on data analysis and metrics.\n*   **Embrace New Tech:** Adopt cutting-edge technologies and stay updated.\n*   **Optimize Processes:** Streamline workflows using technological tools.\n*   **Measure & Iterate:** Track results, analyze data, and refine strategies.\n",
+      "rag_results": []
+    },
+    {
+      "id": "33717097-861c-4d1e-ba0a-519dc3f09ba3",
+      "prompt": "What innovative technologies, such as precision agriculture, vertical farming, or AI-driven supply chain management, hold the greatest potential for increasing food production and reducing waste on a global scale?",
+      "depth": 0,
+      "response": "*   **Precision Agriculture:** Optimizes resource use (water, fertilizer) via sensors, GPS, and data analytics.\n*   **Vertical Farming:** Cultivates crops in stacked layers indoors, maximizing yields and minimizing land use.\n*   **AI-Driven Supply Chain:** Enhances forecasting, optimizes logistics, and reduces spoilage through real-time data analysis.\n",
+      "rag_results": []
+    },
+    {
+      "id": "6971efa0-2113-4c2b-9a27-51946be8f589",
+      "prompt": "3)Personality: The Empathetic Sociologist: Examining social structures and cultural factors.",
+      "depth": 0,
+      "response": "*   **Analyze Social Trends:** Identify patterns in societal behaviors.\n*   **Conduct Interviews:** Gather qualitative data on individual experiences.\n*   **Develop Theories:** Formulate explanations for observed phenomena.\n*   **Create Interventions:** Design programs to address social issues.\n*   **Promote Awareness:** Educate the public on sociological insights.\n",
+      "rag_results": []
+    },
+    {
+      "id": "9ea9785b-acd0-4d1c-bf79-354f1f77d606",
+      "prompt": "In what ways do cultural norms, gender inequalities, and political instability contribute to food insecurity, and how can we foster community-based solutions that empower vulnerable populations and promote equitable access to food?",
+      "depth": 0,
+      "response": "1.  **Cultural Norms:** Challenge dietary restrictions/preferences; promote diverse food sources.\n2.  **Gender Inequalities:** Support women farmers; ensure equal land rights & access to resources.\n3.  **Political Instability:** Establish local food banks/cooperatives; promote policy reforms.\n4.  **Community Empowerment:** Facilitate training, provide financial literacy, and establish self-governance.\n5.  **Equitable Access:** Implement food distribution programs; promote fair trade practices.\n",
+      "rag_results": []
+    },
+    {
+      "id": "2898bbd2-04cc-48f8-8def-6c50d5da7525",
+      "prompt": "4)Personality: The Resourceful Agronomist: With a focus on sustainable farming practices and environmental impact.",
+      "depth": 0,
+      "response": "*   **Prioritize:** Water conservation, soil health, and biodiversity.\n*   **Implement:** Crop rotation, cover cropping, composting.\n*   **Utilize:** Integrated pest management, biological controls.\n*   **Promote:** Reduced pesticide/herbicide use.\n*   **Emphasize:** Renewable energy, carbon sequestration.\n",
+      "rag_results": []
+    },
+    {
+      "id": "ea5734c7-9d0f-47a2-b615-59bbdc14ce82",
+      "prompt": "How can we promote climate-resilient agriculture, including drought-resistant crops and water-efficient irrigation techniques, to improve yields and reduce the environmental impact of food production, particularly in regions most vulnerable to climate change?",
+      "depth": 0,
+      "response": "1.  **Develop and Deploy Drought-Resistant Crops:** Implement breeding programs to create and distribute crop varieties that withstand water scarcity.\n2.  **Adopt Water-Efficient Irrigation:** Utilize drip irrigation and other precision irrigation techniques to minimize water waste.\n3.  **Implement Soil Conservation:** Employ methods like no-till farming and cover cropping to improve soil water retention.\n4.  **Improve Water Resource Management:** Construct rainwater harvesting systems and promote efficient water use policies.\n5.  **Provide Farmer Training:** Educate farmers on climate-resilient agricultural practices.\n6.  **Offer Financial Incentives:** Provide subsidies or loans to encourage the adoption of resilient practices.\n",
+      "rag_results": []
+    },
+    {
+      "id": "79eaf748-ca8b-4abb-83c2-43f27198e7f7",
+      "prompt": "*   **Prioritize:** Water conservation, soil health, and biodiversity.\n*   **Implement:** Crop rotation, cover cropping, composting.\n*   **Utilize:** Integrated pest management, biological controls.\n*   **Promote:** Reduced pesticide/herbicide use.\n*   **Emphasize:** Renewable energy, carbon sequestration.\n\n1) Environmental Ethicist: Considering the ethical implications, how can we balance the needs of current agricultural practices with the long-term health and sustainability of the environment?",
+      "depth": 1,
+      "color": "\u001b[31m",
+      "rag_context": null
+    },
+    {
+      "id": "b91a37da-ae30-4465-b300-b372a87d356b",
+      "prompt": "*   **Prioritize:** Water conservation, soil health, and biodiversity.\n*   **Implement:** Crop rotation, cover cropping, composting.\n*   **Utilize:** Integrated pest management, biological controls.\n*   **Promote:** Reduced pesticide/herbicide use.\n*   **Emphasize:** Renewable energy, carbon sequestration.\n\n2) Agricultural Economist: What economic incentives and disincentives would most effectively encourage farmers to adopt these sustainable practices, considering both short-term costs and long-term benefits?",
+      "depth": 1,
+      "color": "\u001b[91m",
+      "rag_context": null
+    },
+    {
+      "id": "d6eb83a1-98bf-46e5-9ff2-a4d4bc21cd7c",
+      "prompt": "*   **Prioritize:** Water conservation, soil health, and biodiversity.\n*   **Implement:** Crop rotation, cover cropping, composting.\n*   **Utilize:** Integrated pest management, biological controls.\n*   **Promote:** Reduced pesticide/herbicide use.\n*   **Emphasize:** Renewable energy, carbon sequestration.\n\n3) Agricultural Sociologist: How can we address potential social barriers and promote community engagement to ensure the successful adoption and equitable distribution of these sustainable agricultural practices?",
+      "depth": 1,
+      "color": "\u001b[33m",
+      "rag_context": null
+    },
+    {
+      "id": "ea569da5-ea76-4cd5-8c17-6361b6b4e23e",
+      "prompt": "*   **Precision Agriculture:** Optimizes resource use (water, fertilizer) via sensors, GPS, and data analytics.\n*   **Vertical Farming:** Cultivates crops in stacked layers indoors, maximizing yields and minimizing land use.\n*   **AI-Driven Supply Chain:** Enhances forecasting, optimizes logistics, and reduces spoilage through real-time data analysis.\n\n1) **Environmental Ethicist:** Considering the long-term sustainability and impact on ecosystems, what are the potential ethical dilemmas and trade-offs associated with each proposed solution?",
+      "depth": 1,
+      "color": "\u001b[93m",
+      "rag_context": null
+    },
+    {
+      "id": "d8c512fa-db0e-4ee9-b3b7-fbf2e07a35d2",
+      "prompt": "*   **Precision Agriculture:** Optimizes resource use (water, fertilizer) via sensors, GPS, and data analytics.\n*   **Vertical Farming:** Cultivates crops in stacked layers indoors, maximizing yields and minimizing land use.\n*   **AI-Driven Supply Chain:** Enhances forecasting, optimizes logistics, and reduces spoilage through real-time data analysis.\n\n2) **Economist:** How do the initial investment costs, operational expenses, and potential return on investment compare for each solution, and what economic factors might influence their adoption and scalability?",
+      "depth": 1,
+      "color": "\u001b[34m",
+      "rag_context": null
+    },
+    {
+      "id": "daae0488-17ca-4389-a21a-a886de115298",
+      "prompt": "*   **Precision Agriculture:** Optimizes resource use (water, fertilizer) via sensors, GPS, and data analytics.\n*   **Vertical Farming:** Cultivates crops in stacked layers indoors, maximizing yields and minimizing land use.\n*   **AI-Driven Supply Chain:** Enhances forecasting, optimizes logistics, and reduces spoilage through real-time data analysis.\n\n3) **Sociologist:** What are the potential social impacts of these technologies on different communities and populations, including issues of access, equity, and potential displacement of workers?",
+      "depth": 1,
+      "color": "\u001b[94m",
+      "rag_context": null
+    },
+    {
+      "id": "f3740da8-17ec-4183-b664-7ee13630a709",
+      "prompt": "1) **Risk Assessor:** How can we identify and mitigate potential threats and vulnerabilities within our strategies, and how does this influence our decision-making?",
+      "depth": 1,
+      "color": "\u001b[35m",
+      "rag_context": null
+    },
+    {
+      "id": "db5991a6-7e23-4b31-8b55-77c758949c2a",
+      "prompt": "2) **Innovation Strategist:** What are the most promising emerging technologies that could revolutionize our approach, and how do we balance their adoption with practical, measurable impact?",
+      "depth": 1,
+      "color": "\u001b[95m",
+      "rag_context": null
+    },
+    {
+      "id": "9ddd39ba-fc8c-46a0-ac59-02dba989a3d8",
+      "prompt": "3) **Ethical Considerations Advocate:** How do we ensure that our strategies are fair, unbiased, and do not unintentionally create or exacerbate inequalities within society?",
+      "depth": 1,
+      "color": "\u001b[36m",
+      "rag_context": null
+    },
+    {
+      "id": "3f6e24bf-d76e-4fc7-b305-776419c6c5b9",
+      "prompt": "1.  **The Pragmatist:** Considering the proposed solutions, what potential unforeseen challenges or unintended consequences might arise from their implementation, and how can these be mitigated?",
+      "depth": 1,
+      "color": "\u001b[96m",
+      "rag_context": null
+    },
+    {
+      "id": "e47ee81f-9e0d-4b20-8606-956920cd2f36",
+      "prompt": "2.  **The Futurist:** How might emerging technologies, societal shifts, or environmental changes influence the effectiveness and relevance of these solutions over the next 50 years, and how can the solutions be adapted to remain viable?",
+      "depth": 1,
+      "color": "\u001b[32m",
+      "rag_context": null
+    },
+    {
+      "id": "82de0073-0065-4683-afe1-b5517bb901a5",
+      "prompt": "3.  **The Ethicist:** How do these solutions address potential inequalities or disparities, and how do they align with principles of fairness, justice, and the well-being of all stakeholders involved?",
+      "depth": 1,
+      "color": "\u001b[92m",
+      "rag_context": null
+    },
+    {
+      "id": "2596e3b0-a54d-408e-b048-991c57107cd1",
+      "prompt": "1) Economist: Considering the global economic landscape, what are the potential ripple effects, both positive and negative, of implementing these strategies, and how can we mitigate any adverse consequences?",
+      "depth": 1,
+      "color": "\u001b[37m",
+      "rag_context": null
+    },
+    {
+      "id": "a51fc142-dc12-4257-839d-3f71a9c47bdb",
+      "prompt": "2) Sociologist: How do cultural norms and social structures influence the success of these strategies, and how can we ensure these initiatives are culturally sensitive and promote equitable outcomes?",
+      "depth": 1,
+      "color": "\u001b[97m",
+      "rag_context": null
+    },
+    {
+      "id": "d8c0ea46-1181-4c40-859d-1424777e7cd8",
+      "prompt": "3) Environmental Scientist: What are the environmental implications of these strategies, and how can we ensure that they promote sustainable land use and minimize any negative impacts on ecosystems?",
+      "depth": 1,
+      "color": "\u001b[31m",
+      "rag_context": null
+    }
+  ],
+  "links": [
+    {
+      "source": "root",
+      "target": "5c465575-ee52-4895-90d2-e2bc0e90b7c6",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "5c465575-ee52-4895-90d2-e2bc0e90b7c6",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "4266e06a-5aaa-40c3-af38-3cdfd90adbc4",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "4266e06a-5aaa-40c3-af38-3cdfd90adbc4",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "a02d1c39-f5cd-4c5d-a232-1e697148803c",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "a02d1c39-f5cd-4c5d-a232-1e697148803c",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "33717097-861c-4d1e-ba0a-519dc3f09ba3",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "33717097-861c-4d1e-ba0a-519dc3f09ba3",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "6971efa0-2113-4c2b-9a27-51946be8f589",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "6971efa0-2113-4c2b-9a27-51946be8f589",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "9ea9785b-acd0-4d1c-bf79-354f1f77d606",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "9ea9785b-acd0-4d1c-bf79-354f1f77d606",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "2898bbd2-04cc-48f8-8def-6c50d5da7525",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "2898bbd2-04cc-48f8-8def-6c50d5da7525",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "ea5734c7-9d0f-47a2-b615-59bbdc14ce82",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "ea5734c7-9d0f-47a2-b615-59bbdc14ce82",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "5c465575-ee52-4895-90d2-e2bc0e90b7c6",
+      "target": "3f6e24bf-d76e-4fc7-b305-776419c6c5b9",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "5c465575-ee52-4895-90d2-e2bc0e90b7c6",
+      "target": "e47ee81f-9e0d-4b20-8606-956920cd2f36",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "5c465575-ee52-4895-90d2-e2bc0e90b7c6",
+      "target": "82de0073-0065-4683-afe1-b5517bb901a5",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "4266e06a-5aaa-40c3-af38-3cdfd90adbc4",
+      "target": "d6eb83a1-98bf-46e5-9ff2-a4d4bc21cd7c",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.64739096"
+    },
+    {
+      "source": "4266e06a-5aaa-40c3-af38-3cdfd90adbc4",
+      "target": "2596e3b0-a54d-408e-b048-991c57107cd1",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "4266e06a-5aaa-40c3-af38-3cdfd90adbc4",
+      "target": "a51fc142-dc12-4257-839d-3f71a9c47bdb",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "4266e06a-5aaa-40c3-af38-3cdfd90adbc4",
+      "target": "d8c0ea46-1181-4c40-859d-1424777e7cd8",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "a02d1c39-f5cd-4c5d-a232-1e697148803c",
+      "target": "f3740da8-17ec-4183-b664-7ee13630a709",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "a02d1c39-f5cd-4c5d-a232-1e697148803c",
+      "target": "db5991a6-7e23-4b31-8b55-77c758949c2a",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "a02d1c39-f5cd-4c5d-a232-1e697148803c",
+      "target": "9ddd39ba-fc8c-46a0-ac59-02dba989a3d8",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "33717097-861c-4d1e-ba0a-519dc3f09ba3",
+      "target": "79eaf748-ca8b-4abb-83c2-43f27198e7f7",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.54792523"
+    },
+    {
+      "source": "33717097-861c-4d1e-ba0a-519dc3f09ba3",
+      "target": "b91a37da-ae30-4465-b300-b372a87d356b",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6317017"
+    },
+    {
+      "source": "33717097-861c-4d1e-ba0a-519dc3f09ba3",
+      "target": "ea569da5-ea76-4cd5-8c17-6361b6b4e23e",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "33717097-861c-4d1e-ba0a-519dc3f09ba3",
+      "target": "ea569da5-ea76-4cd5-8c17-6361b6b4e23e",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "33717097-861c-4d1e-ba0a-519dc3f09ba3",
+      "target": "d8c512fa-db0e-4ee9-b3b7-fbf2e07a35d2",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "33717097-861c-4d1e-ba0a-519dc3f09ba3",
+      "target": "d8c512fa-db0e-4ee9-b3b7-fbf2e07a35d2",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "33717097-861c-4d1e-ba0a-519dc3f09ba3",
+      "target": "daae0488-17ca-4389-a21a-a886de115298",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "33717097-861c-4d1e-ba0a-519dc3f09ba3",
+      "target": "daae0488-17ca-4389-a21a-a886de115298",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2898bbd2-04cc-48f8-8def-6c50d5da7525",
+      "target": "79eaf748-ca8b-4abb-83c2-43f27198e7f7",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2898bbd2-04cc-48f8-8def-6c50d5da7525",
+      "target": "79eaf748-ca8b-4abb-83c2-43f27198e7f7",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2898bbd2-04cc-48f8-8def-6c50d5da7525",
+      "target": "b91a37da-ae30-4465-b300-b372a87d356b",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2898bbd2-04cc-48f8-8def-6c50d5da7525",
+      "target": "b91a37da-ae30-4465-b300-b372a87d356b",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2898bbd2-04cc-48f8-8def-6c50d5da7525",
+      "target": "d6eb83a1-98bf-46e5-9ff2-a4d4bc21cd7c",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2898bbd2-04cc-48f8-8def-6c50d5da7525",
+      "target": "d6eb83a1-98bf-46e5-9ff2-a4d4bc21cd7c",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2898bbd2-04cc-48f8-8def-6c50d5da7525",
+      "target": "d8c512fa-db0e-4ee9-b3b7-fbf2e07a35d2",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.58373296"
+    },
+    {
+      "source": "ea5734c7-9d0f-47a2-b615-59bbdc14ce82",
+      "target": "79eaf748-ca8b-4abb-83c2-43f27198e7f7",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5632045"
+    },
+    {
+      "source": "ea5734c7-9d0f-47a2-b615-59bbdc14ce82",
+      "target": "b91a37da-ae30-4465-b300-b372a87d356b",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6593981"
+    },
+    {
+      "source": "ea5734c7-9d0f-47a2-b615-59bbdc14ce82",
+      "target": "d6eb83a1-98bf-46e5-9ff2-a4d4bc21cd7c",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6005974"
+    },
+    {
+      "source": "79eaf748-ca8b-4abb-83c2-43f27198e7f7",
+      "target": "ea569da5-ea76-4cd5-8c17-6361b6b4e23e",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.77225596"
+    },
+    {
+      "source": "b91a37da-ae30-4465-b300-b372a87d356b",
+      "target": "ea569da5-ea76-4cd5-8c17-6361b6b4e23e",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.69103646"
+    },
+    {
+      "source": "b91a37da-ae30-4465-b300-b372a87d356b",
+      "target": "d8c512fa-db0e-4ee9-b3b7-fbf2e07a35d2",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6642996"
+    }
+  ]
+}

@@ -1,0 +1,558 @@
+{
+  "directed": true,
+  "multigraph": true,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "root",
+      "prompt": "How do we fix world hunger",
+      "depth": -1
+    },
+    {
+      "id": "c44a3deb-d414-4d19-9fc5-34a0830e7510",
+      "prompt": "1) **Personality:** The Pragmatic Agriculturist - Focused on efficient food production and resource management.",
+      "depth": 0,
+      "response": "1.  **Prioritize:** Maximize yields while minimizing costs.\n2.  **Implement:** Utilize data-driven decisions.\n3.  **Focus:** On practical, proven methods.\n\nNext step: Define specific agricultural challenges.\n",
+      "rag_results": []
+    },
+    {
+      "id": "4430f1f6-d4c5-4f86-a26b-0b25abd0d87a",
+      "prompt": "How can we leverage advancements in agricultural technology and sustainable farming practices to maximize food yields while minimizing environmental impact, and what are the biggest obstacles in implementing these technologies globally?",
+      "depth": 0,
+      "response": "**Maximize Food Yields & Minimize Environmental Impact:**\n\n1.  **Precision Agriculture:** Deploy sensors, GPS, and drones to monitor crop health, soil conditions, and weather patterns.\n2.  **Vertical Farming:** Implement controlled-environment agriculture in urban areas to increase yields and reduce transportation costs.\n3.  **Genetic Engineering:** Utilize biotechnology to develop high-yield, disease-resistant crop varieties.\n4.  **Water Management:** Employ drip irrigation and water-efficient techniques.\n5.  **Integrated Pest Management:** Utilize biocontrol and minimize pesticide use.\n6.  **Conservation Tillage:** Reduce soil erosion and improve soil health.\n\n**Obstacles in Implementing Technologies Globally:**\n\n1.  **Financial Constraints:** High initial investment costs.\n2.  **Infrastructure Deficiencies:** Lack of reliable power, irrigation systems, and transportation networks.\n3.  **Knowledge Gap:** Insufficient farmer training and technical expertise.\n4.  **Policy Barriers:** Inconsistent government regulations and lack of support.\n5.  **Social and Cultural Resistance:** Reluctance to adopt new farming methods.\n\nNext, let's discuss specific examples of Precision Agriculture technologies.\n",
+      "rag_results": []
+    },
+    {
+      "id": "25ecba4b-862f-4672-8c83-ecfbcb68d51d",
+      "prompt": "2) **Personality:** The Empathetic Economist - Driven by a deep understanding of market dynamics and social inequalities.",
+      "depth": 0,
+      "response": "*   **Action 1:** Analyze market trends.\n*   **Action 2:** Identify social inequalities.\n*   **Action 3:** Formulate economic solutions.\n*   **Action 4:** Prioritize empathy.\n\nNext, provide a specific situation for analysis.\n",
+      "rag_results": []
+    },
+    {
+      "id": "7e9bce8d-74db-41b0-9b33-b0061b8296c2",
+      "prompt": "Considering the interconnectedness of global economies, how can we design financial models and trade policies that promote equitable access to food, address income disparities, and prevent the exploitation of vulnerable populations in the food supply chain?",
+      "depth": 0,
+      "response": "1.  **Financial Models:** Develop models incorporating social impact assessments, including:\n    *   Fair pricing mechanisms.\n    *   Risk-sharing for farmers.\n    *   Microfinance for small food businesses.\n\nNext step: Identify specific types of financial models.\n",
+      "rag_results": []
+    },
+    {
+      "id": "ee72b8bc-bae0-4768-9b56-4c7a4252c403",
+      "prompt": "3) **Personality:** The Logistics Strategist - Focused on efficient movement of goods and information.",
+      "depth": 0,
+      "response": "1.  **Define Key Responsibilities:** Outline the core duties of a Logistics Strategist.\n2.  **Identify Skills:** List essential skills like supply chain management, data analysis, and problem-solving.\n3.  **Detail Challenges:** Specify common obstacles such as cost optimization, risk mitigation, and adapting to change.\n4.  **Suggest Solutions:** Propose practical strategies to overcome those challenges.\n5.  **Outline Metrics:** Determine how performance will be measured.\n\nWhat are the key responsibilities of a Logistics Strategist?\n",
+      "rag_results": []
+    },
+    {
+      "id": "58b10f62-7085-493d-b037-aafd46965fbf",
+      "prompt": "How can we optimize food distribution networks, reduce waste, and ensure timely delivery of resources to areas experiencing food insecurity, particularly in regions with challenging infrastructure or geopolitical instability?",
+      "depth": 0,
+      "response": "1.  **Network Mapping:**\n    *   Identify existing food distribution networks.\n    *   Analyze infrastructure limitations (roads, storage).\n    *   Map areas of food insecurity.\n\n2.  **Technology Integration:**\n    *   Implement GPS tracking for real-time monitoring.\n    *   Use predictive analytics for demand forecasting.\n    *   Deploy mobile apps for farmers, distributors, and recipients.\n\n3.  **Decentralized Solutions:**\n    *   Establish localized storage facilities.\n    *   Promote urban farming and community gardens.\n    *   Support local food production.\n\n4.  **Waste Reduction:**\n    *   Improve cold chain management.\n    *   Implement inventory management.\n    *   Develop food waste recycling programs.\n\n5.  **Supply Chain Resilience:**\n    *   Diversify sourcing.\n    *   Establish backup routes.\n    *   Secure supply chains against geopolitical risks.\n\nNext step: Detail technology requirements.\n",
+      "rag_results": []
+    },
+    {
+      "id": "e428f95c-4b49-438e-aca2-116c5ffa1835",
+      "prompt": "4) **Personality:** The Cultural Anthropologist - Focused on understanding human behavior and social structures.",
+      "depth": 0,
+      "response": "1.  **Research:** Explore cultural anthropology principles.\n2.  **Analyze:** Identify key behavioral patterns.\n3.  **Summarize:** Outline social structures.\n4.  **Apply:** Relate to the user's context.\n\nNext, what context is required?\n",
+      "rag_results": []
+    },
+    {
+      "id": "1393c0b5-f182-4fff-9544-d9894040b91b",
+      "prompt": "How do cultural norms, dietary preferences, and societal power dynamics influence food access and consumption patterns, and how can we develop culturally sensitive interventions that address the root causes of hunger within diverse communities?",
+      "depth": 0,
+      "response": "1.  **Cultural Norms:**\n    *   **Solution:** Conduct community-based participatory research to understand food-related traditions, beliefs, and taboos.\n\n2.  **Dietary Preferences:**\n    *   **Solution:** Offer diverse food options that respect religious dietary laws, allergies, and taste preferences.\n\n3.  **Societal Power Dynamics:**\n    *   **Solution:** Advocate for policies that address systemic inequalities and empower marginalized communities.\n\n4.  **Culturally Sensitive Interventions:**\n    *   **Solution:** Partner with community leaders to design and implement programs.\n\n5.  **Root Causes of Hunger:**\n    *   **Solution:** Address poverty, lack of education, and limited access to resources through holistic strategies.\n\nNext, detail the specific research methods for understanding cultural norms.\n",
+      "rag_results": []
+    },
+    {
+      "id": "a69b6a80-27a8-49d8-890d-e55e6a2e5081",
+      "prompt": "5) **Personality:** The Resource Allocation Manager - Focused on the strategic investment of resources.",
+      "depth": 0,
+      "response": "1.  **Prioritize Resource Allocation:** Implement a system to rank resource requests based on strategic importance and potential return on investment.\n2.  **Develop Allocation Criteria:** Create specific, measurable, achievable, relevant, and time-bound (SMART) criteria for resource distribution.\n3.  **Monitor and Evaluate:** Establish key performance indicators (KPIs) to track resource utilization and the effectiveness of allocations.\n4.  **Optimize and Adapt:** Regularly review and adjust resource allocation strategies based on performance data and changing organizational needs.\n\nNext step: Define the specific resources to be managed.\n",
+      "rag_results": []
+    },
+    {
+      "id": "ac973d44-eb22-46db-ae6a-88f7a9f60de8",
+      "prompt": "Given the finite nature of financial, natural, and human resources, how can we prioritize interventions and allocate resources effectively across different aspects of the food system, such as production, distribution, and education, to achieve the greatest impact on reducing world hunger?",
+      "depth": 0,
+      "response": "1.  **Define Measurable Goals:** Establish specific, quantifiable objectives for hunger reduction (e.g., percentage decrease in malnutrition).\n2.  **Conduct a Needs Assessment:** Identify the most critical areas and populations affected by hunger.\n3.  **Cost-Benefit Analysis:** Evaluate potential interventions based on their impact on hunger reduction relative to their resource requirements.\n4.  **Prioritize High-Impact Interventions:** Allocate resources to interventions with the highest potential for achieving the defined goals.\n5.  **Optimize Resource Allocation:** Strategically distribute resources across production, distribution, and education, based on the needs assessment and cost-benefit analysis.\n6.  **Establish Monitoring and Evaluation:** Implement systems to track the effectiveness of interventions and adjust resource allocation accordingly.\n\nNext: What are the specific measurable goals for hunger reduction?\n",
+      "rag_results": []
+    },
+    {
+      "id": "51ebf05d-7921-4967-b9f0-50c3606cb89f",
+      "prompt": "1.  **Financial Models:** Develop models incorporating social impact assessments, including:\n    *   Fair pricing mechanisms.\n    *   Risk-sharing for farmers.\n    *   Microfinance for small food businesses.\n\nNext step: Identify specific types of financial models.\n\n1) Economist: How can we design financial models that incentivize sustainable practices and minimize market distortions within the food supply chain?",
+      "depth": 1,
+      "color": "\u001b[31m",
+      "rag_context": null
+    },
+    {
+      "id": "d892a5d4-a97f-4252-908f-6b971b0b0684",
+      "prompt": "1.  **Define Measurable Goals:** Establish specific, quantifiable objectives for hunger reduction (e.g., percentage decrease in malnutrition).\n2.  **Conduct a Needs Assessment:** Identify the most critical areas and populations affected by hunger.\n3.  **Cost-Benefit Analysis:** Evaluate potential interventions based on their impact on hunger reduction relative to their resource requirements.\n4.  **Prioritize High-Impact Interventions:** Allocate resources to interventions with the highest potential for achieving the defined goals.\n5.  **Optimize Resource Allocation:** Strategically distribute resources across production, distribution, and education, based on the needs assessment and cost-benefit analysis.\n6.  **Establish Monitoring and Evaluation:** Implement systems to track the effectiveness of interventions and adjust resource allocation accordingly.\n\nNext: What are the specific measurable goals for hunger reduction?\n\n1) **Statistician:** What statistical methodologies can be employed to accurately measure hunger reduction across diverse demographics and geographic regions, ensuring the data collected is both representative and robust?",
+      "depth": 1,
+      "color": "\u001b[91m",
+      "rag_context": null
+    },
+    {
+      "id": "48cfb201-1a62-48f4-a008-12aac0f0e3cf",
+      "prompt": "1.  **Define Measurable Goals:** Establish specific, quantifiable objectives for hunger reduction (e.g., percentage decrease in malnutrition).\n2.  **Conduct a Needs Assessment:** Identify the most critical areas and populations affected by hunger.\n3.  **Cost-Benefit Analysis:** Evaluate potential interventions based on their impact on hunger reduction relative to their resource requirements.\n4.  **Prioritize High-Impact Interventions:** Allocate resources to interventions with the highest potential for achieving the defined goals.\n5.  **Optimize Resource Allocation:** Strategically distribute resources across production, distribution, and education, based on the needs assessment and cost-benefit analysis.\n6.  **Establish Monitoring and Evaluation:** Implement systems to track the effectiveness of interventions and adjust resource allocation accordingly.\n\nNext: What are the specific measurable goals for hunger reduction?\n\n2) **Economist:** Considering the complex interplay of economic factors, what specific targets for hunger reduction can be established that are both ambitious and realistically achievable, and how can we account for the influence of variables like inflation and market volatility?",
+      "depth": 1,
+      "color": "\u001b[94m",
+      "rag_context": null
+    },
+    {
+      "id": "46cc7a80-6701-4078-85a4-a8befb28a879",
+      "prompt": "1.  **Define Measurable Goals:** Establish specific, quantifiable objectives for hunger reduction (e.g., percentage decrease in malnutrition).\n2.  **Conduct a Needs Assessment:** Identify the most critical areas and populations affected by hunger.\n3.  **Cost-Benefit Analysis:** Evaluate potential interventions based on their impact on hunger reduction relative to their resource requirements.\n4.  **Prioritize High-Impact Interventions:** Allocate resources to interventions with the highest potential for achieving the defined goals.\n5.  **Optimize Resource Allocation:** Strategically distribute resources across production, distribution, and education, based on the needs assessment and cost-benefit analysis.\n6.  **Establish Monitoring and Evaluation:** Implement systems to track the effectiveness of interventions and adjust resource allocation accordingly.\n\nNext: What are the specific measurable goals for hunger reduction?\n\n3) **Policy Analyst:** Given the existing global and regional frameworks and initiatives related to hunger reduction, what specific, measurable goals can be established that align with these broader efforts while also addressing the unique challenges and opportunities present in different contexts?",
+      "depth": 1,
+      "color": "\u001b[35m",
+      "rag_context": null
+    },
+    {
+      "id": "5bced22b-f15c-4618-a1df-921c453d31a6",
+      "prompt": "1.  **Define Key Responsibilities:** Outline the core duties of a Logistics Strategist.\n2.  **Identify Skills:** List essential skills like supply chain management, data analysis, and problem-solving.\n3.  **Detail Challenges:** Specify common obstacles such as cost optimization, risk mitigation, and adapting to change.\n4.  **Suggest Solutions:** Propose practical strategies to overcome those challenges.\n5.  **Outline Metrics:** Determine how performance will be measured.\n\nWhat are the key responsibilities of a Logistics Strategist?\n\n1) **The Efficiency Expert:** What are the primary bottlenecks Logistics Strategists must identify and address to streamline the supply chain?",
+      "depth": 1,
+      "color": "\u001b[93m",
+      "rag_context": null
+    },
+    {
+      "id": "2c4de0c2-5caa-40dc-9f25-23521f5e2b60",
+      "prompt": "1.  **Financial Models:** Develop models incorporating social impact assessments, including:\n    *   Fair pricing mechanisms.\n    *   Risk-sharing for farmers.\n    *   Microfinance for small food businesses.\n\nNext step: Identify specific types of financial models.\n\n2) Social Scientist: What are the potential societal impacts, both positive and negative, of introducing various financial models into the food supply chain, and how can we mitigate any risks?",
+      "depth": 1,
+      "color": "\u001b[34m",
+      "rag_context": null
+    },
+    {
+      "id": "1ea0d77d-c727-45a8-ab25-9096bb9cd084",
+      "prompt": "1.  **Cultural Norms:**\n    *   **Solution:** Conduct community-based participatory research to understand food-related traditions, beliefs, and taboos.\n\n2.  **Dietary Preferences:**\n    *   **Solution:** Offer diverse food options that respect religious dietary laws, allergies, and taste preferences.\n\n3.  **Societal Power Dynamics:**\n    *   **Solution:** Advocate for policies that address systemic inequalities and empower marginalized communities.\n\n4.  **Culturally Sensitive Interventions:**\n    *   **Solution:** Partner with community leaders to design and implement programs.\n\n5.  **Root Causes of Hunger:**\n    *   **Solution:** Address poverty, lack of education, and limited access to resources through holistic strategies.\n\nNext, detail the specific research methods for understanding cultural norms.\n\n1) Anthropologist: What methods can we use to uncover the unspoken rules and rituals surrounding food within a community, and how might these be integrated into our solution?",
+      "depth": 1,
+      "color": "\u001b[33m",
+      "rag_context": null
+    },
+    {
+      "id": "0f6edb9b-f1cb-49dd-adfa-1f520d453254",
+      "prompt": "2) **The Risk Manager:** How do Logistics Strategists proactively assess and mitigate potential disruptions to the supply chain, and what contingency plans should they develop?",
+      "depth": 1,
+      "color": "\u001b[95m",
+      "rag_context": null
+    },
+    {
+      "id": "174a84ba-705b-49e8-9c4f-3f6e3d2ab779",
+      "prompt": "3) Systems Engineer: Considering the complexity of the food supply chain, what financial model architectures would best accommodate various stakeholders while ensuring transparency and efficiency?",
+      "depth": 1,
+      "color": "\u001b[36m",
+      "rag_context": null
+    },
+    {
+      "id": "f93ba898-b42e-46c4-ac0c-a42efc98fae3",
+      "prompt": "3) **The Innovator:** In what ways should a Logistics Strategist leverage technological advancements and evolving industry trends to improve logistics operations?",
+      "depth": 1,
+      "color": "\u001b[32m",
+      "rag_context": null
+    },
+    {
+      "id": "46e3abac-83dc-470a-afa2-1557ac404b82",
+      "prompt": "2) Focus group facilitator: How do we ensure that the voices of all community members, including those who may be marginalized, are heard and valued in our research on food traditions?",
+      "depth": 1,
+      "color": "\u001b[96m",
+      "rag_context": null
+    },
+    {
+      "id": "89a34545-932a-4819-9e28-35f45f425409",
+      "prompt": "3) Ethicist: What ethical considerations must guide our research into cultural norms, particularly in relation to privacy, consent, and the potential for misinterpretation or exploitation of cultural practices?",
+      "depth": 1,
+      "color": "\u001b[92m",
+      "rag_context": null
+    },
+    {
+      "id": "8a193469-cb43-4e7a-9b61-3be1a09614d1",
+      "prompt": "1) **Community Organizer:** How can we foster a sense of shared responsibility and communal ownership to enhance the effectiveness of the social structures?",
+      "depth": 1,
+      "color": "\u001b[37m",
+      "rag_context": null
+    },
+    {
+      "id": "d11a5be5-d060-4432-8447-a2ca6ab3857f",
+      "prompt": "2) **Risk Assessor:** What potential vulnerabilities or unforeseen consequences might arise from the implementation of these social structures, and how can they be mitigated?",
+      "depth": 1,
+      "color": "\u001b[97m",
+      "rag_context": null
+    },
+    {
+      "id": "8c180054-9c04-40c1-8b4a-ef3be793edad",
+      "prompt": "3) **Ethical Philosopher:** In the context of these social structures, what are the core values that must be upheld to ensure fairness, justice, and the protection of individual rights?",
+      "depth": 1,
+      "color": "\u001b[31m",
+      "rag_context": null
+    },
+    {
+      "id": "7a24e035-d077-4dc1-91cd-bb061953cd58",
+      "prompt": "1) **Agronomist**: Considering diverse climates and soil conditions, what are the most significant, location-specific crop threats?",
+      "depth": 1,
+      "color": "\u001b[91m",
+      "rag_context": null
+    },
+    {
+      "id": "ec3ae7bc-3648-4262-aea9-32ed6abc590d",
+      "prompt": "2) **Economist**: How do fluctuating market prices and global trade policies impact the financial viability of various crop choices?",
+      "depth": 1,
+      "color": "\u001b[33m",
+      "rag_context": null
+    },
+    {
+      "id": "e707ed5f-9604-4548-ba54-bc677f8e5dac",
+      "prompt": "3) **Environmental Scientist**: What are the key ecological impacts of different farming practices, and how can we mitigate them to ensure long-term sustainability?",
+      "depth": 1,
+      "color": "\u001b[93m",
+      "rag_context": null
+    },
+    {
+      "id": "ffc8ae04-f8e9-4fd2-bb8c-a6edd1b85bb0",
+      "prompt": "1) **Technologist:** Considering the diverse needs of the food supply chain, what specific technology solutions can be implemented to optimize efficiency, reduce waste, and enhance accessibility across all stages, from farm to consumer, while addressing potential challenges like infrastructure limitations and data security?",
+      "depth": 1,
+      "color": "\u001b[34m",
+      "rag_context": null
+    },
+    {
+      "id": "ff23b4b2-807e-404d-ae76-9d5fd8557453",
+      "prompt": "2) **Logistics Manager:** How can technology be strategically integrated into the food supply chain to improve the transportation, storage, and distribution of food products, ensuring timely delivery, minimizing spoilage, and adapting to various logistical constraints?",
+      "depth": 1,
+      "color": "\u001b[94m",
+      "rag_context": null
+    },
+    {
+      "id": "e431bbd6-c582-4039-b164-cbfa62f6b2d5",
+      "prompt": "3) **Economist:** How can technology investments in the food supply chain be strategically prioritized to ensure that they yield the greatest economic benefits, including cost savings, increased efficiency, and improved market access for producers and consumers?",
+      "depth": 1,
+      "color": "\u001b[35m",
+      "rag_context": null
+    },
+    {
+      "id": "dbb2928f-03fe-4db7-a70d-05372161eee8",
+      "prompt": "1) **Agronomist**: From a soil science perspective, what are the most critical soil health indicators to monitor and how can precision agriculture technologies be best utilized to address any deficiencies?",
+      "depth": 1,
+      "color": "\u001b[95m",
+      "rag_context": null
+    },
+    {
+      "id": "6682191d-2a01-4bff-b7c5-6bdd3babd87b",
+      "prompt": "2) **Economist**: Considering both initial investment and long-term operational costs, what is the most economically viable approach to implementing precision agriculture technologies across diverse farming scales and geographical locations?",
+      "depth": 1,
+      "color": "\u001b[36m",
+      "rag_context": null
+    },
+    {
+      "id": "c14e36b3-3521-4ede-8d78-1a5e2c18ecf0",
+      "prompt": "3) **Sociologist**: How can precision agriculture technologies be introduced and integrated in a way that respects and leverages existing local knowledge and practices, ensuring community acceptance and participation?",
+      "depth": 1,
+      "color": "\u001b[96m",
+      "rag_context": null
+    }
+  ],
+  "links": [
+    {
+      "source": "root",
+      "target": "c44a3deb-d414-4d19-9fc5-34a0830e7510",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "c44a3deb-d414-4d19-9fc5-34a0830e7510",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "4430f1f6-d4c5-4f86-a26b-0b25abd0d87a",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "4430f1f6-d4c5-4f86-a26b-0b25abd0d87a",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "25ecba4b-862f-4672-8c83-ecfbcb68d51d",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "25ecba4b-862f-4672-8c83-ecfbcb68d51d",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "7e9bce8d-74db-41b0-9b33-b0061b8296c2",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "7e9bce8d-74db-41b0-9b33-b0061b8296c2",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "ee72b8bc-bae0-4768-9b56-4c7a4252c403",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "ee72b8bc-bae0-4768-9b56-4c7a4252c403",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "58b10f62-7085-493d-b037-aafd46965fbf",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "58b10f62-7085-493d-b037-aafd46965fbf",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "e428f95c-4b49-438e-aca2-116c5ffa1835",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "e428f95c-4b49-438e-aca2-116c5ffa1835",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "1393c0b5-f182-4fff-9544-d9894040b91b",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "1393c0b5-f182-4fff-9544-d9894040b91b",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "a69b6a80-27a8-49d8-890d-e55e6a2e5081",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "a69b6a80-27a8-49d8-890d-e55e6a2e5081",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "ac973d44-eb22-46db-ae6a-88f7a9f60de8",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "ac973d44-eb22-46db-ae6a-88f7a9f60de8",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "c44a3deb-d414-4d19-9fc5-34a0830e7510",
+      "target": "7a24e035-d077-4dc1-91cd-bb061953cd58",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "c44a3deb-d414-4d19-9fc5-34a0830e7510",
+      "target": "ec3ae7bc-3648-4262-aea9-32ed6abc590d",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "c44a3deb-d414-4d19-9fc5-34a0830e7510",
+      "target": "e707ed5f-9604-4548-ba54-bc677f8e5dac",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "4430f1f6-d4c5-4f86-a26b-0b25abd0d87a",
+      "target": "dbb2928f-03fe-4db7-a70d-05372161eee8",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "4430f1f6-d4c5-4f86-a26b-0b25abd0d87a",
+      "target": "6682191d-2a01-4bff-b7c5-6bdd3babd87b",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "4430f1f6-d4c5-4f86-a26b-0b25abd0d87a",
+      "target": "c14e36b3-3521-4ede-8d78-1a5e2c18ecf0",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "7e9bce8d-74db-41b0-9b33-b0061b8296c2",
+      "target": "51ebf05d-7921-4967-b9f0-50c3606cb89f",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "7e9bce8d-74db-41b0-9b33-b0061b8296c2",
+      "target": "51ebf05d-7921-4967-b9f0-50c3606cb89f",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "7e9bce8d-74db-41b0-9b33-b0061b8296c2",
+      "target": "2c4de0c2-5caa-40dc-9f25-23521f5e2b60",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "7e9bce8d-74db-41b0-9b33-b0061b8296c2",
+      "target": "2c4de0c2-5caa-40dc-9f25-23521f5e2b60",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "7e9bce8d-74db-41b0-9b33-b0061b8296c2",
+      "target": "174a84ba-705b-49e8-9c4f-3f6e3d2ab779",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ee72b8bc-bae0-4768-9b56-4c7a4252c403",
+      "target": "5bced22b-f15c-4618-a1df-921c453d31a6",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ee72b8bc-bae0-4768-9b56-4c7a4252c403",
+      "target": "5bced22b-f15c-4618-a1df-921c453d31a6",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ee72b8bc-bae0-4768-9b56-4c7a4252c403",
+      "target": "0f6edb9b-f1cb-49dd-adfa-1f520d453254",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ee72b8bc-bae0-4768-9b56-4c7a4252c403",
+      "target": "f93ba898-b42e-46c4-ac0c-a42efc98fae3",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "58b10f62-7085-493d-b037-aafd46965fbf",
+      "target": "ffc8ae04-f8e9-4fd2-bb8c-a6edd1b85bb0",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "58b10f62-7085-493d-b037-aafd46965fbf",
+      "target": "ff23b4b2-807e-404d-ae76-9d5fd8557453",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "58b10f62-7085-493d-b037-aafd46965fbf",
+      "target": "e431bbd6-c582-4039-b164-cbfa62f6b2d5",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "e428f95c-4b49-438e-aca2-116c5ffa1835",
+      "target": "8a193469-cb43-4e7a-9b61-3be1a09614d1",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "e428f95c-4b49-438e-aca2-116c5ffa1835",
+      "target": "d11a5be5-d060-4432-8447-a2ca6ab3857f",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "e428f95c-4b49-438e-aca2-116c5ffa1835",
+      "target": "8c180054-9c04-40c1-8b4a-ef3be793edad",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "1393c0b5-f182-4fff-9544-d9894040b91b",
+      "target": "1ea0d77d-c727-45a8-ab25-9096bb9cd084",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "1393c0b5-f182-4fff-9544-d9894040b91b",
+      "target": "1ea0d77d-c727-45a8-ab25-9096bb9cd084",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "1393c0b5-f182-4fff-9544-d9894040b91b",
+      "target": "46e3abac-83dc-470a-afa2-1557ac404b82",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "1393c0b5-f182-4fff-9544-d9894040b91b",
+      "target": "89a34545-932a-4819-9e28-35f45f425409",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ac973d44-eb22-46db-ae6a-88f7a9f60de8",
+      "target": "d892a5d4-a97f-4252-908f-6b971b0b0684",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ac973d44-eb22-46db-ae6a-88f7a9f60de8",
+      "target": "d892a5d4-a97f-4252-908f-6b971b0b0684",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ac973d44-eb22-46db-ae6a-88f7a9f60de8",
+      "target": "48cfb201-1a62-48f4-a008-12aac0f0e3cf",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ac973d44-eb22-46db-ae6a-88f7a9f60de8",
+      "target": "48cfb201-1a62-48f4-a008-12aac0f0e3cf",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ac973d44-eb22-46db-ae6a-88f7a9f60de8",
+      "target": "46cc7a80-6701-4078-85a4-a8befb28a879",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ac973d44-eb22-46db-ae6a-88f7a9f60de8",
+      "target": "46cc7a80-6701-4078-85a4-a8befb28a879",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    }
+  ]
+}

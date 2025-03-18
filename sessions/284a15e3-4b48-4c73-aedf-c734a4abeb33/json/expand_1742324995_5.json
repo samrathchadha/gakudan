@@ -1,0 +1,358 @@
+{
+  "directed": true,
+  "multigraph": true,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "root",
+      "prompt": "How do we fix world hunger",
+      "depth": -1
+    },
+    {
+      "id": "295977e0-ac86-4286-a1ce-f2b5a20ec2c1",
+      "prompt": "1) Economist: Considering the current global economic landscape, how can we restructure international trade agreements to prioritize food security in vulnerable regions, and what innovative financial instruments could incentivize sustainable agricultural practices?",
+      "depth": 0,
+      "response": "### Problem: Vulnerable regions face food insecurity.\n\n**Immediate Solution:**\n\n*   **Trade Agreement Revision:** Negotiate agreements with surplus food producers to ensure preferential access and stable pricing for vulnerable regions. Implement clauses guaranteeing minimum supply volumes and price stabilization mechanisms.\n*   **Resource Allocation:** Dedicate 10% of existing foreign aid budgets to infrastructure projects such as irrigation, storage facilities, and transportation networks.\n*   **Impact:** Stabilize food prices, increasing food availability for at least 50 million people in vulnerable regions.\n\n**Long-Term Strategy:**\n\n*   **Financial Instruments:** Introduce \"Food Security Bonds\" that fund sustainable agriculture projects.\n*   **Incentives:** Offer tax breaks and subsidies to promote sustainable agricultural practices.\n*   **Impact:** Increase yields by 20% and reduce environmental impact.\n",
+      "rag_results": []
+    },
+    {
+      "id": "933afa5a-c464-427b-9d9c-151ac4031c9f",
+      "prompt": "2) Agricultural Scientist: From a scientific standpoint, what advancements in crop technology, soil management, and pest control are most promising in increasing food production while minimizing environmental impact, and how can these be effectively disseminated to smallholder farmers globally?",
+      "depth": 0,
+      "response": "**Problem:** Insufficient food production with environmental damage.\n\n**Solution:**\n\n*   **Crop Technology:** Develop climate-resilient crops.\n    *   *Immediate:* Prioritize gene editing (CRISPR) for drought/flood resistance, affecting 20% of global crops by 2030.\n    *   *Long-term:* Expand research on nitrogen-efficient crops; reduce fertilizer needs by 30% by 2040.\n*   **Soil Management:** Implement regenerative agriculture.\n    *   *Immediate:* Promote no-till farming and cover crops; reduce erosion by 40% on 1 million hectares by 2028.\n    *   *Long-term:* Widespread adoption of carbon sequestration practices; increase soil carbon by 1% across farmland by 2040.\n*   **Pest Control:** Integrate biocontrol methods.\n    *   *Immediate:* Introduce beneficial insects; reduce pesticide use by 50% on 500,000 hectares by 2028.\n    *   *Long-term:* Develop biological pesticides; 70% adoption by 2040.\n*   **Dissemination to Smallholder Farmers:**\n    *   *Immediate:* Establish agricultural extension services. Train 10,000 extension officers.\n    *   *Long-term:* Utilize digital platforms. Reach 50 million farmers by 2030.\n",
+      "rag_results": []
+    },
+    {
+      "id": "2075232e-e614-45ad-88d4-ffb693bee89c",
+      "prompt": "3) Sociologist: In what ways do cultural norms, social inequalities, and political structures contribute to food insecurity within different communities, and how can these be addressed through community-based interventions and policy reforms?",
+      "depth": 0,
+      "response": "**Problem:** Food insecurity exacerbated by cultural norms, social inequalities, and political structures.\n\n**Solutions:**\n\n*   **Cultural Norms:**\n    *   **Solution:** Promote culturally sensitive nutrition education.\n    *   **Action:** Develop multilingual programs addressing dietary habits, food preparation.\n    *   **Impact:** Reach 10,000 individuals, reduce unhealthy eating by 15%.\n*   **Social Inequalities:**\n    *   **Solution:** Implement targeted food distribution programs.\n    *   **Action:** Establish community-based food banks, mobile pantries in underserved areas.\n    *   **Impact:** Serve 5,000 households weekly, decrease food deserts by 20%.\n*   **Political Structures:**\n    *   **Solution:** Advocate for policy reforms.\n    *   **Action:** Lobby for increased SNAP benefits, support urban agriculture initiatives.\n    *   **Impact:** Increase SNAP enrollment by 10%, create 5 community gardens.\n",
+      "rag_results": []
+    },
+    {
+      "id": "6e822c65-b62c-49e9-acf7-4f79c729a965",
+      "prompt": "4) Technologist: How can digital technologies, including precision agriculture, supply chain management platforms, and mobile applications, be leveraged to enhance food production, distribution, and access, particularly in underserved areas?",
+      "depth": 0,
+      "response": "**Problem:** Inefficient food systems limit production, distribution, and access, especially in underserved regions.\n\n**Solutions:**\n\n*   **Precision Agriculture:** Implement sensor-based irrigation and fertilization systems.\n    *   *Immediate:* Deploy in 10 pilot farms, increasing yields by 15% within one season.\n    *   *Long-term:* Expand to 1,000 farms over five years, impacting 50,000 farmers.\n*   **Supply Chain Management:** Adopt blockchain for transparent tracking.\n    *   *Immediate:* Integrate in 2 regional distribution networks to reduce spoilage by 20%.\n    *   *Long-term:* Extend nationally, connecting 5,000 suppliers and retailers.\n*   **Mobile Applications:** Launch apps for market information and mobile payments.\n    *   *Immediate:* Introduce in 3 underserved areas, benefiting 10,000 users.\n    *   *Long-term:* Expand to a national scale reaching 1 million users.\n",
+      "rag_results": []
+    },
+    {
+      "id": "07440363-46f1-4da7-ac69-6ae03962df69",
+      "prompt": "5) Policy Expert: What comprehensive policy frameworks, including land reform, subsidy programs, and food safety regulations, are necessary to create a sustainable and equitable global food system, and how can these policies be effectively implemented and enforced across different nations?",
+      "depth": 0,
+      "response": "**Problem:** Unsustainable and inequitable global food systems.\n\n**Solution:** Implement comprehensive policy frameworks.\n\n*   **Land Reform:**\n    *   **Action:** Implement policies promoting equitable land distribution, including land redistribution, tenancy reforms, and secure land tenure for smallholder farmers.\n    *   **Implementation:** National legislation, international cooperation for technical and financial support.\n    *   **Impact:** Increased food production by 15%, improved livelihoods for 100+ million farmers.\n*   **Subsidy Programs:**\n    *   **Action:** Reform agricultural subsidies. Redirect support toward sustainable practices, including conservation agriculture, agroforestry, and organic farming.\n    *   **Implementation:** Phase out harmful subsidies; introduce eco-schemes linked to environmental performance.\n    *   **Impact:** Reduced environmental damage by 20%, supported transition to sustainable agriculture by 30%.\n*   **Food Safety Regulations:**\n    *   **Action:** Establish and enforce robust food safety standards at all levels.\n    *   **Implementation:** Implement traceability systems, regular inspections, and consumer education programs.\n    *   **Impact:** Reduced foodborne illnesses by 25%, enhanced consumer trust in food systems.\n",
+      "rag_results": []
+    },
+    {
+      "id": "0651d1b9-9e4f-4ac5-9557-1cb0cdc4b0ee",
+      "prompt": "**Problem:** Insufficient food production with environmental damage.\n\n**Solution:**\n\n*   **Crop Technology:** Develop climate-resilient crops.\n    *   *Immediate:* Prioritize gene editing (CRISPR) for drought/flood resistance, affecting 20% of global crops by 2030.\n    *   *Long-term:* Expand research on nitrogen-efficient crops; reduce fertilizer needs by 30% by 2040.\n*   **Soil Management:** Implement regenerative agriculture.\n    *   *Immediate:* Promote no-till farming and cover crops; reduce erosion by 40% on 1 million hectares by 2028.\n    *   *Long-term:* Widespread adoption of carbon sequestration practices; increase soil carbon by 1% across farmland by 2040.\n*   **Pest Control:** Integrate biocontrol methods.\n    *   *Immediate:* Introduce beneficial insects; reduce pesticide use by 50% on 500,000 hectares by 2028.\n    *   *Long-term:* Develop biological pesticides; 70% adoption by 2040.\n*   **Dissemination to Smallholder Farmers:**\n    *   *Immediate:* Establish agricultural extension services. Train 10,000 extension officers.\n    *   *Long-term:* Utilize digital platforms. Reach 50 million farmers by 2030.\n\n1) **Environmental Scientist:** How do the proposed solutions impact biodiversity and ecosystem health, and what mitigation strategies should be in place?",
+      "depth": 1,
+      "color": "\u001b[31m",
+      "rag_context": null
+    },
+    {
+      "id": "9a33eb2a-a8cf-402e-b741-32d4f06ef486",
+      "prompt": "**Problem:** Insufficient food production with environmental damage.\n\n**Solution:**\n\n*   **Crop Technology:** Develop climate-resilient crops.\n    *   *Immediate:* Prioritize gene editing (CRISPR) for drought/flood resistance, affecting 20% of global crops by 2030.\n    *   *Long-term:* Expand research on nitrogen-efficient crops; reduce fertilizer needs by 30% by 2040.\n*   **Soil Management:** Implement regenerative agriculture.\n    *   *Immediate:* Promote no-till farming and cover crops; reduce erosion by 40% on 1 million hectares by 2028.\n    *   *Long-term:* Widespread adoption of carbon sequestration practices; increase soil carbon by 1% across farmland by 2040.\n*   **Pest Control:** Integrate biocontrol methods.\n    *   *Immediate:* Introduce beneficial insects; reduce pesticide use by 50% on 500,000 hectares by 2028.\n    *   *Long-term:* Develop biological pesticides; 70% adoption by 2040.\n*   **Dissemination to Smallholder Farmers:**\n    *   *Immediate:* Establish agricultural extension services. Train 10,000 extension officers.\n    *   *Long-term:* Utilize digital platforms. Reach 50 million farmers by 2030.\n\n2) **Economist:** What are the economic costs and benefits of the proposed solutions, including the impact on market prices and farmer livelihoods?",
+      "depth": 1,
+      "color": "\u001b[91m",
+      "rag_context": null
+    },
+    {
+      "id": "d1d5ca88-f787-4531-9b9e-5d44df75c41c",
+      "prompt": "**Problem:** Insufficient food production with environmental damage.\n\n**Solution:**\n\n*   **Crop Technology:** Develop climate-resilient crops.\n    *   *Immediate:* Prioritize gene editing (CRISPR) for drought/flood resistance, affecting 20% of global crops by 2030.\n    *   *Long-term:* Expand research on nitrogen-efficient crops; reduce fertilizer needs by 30% by 2040.\n*   **Soil Management:** Implement regenerative agriculture.\n    *   *Immediate:* Promote no-till farming and cover crops; reduce erosion by 40% on 1 million hectares by 2028.\n    *   *Long-term:* Widespread adoption of carbon sequestration practices; increase soil carbon by 1% across farmland by 2040.\n*   **Pest Control:** Integrate biocontrol methods.\n    *   *Immediate:* Introduce beneficial insects; reduce pesticide use by 50% on 500,000 hectares by 2028.\n    *   *Long-term:* Develop biological pesticides; 70% adoption by 2040.\n*   **Dissemination to Smallholder Farmers:**\n    *   *Immediate:* Establish agricultural extension services. Train 10,000 extension officers.\n    *   *Long-term:* Utilize digital platforms. Reach 50 million farmers by 2030.\n\n3) **Policy Maker:** What policy frameworks and incentives are needed to ensure widespread adoption and long-term sustainability of these solutions, considering global cooperation and equity?",
+      "depth": 1,
+      "color": "\u001b[33m",
+      "rag_context": null
+    },
+    {
+      "id": "579d79a6-f000-46af-b1d2-578179dd508d",
+      "prompt": "### Problem: Vulnerable regions face food insecurity.\n\n**Immediate Solution:**\n\n*   **Trade Agreement Revision:** Negotiate agreements with surplus food producers to ensure preferential access and stable pricing for vulnerable regions. Implement clauses guaranteeing minimum supply volumes and price stabilization mechanisms.\n*   **Resource Allocation:** Dedicate 10% of existing foreign aid budgets to infrastructure projects such as irrigation, storage facilities, and transportation networks.\n*   **Impact:** Stabilize food prices, increasing food availability for at least 50 million people in vulnerable regions.\n\n**Long-Term Strategy:**\n\n*   **Financial Instruments:** Introduce \"Food Security Bonds\" that fund sustainable agriculture projects.\n*   **Incentives:** Offer tax breaks and subsidies to promote sustainable agricultural practices.\n*   **Impact:** Increase yields by 20% and reduce environmental impact.\n\n1) Economist: What economic models and incentives can be utilized to encourage local food production and reduce reliance on external trade, specifically within the context of vulnerable regions?",
+      "depth": 1,
+      "color": "\u001b[93m",
+      "rag_context": null
+    },
+    {
+      "id": "6b5a3283-2a69-4e48-a104-edb7f1e5a36f",
+      "prompt": "### Problem: Vulnerable regions face food insecurity.\n\n**Immediate Solution:**\n\n*   **Trade Agreement Revision:** Negotiate agreements with surplus food producers to ensure preferential access and stable pricing for vulnerable regions. Implement clauses guaranteeing minimum supply volumes and price stabilization mechanisms.\n*   **Resource Allocation:** Dedicate 10% of existing foreign aid budgets to infrastructure projects such as irrigation, storage facilities, and transportation networks.\n*   **Impact:** Stabilize food prices, increasing food availability for at least 50 million people in vulnerable regions.\n\n**Long-Term Strategy:**\n\n*   **Financial Instruments:** Introduce \"Food Security Bonds\" that fund sustainable agriculture projects.\n*   **Incentives:** Offer tax breaks and subsidies to promote sustainable agricultural practices.\n*   **Impact:** Increase yields by 20% and reduce environmental impact.\n\n2) Humanitarian: How can aid distribution systems be optimized to reach the most vulnerable populations effectively, considering potential logistical challenges and corruption risks?",
+      "depth": 1,
+      "color": "\u001b[34m",
+      "rag_context": null
+    },
+    {
+      "id": "c127f72c-d89c-4b03-92ee-70a397b14701",
+      "prompt": "### Problem: Vulnerable regions face food insecurity.\n\n**Immediate Solution:**\n\n*   **Trade Agreement Revision:** Negotiate agreements with surplus food producers to ensure preferential access and stable pricing for vulnerable regions. Implement clauses guaranteeing minimum supply volumes and price stabilization mechanisms.\n*   **Resource Allocation:** Dedicate 10% of existing foreign aid budgets to infrastructure projects such as irrigation, storage facilities, and transportation networks.\n*   **Impact:** Stabilize food prices, increasing food availability for at least 50 million people in vulnerable regions.\n\n**Long-Term Strategy:**\n\n*   **Financial Instruments:** Introduce \"Food Security Bonds\" that fund sustainable agriculture projects.\n*   **Incentives:** Offer tax breaks and subsidies to promote sustainable agricultural practices.\n*   **Impact:** Increase yields by 20% and reduce environmental impact.\n\n3) Agronomist: What are the most resilient and productive crop varieties suitable for cultivation in the diverse environmental conditions of these vulnerable regions, and how can their adoption be promoted?",
+      "depth": 1,
+      "color": "\u001b[94m",
+      "rag_context": null
+    },
+    {
+      "id": "8c345923-f488-4dfa-a9bf-200bc45e77cd",
+      "prompt": "**Problem:** Unsustainable and inequitable global food systems.\n\n**Solution:** Implement comprehensive policy frameworks.\n\n*   **Land Reform:**\n    *   **Action:** Implement policies promoting equitable land distribution, including land redistribution, tenancy reforms, and secure land tenure for smallholder farmers.\n    *   **Implementation:** National legislation, international cooperation for technical and financial support.\n    *   **Impact:** Increased food production by 15%, improved livelihoods for 100+ million farmers.\n*   **Subsidy Programs:**\n    *   **Action:** Reform agricultural subsidies. Redirect support toward sustainable practices, including conservation agriculture, agroforestry, and organic farming.\n    *   **Implementation:** Phase out harmful subsidies; introduce eco-schemes linked to environmental performance.\n    *   **Impact:** Reduced environmental damage by 20%, supported transition to sustainable agriculture by 30%.\n*   **Food Safety Regulations:**\n    *   **Action:** Establish and enforce robust food safety standards at all levels.\n    *   **Implementation:** Implement traceability systems, regular inspections, and consumer education programs.\n    *   **Impact:** Reduced foodborne illnesses by 25%, enhanced consumer trust in food systems.\n\n1) Economist: Considering the economic implications, how can we ensure the proposed policy frameworks are not only effective but also economically viable and minimize potential negative impacts such as market disruptions or job losses?",
+      "depth": 1,
+      "color": "\u001b[35m",
+      "rag_context": null
+    },
+    {
+      "id": "1290eabf-bb94-4a93-9c74-f8050ee40119",
+      "prompt": "**Problem:** Unsustainable and inequitable global food systems.\n\n**Solution:** Implement comprehensive policy frameworks.\n\n*   **Land Reform:**\n    *   **Action:** Implement policies promoting equitable land distribution, including land redistribution, tenancy reforms, and secure land tenure for smallholder farmers.\n    *   **Implementation:** National legislation, international cooperation for technical and financial support.\n    *   **Impact:** Increased food production by 15%, improved livelihoods for 100+ million farmers.\n*   **Subsidy Programs:**\n    *   **Action:** Reform agricultural subsidies. Redirect support toward sustainable practices, including conservation agriculture, agroforestry, and organic farming.\n    *   **Implementation:** Phase out harmful subsidies; introduce eco-schemes linked to environmental performance.\n    *   **Impact:** Reduced environmental damage by 20%, supported transition to sustainable agriculture by 30%.\n*   **Food Safety Regulations:**\n    *   **Action:** Establish and enforce robust food safety standards at all levels.\n    *   **Implementation:** Implement traceability systems, regular inspections, and consumer education programs.\n    *   **Impact:** Reduced foodborne illnesses by 25%, enhanced consumer trust in food systems.\n\n2) Sociologist: How will these policy frameworks impact different social groups, considering potential disparities in access to land, resources, and information, and what measures can be put in place to mitigate unintended social consequences?",
+      "depth": 1,
+      "color": "\u001b[95m",
+      "rag_context": null
+    },
+    {
+      "id": "8dd964e8-7304-4d0a-a8f4-b3fe13672d29",
+      "prompt": "**Problem:** Unsustainable and inequitable global food systems.\n\n**Solution:** Implement comprehensive policy frameworks.\n\n*   **Land Reform:**\n    *   **Action:** Implement policies promoting equitable land distribution, including land redistribution, tenancy reforms, and secure land tenure for smallholder farmers.\n    *   **Implementation:** National legislation, international cooperation for technical and financial support.\n    *   **Impact:** Increased food production by 15%, improved livelihoods for 100+ million farmers.\n*   **Subsidy Programs:**\n    *   **Action:** Reform agricultural subsidies. Redirect support toward sustainable practices, including conservation agriculture, agroforestry, and organic farming.\n    *   **Implementation:** Phase out harmful subsidies; introduce eco-schemes linked to environmental performance.\n    *   **Impact:** Reduced environmental damage by 20%, supported transition to sustainable agriculture by 30%.\n*   **Food Safety Regulations:**\n    *   **Action:** Establish and enforce robust food safety standards at all levels.\n    *   **Implementation:** Implement traceability systems, regular inspections, and consumer education programs.\n    *   **Impact:** Reduced foodborne illnesses by 25%, enhanced consumer trust in food systems.\n\n3) Environmental scientist: What specific environmental indicators should be monitored to evaluate the effectiveness of these policy frameworks in promoting sustainability, and how can we ensure long-term environmental resilience?",
+      "depth": 1,
+      "color": "\u001b[36m",
+      "rag_context": null
+    },
+    {
+      "id": "13b03c42-b8be-4216-a355-87666e6e457a",
+      "prompt": "1) **Economist:** Considering the proposed solutions, how can we best quantify the return on investment, accounting for both financial and social impact, to prioritize resource allocation effectively?",
+      "depth": 1,
+      "color": "\u001b[96m",
+      "rag_context": null
+    },
+    {
+      "id": "8e231b4f-bb53-4629-83c6-7999121aea04",
+      "prompt": "2) **Social Worker:** From a community perspective, how do the proposed solutions address and mitigate potential disparities in access and adoption, ensuring equitable benefits for all demographics?",
+      "depth": 1,
+      "color": "\u001b[32m",
+      "rag_context": null
+    },
+    {
+      "id": "c9ffa85e-54a4-4b7a-8e8e-1a09369b8955",
+      "prompt": "3) **Logistics Manager:** How can we design the implementation of these solutions to minimize disruptions to existing food systems, while ensuring scalability and long-term sustainability?",
+      "depth": 1,
+      "color": "\u001b[92m",
+      "rag_context": null
+    },
+    {
+      "id": "ead2f8b6-597b-4351-a98e-c7cd89de3b73",
+      "prompt": "1) Sociologist: Given the interconnectedness of cultural norms, social inequalities, and political structures, how can we design interventions that address the root causes of food insecurity and foster sustainable solutions that promote equitable access to food?",
+      "depth": 1,
+      "color": "\u001b[37m",
+      "rag_context": null
+    },
+    {
+      "id": "5f2066c2-7b45-41a9-904e-e7120da3bef7",
+      "prompt": "2) Economist: Considering the proposed interventions, how do we evaluate the cost-effectiveness and long-term economic impact of addressing food insecurity, while also exploring potential funding models and resource allocation strategies?",
+      "depth": 1,
+      "color": "\u001b[97m",
+      "rag_context": null
+    },
+    {
+      "id": "39909031-ca8d-41e9-81e4-daeb10761e0d",
+      "prompt": "3) Community Organizer: How can we empower communities to actively participate in the design and implementation of these solutions, ensuring their voices are heard and fostering a sense of ownership and self-determination in addressing food insecurity?",
+      "depth": 1,
+      "color": "\u001b[31m",
+      "rag_context": null
+    }
+  ],
+  "links": [
+    {
+      "source": "root",
+      "target": "295977e0-ac86-4286-a1ce-f2b5a20ec2c1",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "295977e0-ac86-4286-a1ce-f2b5a20ec2c1",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "933afa5a-c464-427b-9d9c-151ac4031c9f",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "933afa5a-c464-427b-9d9c-151ac4031c9f",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "2075232e-e614-45ad-88d4-ffb693bee89c",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "2075232e-e614-45ad-88d4-ffb693bee89c",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "6e822c65-b62c-49e9-acf7-4f79c729a965",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "6e822c65-b62c-49e9-acf7-4f79c729a965",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "07440363-46f1-4da7-ac69-6ae03962df69",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "07440363-46f1-4da7-ac69-6ae03962df69",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "295977e0-ac86-4286-a1ce-f2b5a20ec2c1",
+      "target": "579d79a6-f000-46af-b1d2-578179dd508d",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "295977e0-ac86-4286-a1ce-f2b5a20ec2c1",
+      "target": "579d79a6-f000-46af-b1d2-578179dd508d",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "295977e0-ac86-4286-a1ce-f2b5a20ec2c1",
+      "target": "6b5a3283-2a69-4e48-a104-edb7f1e5a36f",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "295977e0-ac86-4286-a1ce-f2b5a20ec2c1",
+      "target": "6b5a3283-2a69-4e48-a104-edb7f1e5a36f",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "295977e0-ac86-4286-a1ce-f2b5a20ec2c1",
+      "target": "c127f72c-d89c-4b03-92ee-70a397b14701",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "295977e0-ac86-4286-a1ce-f2b5a20ec2c1",
+      "target": "c127f72c-d89c-4b03-92ee-70a397b14701",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "933afa5a-c464-427b-9d9c-151ac4031c9f",
+      "target": "0651d1b9-9e4f-4ac5-9557-1cb0cdc4b0ee",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "933afa5a-c464-427b-9d9c-151ac4031c9f",
+      "target": "0651d1b9-9e4f-4ac5-9557-1cb0cdc4b0ee",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "933afa5a-c464-427b-9d9c-151ac4031c9f",
+      "target": "9a33eb2a-a8cf-402e-b741-32d4f06ef486",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "933afa5a-c464-427b-9d9c-151ac4031c9f",
+      "target": "9a33eb2a-a8cf-402e-b741-32d4f06ef486",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "933afa5a-c464-427b-9d9c-151ac4031c9f",
+      "target": "d1d5ca88-f787-4531-9b9e-5d44df75c41c",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "933afa5a-c464-427b-9d9c-151ac4031c9f",
+      "target": "d1d5ca88-f787-4531-9b9e-5d44df75c41c",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2075232e-e614-45ad-88d4-ffb693bee89c",
+      "target": "ead2f8b6-597b-4351-a98e-c7cd89de3b73",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2075232e-e614-45ad-88d4-ffb693bee89c",
+      "target": "5f2066c2-7b45-41a9-904e-e7120da3bef7",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2075232e-e614-45ad-88d4-ffb693bee89c",
+      "target": "39909031-ca8d-41e9-81e4-daeb10761e0d",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "6e822c65-b62c-49e9-acf7-4f79c729a965",
+      "target": "13b03c42-b8be-4216-a355-87666e6e457a",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "6e822c65-b62c-49e9-acf7-4f79c729a965",
+      "target": "8e231b4f-bb53-4629-83c6-7999121aea04",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "6e822c65-b62c-49e9-acf7-4f79c729a965",
+      "target": "c9ffa85e-54a4-4b7a-8e8e-1a09369b8955",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "07440363-46f1-4da7-ac69-6ae03962df69",
+      "target": "8c345923-f488-4dfa-a9bf-200bc45e77cd",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "07440363-46f1-4da7-ac69-6ae03962df69",
+      "target": "8c345923-f488-4dfa-a9bf-200bc45e77cd",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "07440363-46f1-4da7-ac69-6ae03962df69",
+      "target": "1290eabf-bb94-4a93-9c74-f8050ee40119",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "07440363-46f1-4da7-ac69-6ae03962df69",
+      "target": "1290eabf-bb94-4a93-9c74-f8050ee40119",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "07440363-46f1-4da7-ac69-6ae03962df69",
+      "target": "8dd964e8-7304-4d0a-a8f4-b3fe13672d29",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "07440363-46f1-4da7-ac69-6ae03962df69",
+      "target": "8dd964e8-7304-4d0a-a8f4-b3fe13672d29",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    }
+  ]
+}

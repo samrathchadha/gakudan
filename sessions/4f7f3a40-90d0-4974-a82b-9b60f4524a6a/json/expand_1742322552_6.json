@@ -1,0 +1,541 @@
+{
+  "directed": true,
+  "multigraph": true,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "root",
+      "prompt": "Generate a web application",
+      "depth": -1
+    },
+    {
+      "id": "ed4d14d9-6b7c-4ab4-b522-a5bcc2912462",
+      "prompt": "1) **Personality: Experienced Software Architect** - Considering the current technological landscape and scalability needs, what foundational architectural patterns and technology choices would you recommend to ensure the web application is robust, maintainable, and capable of handling future growth?",
+      "depth": 0,
+      "response": "*   **Microservices Architecture**: Decompose the application into independent, deployable services.\n*   **Containerization (Docker)**: Package services with dependencies for consistent deployment.\n*   **Orchestration (Kubernetes)**: Automate container deployment, scaling, and management.\n*   **API Gateway**: Manage API traffic, authentication, and routing.\n*   **Message Queue (Kafka/RabbitMQ)**: Enable asynchronous communication.\n*   **Database**: Choose a database based on data needs (SQL/NoSQL).\n*   **Caching (Redis/Memcached)**: Improve performance by caching frequently accessed data.\n*   **CI/CD Pipeline**: Automate build, test, and deployment.\n*   **Monitoring/Logging**: Implement tools for system health tracking.\n",
+      "rag_results": []
+    },
+    {
+      "id": "8a40883b-4df9-4769-b2c2-86c7510fed07",
+      "prompt": "2) **Personality: User Experience (UX) Researcher** - To create a truly user-centric web application, what methods would you employ to deeply understand the target audience's needs, pain points, and expectations throughout the entire user journey, and how would you translate these findings into actionable design and functionality decisions?",
+      "depth": 0,
+      "response": "*   **User Interviews:** Conduct one-on-one sessions to gather in-depth qualitative data.\n*   **Usability Testing:** Observe users interacting with prototypes to identify usability issues.\n*   **Surveys:** Distribute questionnaires to collect quantitative and qualitative data from a broader audience.\n*   **Analytics Analysis:** Examine web analytics to understand user behavior patterns.\n*   **Persona Creation:** Develop detailed user personas based on research findings.\n*   **Journey Mapping:** Visualize the user's end-to-end experience to identify opportunities for improvement.\n*   **A/B Testing:** Experiment with different design and functionality variations to optimize the user experience.\n",
+      "rag_results": []
+    },
+    {
+      "id": "3a342e15-54b1-4f50-8c89-871ab73b52d9",
+      "prompt": "3) **Personality: Cybersecurity Specialist** - What are the most critical security vulnerabilities and threats that a web application is susceptible to, and what proactive measures, including specific coding practices, authentication protocols, and infrastructure configurations, should be implemented from the outset to mitigate these risks and protect user data?",
+      "depth": 0,
+      "response": "### **Vulnerabilities & Threats:**\n\n*   **Injection Flaws:** SQL, XSS, Command Injection.\n*   **Broken Authentication:** Weak passwords, session management.\n*   **Sensitive Data Exposure:** Lack of encryption, storage flaws.\n*   **XML External Entities (XXE):** Malicious XML processing.\n*   **Security Misconfiguration:** Default settings, open ports.\n*   **Cross-Site Scripting (XSS):** Injecting malicious scripts.\n*   **Insecure Deserialization:** Exploiting object creation.\n*   **Using Components with Known Vulnerabilities:** Outdated libraries.\n*   **Insufficient Logging & Monitoring:** Lack of incident response.\n*   **Account Takeover:** Brute-force, credential stuffing.\n\n### **Proactive Measures:**\n\n*   **Input Validation:** Sanitize all inputs.\n*   **Output Encoding:** Prevent XSS.\n*   **Parameterized Queries/ORM:** Prevent SQL injection.\n*   **Secure Authentication:** Strong passwords, MFA.\n*   **Authorization:** Role-based access control.\n*   **Encryption:** TLS/SSL, data encryption.\n*   **Regular Updates:** Patch promptly.\n*   **Security Headers:** Implement HTTP security headers.\n*   **Least Privilege:** Minimize access.\n*   **Web Application Firewall (WAF):** Protect against attacks.\n*   **Intrusion Detection/Prevention:** Monitor and alert.\n*   **Secure Coding Standards:** Follow best practices.\n*   **Regular Security Audits:** Penetration testing.\n*   **Dependency Management:** Use secure libraries.\n*   **Rate Limiting:** Prevent brute force.\n*   **Error Handling:** Avoid revealing sensitive info.\n",
+      "rag_results": []
+    },
+    {
+      "id": "49d0c1bb-21d2-4546-8d7f-547755b41acd",
+      "prompt": "4) **Personality: Agile Project Manager** - How would you structure the development process, incorporating agile methodologies and iterative development cycles, to ensure the web application is delivered efficiently, with regular opportunities for stakeholder feedback, adaptation to changing requirements, and continuous improvement throughout the project lifecycle?",
+      "depth": 0,
+      "response": "*   **Sprints:** 2-4 week iterations.\n*   **Daily Stand-ups:** Team updates.\n*   **Sprint Planning:** Define sprint goals.\n*   **Sprint Review:** Demo completed work.\n*   **Sprint Retrospective:** Process improvement.\n*   **Backlog:** Prioritized features.\n*   **User Stories:** Concise requirements.\n*   **Continuous Integration/Deployment:** Automated builds/tests.\n*   **Stakeholder Involvement:** Regular feedback loops.\n*   **Adaptive Planning:** Respond to changes.\n",
+      "rag_results": []
+    },
+    {
+      "id": "16a89edb-c0a8-4dcd-9d74-4860b99210ee",
+      "prompt": "5) **Personality: Accessibility Advocate** - How can we ensure the web application is inclusive and usable by individuals with disabilities, adhering to accessibility standards and guidelines, and what specific design and development considerations are crucial to achieve this goal?",
+      "depth": 0,
+      "response": "*   **WCAG Compliance:** Adhere to Web Content Accessibility Guidelines (WCAG) 2.1.\n*   **Semantic HTML:** Use semantic HTML elements (e.g., `<nav>`, `<article>`, `<aside>`) for structure.\n*   **ARIA Attributes:** Implement ARIA attributes to enhance semantic meaning.\n*   **Keyboard Navigation:** Ensure full site navigation via keyboard.\n*   **Alternative Text:** Provide `alt` text for all images.\n*   **Color Contrast:** Maintain sufficient color contrast for text and UI elements.\n*   **Form Accessibility:** Label all form fields clearly.\n*   **Multimedia Captions/Transcripts:** Offer captions and transcripts for videos and audio.\n*   **Testing:** Regularly test with screen readers and other assistive technologies.\n",
+      "rag_results": []
+    },
+    {
+      "id": "2767b33e-1608-4f16-b163-f12ff6ce2c23",
+      "prompt": "6) **Personality: DevOps Engineer** - What automated processes and tools would you integrate into the development and deployment pipeline to enable continuous integration, continuous delivery (CI/CD), efficient infrastructure management, and streamlined monitoring and maintenance of the web application in a production environment?",
+      "depth": 0,
+      "response": "*   **CI/CD:** Jenkins, GitLab CI, or CircleCI for automated builds, tests, and deployments.\n*   **Infrastructure:** Terraform or AWS CloudFormation for Infrastructure as Code (IaC), containerization with Docker and orchestration with Kubernetes.\n*   **Monitoring & Maintenance:** Prometheus with Grafana for application and infrastructure monitoring, ELK stack (Elasticsearch, Logstash, Kibana) for log aggregation and analysis, and automated alerting.\n",
+      "rag_results": []
+    },
+    {
+      "id": "053abdac-c054-439b-85a9-a177a501f7b3",
+      "prompt": "7) **Personality: Business Analyst** - How do you define the core features and functionalities of the web application in a way that aligns with the business goals, addresses market needs, and delivers demonstrable value to the users, ensuring a strong return on investment?",
+      "depth": 0,
+      "response": "*   **Requirement Elicitation:** Conduct stakeholder interviews, surveys, and market research.\n*   **Feature Prioritization:** Use methods like MoSCoW or Kano Model.\n*   **User Stories:** Create stories with clear acceptance criteria.\n*   **Value Proposition:** Define how features solve user problems.\n*   **ROI Analysis:** Forecast costs, benefits, and payback period.\n*   **KPI Definition:** Establish metrics to measure success.\n*   **Documentation:** Create a comprehensive requirements document.\n",
+      "rag_results": []
+    },
+    {
+      "id": "b8b050b1-92d1-4112-9b7e-326afb64bd51",
+      "prompt": "*   **Sprints:** 2-4 week iterations.\n*   **Daily Stand-ups:** Team updates.\n*   **Sprint Planning:** Define sprint goals.\n*   **Sprint Review:** Demo completed work.\n*   **Sprint Retrospective:** Process improvement.\n*   **Backlog:** Prioritized features.\n*   **User Stories:** Concise requirements.\n*   **Continuous Integration/Deployment:** Automated builds/tests.\n*   **Stakeholder Involvement:** Regular feedback loops.\n*   **Adaptive Planning:** Respond to changes.\n\n1) **Risk Assessor:** Considering the potential for schedule slippage, changing requirements, and unforeseen technical challenges, how can we proactively identify and mitigate the most significant risks associated with this agile framework?",
+      "depth": 1,
+      "color": "\u001b[31m",
+      "rag_context": null
+    },
+    {
+      "id": "aa8014bb-6401-45b6-95f7-6905b6dfbd70",
+      "prompt": "*   **Sprints:** 2-4 week iterations.\n*   **Daily Stand-ups:** Team updates.\n*   **Sprint Planning:** Define sprint goals.\n*   **Sprint Review:** Demo completed work.\n*   **Sprint Retrospective:** Process improvement.\n*   **Backlog:** Prioritized features.\n*   **User Stories:** Concise requirements.\n*   **Continuous Integration/Deployment:** Automated builds/tests.\n*   **Stakeholder Involvement:** Regular feedback loops.\n*   **Adaptive Planning:** Respond to changes.\n\n2) **Team Psychologist:** Given the emphasis on collaboration and rapid iteration, how can we foster a team environment that encourages psychological safety, open communication, and constructive feedback to maximize team performance and morale?",
+      "depth": 1,
+      "color": "\u001b[91m",
+      "rag_context": null
+    },
+    {
+      "id": "8460d39d-1577-4531-b1e2-840cf42d5e56",
+      "prompt": "*   **Sprints:** 2-4 week iterations.\n*   **Daily Stand-ups:** Team updates.\n*   **Sprint Planning:** Define sprint goals.\n*   **Sprint Review:** Demo completed work.\n*   **Sprint Retrospective:** Process improvement.\n*   **Backlog:** Prioritized features.\n*   **User Stories:** Concise requirements.\n*   **Continuous Integration/Deployment:** Automated builds/tests.\n*   **Stakeholder Involvement:** Regular feedback loops.\n*   **Adaptive Planning:** Respond to changes.\n\n3) **Financial Controller:** From a budgetary standpoint, how can we measure and report the cost-effectiveness of adopting this agile methodology, ensuring that the investment in processes and tools yields a demonstrable return?",
+      "depth": 1,
+      "color": "\u001b[33m",
+      "rag_context": null
+    },
+    {
+      "id": "1bb832c2-b1e9-4bf4-bcd7-6324247f50e8",
+      "prompt": "*   **CI/CD:** Jenkins, GitLab CI, or CircleCI for automated builds, tests, and deployments.\n*   **Infrastructure:** Terraform or AWS CloudFormation for Infrastructure as Code (IaC), containerization with Docker and orchestration with Kubernetes.\n*   **Monitoring & Maintenance:** Prometheus with Grafana for application and infrastructure monitoring, ELK stack (Elasticsearch, Logstash, Kibana) for log aggregation and analysis, and automated alerting.\n\n1) **The Skeptic:** Considering potential pitfalls and risks, what are the most significant challenges in implementing this technical stack, and how can we proactively mitigate them?",
+      "depth": 1,
+      "color": "\u001b[93m",
+      "rag_context": null
+    },
+    {
+      "id": "2b899b12-1052-4cf1-94ec-a69fe1f9974e",
+      "prompt": "*   **CI/CD:** Jenkins, GitLab CI, or CircleCI for automated builds, tests, and deployments.\n*   **Infrastructure:** Terraform or AWS CloudFormation for Infrastructure as Code (IaC), containerization with Docker and orchestration with Kubernetes.\n*   **Monitoring & Maintenance:** Prometheus with Grafana for application and infrastructure monitoring, ELK stack (Elasticsearch, Logstash, Kibana) for log aggregation and analysis, and automated alerting.\n\n2) **The Pragmatist:** How do we balance the desire for an ideal, cutting-edge technical stack with the practical constraints of budget, team skill sets, and existing infrastructure?",
+      "depth": 1,
+      "color": "\u001b[34m",
+      "rag_context": null
+    },
+    {
+      "id": "c1a74a57-2c1e-4dbf-b1a4-85177bbe3a04",
+      "prompt": "*   **CI/CD:** Jenkins, GitLab CI, or CircleCI for automated builds, tests, and deployments.\n*   **Infrastructure:** Terraform or AWS CloudFormation for Infrastructure as Code (IaC), containerization with Docker and orchestration with Kubernetes.\n*   **Monitoring & Maintenance:** Prometheus with Grafana for application and infrastructure monitoring, ELK stack (Elasticsearch, Logstash, Kibana) for log aggregation and analysis, and automated alerting.\n\n3) **The Futurist:** Looking ahead, how adaptable and scalable is this proposed technical stack to accommodate future technological advancements and evolving business needs?",
+      "depth": 1,
+      "color": "\u001b[94m",
+      "rag_context": null
+    },
+    {
+      "id": "a3c80315-fae1-4cdb-bc63-e39c9cf595a9",
+      "prompt": "*   **Microservices Architecture**: Decompose the application into independent, deployable services.\n*   **Containerization (Docker)**: Package services with dependencies for consistent deployment.\n*   **Orchestration (Kubernetes)**: Automate container deployment, scaling, and management.\n*   **API Gateway**: Manage API traffic, authentication, and routing.\n*   **Message Queue (Kafka/RabbitMQ)**: Enable asynchronous communication.\n*   **Database**: Choose a database based on data needs (SQL/NoSQL).\n*   **Caching (Redis/Memcached)**: Improve performance by caching frequently accessed data.\n*   **CI/CD Pipeline**: Automate build, test, and deployment.\n*   **Monitoring/Logging**: Implement tools for system health tracking.\n\n1) **System Architect**: What are the critical dependencies and potential points of failure within this architecture, and how can we mitigate them?",
+      "depth": 1,
+      "color": "\u001b[35m",
+      "rag_context": null
+    },
+    {
+      "id": "2b7c942d-7140-421f-b9a2-fbc1d1564787",
+      "prompt": "*   **Microservices Architecture**: Decompose the application into independent, deployable services.\n*   **Containerization (Docker)**: Package services with dependencies for consistent deployment.\n*   **Orchestration (Kubernetes)**: Automate container deployment, scaling, and management.\n*   **API Gateway**: Manage API traffic, authentication, and routing.\n*   **Message Queue (Kafka/RabbitMQ)**: Enable asynchronous communication.\n*   **Database**: Choose a database based on data needs (SQL/NoSQL).\n*   **Caching (Redis/Memcached)**: Improve performance by caching frequently accessed data.\n*   **CI/CD Pipeline**: Automate build, test, and deployment.\n*   **Monitoring/Logging**: Implement tools for system health tracking.\n\n2) **Security Specialist**: What are the potential security vulnerabilities of each component, and what strategies can we employ to address them?",
+      "depth": 1,
+      "color": "\u001b[95m",
+      "rag_context": null
+    },
+    {
+      "id": "921395af-46ca-46ae-9f3f-b8801b913ffb",
+      "prompt": "3) **Cost Analyst**: Given the proposed architecture, how can we optimize resource allocation and minimize operational costs?",
+      "depth": 1,
+      "color": "\u001b[36m",
+      "rag_context": null
+    },
+    {
+      "id": "7d96e0c1-a3a9-4c17-91ec-56309f8ee194",
+      "prompt": "1) **The Pragmatist:** Considering the constraints of limited resources and time, what is the most essential set of requirements we can define to ensure a functional product launch?",
+      "depth": 1,
+      "color": "\u001b[96m",
+      "rag_context": null
+    },
+    {
+      "id": "8a04d153-2b9a-4173-b331-13676e2d073b",
+      "prompt": "2) **The User Advocate:** How can we ensure the collected requirements accurately reflect the diverse needs and expectations of our target user groups, going beyond surface-level feedback?",
+      "depth": 1,
+      "color": "\u001b[32m",
+      "rag_context": null
+    },
+    {
+      "id": "58acfb10-5c38-4646-977c-d657f2ad3f98",
+      "prompt": "3) **The Risk Manager:** What potential risks or unforeseen challenges might arise during the requirements gathering and definition phase, and how can we proactively mitigate them to avoid project delays or failures?",
+      "depth": 1,
+      "color": "\u001b[92m",
+      "rag_context": null
+    },
+    {
+      "id": "ba3a095c-2b06-47ec-9d96-c239b50a1f84",
+      "prompt": "1) The Empathetic Designer: Can you describe the emotional journey users experience when interacting with our product, and what design elements can best support their feelings?",
+      "depth": 1,
+      "color": "\u001b[37m",
+      "rag_context": null
+    },
+    {
+      "id": "959dab41-f924-43ba-82e9-5b89897a5307",
+      "prompt": "2) The Skeptical Analyst: Based on the current data and our proposed testing methods, what are the most significant risks to the validity and reliability of our user research, and how can we mitigate them?",
+      "depth": 1,
+      "color": "\u001b[97m",
+      "rag_context": null
+    },
+    {
+      "id": "1219a9e2-1ce0-40a7-abcb-e4b40b252ad5",
+      "prompt": "3) The Pragmatic Manager: Considering time, budget, and resource constraints, what is the most efficient and impactful sequence of user research activities we should undertake, and what are the expected outcomes of each phase?",
+      "depth": 1,
+      "color": "\u001b[31m",
+      "rag_context": null
+    },
+    {
+      "id": "ea34f4e4-ac81-45d7-9b2d-843481b83f61",
+      "prompt": "1) Security Architect: How can we design a layered security architecture to mitigate the combined risk profile, considering both the vulnerabilities and the proactive measures, to create a robust and resilient system?",
+      "depth": 1,
+      "color": "\u001b[91m",
+      "rag_context": null
+    },
+    {
+      "id": "ddb33f4d-7df3-4219-b9d7-53d54e50c2a7",
+      "prompt": "2) Risk Assessor: Considering the listed vulnerabilities, what is a prioritized risk assessment matrix for these threats, factoring in both likelihood and impact, and how does this inform the allocation of resources for mitigation efforts?",
+      "depth": 1,
+      "color": "\u001b[33m",
+      "rag_context": null
+    },
+    {
+      "id": "bc6c472a-8715-4fbd-84ee-ca03d1563ea1",
+      "prompt": "3) Incident Responder: Considering a security breach, how can the proactive measures be utilized to quickly identify the source of the breach, contain the damage, and restore services effectively, and how can logging and monitoring be optimized for such scenarios?",
+      "depth": 1,
+      "color": "\u001b[93m",
+      "rag_context": null
+    }
+  ],
+  "links": [
+    {
+      "source": "root",
+      "target": "ed4d14d9-6b7c-4ab4-b522-a5bcc2912462",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "ed4d14d9-6b7c-4ab4-b522-a5bcc2912462",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "8a40883b-4df9-4769-b2c2-86c7510fed07",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "8a40883b-4df9-4769-b2c2-86c7510fed07",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "3a342e15-54b1-4f50-8c89-871ab73b52d9",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "3a342e15-54b1-4f50-8c89-871ab73b52d9",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "49d0c1bb-21d2-4546-8d7f-547755b41acd",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "49d0c1bb-21d2-4546-8d7f-547755b41acd",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "16a89edb-c0a8-4dcd-9d74-4860b99210ee",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "16a89edb-c0a8-4dcd-9d74-4860b99210ee",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "2767b33e-1608-4f16-b163-f12ff6ce2c23",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "2767b33e-1608-4f16-b163-f12ff6ce2c23",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "053abdac-c054-439b-85a9-a177a501f7b3",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "053abdac-c054-439b-85a9-a177a501f7b3",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ed4d14d9-6b7c-4ab4-b522-a5bcc2912462",
+      "target": "a3c80315-fae1-4cdb-bc63-e39c9cf595a9",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ed4d14d9-6b7c-4ab4-b522-a5bcc2912462",
+      "target": "a3c80315-fae1-4cdb-bc63-e39c9cf595a9",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ed4d14d9-6b7c-4ab4-b522-a5bcc2912462",
+      "target": "2b7c942d-7140-421f-b9a2-fbc1d1564787",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ed4d14d9-6b7c-4ab4-b522-a5bcc2912462",
+      "target": "2b7c942d-7140-421f-b9a2-fbc1d1564787",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ed4d14d9-6b7c-4ab4-b522-a5bcc2912462",
+      "target": "921395af-46ca-46ae-9f3f-b8801b913ffb",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ed4d14d9-6b7c-4ab4-b522-a5bcc2912462",
+      "target": "1bb832c2-b1e9-4bf4-bcd7-6324247f50e8",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6107415"
+    },
+    {
+      "source": "ed4d14d9-6b7c-4ab4-b522-a5bcc2912462",
+      "target": "2b899b12-1052-4cf1-94ec-a69fe1f9974e",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5880017"
+    },
+    {
+      "source": "ed4d14d9-6b7c-4ab4-b522-a5bcc2912462",
+      "target": "c1a74a57-2c1e-4dbf-b1a4-85177bbe3a04",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6409855"
+    },
+    {
+      "source": "8a40883b-4df9-4769-b2c2-86c7510fed07",
+      "target": "b8b050b1-92d1-4112-9b7e-326afb64bd51",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.3952314"
+    },
+    {
+      "source": "8a40883b-4df9-4769-b2c2-86c7510fed07",
+      "target": "aa8014bb-6401-45b6-95f7-6905b6dfbd70",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.41851866"
+    },
+    {
+      "source": "8a40883b-4df9-4769-b2c2-86c7510fed07",
+      "target": "8460d39d-1577-4531-b1e2-840cf42d5e56",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.36064324"
+    },
+    {
+      "source": "8a40883b-4df9-4769-b2c2-86c7510fed07",
+      "target": "ba3a095c-2b06-47ec-9d96-c239b50a1f84",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "8a40883b-4df9-4769-b2c2-86c7510fed07",
+      "target": "959dab41-f924-43ba-82e9-5b89897a5307",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "8a40883b-4df9-4769-b2c2-86c7510fed07",
+      "target": "1219a9e2-1ce0-40a7-abcb-e4b40b252ad5",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "3a342e15-54b1-4f50-8c89-871ab73b52d9",
+      "target": "ea34f4e4-ac81-45d7-9b2d-843481b83f61",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "3a342e15-54b1-4f50-8c89-871ab73b52d9",
+      "target": "ddb33f4d-7df3-4219-b9d7-53d54e50c2a7",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "3a342e15-54b1-4f50-8c89-871ab73b52d9",
+      "target": "bc6c472a-8715-4fbd-84ee-ca03d1563ea1",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "49d0c1bb-21d2-4546-8d7f-547755b41acd",
+      "target": "b8b050b1-92d1-4112-9b7e-326afb64bd51",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "49d0c1bb-21d2-4546-8d7f-547755b41acd",
+      "target": "b8b050b1-92d1-4112-9b7e-326afb64bd51",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "49d0c1bb-21d2-4546-8d7f-547755b41acd",
+      "target": "aa8014bb-6401-45b6-95f7-6905b6dfbd70",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "49d0c1bb-21d2-4546-8d7f-547755b41acd",
+      "target": "aa8014bb-6401-45b6-95f7-6905b6dfbd70",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "49d0c1bb-21d2-4546-8d7f-547755b41acd",
+      "target": "8460d39d-1577-4531-b1e2-840cf42d5e56",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "49d0c1bb-21d2-4546-8d7f-547755b41acd",
+      "target": "8460d39d-1577-4531-b1e2-840cf42d5e56",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "49d0c1bb-21d2-4546-8d7f-547755b41acd",
+      "target": "2b899b12-1052-4cf1-94ec-a69fe1f9974e",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.40805674"
+    },
+    {
+      "source": "49d0c1bb-21d2-4546-8d7f-547755b41acd",
+      "target": "c1a74a57-2c1e-4dbf-b1a4-85177bbe3a04",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.36312792"
+    },
+    {
+      "source": "2767b33e-1608-4f16-b163-f12ff6ce2c23",
+      "target": "1bb832c2-b1e9-4bf4-bcd7-6324247f50e8",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2767b33e-1608-4f16-b163-f12ff6ce2c23",
+      "target": "1bb832c2-b1e9-4bf4-bcd7-6324247f50e8",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2767b33e-1608-4f16-b163-f12ff6ce2c23",
+      "target": "2b899b12-1052-4cf1-94ec-a69fe1f9974e",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2767b33e-1608-4f16-b163-f12ff6ce2c23",
+      "target": "2b899b12-1052-4cf1-94ec-a69fe1f9974e",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2767b33e-1608-4f16-b163-f12ff6ce2c23",
+      "target": "c1a74a57-2c1e-4dbf-b1a4-85177bbe3a04",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2767b33e-1608-4f16-b163-f12ff6ce2c23",
+      "target": "c1a74a57-2c1e-4dbf-b1a4-85177bbe3a04",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "053abdac-c054-439b-85a9-a177a501f7b3",
+      "target": "b8b050b1-92d1-4112-9b7e-326afb64bd51",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.42065307"
+    },
+    {
+      "source": "053abdac-c054-439b-85a9-a177a501f7b3",
+      "target": "aa8014bb-6401-45b6-95f7-6905b6dfbd70",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.32606858"
+    },
+    {
+      "source": "053abdac-c054-439b-85a9-a177a501f7b3",
+      "target": "8460d39d-1577-4531-b1e2-840cf42d5e56",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.43393353"
+    },
+    {
+      "source": "053abdac-c054-439b-85a9-a177a501f7b3",
+      "target": "7d96e0c1-a3a9-4c17-91ec-56309f8ee194",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "053abdac-c054-439b-85a9-a177a501f7b3",
+      "target": "8a04d153-2b9a-4173-b331-13676e2d073b",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "053abdac-c054-439b-85a9-a177a501f7b3",
+      "target": "58acfb10-5c38-4646-977c-d657f2ad3f98",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "b8b050b1-92d1-4112-9b7e-326afb64bd51",
+      "target": "1bb832c2-b1e9-4bf4-bcd7-6324247f50e8",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.48921877"
+    },
+    {
+      "source": "1bb832c2-b1e9-4bf4-bcd7-6324247f50e8",
+      "target": "a3c80315-fae1-4cdb-bc63-e39c9cf595a9",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.65768504"
+    },
+    {
+      "source": "c1a74a57-2c1e-4dbf-b1a4-85177bbe3a04",
+      "target": "a3c80315-fae1-4cdb-bc63-e39c9cf595a9",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.60546386"
+    }
+  ]
+}

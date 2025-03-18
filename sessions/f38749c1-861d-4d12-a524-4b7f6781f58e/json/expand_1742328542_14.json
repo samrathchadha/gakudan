@@ -1,0 +1,1377 @@
+{
+  "directed": true,
+  "multigraph": true,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "root",
+      "prompt": "How do we fix world hunger?",
+      "depth": -1
+    },
+    {
+      "id": "a6b294c0-d582-4b2f-8bfe-0a77ce6df53a",
+      "prompt": "1) Agricultural Scientist (focused on sustainable farming): In what innovative ways can we optimize crop yields and resource utilization, particularly in regions most affected by food insecurity, while minimizing environmental impact?",
+      "depth": 0,
+      "response": "*   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\n",
+      "rag_results": []
+    },
+    {
+      "id": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "prompt": "2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?",
+      "depth": 0,
+      "response": "*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n",
+      "rag_results": []
+    },
+    {
+      "id": "c2def62c-5c67-434e-8b45-bc77b02a0c52",
+      "prompt": "3) Political Strategist (with experience in international relations): What are the most effective strategies for fostering political stability and international cooperation to address the root causes of hunger, such as conflict, corruption, and displacement?",
+      "depth": 0,
+      "response": "*   **Diplomacy & Negotiation:** Facilitate dialogue, mediation, and conflict resolution.\n*   **Economic Development:** Promote sustainable growth, trade, and investment.\n*   **Good Governance:** Combat corruption, promote transparency, and strengthen institutions.\n*   **Humanitarian Aid:** Provide immediate relief, food security programs, and support displaced populations.\n*   **Security Cooperation:** Address conflicts, and support peacebuilding initiatives.\n",
+      "rag_results": []
+    },
+    {
+      "id": "d77283d3-5f41-4dad-9f7f-120e1b51183d",
+      "prompt": "4) Sociologist (studying cultural and social behaviors around food): How can we tailor food distribution programs and educational initiatives to respect and integrate local cultural practices and dietary preferences, ensuring effective and dignified solutions for communities facing hunger?",
+      "depth": 0,
+      "response": "*   **Needs Assessment:** Conduct ethnographic research to understand local foodways, including preparation methods, ingredient usage, and meal structures.\n*   **Community Involvement:** Establish participatory planning with community leaders to incorporate cultural practices into program design.\n*   **Culturally Appropriate Menus:** Design food baskets and educational materials that reflect local preferences and address nutritional needs.\n*   **Flexible Delivery:** Offer options for food preparation and consumption, respecting cultural meal schedules.\n*   **Education:** Develop culturally sensitive educational resources that promote healthy eating habits.\n*   **Feedback Loop:** Establish ongoing feedback mechanisms to evaluate and refine programs based on community input.\n",
+      "rag_results": []
+    },
+    {
+      "id": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "prompt": "5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?",
+      "depth": 0,
+      "response": "*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\n",
+      "rag_results": []
+    },
+    {
+      "id": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "prompt": "*   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\n\n1) **Environmental Ethicist:** Considering the environmental impact, what are the most ethically sound agricultural practices to prioritize, weighing immediate productivity against long-term ecological health?",
+      "depth": 1,
+      "color": "\u001b[31m",
+      "rag_context": null,
+      "response": "*   **Prioritize Soil Health:** Implement no-till farming, cover cropping, and composting to enhance long-term soil fertility and carbon sequestration.\n*   **Promote Integrated Pest Management (IPM):** Minimize pesticide use by utilizing biological control and crop rotation strategies.\n*   **Implement Agroforestry:** Integrate trees with crops/livestock to enhance biodiversity and carbon sequestration.\n*   **Embrace Water Conservation:** Utilize efficient irrigation techniques and promote drought-resistant crops to conserve water.\n*   **Diversify Crops:** Implement crop diversification to spread risk and improve soil health.\n",
+      "rag_results": "[{'text': '5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\\n', 'node_id': '2e5cc70a-4b05-4b5c-9665-8992050e960f', 'similarity': 0.69124985}, {'text': '2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\\n', 'node_id': 'e270e419-dbc5-44ec-94b1-75f3b29aa219', 'similarity': 0.37426504}]"
+    },
+    {
+      "id": "efad40f3-071e-46f6-bccf-32e9cc586760",
+      "prompt": "*   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\n\n2) **Financial Analyst:** What is the cost-benefit analysis of each proposed agricultural method, considering initial investment, operational expenses, potential yields, and long-term financial sustainability?",
+      "depth": 1,
+      "color": "\u001b[91m",
+      "rag_context": null,
+      "response": "*   **Diversify Crops:** Reduces risk of crop failure; improves soil health, increasing long-term productivity.\n*   **Water Management:** Efficient irrigation reduces water waste; drought-resistant crops reduce irrigation needs.\n*   **Soil Health:** No-till, cover cropping, and composting enhance water retention and reduce erosion.\n*   **Early Warning Systems:** Improves preparedness, minimizing crop losses, and allowing for proactive responses.\n*   **Precision Agriculture:** Reduces resource waste, increasing yields.\n*   **Agroforestry:** Increases biodiversity, carbon sequestration; and enhances soil fertility.\n*   **Hydroponics/Aeroponics:** Reduces water usage and enhances yield.\n*   **Drought-Resistant Crops:** Reduces need for irrigation.\n*   **Integrated Pest Management (IPM):** Reduces pesticide costs; protects environment.\n*   **Water Harvesting:** Reduces irrigation expenses; improves water supply reliability.\n*   **Diversify Supply Chains:** Reduces risk; increases resilience to supply disruptions.\n*   **Implement Buffer Stocks:** Stabilizes prices, reducing volatility.\n*   **Regulate Financial Speculation:** Reduces price manipulation.\n*   **Promote Fair Trade:** Provides fair prices to producers.\n*   **Invest in Infrastructure:** Reduces transportation costs; and increases efficiency.\n*   **Enhance Transparency:** Enables informed decision-making.\n",
+      "rag_results": "[{'text': '5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\\n', 'node_id': '2e5cc70a-4b05-4b5c-9665-8992050e960f', 'similarity': 0.5604422}, {'text': '2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\\n', 'node_id': 'e270e419-dbc5-44ec-94b1-75f3b29aa219', 'similarity': 0.42840147}]"
+    },
+    {
+      "id": "26cec893-32f0-44f4-aec3-d863ca760ed5",
+      "prompt": "*   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\n\n3) **Community Organizer:** How can we ensure the equitable distribution of resources and knowledge related to these agricultural advancements, addressing potential disparities in access for different communities and farmers?",
+      "depth": 1,
+      "color": "\u001b[33m",
+      "rag_context": null,
+      "response": "1.  **Knowledge Sharing:** Establish farmer-to-farmer networks, workshops, and training programs.\n2.  **Technology Access:** Subsidize or offer micro-loans for agricultural tech adoption.\n3.  **Land Reform:** Promote policies that support land ownership or access for marginalized groups.\n4.  **Inclusive Policy:** Advocate for the inclusion of diverse voices in policy-making.\n5.  **Community Gardens:** Support local initiatives and urban farming projects.\n",
+      "rag_results": "[{'text': '5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\\n', 'node_id': '2e5cc70a-4b05-4b5c-9665-8992050e960f', 'similarity': 0.69477683}, {'text': '2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\\n', 'node_id': 'e270e419-dbc5-44ec-94b1-75f3b29aa219', 'similarity': 0.44220498}]"
+    },
+    {
+      "id": "12a267c3-b4a5-498a-8880-91b8642c6fd4",
+      "prompt": "*   **Diplomacy & Negotiation:** Facilitate dialogue, mediation, and conflict resolution.\n*   **Economic Development:** Promote sustainable growth, trade, and investment.\n*   **Good Governance:** Combat corruption, promote transparency, and strengthen institutions.\n*   **Humanitarian Aid:** Provide immediate relief, food security programs, and support displaced populations.\n*   **Security Cooperation:** Address conflicts, and support peacebuilding initiatives.\n\n1)  **Historian**: What historical precedents can inform how we approach international relations and prioritize these five key areas?",
+      "depth": 1,
+      "color": "\u001b[93m",
+      "rag_context": null,
+      "response": "**Strategies for Long-Term Supply Chain Resilience:**\n\n*   **Diversify Supply Chains:**\n    *   **Action:** Reduce reliance on single suppliers; promote regional trade agreements.\n    *   **Trade-offs:** Increased initial costs, complexity.\n*   **Implement Buffer Stocks:**\n    *   **Action:** Establish reserves of essential commodities.\n    *   **Trade-offs:** Storage costs, potential spoilage.\n*   **Regulate Financial Speculation:**\n    *   **Action:** Limit speculative trading in food and resource markets.\n    *   **Trade-offs:** Reduced market liquidity, potential for unintended consequences.\n*   **Invest in Infrastructure:**\n    *   **Action:** Improve storage, transportation, and distribution networks.\n    *   **Trade-offs:** High capital investment, long lead times.\n*   **Enhance Transparency:**\n    *   **Action:** Increase data availability on production, stocks, and trade flows.\n    *   **Trade-offs:** Data security concerns, potential for misuse of information.\n\n**Historical Precedents for International Relations:**\n\n*   **Diplomacy & Negotiation:** Congress of Vienna (1814-1815) - Established a framework for European stability.\n*   **Economic Development:** Marshall Plan (post-WWII) - Rebuilt European economies.\n*   **Good Governance:** Treaty of Westphalia (1648) - Established state sovereignty.\n*   **Humanitarian Aid:** Post-World War II relief efforts.\n*   **Security Cooperation:** NATO (post-WWII) - Collective defense alliance.\n",
+      "rag_results": "[{'text': '2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\\n', 'node_id': 'e270e419-dbc5-44ec-94b1-75f3b29aa219', 'similarity': 0.5012086}, {'text': '*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\\n\\n1) **Economist:** Considering global economic trends and potential geopolitical risks, what are the most economically viable and sustainable strategies to ensure long-term supply chain resilience, and what are the potential trade-offs of each strategy?', 'node_id': 'ef1b4d38-b3f1-49f5-a62f-660bec665e63', 'similarity': 0.4055131}]"
+    },
+    {
+      "id": "91222eaf-5fa4-4efa-a10f-1587e0817fc6",
+      "prompt": "*   **Diplomacy & Negotiation:** Facilitate dialogue, mediation, and conflict resolution.\n*   **Economic Development:** Promote sustainable growth, trade, and investment.\n*   **Good Governance:** Combat corruption, promote transparency, and strengthen institutions.\n*   **Humanitarian Aid:** Provide immediate relief, food security programs, and support displaced populations.\n*   **Security Cooperation:** Address conflicts, and support peacebuilding initiatives.\n\n2)  **Ethicist**: Considering the inherent values and potential conflicts within these five areas, how should we prioritize them to ensure the most ethical and beneficial outcomes?",
+      "depth": 1,
+      "color": "\u001b[34m",
+      "rag_context": null,
+      "response": "### **Prioritization of Ethical Agricultural Practices**\n\n1.  **Prioritize Agroforestry:** Integrate trees with crops and livestock to boost soil fertility, biodiversity, and carbon sequestration. *Rationale: Addresses long-term ecological health by improving soil, conserving biodiversity, and mitigating climate change while also supporting immediate productivity.*\n2.  **Implement Integrated Pest Management (IPM):** Use biological control and crop rotation. *Rationale: Minimizes pesticide use, protects the environment, and promotes sustainable practices.*\n3.  **Develop Water Harvesting & Efficient Irrigation:** Conserve water resources through rainwater harvesting and effective irrigation. *Rationale: Crucial for sustainable agriculture, especially in water-scarce regions, and aligns with long-term environmental goals.*\n4.  **Promote Drought-Resistant Crops:** Introduce genetically modified or naturally bred crops. *Rationale: Improves productivity and resilience in challenging environments, ensuring food security.*\n5.  **Utilize Precision Agriculture:** Implement sensor networks and drones. *Rationale: Allows for efficient resource use. Improves crop yields and reduces environmental impact.*\n6.  **Use Hydroponics/Aeroponics:** Utilize soilless systems for optimizing water and nutrient use. *Rationale: Maximizes resources and reduces land use.*\n\n### **Prioritization of Ethical Outcomes**\n\n1.  **Good Governance:** Combating corruption, promoting transparency, and strengthening institutions. *Rationale: Provides a framework for ethical conduct and accountability.*\n2.  **Economic Development:** Promote sustainable growth, trade, and investment. *Rationale: Improves quality of life while minimizing negative environmental and social impact.*\n3.  **Humanitarian Aid:** Provide immediate relief, food security, and support for displaced people. *Rationale: Addresses immediate needs.*\n4.  **Security Cooperation:** Addresses conflicts and supports peacebuilding. *Rationale: Essential for stability.*\n5.  **Diplomacy & Negotiation:** Facilitate dialogue, mediation, and conflict resolution. *Rationale: Resolve underlying causes of instability.*\n",
+      "rag_results": "[{'text': '2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\\n', 'node_id': 'e270e419-dbc5-44ec-94b1-75f3b29aa219', 'similarity': 0.47204664}, {'text': '*   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\\n\\n1) **Environmental Ethicist:** Considering the environmental impact, what are the most ethically sound agricultural practices to prioritize, weighing immediate productivity against long-term ecological health?', 'node_id': 'd37ec991-0baf-42c5-b42b-43e017078bbc', 'similarity': 0.39298505}]"
+    },
+    {
+      "id": "7d3223cc-9b44-4e0e-ba24-b302528a86f0",
+      "prompt": "*   **Diplomacy & Negotiation:** Facilitate dialogue, mediation, and conflict resolution.\n*   **Economic Development:** Promote sustainable growth, trade, and investment.\n*   **Good Governance:** Combat corruption, promote transparency, and strengthen institutions.\n*   **Humanitarian Aid:** Provide immediate relief, food security programs, and support displaced populations.\n*   **Security Cooperation:** Address conflicts, and support peacebuilding initiatives.\n\n3)  **Systems Thinker**: How do these five areas interact, and what are the potential ripple effects of prioritizing one over another?",
+      "depth": 1,
+      "color": "\u001b[94m",
+      "rag_context": null,
+      "response": "**Policy Maker Solutions**\n\n1.  **Incentives:**\n    *   **Tax Breaks**: Offer tax incentives for companies diversifying supply chains and investing in infrastructure.\n    *   **Subsidies**: Provide subsidies for buffer stock creation and fair trade practices.\n    *   **Grants**: Offer grants to improve storage, transportation, and distribution networks.\n2.  **Regulations:**\n    *   **Financial Regulation**: Implement stricter regulations on commodity speculation.\n    *   **Trade Agreements**: Enforce trade agreements promoting fair trade and regional cooperation.\n    *   **Transparency Mandates**: Mandate public reporting on production, stocks, and trade.\n3.  **International Collaboration:**\n    *   **Trade Agreements**: Negotiate and ratify international trade agreements.\n    *   **Data Sharing**: Establish global data-sharing platforms.\n    *   **Coordination**: Collaborate on humanitarian aid and conflict resolution.\n\n",
+      "rag_results": "[{'text': '*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\\n\\n3) **Policy Maker:** How can government policies and regulations be designed and implemented to effectively incentivize these strategies while minimizing unintended consequences, and what international collaborations are essential for success?', 'node_id': '0f52fc44-881c-45c3-996f-dab6d953fceb', 'similarity': 0.58213234}, {'text': '2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\\n', 'node_id': 'e270e419-dbc5-44ec-94b1-75f3b29aa219', 'similarity': 0.5600386}]"
+    },
+    {
+      "id": "ef1b4d38-b3f1-49f5-a62f-660bec665e63",
+      "prompt": "*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n1) **Economist:** Considering global economic trends and potential geopolitical risks, what are the most economically viable and sustainable strategies to ensure long-term supply chain resilience, and what are the potential trade-offs of each strategy?",
+      "depth": 1,
+      "color": "\u001b[35m",
+      "rag_context": null,
+      "response": "**Systems Thinker**\n\n*   **Interactions:**\n    *   Economic development depends on good governance, and security.\n    *   Humanitarian aid can stabilize immediate needs, but long-term solutions depend on economic and governance improvements.\n    *   Diplomacy, negotiation, and security cooperation are critical for managing conflicts that disrupt all other areas.\n*   **Ripple Effects:**\n    *   Prioritizing **economic development** without addressing good governance can lead to corruption, instability, and unsustainable growth.\n    *   Focusing solely on **humanitarian aid** without addressing root causes of conflict and economic instability can create dependency.\n    *   Overemphasizing **security cooperation** without economic or political solutions can lead to militarization and further conflict.\n\n**Economist**\n\n*   **Diversify Supply Chains:**\n    *   **Viability:** Reduces vulnerability to disruptions.\n    *   **Trade-offs:** Increased costs, logistical complexity. Example: Tesla diversifying battery component sources to reduce reliance on a single country.\n*   **Implement Buffer Stocks:**\n    *   **Viability:** Stabilizes prices, ensures supply.\n    *   **Trade-offs:** Storage costs, risk of spoilage. Example: National grain reserves.\n*   **Regulate Financial Speculation:**\n    *   **Viability:** Controls price volatility.\n    *   **Trade-offs:** Reduced market liquidity, potential for unintended consequences. Example: Regulations on commodity futures trading.\n*   **Promote Fair Trade:**\n    *   **Viability:** Supports producers, promotes ethical sourcing.\n    *   **Trade-offs:** Higher consumer prices, potential for market distortions. Example: Fairtrade certification for coffee.\n*   **Invest in Infrastructure:**\n    *   **Viability:** Improves efficiency, reduces waste.\n    *   **Trade-offs:** High upfront costs, long lead times. Example: Building new ports or upgrading existing ones.\n*   **Enhance Transparency:**\n    *   **Viability:** Improves market efficiency, reduces information asymmetry.\n    *   **Trade-offs:** Requires data collection, potential for misuse of information. Example: Publicly available data on food production and stocks.\n",
+      "rag_results": "[{'text': '*   **Diplomacy & Negotiation:** Facilitate dialogue, mediation, and conflict resolution.\\n*   **Economic Development:** Promote sustainable growth, trade, and investment.\\n*   **Good Governance:** Combat corruption, promote transparency, and strengthen institutions.\\n*   **Humanitarian Aid:** Provide immediate relief, food security programs, and support displaced populations.\\n*   **Security Cooperation:** Address conflicts, and support peacebuilding initiatives.\\n\\n3)  **Systems Thinker**: How do these five areas interact, and what are the potential ripple effects of prioritizing one over another?', 'node_id': '7d3223cc-9b44-4e0e-ba24-b302528a86f0', 'similarity': 0.46227434}, {'text': '3) Political Strategist (with experience in international relations): What are the most effective strategies for fostering political stability and international cooperation to address the root causes of hunger, such as conflict, corruption, and displacement?\\n*   **Diplomacy & Negotiation:** Facilitate dialogue, mediation, and conflict resolution.\\n*   **Economic Development:** Promote sustainable growth, trade, and investment.\\n*   **Good Governance:** Combat corruption, promote transparency, and strengthen institutions.\\n*   **Humanitarian Aid:** Provide immediate relief, food security programs, and support displaced populations.\\n*   **Security Cooperation:** Address conflicts, and support peacebuilding initiatives.\\n', 'node_id': 'c2def62c-5c67-434e-8b45-bc77b02a0c52', 'similarity': 0.4613071}]"
+    },
+    {
+      "id": "475c2976-63fd-4a26-972a-68c9d908ba4c",
+      "prompt": "*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n2) **Supply Chain Manager:** From a logistical and operational standpoint, how can we best integrate these strategies across the entire supply chain, considering the impact on efficiency, cost, and risk mitigation at each stage, from sourcing to delivery?",
+      "depth": 1,
+      "color": "\u001b[95m",
+      "rag_context": null,
+      "response": "1.  **Environmental Scientist:**\n\n    *   **Quantify Impact:**\n        *   Life Cycle Assessments (LCAs): Evaluate environmental impacts (carbon footprint, water usage, soil health) across a product's life.\n        *   Field Monitoring: Track changes in soil carbon, water quality, and biodiversity.\n        *   Remote Sensing: Use satellite data and drones for large-scale environmental monitoring.\n    *   **Trade-offs:**\n        *   Agroforestry: Potential land use change impacting existing ecosystems.\n        *   GM Crops: Potential biodiversity concerns and impacts on non-target organisms.\n        *   Precision Agriculture: Energy use and electronic waste.\n2.  **Financial Analyst:**\n\n    *   **Cost-Benefit Analysis:**\n        *   Initial Investment: Compare upfront costs for equipment, technology, and training.\n        *   Operational Expenses: Factor in ongoing costs for inputs, labor, and maintenance.\n        *   Yield Potential: Forecast crop yields and revenue based on improved practices.\n        *   Long-term Sustainability: Evaluate soil health, resource conservation, and market stability.\n    *   **Examples**:\n        *   Drip irrigation: High initial cost, low water usage.\n        *   Agroforestry: Lower initial cost, increased revenue from timber/fruit.\n        *   Hydroponics: High startup cost, high yield potential.\n3.  **Supply Chain Manager:**\n\n    *   **Integration Strategies:**\n        *   Sourcing: Implement supplier diversity, fair-trade certification.\n        *   Production: Adopt precision agriculture, drought-resistant crops.\n        *   Storage: Develop efficient storage facilities and buffer stocks.\n        *   Transportation: Optimize logistics for energy efficiency and waste reduction.\n        *   Distribution: Enhance transparency via data sharing.\n    *   **Examples:**\n        *   Implementing cold chain technology in transportation.\n        *   Utilizing blockchain to track food safety.\n        *   Establishing regional distribution hubs.\n",
+      "rag_results": "[{'text': '*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\\n\\n1) Environmental Scientist: How can we quantify the environmental impact of different climate-resilient agricultural practices, and what are the trade-offs involved?', 'node_id': '9a845ec6-2634-4092-984e-8379fcd9290a', 'similarity': 0.3975679}, {'text': '*   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\\n\\n2) **Financial Analyst:** What is the cost-benefit analysis of each proposed agricultural method, considering initial investment, operational expenses, potential yields, and long-term financial sustainability?', 'node_id': 'efad40f3-071e-46f6-bccf-32e9cc586760', 'similarity': 0.38949284}]"
+    },
+    {
+      "id": "0f52fc44-881c-45c3-996f-dab6d953fceb",
+      "prompt": "*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n3) **Policy Maker:** How can government policies and regulations be designed and implemented to effectively incentivize these strategies while minimizing unintended consequences, and what international collaborations are essential for success?",
+      "depth": 1,
+      "color": "\u001b[36m",
+      "rag_context": null,
+      "response": "### Systems Thinker: Interconnections & Ripple Effects\n\n1.  **Prioritize Good Governance**:\n    *   **Ripple Effects**: Reduces corruption (positive impact on economic development), increases transparency (supports diplomacy), strengthens institutions (aids security and humanitarian efforts).\n2.  **Promote Economic Development**:\n    *   **Ripple Effects**: Increases resources for humanitarian aid, reduces reliance on conflict, and creates conditions for better governance.\n3.  **Focus on Security Cooperation**:\n    *   **Ripple Effects**: Reduces conflict (enables economic development, and allows humanitarian aid to be delivered), enhances stability (good governance), and supports diplomacy.\n4.  **Implement Humanitarian Aid**:\n    *   **Ripple Effects**: Provides stability to allow for Diplomacy and Economic development, but can also create dependency if not paired with long-term solutions.\n5.  **Emphasize Diplomacy & Negotiation**:\n    *   **Ripple Effects**: Resolves conflict (enhances security, enables economic development), and facilitates communication for all other areas.\n\n### Political Strategist & Policymaker: Strategies for Political Stability & International Cooperation\n\n1.  **Policy Incentives**:\n    *   **Diversify Supply Chains**: Tax incentives for companies using multiple suppliers.\n    *   **Implement Buffer Stocks**: Subsidies for the establishment and maintenance of commodity reserves.\n    *   **Regulate Financial Speculation**: Implement taxes and regulations on high-frequency trading in food and resources.\n    *   **Promote Fair Trade**: Offer preferential trade agreements to countries practicing fair trade.\n    *   **Invest in Infrastructure**: Public-private partnerships and tax breaks for infrastructure development.\n    *   **Enhance Transparency**: Mandate public reporting of data related to production, stocks, and trade flows.\n2.  **International Collaboration**:\n    *   **World Trade Organization (WTO)**: Enforce fair trade practices.\n    *   **United Nations (UN)**: Coordinate humanitarian efforts and promote peace-keeping missions.\n    *   **International Monetary Fund (IMF)**: Offer financial assistance and technical support to stabilize economies.\n    *   **Regional Economic Blocs**: EU, ASEAN, and others to facilitate trade, and coordinate policies.\n    *   **Non-governmental Organizations (NGOs)**: Facilitate aid delivery and provide early warning systems for conflict.\n",
+      "rag_results": "[{'text': '*   **Diplomacy & Negotiation:** Facilitate dialogue, mediation, and conflict resolution.\\n*   **Economic Development:** Promote sustainable growth, trade, and investment.\\n*   **Good Governance:** Combat corruption, promote transparency, and strengthen institutions.\\n*   **Humanitarian Aid:** Provide immediate relief, food security programs, and support displaced populations.\\n*   **Security Cooperation:** Address conflicts, and support peacebuilding initiatives.\\n\\n3)  **Systems Thinker**: How do these five areas interact, and what are the potential ripple effects of prioritizing one over another?', 'node_id': '7d3223cc-9b44-4e0e-ba24-b302528a86f0', 'similarity': 0.58213246}, {'text': '3) Political Strategist (with experience in international relations): What are the most effective strategies for fostering political stability and international cooperation to address the root causes of hunger, such as conflict, corruption, and displacement?\\n*   **Diplomacy & Negotiation:** Facilitate dialogue, mediation, and conflict resolution.\\n*   **Economic Development:** Promote sustainable growth, trade, and investment.\\n*   **Good Governance:** Combat corruption, promote transparency, and strengthen institutions.\\n*   **Humanitarian Aid:** Provide immediate relief, food security programs, and support displaced populations.\\n*   **Security Cooperation:** Address conflicts, and support peacebuilding initiatives.\\n', 'node_id': 'c2def62c-5c67-434e-8b45-bc77b02a0c52', 'similarity': 0.56065}]"
+    },
+    {
+      "id": "9a845ec6-2634-4092-984e-8379fcd9290a",
+      "prompt": "*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\n\n1) Environmental Scientist: How can we quantify the environmental impact of different climate-resilient agricultural practices, and what are the trade-offs involved?",
+      "depth": 1,
+      "color": "\u001b[96m",
+      "rag_context": null,
+      "response": "1.  **Life Cycle Assessment (LCA):** Conduct LCAs to quantify the environmental impact (carbon footprint, water use, pesticide runoff) of each practice.\n2.  **Comparative Analysis:** Compare practices using environmental indicators (e.g., greenhouse gas emissions, biodiversity impact) to identify trade-offs.\n3.  **Spatial Analysis:** Use GIS to map the environmental impact of practices, accounting for regional variations.\n4.  **Monitor & Evaluate:** Establish monitoring programs (soil health, water quality) to assess the long-term effects of chosen strategies.\n5.  **Cost-Benefit Analysis:** Integrate economic costs with environmental benefits to provide a comprehensive assessment.\n",
+      "rag_results": "[{'text': '*   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\\n\\n1) **Environmental Ethicist:** Considering the environmental impact, what are the most ethically sound agricultural practices to prioritize, weighing immediate productivity against long-term ecological health?\\n*   **Prioritize Soil Health:** Implement no-till farming, cover cropping, and composting to enhance long-term soil fertility and carbon sequestration.\\n*   **Promote Integrated Pest Management (IPM):** Minimize pesticide use by utilizing biological control and crop rotation strategies.\\n*   **Implement Agroforestry:** Integrate trees with crops/livestock to enhance biodiversity and carbon sequestration.\\n*   **Embrace Water Conservation:** Utilize efficient irrigation techniques and promote drought-resistant crops to conserve water.\\n*   **Diversify Crops:** Implement crop diversification to spread risk and improve soil health.\\n', 'node_id': 'd37ec991-0baf-42c5-b42b-43e017078bbc', 'similarity': 0.75541985}, {'text': '1) Agricultural Scientist (focused on sustainable farming): In what innovative ways can we optimize crop yields and resource utilization, particularly in regions most affected by food insecurity, while minimizing environmental impact?\\n*   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\\n', 'node_id': 'a6b294c0-d582-4b2f-8bfe-0a77ce6df53a', 'similarity': 0.7302065}]"
+    },
+    {
+      "id": "6ff365b9-1618-49af-ac6d-aa161b800356",
+      "prompt": "*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\n\n2) Agricultural Economist: What are the economic incentives and disincentives for farmers to adopt climate-resilient agricultural practices, and how can we design policies to overcome barriers to adoption?",
+      "depth": 1,
+      "color": "\u001b[32m",
+      "rag_context": null
+    },
+    {
+      "id": "c262cfd3-c321-48ac-b7e6-5e1bee0af34e",
+      "prompt": "*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\n\n3) Rural Sociologist: How do social and cultural factors influence the adoption of climate-resilient agricultural practices, and what strategies can be employed to promote equitable access and participation?",
+      "depth": 1,
+      "color": "\u001b[92m",
+      "rag_context": null
+    },
+    {
+      "id": "3e778403-5f19-4457-8ece-d631078a82dd",
+      "prompt": "*   **Needs Assessment:** Conduct ethnographic research to understand local foodways, including preparation methods, ingredient usage, and meal structures.\n*   **Community Involvement:** Establish participatory planning with community leaders to incorporate cultural practices into program design.\n*   **Culturally Appropriate Menus:** Design food baskets and educational materials that reflect local preferences and address nutritional needs.\n*   **Flexible Delivery:** Offer options for food preparation and consumption, respecting cultural meal schedules.\n*   **Education:** Develop culturally sensitive educational resources that promote healthy eating habits.\n*   **Feedback Loop:** Establish ongoing feedback mechanisms to evaluate and refine programs based on community input.\n\n1) Cultural Anthropologist: How can we ensure the program respects the cultural significance of food within the community's daily life and celebrations?",
+      "depth": 1,
+      "color": "\u001b[37m",
+      "rag_context": null
+    },
+    {
+      "id": "6eb90bca-60f4-48cb-9085-399dcd5b22c9",
+      "prompt": "*   **Needs Assessment:** Conduct ethnographic research to understand local foodways, including preparation methods, ingredient usage, and meal structures.\n*   **Community Involvement:** Establish participatory planning with community leaders to incorporate cultural practices into program design.\n*   **Culturally Appropriate Menus:** Design food baskets and educational materials that reflect local preferences and address nutritional needs.\n*   **Flexible Delivery:** Offer options for food preparation and consumption, respecting cultural meal schedules.\n*   **Education:** Develop culturally sensitive educational resources that promote healthy eating habits.\n*   **Feedback Loop:** Establish ongoing feedback mechanisms to evaluate and refine programs based on community input.\n\n2) Nutritionist: What are the most effective ways to communicate nutritional information, considering potential language barriers and varying levels of health literacy?",
+      "depth": 1,
+      "color": "\u001b[97m",
+      "rag_context": null
+    },
+    {
+      "id": "026a73c8-f23c-4773-8d1d-cddd2cfd6eac",
+      "prompt": "*   **Needs Assessment:** Conduct ethnographic research to understand local foodways, including preparation methods, ingredient usage, and meal structures.\n*   **Community Involvement:** Establish participatory planning with community leaders to incorporate cultural practices into program design.\n*   **Culturally Appropriate Menus:** Design food baskets and educational materials that reflect local preferences and address nutritional needs.\n*   **Flexible Delivery:** Offer options for food preparation and consumption, respecting cultural meal schedules.\n*   **Education:** Develop culturally sensitive educational resources that promote healthy eating habits.\n*   **Feedback Loop:** Establish ongoing feedback mechanisms to evaluate and refine programs based on community input.\n\n3) Logistics Coordinator: What strategies can be implemented to overcome potential logistical challenges, such as storage limitations and transportation difficulties, while maintaining the cultural integrity of the food program?",
+      "depth": 1,
+      "color": "\u001b[31m",
+      "rag_context": null,
+      "response": "*   **Community Needs Assessment:** Ethnographic research to understand local foodways.\n*   **Participatory Planning:** Involve community leaders to integrate cultural practices.\n*   **Culturally Appropriate Menus:** Design food baskets reflecting local preferences.\n*   **Flexible Delivery:** Offer options for preparation and consumption, respecting meal schedules.\n*   **Culturally Sensitive Education:** Develop educational resources.\n*   **Feedback Loop:** Establish mechanisms for program refinement.\n*   **Optimize Storage & Transport:** Utilize mobile storage solutions.\n*   **Local Sourcing:** Prioritize local suppliers.\n*   **Modular Packaging:** Employ flexible packaging to meet various cultural needs.\n*   **Training Programs:** Provide training on handling culturally specific ingredients.\n*   **Communication:** Maintain clear communication regarding food safety guidelines.\n",
+      "rag_results": "[{'text': '*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\\n\\n3) Rural Sociologist: How do social and cultural factors influence the adoption of climate-resilient agricultural practices, and what strategies can be employed to promote equitable access and participation?', 'node_id': 'c262cfd3-c321-48ac-b7e6-5e1bee0af34e', 'similarity': 0.4323727}, {'text': '*   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\\n\\n3) **Community Organizer:** How can we ensure the equitable distribution of resources and knowledge related to these agricultural advancements, addressing potential disparities in access for different communities and farmers?\\n1.  **Knowledge Sharing:** Establish farmer-to-farmer networks, workshops, and training programs.\\n2.  **Technology Access:** Subsidize or offer micro-loans for agricultural tech adoption.\\n3.  **Land Reform:** Promote policies that support land ownership or access for marginalized groups.\\n4.  **Inclusive Policy:** Advocate for the inclusion of diverse voices in policy-making.\\n5.  **Community Gardens:** Support local initiatives and urban farming projects.\\n', 'node_id': '26cec893-32f0-44f4-aec3-d863ca760ed5', 'similarity': 0.396666}]"
+    },
+    {
+      "id": "2f03d223-df2d-4536-acff-01109a5b3c42",
+      "prompt": "Previous relevant information:\nSource 1 (relevance: 0.69): 5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\n\n\nSource 2 (relevance: 0.44): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\nSimilarity source 2e5cc70a-4b05-4b5c-9665-8992050e960f: 0.69\nSimilarity source e270e419-dbc5-44ec-94b1-75f3b29aa219: 0.44\n1.  **Knowledge Sharing:** Establish farmer-to-farmer networks, workshops, and training programs.\n2.  **Technology Access:** Subsidize or offer micro-loans for agricultural tech adoption.\n3.  **Land Reform:** Promote policies that support land ownership or access for marginalized groups.\n4.  **Inclusive Policy:** Advocate for the inclusion of diverse voices in policy-making.\n5.  **Community Gardens:** Support local initiatives and urban farming projects.\n\n1.  **The Pragmatist:** Considering the resource constraints of marginalized groups, how would you prioritize the implementation of these strategies to achieve the greatest impact with the fewest resources?",
+      "depth": 2,
+      "color": "\u001b[91m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.69): 5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\n\n\nSource 2 (relevance: 0.44): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\n",
+      "response": "1.  **Prioritize Water Management:** Implement efficient irrigation, rainwater harvesting, and drought-resistant crops. This directly addresses water scarcity, a major constraint.\n\n2.  **Promote Soil Health:** Initiate no-till farming, cover cropping, and composting. Improves soil fertility, reduces water needs, and sequesters carbon.\n\n3.  **Knowledge Sharing:** Establish farmer-to-farmer networks for practical, low-cost information exchange and training.\n\n4.  **Early Warning Systems:** Develop and utilize climate-based early warning systems.\n\n5.  **Diversify Crops:** Implement crop diversification to spread risk.\n",
+      "rag_results": "[{'text': '5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\\n', 'node_id': '2e5cc70a-4b05-4b5c-9665-8992050e960f', 'similarity': 0.89119935}, {'text': '*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\\n\\n2) Agricultural Economist: What are the economic incentives and disincentives for farmers to adopt climate-resilient agricultural practices, and how can we design policies to overcome barriers to adoption?', 'node_id': '6ff365b9-1618-49af-ac6d-aa161b800356', 'similarity': 0.87709284}]"
+    },
+    {
+      "id": "adcc0bd8-c9fe-4b8d-b506-291732d43f3b",
+      "prompt": "Previous relevant information:\nSource 1 (relevance: 0.69): 5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\n\n\nSource 2 (relevance: 0.37): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\nSimilarity source 2e5cc70a-4b05-4b5c-9665-8992050e960f: 0.69\nSimilarity source e270e419-dbc5-44ec-94b1-75f3b29aa219: 0.37\n*   **Prioritize Soil Health:** Implement no-till farming, cover cropping, and composting to enhance long-term soil fertility and carbon sequestration.\n*   **Promote Integrated Pest Management (IPM):** Minimize pesticide use by utilizing biological control and crop rotation strategies.\n*   **Implement Agroforestry:** Integrate trees with crops/livestock to enhance biodiversity and carbon sequestration.\n*   **Embrace Water Conservation:** Utilize efficient irrigation techniques and promote drought-resistant crops to conserve water.\n*   **Diversify Crops:** Implement crop diversification to spread risk and improve soil health.\n\n1) **The Pragmatist:** Considering the economic realities of modern farming, how can we ensure the proposed strategies are financially viable and attractive to farmers in the short term?",
+      "depth": 2,
+      "color": "\u001b[33m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.69): 5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\n\n\nSource 2 (relevance: 0.37): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\n"
+    },
+    {
+      "id": "a02cb07f-4515-4e43-b28a-2305983992a6",
+      "prompt": "Previous relevant information:\nSource 1 (relevance: 0.69): 5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\n\n\nSource 2 (relevance: 0.37): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\nSimilarity source 2e5cc70a-4b05-4b5c-9665-8992050e960f: 0.69\nSimilarity source e270e419-dbc5-44ec-94b1-75f3b29aa219: 0.37\n*   **Prioritize Soil Health:** Implement no-till farming, cover cropping, and composting to enhance long-term soil fertility and carbon sequestration.\n*   **Promote Integrated Pest Management (IPM):** Minimize pesticide use by utilizing biological control and crop rotation strategies.\n*   **Implement Agroforestry:** Integrate trees with crops/livestock to enhance biodiversity and carbon sequestration.\n*   **Embrace Water Conservation:** Utilize efficient irrigation techniques and promote drought-resistant crops to conserve water.\n*   **Diversify Crops:** Implement crop diversification to spread risk and improve soil health.\n\n2) **The Environmental Ethicist:** Beyond the immediate benefits, what are the potential unintended environmental consequences of these strategies, and how can we mitigate them to ensure long-term sustainability?",
+      "depth": 2,
+      "color": "\u001b[34m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.69): 5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\n\n\nSource 2 (relevance: 0.37): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\n",
+      "response": "*   **Water Management:** Potential: Over-reliance on irrigation depletes water sources; Solution: Implement water-efficient irrigation and rainwater harvesting.\n\n*   **Soil Health:** Potential: Increased use of cover crops may require more land and resources; Solution: Integrate cover crops into existing farming systems and promote composting.\n\n*   **Crop Diversification:** Potential: Introduction of new crops could disrupt local ecosystems; Solution: Prioritize native or adapted species.\n\n*   **Early Warning Systems:** Potential: False alarms or lack of timely response; Solution: Ensure systems are accurate and accessible.\n\n*   **Knowledge Sharing:** Potential: Information overload or unequal access; Solution: Provide tailored training and create feedback mechanisms.\n",
+      "rag_results": "[{'text': 'Previous relevant information:\\nSource 1 (relevance: 0.69): 5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\\n\\n\\nSource 2 (relevance: 0.44): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\\n\\n\\nSimilarity source 2e5cc70a-4b05-4b5c-9665-8992050e960f: 0.69\\nSimilarity source e270e419-dbc5-44ec-94b1-75f3b29aa219: 0.44\\n1.  **Knowledge Sharing:** Establish farmer-to-farmer networks, workshops, and training programs.\\n2.  **Technology Access:** Subsidize or offer micro-loans for agricultural tech adoption.\\n3.  **Land Reform:** Promote policies that support land ownership or access for marginalized groups.\\n4.  **Inclusive Policy:** Advocate for the inclusion of diverse voices in policy-making.\\n5.  **Community Gardens:** Support local initiatives and urban farming projects.\\n\\n1.  **The Pragmatist:** Considering the resource constraints of marginalized groups, how would you prioritize the implementation of these strategies to achieve the greatest impact with the fewest resources?\\n1.  **Prioritize Water Management:** Implement efficient irrigation, rainwater harvesting, and drought-resistant crops. This directly addresses water scarcity, a major constraint.\\n\\n2.  **Promote Soil Health:** Initiate no-till farming, cover cropping, and composting. Improves soil fertility, reduces water needs, and sequesters carbon.\\n\\n3.  **Knowledge Sharing:** Establish farmer-to-farmer networks for practical, low-cost information exchange and training.\\n\\n4.  **Early Warning Systems:** Develop and utilize climate-based early warning systems.\\n\\n5.  **Diversify Crops:** Implement crop diversification to spread risk.\\n', 'node_id': '2f03d223-df2d-4536-acff-01109a5b3c42', 'similarity': 0.9999491}, {'text': '5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\\n', 'node_id': '2e5cc70a-4b05-4b5c-9665-8992050e960f', 'similarity': 0.8924763}]"
+    },
+    {
+      "id": "29476cbb-196d-4f9a-aca9-0003285e4684",
+      "prompt": "2.  **The Community Organizer:** How would you design a campaign to engage marginalized groups in the decision-making process regarding these strategies, ensuring their voices shape the implementation and future evolution of these initiatives?",
+      "depth": 2,
+      "color": "\u001b[93m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.69): 5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\n\n\nSource 2 (relevance: 0.44): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\n"
+    },
+    {
+      "id": "baad6b15-780c-4c81-8fa2-8ca4043eced0",
+      "prompt": "3.  **The Economist:** What are the potential economic ripple effects of these strategies on marginalized groups and the broader community, and what mechanisms can be put in place to mitigate any negative impacts while maximizing positive outcomes?",
+      "depth": 2,
+      "color": "\u001b[35m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.69): 5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\n\n\nSource 2 (relevance: 0.44): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\n"
+    },
+    {
+      "id": "c4915648-78c3-49bb-9627-048291c0cc57",
+      "prompt": "3) **The Farmer Advocate:** From a farmer's perspective, what are the biggest challenges in adopting these practices, and what support systems are needed to facilitate successful implementation across diverse farm types and sizes?",
+      "depth": 2,
+      "color": "\u001b[94m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.69): 5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\n\n\nSource 2 (relevance: 0.37): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\n"
+    },
+    {
+      "id": "78718967-b4a9-492d-9b6a-f0d68a5e089e",
+      "prompt": "1) **Economist**: Given the current economic climate, what is the most economically sound sequence of incentives, regulations, and international collaborations to implement?",
+      "depth": 2,
+      "color": "\u001b[95m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.58): *   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n3) **Policy Maker:** How can government policies and regulations be designed and implemented to effectively incentivize these strategies while minimizing unintended consequences, and what international collaborations are essential for success?\n\nSource 2 (relevance: 0.56): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\n"
+    },
+    {
+      "id": "ebcd16ad-9bf3-49e7-9253-f2130c1c13f2",
+      "prompt": "2) **Social Justice Advocate**: How do the proposed incentives, regulations, and international collaborations address potential inequities within the food system and ensure equitable access to resources?",
+      "depth": 2,
+      "color": "\u001b[36m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.58): *   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n3) **Policy Maker:** How can government policies and regulations be designed and implemented to effectively incentivize these strategies while minimizing unintended consequences, and what international collaborations are essential for success?\n\nSource 2 (relevance: 0.56): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\n"
+    },
+    {
+      "id": "65ff1402-4b53-43a9-b43c-b2e9fa1025d3",
+      "prompt": "3) **Logistics Expert**: Considering existing infrastructure and geopolitical factors, which aspects of storage, transportation, and distribution networks require the most immediate attention and what policy adjustments are needed?",
+      "depth": 2,
+      "color": "\u001b[96m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.58): *   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n3) **Policy Maker:** How can government policies and regulations be designed and implemented to effectively incentivize these strategies while minimizing unintended consequences, and what international collaborations are essential for success?\n\nSource 2 (relevance: 0.56): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\n"
+    },
+    {
+      "id": "70d533ec-b9e6-4467-9e66-0972450f4396",
+      "prompt": "1) Agronomist: Considering the listed strategies, how can we best sequence their implementation to achieve the most immediate and long-term benefits, while accounting for varying regional conditions and resource availability?",
+      "depth": 2,
+      "color": "\u001b[32m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.56): 5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\n\n\nSource 2 (relevance: 0.43): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\n"
+    },
+    {
+      "id": "eda9752b-f51d-4a89-9e80-24290db77235",
+      "prompt": "1) **Economist:** How do we calculate the cost-benefit ratio of investing in supply chain resilience, considering both short-term expenses and long-term economic stability?",
+      "depth": 2,
+      "color": "\u001b[37m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.50): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\nSource 2 (relevance: 0.41): *   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n1) **Economist:** Considering global economic trends and potential geopolitical risks, what are the most economically viable and sustainable strategies to ensure long-term supply chain resilience, and what are the potential trade-offs of each strategy?\n\n"
+    },
+    {
+      "id": "7918415f-f468-4bc2-b3c7-f3a62a54a067",
+      "prompt": "1.  **Environmental Scientist**: Considering the agricultural practices outlined, how can we quantify the long-term environmental benefits and drawbacks of each practice, and what specific data points are essential for a comprehensive environmental impact assessment?",
+      "depth": 2,
+      "color": "\u001b[92m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.47): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\nSource 2 (relevance: 0.39): *   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\n\n1) **Environmental Ethicist:** Considering the environmental impact, what are the most ethically sound agricultural practices to prioritize, weighing immediate productivity against long-term ecological health?\n\n"
+    },
+    {
+      "id": "4973ad1f-eee0-494a-9e9d-3d5844e81184",
+      "prompt": "2) **Political Scientist:** In what ways can international relations and diplomacy be leveraged to promote global cooperation in securing supply chains and mitigating potential conflicts arising from resource scarcity?",
+      "depth": 2,
+      "color": "\u001b[97m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.50): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\nSource 2 (relevance: 0.41): *   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n1) **Economist:** Considering global economic trends and potential geopolitical risks, what are the most economically viable and sustainable strategies to ensure long-term supply chain resilience, and what are the potential trade-offs of each strategy?\n\n"
+    },
+    {
+      "id": "719336b4-8c83-42a2-9f72-05e6d90726ef",
+      "prompt": "2) Economist: How can we quantify the economic impacts of implementing each of these strategies, including both the costs and the benefits, and how can we incentivize adoption among farmers and stakeholders?",
+      "depth": 2,
+      "color": "\u001b[31m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.56): 5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\n\n\nSource 2 (relevance: 0.43): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\n"
+    },
+    {
+      "id": "26aaeb89-4f39-4fc8-aca4-19278c804917",
+      "prompt": "3) **Risk Management Consultant:** What are the most critical failure points in current supply chains, and how can we quantify the potential impact of these disruptions to prioritize resilience investments?",
+      "depth": 2,
+      "color": "\u001b[33m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.50): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\nSource 2 (relevance: 0.41): *   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n1) **Economist:** Considering global economic trends and potential geopolitical risks, what are the most economically viable and sustainable strategies to ensure long-term supply chain resilience, and what are the potential trade-offs of each strategy?\n\n"
+    },
+    {
+      "id": "5ee9d755-e19b-4b02-8146-f5d8ab557670",
+      "prompt": "2.  **Ethical Philosopher**: Given the dual focus on ethical agricultural practices and ethical outcomes, how do we resolve potential conflicts between these two priorities, and what ethical frameworks should guide decision-making when these priorities clash?",
+      "depth": 2,
+      "color": "\u001b[91m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.47): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\nSource 2 (relevance: 0.39): *   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\n\n1) **Environmental Ethicist:** Considering the environmental impact, what are the most ethically sound agricultural practices to prioritize, weighing immediate productivity against long-term ecological health?\n\n"
+    },
+    {
+      "id": "616143d6-b1a3-43fb-a52c-5ed6be80f8b5",
+      "prompt": "3.  **Economist**: How can we incentivize the adoption of these ethical agricultural practices while ensuring economic viability for farmers and the affordability of food for consumers, and what economic models can best predict the long-term financial sustainability of these practices?",
+      "depth": 2,
+      "color": "\u001b[34m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.47): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\nSource 2 (relevance: 0.39): *   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\n\n1) **Environmental Ethicist:** Considering the environmental impact, what are the most ethically sound agricultural practices to prioritize, weighing immediate productivity against long-term ecological health?\n\n"
+    },
+    {
+      "id": "24612d0c-9a29-4797-a983-7f0bafafdf91",
+      "prompt": "3) Policy Maker: What policy frameworks, including regulations, subsidies, and educational programs, are needed to effectively support and scale the implementation of these strategies at a national or regional level, and how can we ensure equitable access to these resources?",
+      "depth": 2,
+      "color": "\u001b[93m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.56): 5) Environmental Activist (focused on climate change): In light of climate change, how can we develop and implement resilient agricultural practices and food systems that adapt to changing environmental conditions and mitigate the impact of extreme weather events on food security?\n*   **Diversify Crops:** Implement crop diversification to spread risk, improve soil health, and resilience to pests and diseases.\n*   **Water Management:** Utilize efficient irrigation techniques (drip, precision), rainwater harvesting, and drought-resistant crop varieties.\n*   **Soil Health:** Promote no-till farming, cover cropping, and composting to enhance water retention, reduce erosion, and sequester carbon.\n*   **Early Warning Systems:** Develop and utilize climate-based early warning systems to alert farmers of impending extreme weather.\n*   **Policy Support:** Advocate for policies that support climate-resilient agriculture, including subsidies for sustainable practices and carbon pricing.\n\n\nSource 2 (relevance: 0.43): 2) Economist (specializing in global markets and trade): How can we restructure global trade policies and financial systems to ensure equitable access to food and resources, addressing price volatility and market manipulation that exacerbate hunger?\n*   **Diversify Supply Chains:** Reduce reliance on single-source suppliers; promote regional trade agreements.\n*   **Implement Buffer Stocks:** Establish reserves of essential commodities to stabilize prices.\n*   **Regulate Financial Speculation:** Limit speculative trading in food and resource markets.\n*   **Promote Fair Trade:** Support producer cooperatives and ethical sourcing.\n*   **Invest in Infrastructure:** Improve storage, transportation, and distribution networks.\n*   **Enhance Transparency:** Increase data availability on production, stocks, and trade flows.\n\n\n"
+    },
+    {
+      "id": "43ddf674-8805-4a75-a8c0-ee8a98295e4d",
+      "prompt": "1) **The Environmental Economist:** Given the proposed practices, what are the direct and indirect economic impacts of the adoption, including potential market shifts and long-term financial sustainability?",
+      "depth": 2,
+      "color": "\u001b[94m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.76): *   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\n\n1) **Environmental Ethicist:** Considering the environmental impact, what are the most ethically sound agricultural practices to prioritize, weighing immediate productivity against long-term ecological health?\n*   **Prioritize Soil Health:** Implement no-till farming, cover cropping, and composting to enhance long-term soil fertility and carbon sequestration.\n*   **Promote Integrated Pest Management (IPM):** Minimize pesticide use by utilizing biological control and crop rotation strategies.\n*   **Implement Agroforestry:** Integrate trees with crops/livestock to enhance biodiversity and carbon sequestration.\n*   **Embrace Water Conservation:** Utilize efficient irrigation techniques and promote drought-resistant crops to conserve water.\n*   **Diversify Crops:** Implement crop diversification to spread risk and improve soil health.\n\n\nSource 2 (relevance: 0.73): 1) Agricultural Scientist (focused on sustainable farming): In what innovative ways can we optimize crop yields and resource utilization, particularly in regions most affected by food insecurity, while minimizing environmental impact?\n*   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\n\n\n"
+    },
+    {
+      "id": "dff0ffb4-8c6e-4fe2-9bb0-d2f2965f3967",
+      "prompt": "2) **The Community Advocate:** Considering the environmental impacts and economic implications, how do we ensure equitable distribution of benefits and burdens across different socioeconomic groups and communities?",
+      "depth": 2,
+      "color": "\u001b[35m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.76): *   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\n\n1) **Environmental Ethicist:** Considering the environmental impact, what are the most ethically sound agricultural practices to prioritize, weighing immediate productivity against long-term ecological health?\n*   **Prioritize Soil Health:** Implement no-till farming, cover cropping, and composting to enhance long-term soil fertility and carbon sequestration.\n*   **Promote Integrated Pest Management (IPM):** Minimize pesticide use by utilizing biological control and crop rotation strategies.\n*   **Implement Agroforestry:** Integrate trees with crops/livestock to enhance biodiversity and carbon sequestration.\n*   **Embrace Water Conservation:** Utilize efficient irrigation techniques and promote drought-resistant crops to conserve water.\n*   **Diversify Crops:** Implement crop diversification to spread risk and improve soil health.\n\n\nSource 2 (relevance: 0.73): 1) Agricultural Scientist (focused on sustainable farming): In what innovative ways can we optimize crop yields and resource utilization, particularly in regions most affected by food insecurity, while minimizing environmental impact?\n*   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\n\n\n"
+    },
+    {
+      "id": "b6e8ee65-b7e3-4d18-86c7-234fd8504d99",
+      "prompt": "3) **The Systems Thinker:** How can we model the interconnectedness of these practices within the broader ecosystem, considering feedback loops and potential unintended consequences across different environmental media (air, water, soil)?",
+      "depth": 2,
+      "color": "\u001b[95m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.76): *   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\n\n1) **Environmental Ethicist:** Considering the environmental impact, what are the most ethically sound agricultural practices to prioritize, weighing immediate productivity against long-term ecological health?\n*   **Prioritize Soil Health:** Implement no-till farming, cover cropping, and composting to enhance long-term soil fertility and carbon sequestration.\n*   **Promote Integrated Pest Management (IPM):** Minimize pesticide use by utilizing biological control and crop rotation strategies.\n*   **Implement Agroforestry:** Integrate trees with crops/livestock to enhance biodiversity and carbon sequestration.\n*   **Embrace Water Conservation:** Utilize efficient irrigation techniques and promote drought-resistant crops to conserve water.\n*   **Diversify Crops:** Implement crop diversification to spread risk and improve soil health.\n\n\nSource 2 (relevance: 0.73): 1) Agricultural Scientist (focused on sustainable farming): In what innovative ways can we optimize crop yields and resource utilization, particularly in regions most affected by food insecurity, while minimizing environmental impact?\n*   **Precision Agriculture:** Implement sensor networks and drones for real-time data on soil conditions and crop health; deploy variable-rate application of water, fertilizers, and pesticides.\n*   **Agroforestry:** Integrate trees with crops/livestock to enhance soil fertility, biodiversity, and carbon sequestration.\n*   **Hydroponics/Aeroponics:** Utilize soilless systems to optimize water and nutrient use, enabling cultivation in areas with poor soil or water scarcity.\n*   **Drought-Resistant Crops:** Promote planting of genetically modified or naturally bred crops with enhanced tolerance to water scarcity.\n*   **Integrated Pest Management (IPM):** Implement biological control, crop rotation, and other strategies to minimize pesticide use.\n*   **Water Harvesting:** Develop rainwater harvesting systems and efficient irrigation techniques to conserve water resources.\n\n\n"
+    }
+  ],
+  "links": [
+    {
+      "source": "root",
+      "target": "a6b294c0-d582-4b2f-8bfe-0a77ce6df53a",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "a6b294c0-d582-4b2f-8bfe-0a77ce6df53a",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "c2def62c-5c67-434e-8b45-bc77b02a0c52",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "c2def62c-5c67-434e-8b45-bc77b02a0c52",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "d77283d3-5f41-4dad-9f7f-120e1b51183d",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "d77283d3-5f41-4dad-9f7f-120e1b51183d",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "a6b294c0-d582-4b2f-8bfe-0a77ce6df53a",
+      "target": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "a6b294c0-d582-4b2f-8bfe-0a77ce6df53a",
+      "target": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "a6b294c0-d582-4b2f-8bfe-0a77ce6df53a",
+      "target": "efad40f3-071e-46f6-bccf-32e9cc586760",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "a6b294c0-d582-4b2f-8bfe-0a77ce6df53a",
+      "target": "efad40f3-071e-46f6-bccf-32e9cc586760",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "a6b294c0-d582-4b2f-8bfe-0a77ce6df53a",
+      "target": "26cec893-32f0-44f4-aec3-d863ca760ed5",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "a6b294c0-d582-4b2f-8bfe-0a77ce6df53a",
+      "target": "26cec893-32f0-44f4-aec3-d863ca760ed5",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "a6b294c0-d582-4b2f-8bfe-0a77ce6df53a",
+      "target": "9a845ec6-2634-4092-984e-8379fcd9290a",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.7302065"
+    },
+    {
+      "source": "a6b294c0-d582-4b2f-8bfe-0a77ce6df53a",
+      "target": "43ddf674-8805-4a75-a8c0-ee8a98295e4d",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.7302065"
+    },
+    {
+      "source": "a6b294c0-d582-4b2f-8bfe-0a77ce6df53a",
+      "target": "dff0ffb4-8c6e-4fe2-9bb0-d2f2965f3967",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.7302065"
+    },
+    {
+      "source": "a6b294c0-d582-4b2f-8bfe-0a77ce6df53a",
+      "target": "b6e8ee65-b7e3-4d18-86c7-234fd8504d99",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.7302065"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.37426504"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "efad40f3-071e-46f6-bccf-32e9cc586760",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.42840147"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "26cec893-32f0-44f4-aec3-d863ca760ed5",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.44220498"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "ef1b4d38-b3f1-49f5-a62f-660bec665e63",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "ef1b4d38-b3f1-49f5-a62f-660bec665e63",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "475c2976-63fd-4a26-972a-68c9d908ba4c",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "475c2976-63fd-4a26-972a-68c9d908ba4c",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "0f52fc44-881c-45c3-996f-dab6d953fceb",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "0f52fc44-881c-45c3-996f-dab6d953fceb",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "91222eaf-5fa4-4efa-a10f-1587e0817fc6",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.47204664"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "12a267c3-b4a5-498a-8880-91b8642c6fd4",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5012086"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "7d3223cc-9b44-4e0e-ba24-b302528a86f0",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5600386"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "2f03d223-df2d-4536-acff-01109a5b3c42",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.44220498"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "2f03d223-df2d-4536-acff-01109a5b3c42",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "adcc0bd8-c9fe-4b8d-b506-291732d43f3b",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.37426504"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "adcc0bd8-c9fe-4b8d-b506-291732d43f3b",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "a02cb07f-4515-4e43-b28a-2305983992a6",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.37426504"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "a02cb07f-4515-4e43-b28a-2305983992a6",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "29476cbb-196d-4f9a-aca9-0003285e4684",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.44220498"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "baad6b15-780c-4c81-8fa2-8ca4043eced0",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.44220498"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "c4915648-78c3-49bb-9627-048291c0cc57",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.37426504"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "78718967-b4a9-492d-9b6a-f0d68a5e089e",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5600386"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "ebcd16ad-9bf3-49e7-9253-f2130c1c13f2",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5600386"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "65ff1402-4b53-43a9-b43c-b2e9fa1025d3",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5600386"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "eda9752b-f51d-4a89-9e80-24290db77235",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5012086"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "70d533ec-b9e6-4467-9e66-0972450f4396",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.42840147"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "7918415f-f468-4bc2-b3c7-f3a62a54a067",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.47204664"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "4973ad1f-eee0-494a-9e9d-3d5844e81184",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5012086"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "719336b4-8c83-42a2-9f72-05e6d90726ef",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.42840147"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "26aaeb89-4f39-4fc8-aca4-19278c804917",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5012086"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "5ee9d755-e19b-4b02-8146-f5d8ab557670",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.47204664"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "616143d6-b1a3-43fb-a52c-5ed6be80f8b5",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.47204664"
+    },
+    {
+      "source": "e270e419-dbc5-44ec-94b1-75f3b29aa219",
+      "target": "24612d0c-9a29-4797-a983-7f0bafafdf91",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.42840147"
+    },
+    {
+      "source": "c2def62c-5c67-434e-8b45-bc77b02a0c52",
+      "target": "12a267c3-b4a5-498a-8880-91b8642c6fd4",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "c2def62c-5c67-434e-8b45-bc77b02a0c52",
+      "target": "12a267c3-b4a5-498a-8880-91b8642c6fd4",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "c2def62c-5c67-434e-8b45-bc77b02a0c52",
+      "target": "91222eaf-5fa4-4efa-a10f-1587e0817fc6",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "c2def62c-5c67-434e-8b45-bc77b02a0c52",
+      "target": "91222eaf-5fa4-4efa-a10f-1587e0817fc6",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "c2def62c-5c67-434e-8b45-bc77b02a0c52",
+      "target": "7d3223cc-9b44-4e0e-ba24-b302528a86f0",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "c2def62c-5c67-434e-8b45-bc77b02a0c52",
+      "target": "7d3223cc-9b44-4e0e-ba24-b302528a86f0",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "c2def62c-5c67-434e-8b45-bc77b02a0c52",
+      "target": "ef1b4d38-b3f1-49f5-a62f-660bec665e63",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.4613071"
+    },
+    {
+      "source": "c2def62c-5c67-434e-8b45-bc77b02a0c52",
+      "target": "0f52fc44-881c-45c3-996f-dab6d953fceb",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.56065"
+    },
+    {
+      "source": "d77283d3-5f41-4dad-9f7f-120e1b51183d",
+      "target": "3e778403-5f19-4457-8ece-d631078a82dd",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "d77283d3-5f41-4dad-9f7f-120e1b51183d",
+      "target": "3e778403-5f19-4457-8ece-d631078a82dd",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "d77283d3-5f41-4dad-9f7f-120e1b51183d",
+      "target": "6eb90bca-60f4-48cb-9085-399dcd5b22c9",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "d77283d3-5f41-4dad-9f7f-120e1b51183d",
+      "target": "6eb90bca-60f4-48cb-9085-399dcd5b22c9",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "d77283d3-5f41-4dad-9f7f-120e1b51183d",
+      "target": "026a73c8-f23c-4773-8d1d-cddd2cfd6eac",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "d77283d3-5f41-4dad-9f7f-120e1b51183d",
+      "target": "026a73c8-f23c-4773-8d1d-cddd2cfd6eac",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.69124985"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "efad40f3-071e-46f6-bccf-32e9cc586760",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5604422"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "26cec893-32f0-44f4-aec3-d863ca760ed5",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.69477683"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "9a845ec6-2634-4092-984e-8379fcd9290a",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "9a845ec6-2634-4092-984e-8379fcd9290a",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "6ff365b9-1618-49af-ac6d-aa161b800356",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "6ff365b9-1618-49af-ac6d-aa161b800356",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "c262cfd3-c321-48ac-b7e6-5e1bee0af34e",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "c262cfd3-c321-48ac-b7e6-5e1bee0af34e",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "2f03d223-df2d-4536-acff-01109a5b3c42",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.69477683"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "2f03d223-df2d-4536-acff-01109a5b3c42",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "2f03d223-df2d-4536-acff-01109a5b3c42",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.89119935"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "adcc0bd8-c9fe-4b8d-b506-291732d43f3b",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.69124985"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "adcc0bd8-c9fe-4b8d-b506-291732d43f3b",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "adcc0bd8-c9fe-4b8d-b506-291732d43f3b",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.8924763"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "a02cb07f-4515-4e43-b28a-2305983992a6",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.69124985"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "a02cb07f-4515-4e43-b28a-2305983992a6",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "a02cb07f-4515-4e43-b28a-2305983992a6",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.8924763"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "29476cbb-196d-4f9a-aca9-0003285e4684",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.69477683"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "baad6b15-780c-4c81-8fa2-8ca4043eced0",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.69477683"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "c4915648-78c3-49bb-9627-048291c0cc57",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.69124985"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "3e778403-5f19-4457-8ece-d631078a82dd",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.3913342"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "70d533ec-b9e6-4467-9e66-0972450f4396",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5604422"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "719336b4-8c83-42a2-9f72-05e6d90726ef",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5604422"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "24612d0c-9a29-4797-a983-7f0bafafdf91",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5604422"
+    },
+    {
+      "source": "2e5cc70a-4b05-4b5c-9665-8992050e960f",
+      "target": "6eb90bca-60f4-48cb-9085-399dcd5b22c9",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.3710553"
+    },
+    {
+      "source": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "target": "91222eaf-5fa4-4efa-a10f-1587e0817fc6",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.39298505"
+    },
+    {
+      "source": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "target": "9a845ec6-2634-4092-984e-8379fcd9290a",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.75541985"
+    },
+    {
+      "source": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "target": "adcc0bd8-c9fe-4b8d-b506-291732d43f3b",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "target": "adcc0bd8-c9fe-4b8d-b506-291732d43f3b",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "target": "a02cb07f-4515-4e43-b28a-2305983992a6",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "target": "a02cb07f-4515-4e43-b28a-2305983992a6",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "target": "c4915648-78c3-49bb-9627-048291c0cc57",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "target": "6ff365b9-1618-49af-ac6d-aa161b800356",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.71913934"
+    },
+    {
+      "source": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "target": "c262cfd3-c321-48ac-b7e6-5e1bee0af34e",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6211233"
+    },
+    {
+      "source": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "target": "7918415f-f468-4bc2-b3c7-f3a62a54a067",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.39298505"
+    },
+    {
+      "source": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "target": "5ee9d755-e19b-4b02-8146-f5d8ab557670",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.39298505"
+    },
+    {
+      "source": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "target": "616143d6-b1a3-43fb-a52c-5ed6be80f8b5",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.39298505"
+    },
+    {
+      "source": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "target": "43ddf674-8805-4a75-a8c0-ee8a98295e4d",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.75541985"
+    },
+    {
+      "source": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "target": "dff0ffb4-8c6e-4fe2-9bb0-d2f2965f3967",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.75541985"
+    },
+    {
+      "source": "d37ec991-0baf-42c5-b42b-43e017078bbc",
+      "target": "b6e8ee65-b7e3-4d18-86c7-234fd8504d99",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.75541985"
+    },
+    {
+      "source": "efad40f3-071e-46f6-bccf-32e9cc586760",
+      "target": "475c2976-63fd-4a26-972a-68c9d908ba4c",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.38949284"
+    },
+    {
+      "source": "efad40f3-071e-46f6-bccf-32e9cc586760",
+      "target": "70d533ec-b9e6-4467-9e66-0972450f4396",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "efad40f3-071e-46f6-bccf-32e9cc586760",
+      "target": "6ff365b9-1618-49af-ac6d-aa161b800356",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6984625"
+    },
+    {
+      "source": "efad40f3-071e-46f6-bccf-32e9cc586760",
+      "target": "719336b4-8c83-42a2-9f72-05e6d90726ef",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "efad40f3-071e-46f6-bccf-32e9cc586760",
+      "target": "24612d0c-9a29-4797-a983-7f0bafafdf91",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "26cec893-32f0-44f4-aec3-d863ca760ed5",
+      "target": "2f03d223-df2d-4536-acff-01109a5b3c42",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "26cec893-32f0-44f4-aec3-d863ca760ed5",
+      "target": "2f03d223-df2d-4536-acff-01109a5b3c42",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "26cec893-32f0-44f4-aec3-d863ca760ed5",
+      "target": "29476cbb-196d-4f9a-aca9-0003285e4684",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "26cec893-32f0-44f4-aec3-d863ca760ed5",
+      "target": "baad6b15-780c-4c81-8fa2-8ca4043eced0",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "26cec893-32f0-44f4-aec3-d863ca760ed5",
+      "target": "c262cfd3-c321-48ac-b7e6-5e1bee0af34e",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6443734"
+    },
+    {
+      "source": "26cec893-32f0-44f4-aec3-d863ca760ed5",
+      "target": "026a73c8-f23c-4773-8d1d-cddd2cfd6eac",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.396666"
+    },
+    {
+      "source": "12a267c3-b4a5-498a-8880-91b8642c6fd4",
+      "target": "eda9752b-f51d-4a89-9e80-24290db77235",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "12a267c3-b4a5-498a-8880-91b8642c6fd4",
+      "target": "4973ad1f-eee0-494a-9e9d-3d5844e81184",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "12a267c3-b4a5-498a-8880-91b8642c6fd4",
+      "target": "26aaeb89-4f39-4fc8-aca4-19278c804917",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "91222eaf-5fa4-4efa-a10f-1587e0817fc6",
+      "target": "7918415f-f468-4bc2-b3c7-f3a62a54a067",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "91222eaf-5fa4-4efa-a10f-1587e0817fc6",
+      "target": "5ee9d755-e19b-4b02-8146-f5d8ab557670",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "91222eaf-5fa4-4efa-a10f-1587e0817fc6",
+      "target": "616143d6-b1a3-43fb-a52c-5ed6be80f8b5",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "7d3223cc-9b44-4e0e-ba24-b302528a86f0",
+      "target": "ef1b4d38-b3f1-49f5-a62f-660bec665e63",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.46227434"
+    },
+    {
+      "source": "7d3223cc-9b44-4e0e-ba24-b302528a86f0",
+      "target": "0f52fc44-881c-45c3-996f-dab6d953fceb",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.58213246"
+    },
+    {
+      "source": "7d3223cc-9b44-4e0e-ba24-b302528a86f0",
+      "target": "78718967-b4a9-492d-9b6a-f0d68a5e089e",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "7d3223cc-9b44-4e0e-ba24-b302528a86f0",
+      "target": "ebcd16ad-9bf3-49e7-9253-f2130c1c13f2",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "7d3223cc-9b44-4e0e-ba24-b302528a86f0",
+      "target": "65ff1402-4b53-43a9-b43c-b2e9fa1025d3",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "ef1b4d38-b3f1-49f5-a62f-660bec665e63",
+      "target": "12a267c3-b4a5-498a-8880-91b8642c6fd4",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.4055131"
+    },
+    {
+      "source": "ef1b4d38-b3f1-49f5-a62f-660bec665e63",
+      "target": "eda9752b-f51d-4a89-9e80-24290db77235",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.4055131"
+    },
+    {
+      "source": "ef1b4d38-b3f1-49f5-a62f-660bec665e63",
+      "target": "4973ad1f-eee0-494a-9e9d-3d5844e81184",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.4055131"
+    },
+    {
+      "source": "ef1b4d38-b3f1-49f5-a62f-660bec665e63",
+      "target": "26aaeb89-4f39-4fc8-aca4-19278c804917",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.4055131"
+    },
+    {
+      "source": "0f52fc44-881c-45c3-996f-dab6d953fceb",
+      "target": "7d3223cc-9b44-4e0e-ba24-b302528a86f0",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.58213234"
+    },
+    {
+      "source": "0f52fc44-881c-45c3-996f-dab6d953fceb",
+      "target": "78718967-b4a9-492d-9b6a-f0d68a5e089e",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.58213234"
+    },
+    {
+      "source": "0f52fc44-881c-45c3-996f-dab6d953fceb",
+      "target": "ebcd16ad-9bf3-49e7-9253-f2130c1c13f2",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.58213234"
+    },
+    {
+      "source": "0f52fc44-881c-45c3-996f-dab6d953fceb",
+      "target": "65ff1402-4b53-43a9-b43c-b2e9fa1025d3",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.58213234"
+    },
+    {
+      "source": "9a845ec6-2634-4092-984e-8379fcd9290a",
+      "target": "475c2976-63fd-4a26-972a-68c9d908ba4c",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.3975679"
+    },
+    {
+      "source": "9a845ec6-2634-4092-984e-8379fcd9290a",
+      "target": "43ddf674-8805-4a75-a8c0-ee8a98295e4d",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "9a845ec6-2634-4092-984e-8379fcd9290a",
+      "target": "dff0ffb4-8c6e-4fe2-9bb0-d2f2965f3967",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "9a845ec6-2634-4092-984e-8379fcd9290a",
+      "target": "b6e8ee65-b7e3-4d18-86c7-234fd8504d99",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "6ff365b9-1618-49af-ac6d-aa161b800356",
+      "target": "2f03d223-df2d-4536-acff-01109a5b3c42",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.87709284"
+    },
+    {
+      "source": "c262cfd3-c321-48ac-b7e6-5e1bee0af34e",
+      "target": "3e778403-5f19-4457-8ece-d631078a82dd",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.45577186"
+    },
+    {
+      "source": "c262cfd3-c321-48ac-b7e6-5e1bee0af34e",
+      "target": "6eb90bca-60f4-48cb-9085-399dcd5b22c9",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.43398005"
+    },
+    {
+      "source": "c262cfd3-c321-48ac-b7e6-5e1bee0af34e",
+      "target": "026a73c8-f23c-4773-8d1d-cddd2cfd6eac",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.4323727"
+    },
+    {
+      "source": "2f03d223-df2d-4536-acff-01109a5b3c42",
+      "target": "adcc0bd8-c9fe-4b8d-b506-291732d43f3b",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.9999491"
+    },
+    {
+      "source": "2f03d223-df2d-4536-acff-01109a5b3c42",
+      "target": "a02cb07f-4515-4e43-b28a-2305983992a6",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.9999491"
+    }
+  ]
+}

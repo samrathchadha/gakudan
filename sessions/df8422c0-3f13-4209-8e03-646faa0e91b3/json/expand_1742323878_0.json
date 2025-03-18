@@ -1,0 +1,13 @@
+{
+  "directed": true,
+  "multigraph": true,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "root",
+      "prompt": "Main Prompt",
+      "depth": -1
+    }
+  ],
+  "links": []
+}

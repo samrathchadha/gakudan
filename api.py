@@ -47,11 +47,10 @@ lock = threading.Lock()  # Thread safety
 
 def run_expand(session_id: str, prompt: str, api_key: str):
     """Run the expand/runner.py script as a subprocess with extensive logging."""
+    session_dir = os.path.abspath(os.path.join(SESSIONS_DIR, session_id))
+    os.makedirs(session_dir, exist_ok=True)
     try:
         # Create a session directory
-        session_dir = os.path.abspath(os.path.join(SESSIONS_DIR, session_id))
-        os.makedirs(session_dir, exist_ok=True)
-        
         logger.info(f"Starting expand process for session {session_id} in {session_dir}")
         
         expand_process = subprocess.Popen(

@@ -22,6 +22,7 @@ THOUGHT_GENERATOR_SYSTEM_PROMPT = """Generate an appropriate number of sub-promp
     ...
 - format end
 do not deviate from format at all 
+do not give further asks about personality just two words in the exact format given
 under no circumstance can you ever deviate. no new lines, no weird formatting, only exactly how it is given
 """
 
@@ -46,9 +47,10 @@ Generate a MAXIMUM of 3 sub-prompts to solve the given problem and explore the p
     ..
 - format end
 do not deviate from format at all 
+do not give further asks about personality just two words in the exact format given
 under no circumstance can you ever deviate. no new lines, no weird formatting, only exactly how it is given
 """
 
-SUB_PROMPT_SYSTEM_INSTRUCTION = "You are an AI assistant. Provide EXTREMELY CONCISE and PRECISE responses. Do not answer with yes or no, build unique content. Provide strong tangible solutions to the task at hand. do not include any introductory messages or conclusive messages"
+SUB_PROMPT_SYSTEM_INSTRUCTION = "You are an AI assistant. Provide PRECISE responses using the role you have been given, ensure you use skills/tools/approaches/anything an expert of your role given would. Do not answer with yes or no, build unique content. Provide strong tangible solutions to the task at hand. do not include any introductory messages or conclusive messages"
 
-COMBINER_SYSTEM_PROMPT = 'You have been given several perspectives from many different people.INCLUDE EVERY GOOD POINT ANYONE HAS MENTIONED. You will now create a formal plan with all the work everyone has done. Dont summarize, synthesize a coherent synchronous answer that is a final answer to the original prompt, not just a summary of the answers you have. DO NOT GIVE ANY TOPICS. JUST GIVE IT INSTRUCTIONS ON HOW TO DO NOT WHAT TO DO IT ON. do not include any introductory messages or conclusive messages. You do not need to be concise.'
+COMBINER_SYSTEM_PROMPT = 'You have been given several perspectives from many different people.INCLUDE EVERY GOOD POINT ANYONE HAS MENTIONED. You will now create a formal plan with all the work everyone has done. Dont summarize, synthesize a coherent synchronous answer that is a final answer to the original prompt, not just a summary of the answers you have. DO NOT GIVE ANY TOPICS. JUST GIVE IT INSTRUCTIONS ON HOW TO DO NOT WHAT TO DO IT ON. do not include any introductory messages or conclusive messages. You do not need to be concise. You do not need to quote or show the users what insights/sources you are using btw'

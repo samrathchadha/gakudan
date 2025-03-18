@@ -1,0 +1,556 @@
+{
+  "directed": true,
+  "multigraph": true,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "root",
+      "prompt": "How do we fix world hunger",
+      "depth": -1
+    },
+    {
+      "id": "c6b34285-7b18-4d32-b6f8-51551cb19178",
+      "prompt": "1) Economist: Considering the complex interplay of global markets, what innovative financial mechanisms and trade policies could most effectively stabilize food prices and ensure equitable distribution, even in the face of unpredictable economic shocks and localized crises?",
+      "depth": 0,
+      "response": "**Financial Mechanisms & Trade Policies:**\n\n1.  **Global Food Reserve:** Establish a globally coordinated, decentralized system.\n2.  **Price Stabilization Funds:** Implement commodity-specific funds.\n3.  **Hedging Programs:** Encourage risk management.\n4.  **Trade Policy Harmonization:** Reduce tariffs & eliminate export restrictions.\n5.  **Information Transparency:** Improve data sharing.\n6.  **Climate-Resilient Agriculture:** Invest in sustainable farming.\n",
+      "rag_results": []
+    },
+    {
+      "id": "db5949b5-c79a-47c2-949e-397b170abfb5",
+      "prompt": "2) Agricultural Scientist: Beyond increasing yields, how can we leverage advancements in biotechnology, sustainable farming practices, and climate-resilient crops to build more robust and adaptable food systems that can withstand environmental challenges and ensure long-term food security in diverse geographical contexts?",
+      "depth": 0,
+      "response": "**Biotechnology & Climate-Resilient Crops:**\n\n1.  **Develop:** Drought/flood-resistant, pest-resistant, and heat-tolerant crops.\n2.  **Enhance:** Nutrient use efficiency via genetic modification.\n3.  **Implement:** Precision breeding for regional adaptation.\n\n**Sustainable Farming:**\n\n1.  **Promote:** Integrated pest management to reduce pesticide use by 40%.\n2.  **Implement:** Crop rotation/cover cropping to improve soil health and reduce erosion by 30%.\n3.  **Adopt:** Water-efficient irrigation; reduce water usage by 25%.\n\n**Adaptable Food Systems:**\n\n1.  **Diversify:** Crop portfolios; implement 3-5 diverse crops per region.\n2.  **Establish:** Early warning systems for climate impacts.\n3.  **Improve:** Storage/transport infrastructure, reducing food loss by 15%.\n",
+      "rag_results": []
+    },
+    {
+      "id": "a108fac7-04ec-4411-8b3e-98fdb3b982b0",
+      "prompt": "3) Sociologist: Recognizing the deep-seated social and cultural factors influencing food access and consumption patterns, what community-based strategies and educational programs can empower vulnerable populations, address inequalities, and foster behavioral changes that promote healthier diets and reduce food waste?",
+      "depth": 0,
+      "response": "**Community-Based Strategies:**\n\n1.  **Establish Community Gardens:** Provide land, resources, and education to grow fresh produce, increasing access to healthy foods by 40%.\n2.  **Mobile Markets:** Implement mobile markets in underserved areas, offering affordable, nutritious options.\n3.  **Cooking Classes:** Offer culturally sensitive cooking classes to promote healthy eating habits by 30% and reduce food waste.\n4.  **Food Waste Reduction Programs:** Implement composting and food donation programs to cut waste by 25%.\n\n**Educational Programs:**\n\n1.  **Nutrition Education:** Develop culturally appropriate nutrition education programs in schools and community centers to improve dietary knowledge by 50%.\n2.  **Budgeting Workshops:** Provide financial literacy workshops to help families make informed food choices.\n3.  **Promote Food Label Literacy:** Educate people on how to read food labels to empower informed decisions by 60%.\n4.  **School Programs:** Integrate nutrition and healthy eating into school curricula.\n",
+      "rag_results": []
+    },
+    {
+      "id": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "prompt": "4) Technologist: Given the rapid evolution of digital technologies, how can we best utilize data analytics, precision agriculture, and supply chain optimization tools to improve the efficiency, transparency, and resilience of food production and distribution, particularly in resource-constrained environments?",
+      "depth": 0,
+      "response": "**Data Analytics for Food Systems**\n\n1.  **Implement Predictive Analytics:** Forecast crop yields, demand, and potential disruptions.\n2.  **Use Real-time Data:** Monitor environmental factors, soil conditions, and market prices.\n3.  **Integrate Data Platforms:** Connect farm management software, weather services, and market data.\n\n**Precision Agriculture Techniques**\n\n1.  **Deploy Sensor Networks:** Monitor moisture, nutrients, and pest presence.\n2.  **Use Drones & Satellite Imagery:** Map fields, assess crop health, and optimize resource allocation.\n3.  **Implement Variable Rate Technology:** Apply inputs (water, fertilizer) based on specific needs.\n\n**Supply Chain Optimization**\n\n1.  **Adopt Blockchain Technology:** Improve traceability and transparency.\n2.  **Use Route Optimization Software:** Minimize transportation costs and reduce waste.\n3.  **Establish Cold Chain Management:** Maintain product quality during storage and transport.\n",
+      "rag_results": []
+    },
+    {
+      "id": "5c8ded40-cb6c-4bc4-8eff-e7c229a8a981",
+      "prompt": "5) Logistics Expert: Focusing on the often-overlooked challenges of moving food from production to consumption, what innovative transportation solutions, infrastructure improvements, and storage technologies can minimize post-harvest losses, reduce transportation costs, and ensure the timely delivery of nutritious food to those who need it most, especially in remote or conflict-affected areas?",
+      "depth": 0,
+      "response": "## Logistics Solutions: Food Delivery\n\n1.  **Transportation Innovations**:\n    *   **Drone Networks**: Deploy drones for last-mile delivery to remote areas. Reduce delivery time by 80%.\n    *   **Refrigerated Transport**: Use solar-powered refrigerated trucks. Extend food shelf life by 50%.\n    *   **Modular Vehicles**: Employ adaptable vehicles for diverse terrains. Increase access to 90% of target locations.\n2.  **Infrastructure Improvements**:\n    *   **Mobile Processing Units**: Establish units near farms. Decrease spoilage by 30%.\n    *   **Cold Chain Networks**: Develop temperature-controlled storage facilities. Minimize waste by 40%.\n    *   **Road Optimization**: Improve road networks. Reduce travel time by 25%.\n3.  **Storage Technologies**:\n    *   **Smart Warehouses**: Implement automated inventory management. Cut operational costs by 15%.\n    *   **Hermetic Storage**: Utilize airtight containers. Preserve grains for up to 2 years.\n    *   **Phase Change Materials**: Use PCM for temperature regulation. Maintain consistent temperatures for 72 hours.\n",
+      "rag_results": []
+    },
+    {
+      "id": "6a84de7f-477c-4018-8021-c0765eff9285",
+      "prompt": "**Financial Mechanisms & Trade Policies:**\n\n1.  **Global Food Reserve:** Establish a globally coordinated, decentralized system.\n2.  **Price Stabilization Funds:** Implement commodity-specific funds.\n3.  **Hedging Programs:** Encourage risk management.\n4.  **Trade Policy Harmonization:** Reduce tariffs & eliminate export restrictions.\n5.  **Information Transparency:** Improve data sharing.\n6.  **Climate-Resilient Agriculture:** Invest in sustainable farming.\n\n1) Economist: How do the proposed financial mechanisms and trade policies affect the global distribution of wealth and the economic stability of different regions, considering factors like agricultural productivity, trade dependencies, and the impact on vulnerable populations?",
+      "depth": 1,
+      "color": "\u001b[31m",
+      "rag_context": null,
+      "response": "**Financial Mechanisms & Trade Policies Impact:**\n\n1.  **Wealth Redistribution:**\n    *   **Global Food Reserve:** Stabilizes prices, benefiting both producers and consumers.\n    *   **Price Stabilization Funds:** Protects against price volatility, especially benefiting vulnerable regions.\n    *   **Hedging Programs:** Enables risk management; beneficial for large and small producers.\n    *   **Trade Policy Harmonization:** Increases global trade efficiency, which may vary in benefits.\n2.  **Economic Stability:**\n    *   **Information Transparency:** Improves market efficiency, stabilizing prices.\n    *   **Climate-Resilient Agriculture:** Boosts long-term agricultural productivity, enhancing stability.\n3.  **Impact on Vulnerable Populations:**\n    *   **Price Stabilization Funds:** Reduces food price shocks, protecting vulnerable groups.\n    *   **Climate-Resilient Agriculture:** Enhances food security, benefiting vulnerable populations.\n",
+      "rag_results": "[{'text': '2) Agricultural Scientist: Beyond increasing yields, how can we leverage advancements in biotechnology, sustainable farming practices, and climate-resilient crops to build more robust and adaptable food systems that can withstand environmental challenges and ensure long-term food security in diverse geographical contexts?\\n**Biotechnology & Climate-Resilient Crops:**\\n\\n1.  **Develop:** Drought/flood-resistant, pest-resistant, and heat-tolerant crops.\\n2.  **Enhance:** Nutrient use efficiency via genetic modification.\\n3.  **Implement:** Precision breeding for regional adaptation.\\n\\n**Sustainable Farming:**\\n\\n1.  **Promote:** Integrated pest management to reduce pesticide use by 40%.\\n2.  **Implement:** Crop rotation/cover cropping to improve soil health and reduce erosion by 30%.\\n3.  **Adopt:** Water-efficient irrigation; reduce water usage by 25%.\\n\\n**Adaptable Food Systems:**\\n\\n1.  **Diversify:** Crop portfolios; implement 3-5 diverse crops per region.\\n2.  **Establish:** Early warning systems for climate impacts.\\n3.  **Improve:** Storage/transport infrastructure, reducing food loss by 15%.\\n', 'node_id': 'db5949b5-c79a-47c2-949e-397b170abfb5', 'similarity': 0.58386034}, {'text': '4) Technologist: Given the rapid evolution of digital technologies, how can we best utilize data analytics, precision agriculture, and supply chain optimization tools to improve the efficiency, transparency, and resilience of food production and distribution, particularly in resource-constrained environments?\\n**Data Analytics for Food Systems**\\n\\n1.  **Implement Predictive Analytics:** Forecast crop yields, demand, and potential disruptions.\\n2.  **Use Real-time Data:** Monitor environmental factors, soil conditions, and market prices.\\n3.  **Integrate Data Platforms:** Connect farm management software, weather services, and market data.\\n\\n**Precision Agriculture Techniques**\\n\\n1.  **Deploy Sensor Networks:** Monitor moisture, nutrients, and pest presence.\\n2.  **Use Drones & Satellite Imagery:** Map fields, assess crop health, and optimize resource allocation.\\n3.  **Implement Variable Rate Technology:** Apply inputs (water, fertilizer) based on specific needs.\\n\\n**Supply Chain Optimization**\\n\\n1.  **Adopt Blockchain Technology:** Improve traceability and transparency.\\n2.  **Use Route Optimization Software:** Minimize transportation costs and reduce waste.\\n3.  **Establish Cold Chain Management:** Maintain product quality during storage and transport.\\n', 'node_id': '5a341ef5-ea96-42dc-9748-137cc4c71ab0', 'similarity': 0.5197251}]"
+    },
+    {
+      "id": "ab43bc86-6dd9-438c-a572-a51ff289705f",
+      "prompt": "**Financial Mechanisms & Trade Policies:**\n\n1.  **Global Food Reserve:** Establish a globally coordinated, decentralized system.\n2.  **Price Stabilization Funds:** Implement commodity-specific funds.\n3.  **Hedging Programs:** Encourage risk management.\n4.  **Trade Policy Harmonization:** Reduce tariffs & eliminate export restrictions.\n5.  **Information Transparency:** Improve data sharing.\n6.  **Climate-Resilient Agriculture:** Invest in sustainable farming.\n\n2) Political Scientist: What are the potential political challenges and international relations implications associated with implementing these financial mechanisms and trade policies, considering factors like national sovereignty, geopolitical interests, and the need for international cooperation?",
+      "depth": 1,
+      "color": "\u001b[91m",
+      "rag_context": null,
+      "response": "**Agricultural Scientist - Actionable Steps:**\n\n1.  **Biotechnology & Climate-Resilient Crops:** Develop drought-resistant crops within 3 years. Enhance nutrient use efficiency via genetic modification by 2027. Implement precision breeding by Q1 2026.\n2.  **Sustainable Farming:** Promote integrated pest management within 1 year. Implement crop rotation/cover cropping by Q4 2025. Adopt water-efficient irrigation in 18 months.\n3.  **Adaptable Food Systems:** Diversify crop portfolios by 2026. Establish early warning systems within 2 years. Improve storage/transport infrastructure within 3 years.\n\n**Technologist - Actionable Steps:**\n\n1.  **Data Analytics for Food Systems:** Implement predictive analytics by Q2 2025. Utilize real-time data by Q1 2025. Integrate data platforms in 1 year.\n2.  **Precision Agriculture Techniques:** Deploy sensor networks within 6 months. Use drones & satellite imagery by Q1 2025. Implement variable rate technology within 18 months.\n3.  **Supply Chain Optimization:** Adopt blockchain technology in 2 years. Use route optimization software by Q4 2025. Establish cold chain management in 3 years.\n\n**Political Scientist - Actionable Steps:**\n\n1.  **Financial Mechanisms & Trade Policies:** Establish a global food reserve by 2028. Implement price stabilization funds within 2 years. Establish hedging programs by 2027. Harmonize trade policies by 2029. Improve information transparency within 1 year. Invest in climate-resilient agriculture by 2026.\n",
+      "rag_results": "[{'text': '2) Agricultural Scientist: Beyond increasing yields, how can we leverage advancements in biotechnology, sustainable farming practices, and climate-resilient crops to build more robust and adaptable food systems that can withstand environmental challenges and ensure long-term food security in diverse geographical contexts?\\n**Biotechnology & Climate-Resilient Crops:**\\n\\n1.  **Develop:** Drought/flood-resistant, pest-resistant, and heat-tolerant crops.\\n2.  **Enhance:** Nutrient use efficiency via genetic modification.\\n3.  **Implement:** Precision breeding for regional adaptation.\\n\\n**Sustainable Farming:**\\n\\n1.  **Promote:** Integrated pest management to reduce pesticide use by 40%.\\n2.  **Implement:** Crop rotation/cover cropping to improve soil health and reduce erosion by 30%.\\n3.  **Adopt:** Water-efficient irrigation; reduce water usage by 25%.\\n\\n**Adaptable Food Systems:**\\n\\n1.  **Diversify:** Crop portfolios; implement 3-5 diverse crops per region.\\n2.  **Establish:** Early warning systems for climate impacts.\\n3.  **Improve:** Storage/transport infrastructure, reducing food loss by 15%.\\n', 'node_id': 'db5949b5-c79a-47c2-949e-397b170abfb5', 'similarity': 0.4672651}, {'text': '4) Technologist: Given the rapid evolution of digital technologies, how can we best utilize data analytics, precision agriculture, and supply chain optimization tools to improve the efficiency, transparency, and resilience of food production and distribution, particularly in resource-constrained environments?\\n**Data Analytics for Food Systems**\\n\\n1.  **Implement Predictive Analytics:** Forecast crop yields, demand, and potential disruptions.\\n2.  **Use Real-time Data:** Monitor environmental factors, soil conditions, and market prices.\\n3.  **Integrate Data Platforms:** Connect farm management software, weather services, and market data.\\n\\n**Precision Agriculture Techniques**\\n\\n1.  **Deploy Sensor Networks:** Monitor moisture, nutrients, and pest presence.\\n2.  **Use Drones & Satellite Imagery:** Map fields, assess crop health, and optimize resource allocation.\\n3.  **Implement Variable Rate Technology:** Apply inputs (water, fertilizer) based on specific needs.\\n\\n**Supply Chain Optimization**\\n\\n1.  **Adopt Blockchain Technology:** Improve traceability and transparency.\\n2.  **Use Route Optimization Software:** Minimize transportation costs and reduce waste.\\n3.  **Establish Cold Chain Management:** Maintain product quality during storage and transport.\\n', 'node_id': '5a341ef5-ea96-42dc-9748-137cc4c71ab0', 'similarity': 0.42087317}]"
+    },
+    {
+      "id": "100f73ab-5094-4222-81ba-f0e0efbcdf80",
+      "prompt": "**Financial Mechanisms & Trade Policies:**\n\n1.  **Global Food Reserve:** Establish a globally coordinated, decentralized system.\n2.  **Price Stabilization Funds:** Implement commodity-specific funds.\n3.  **Hedging Programs:** Encourage risk management.\n4.  **Trade Policy Harmonization:** Reduce tariffs & eliminate export restrictions.\n5.  **Information Transparency:** Improve data sharing.\n6.  **Climate-Resilient Agriculture:** Invest in sustainable farming.\n\n3) Agricultural Scientist: How do these financial mechanisms and trade policies impact agricultural practices, technological innovation, and the long-term sustainability of food production systems, considering factors like climate change, land use, and the diversity of farming methods?",
+      "depth": 1,
+      "color": "\u001b[33m",
+      "rag_context": null,
+      "response": "**Addressing Agricultural Challenges:**\n\n1.  **Biotechnology and Climate-Resilient Crops:** Develop drought/flood-resistant crops. Enhance nutrient use efficiency. Implement precision breeding.\n2.  **Sustainable Farming:** Promote Integrated Pest Management. Implement crop rotation and water-efficient irrigation.\n3.  **Adaptable Food Systems:** Diversify crop portfolios. Establish climate impact early warning systems. Improve storage and transport to reduce food loss.\n4.  **Data Analytics for Food Systems:** Use predictive analytics. Implement real-time data monitoring. Integrate data platforms.\n5.  **Precision Agriculture:** Deploy sensor networks and use drones/satellite imagery.\n6.  **Supply Chain Optimization:** Adopt blockchain technology and route optimization software.\n7.  **Financial & Trade Policies:** Establish a global food reserve, price stabilization funds, and hedging programs. Harmonize trade policies. Improve information transparency. Invest in climate-resilient agriculture.\n",
+      "rag_results": "[{'text': '2) Agricultural Scientist: Beyond increasing yields, how can we leverage advancements in biotechnology, sustainable farming practices, and climate-resilient crops to build more robust and adaptable food systems that can withstand environmental challenges and ensure long-term food security in diverse geographical contexts?\\n**Biotechnology & Climate-Resilient Crops:**\\n\\n1.  **Develop:** Drought/flood-resistant, pest-resistant, and heat-tolerant crops.\\n2.  **Enhance:** Nutrient use efficiency via genetic modification.\\n3.  **Implement:** Precision breeding for regional adaptation.\\n\\n**Sustainable Farming:**\\n\\n1.  **Promote:** Integrated pest management to reduce pesticide use by 40%.\\n2.  **Implement:** Crop rotation/cover cropping to improve soil health and reduce erosion by 30%.\\n3.  **Adopt:** Water-efficient irrigation; reduce water usage by 25%.\\n\\n**Adaptable Food Systems:**\\n\\n1.  **Diversify:** Crop portfolios; implement 3-5 diverse crops per region.\\n2.  **Establish:** Early warning systems for climate impacts.\\n3.  **Improve:** Storage/transport infrastructure, reducing food loss by 15%.\\n', 'node_id': 'db5949b5-c79a-47c2-949e-397b170abfb5', 'similarity': 0.72814465}, {'text': '4) Technologist: Given the rapid evolution of digital technologies, how can we best utilize data analytics, precision agriculture, and supply chain optimization tools to improve the efficiency, transparency, and resilience of food production and distribution, particularly in resource-constrained environments?\\n**Data Analytics for Food Systems**\\n\\n1.  **Implement Predictive Analytics:** Forecast crop yields, demand, and potential disruptions.\\n2.  **Use Real-time Data:** Monitor environmental factors, soil conditions, and market prices.\\n3.  **Integrate Data Platforms:** Connect farm management software, weather services, and market data.\\n\\n**Precision Agriculture Techniques**\\n\\n1.  **Deploy Sensor Networks:** Monitor moisture, nutrients, and pest presence.\\n2.  **Use Drones & Satellite Imagery:** Map fields, assess crop health, and optimize resource allocation.\\n3.  **Implement Variable Rate Technology:** Apply inputs (water, fertilizer) based on specific needs.\\n\\n**Supply Chain Optimization**\\n\\n1.  **Adopt Blockchain Technology:** Improve traceability and transparency.\\n2.  **Use Route Optimization Software:** Minimize transportation costs and reduce waste.\\n3.  **Establish Cold Chain Management:** Maintain product quality during storage and transport.\\n', 'node_id': '5a341ef5-ea96-42dc-9748-137cc4c71ab0', 'similarity': 0.6395751}]"
+    },
+    {
+      "id": "dfdd466d-4c95-42bd-bac5-b9f324cd886e",
+      "prompt": "**Biotechnology & Climate-Resilient Crops:**\n\n1.  **Develop:** Drought/flood-resistant, pest-resistant, and heat-tolerant crops.\n2.  **Enhance:** Nutrient use efficiency via genetic modification.\n3.  **Implement:** Precision breeding for regional adaptation.\n\n**Sustainable Farming:**\n\n1.  **Promote:** Integrated pest management to reduce pesticide use by 40%.\n2.  **Implement:** Crop rotation/cover cropping to improve soil health and reduce erosion by 30%.\n3.  **Adopt:** Water-efficient irrigation; reduce water usage by 25%.\n\n**Adaptable Food Systems:**\n\n1.  **Diversify:** Crop portfolios; implement 3-5 diverse crops per region.\n2.  **Establish:** Early warning systems for climate impacts.\n3.  **Improve:** Storage/transport infrastructure, reducing food loss by 15%.\n\n1) **Economist**: Considering the global supply chain, how do we ensure these proposed agricultural and biotechnological advancements are economically viable and accessible across different socioeconomic levels, and what are the potential market impacts of widespread adoption?",
+      "depth": 1,
+      "color": "\u001b[93m",
+      "rag_context": null
+    },
+    {
+      "id": "0626d437-129d-4bed-aa6d-c54cd4c05355",
+      "prompt": "## Logistics Solutions: Food Delivery\n\n1.  **Transportation Innovations**:\n    *   **Drone Networks**: Deploy drones for last-mile delivery to remote areas. Reduce delivery time by 80%.\n    *   **Refrigerated Transport**: Use solar-powered refrigerated trucks. Extend food shelf life by 50%.\n    *   **Modular Vehicles**: Employ adaptable vehicles for diverse terrains. Increase access to 90% of target locations.\n2.  **Infrastructure Improvements**:\n    *   **Mobile Processing Units**: Establish units near farms. Decrease spoilage by 30%.\n    *   **Cold Chain Networks**: Develop temperature-controlled storage facilities. Minimize waste by 40%.\n    *   **Road Optimization**: Improve road networks. Reduce travel time by 25%.\n3.  **Storage Technologies**:\n    *   **Smart Warehouses**: Implement automated inventory management. Cut operational costs by 15%.\n    *   **Hermetic Storage**: Utilize airtight containers. Preserve grains for up to 2 years.\n    *   **Phase Change Materials**: Use PCM for temperature regulation. Maintain consistent temperatures for 72 hours.\n\n1.  **Supply Chain Manager**: How can we optimize the end-to-end food delivery process to minimize waste and maximize efficiency, considering both operational costs and environmental impact?",
+      "depth": 1,
+      "color": "\u001b[34m",
+      "rag_context": null
+    },
+    {
+      "id": "a3ca7282-ea4d-4de0-bcfa-6fe877d98d74",
+      "prompt": "**Biotechnology & Climate-Resilient Crops:**\n\n1.  **Develop:** Drought/flood-resistant, pest-resistant, and heat-tolerant crops.\n2.  **Enhance:** Nutrient use efficiency via genetic modification.\n3.  **Implement:** Precision breeding for regional adaptation.\n\n**Sustainable Farming:**\n\n1.  **Promote:** Integrated pest management to reduce pesticide use by 40%.\n2.  **Implement:** Crop rotation/cover cropping to improve soil health and reduce erosion by 30%.\n3.  **Adopt:** Water-efficient irrigation; reduce water usage by 25%.\n\n**Adaptable Food Systems:**\n\n1.  **Diversify:** Crop portfolios; implement 3-5 diverse crops per region.\n2.  **Establish:** Early warning systems for climate impacts.\n3.  **Improve:** Storage/transport infrastructure, reducing food loss by 15%.\n\n2) **Environmental Scientist**: How can we assess and mitigate the environmental impacts (such as biodiversity loss, water contamination, and soil degradation) of implementing biotechnological and sustainable farming practices on a large scale, and what are the trade-offs involved?",
+      "depth": 1,
+      "color": "\u001b[94m",
+      "rag_context": null
+    },
+    {
+      "id": "cd545bf6-f847-4522-966d-e876feb88893",
+      "prompt": "## Logistics Solutions: Food Delivery\n\n1.  **Transportation Innovations**:\n    *   **Drone Networks**: Deploy drones for last-mile delivery to remote areas. Reduce delivery time by 80%.\n    *   **Refrigerated Transport**: Use solar-powered refrigerated trucks. Extend food shelf life by 50%.\n    *   **Modular Vehicles**: Employ adaptable vehicles for diverse terrains. Increase access to 90% of target locations.\n2.  **Infrastructure Improvements**:\n    *   **Mobile Processing Units**: Establish units near farms. Decrease spoilage by 30%.\n    *   **Cold Chain Networks**: Develop temperature-controlled storage facilities. Minimize waste by 40%.\n    *   **Road Optimization**: Improve road networks. Reduce travel time by 25%.\n3.  **Storage Technologies**:\n    *   **Smart Warehouses**: Implement automated inventory management. Cut operational costs by 15%.\n    *   **Hermetic Storage**: Utilize airtight containers. Preserve grains for up to 2 years.\n    *   **Phase Change Materials**: Use PCM for temperature regulation. Maintain consistent temperatures for 72 hours.\n\n2.  **Sustainability Advocate**: Considering the environmental footprint of food delivery, what are the most impactful strategies we can implement to reduce carbon emissions and promote sustainable practices throughout the supply chain?",
+      "depth": 1,
+      "color": "\u001b[35m",
+      "rag_context": null
+    },
+    {
+      "id": "3f873ff6-e98d-4a15-9c19-7d3f1f175527",
+      "prompt": "**Biotechnology & Climate-Resilient Crops:**\n\n1.  **Develop:** Drought/flood-resistant, pest-resistant, and heat-tolerant crops.\n2.  **Enhance:** Nutrient use efficiency via genetic modification.\n3.  **Implement:** Precision breeding for regional adaptation.\n\n**Sustainable Farming:**\n\n1.  **Promote:** Integrated pest management to reduce pesticide use by 40%.\n2.  **Implement:** Crop rotation/cover cropping to improve soil health and reduce erosion by 30%.\n3.  **Adopt:** Water-efficient irrigation; reduce water usage by 25%.\n\n**Adaptable Food Systems:**\n\n1.  **Diversify:** Crop portfolios; implement 3-5 diverse crops per region.\n2.  **Establish:** Early warning systems for climate impacts.\n3.  **Improve:** Storage/transport infrastructure, reducing food loss by 15%.\n\n3) **Sociologist**: What social and cultural factors might influence the adoption of these new agricultural practices and technologies by farmers and communities, and how can we address potential inequalities or resistance to change?",
+      "depth": 1,
+      "color": "\u001b[95m",
+      "rag_context": null
+    },
+    {
+      "id": "95b57f0b-4e3f-4a20-8de6-8d366217662c",
+      "prompt": "## Logistics Solutions: Food Delivery\n\n1.  **Transportation Innovations**:\n    *   **Drone Networks**: Deploy drones for last-mile delivery to remote areas. Reduce delivery time by 80%.\n    *   **Refrigerated Transport**: Use solar-powered refrigerated trucks. Extend food shelf life by 50%.\n    *   **Modular Vehicles**: Employ adaptable vehicles for diverse terrains. Increase access to 90% of target locations.\n2.  **Infrastructure Improvements**:\n    *   **Mobile Processing Units**: Establish units near farms. Decrease spoilage by 30%.\n    *   **Cold Chain Networks**: Develop temperature-controlled storage facilities. Minimize waste by 40%.\n    *   **Road Optimization**: Improve road networks. Reduce travel time by 25%.\n3.  **Storage Technologies**:\n    *   **Smart Warehouses**: Implement automated inventory management. Cut operational costs by 15%.\n    *   **Hermetic Storage**: Utilize airtight containers. Preserve grains for up to 2 years.\n    *   **Phase Change Materials**: Use PCM for temperature regulation. Maintain consistent temperatures for 72 hours.\n\n3.  **Consumer Behavior Analyst**: How can we leverage insights into consumer preferences and behaviors to design food delivery solutions that are both convenient for consumers and operationally efficient?",
+      "depth": 1,
+      "color": "\u001b[36m",
+      "rag_context": null
+    },
+    {
+      "id": "303968d1-05d4-4668-aa25-7f810a0245df",
+      "prompt": "1) **The Futurist:** Considering current technological advancements and their projected trajectories, what unforeseen opportunities and challenges might data analytics present to food systems in the next 20 years, specifically considering potential shifts in consumer behavior and global environmental changes?",
+      "depth": 1,
+      "color": "\u001b[96m",
+      "rag_context": null
+    },
+    {
+      "id": "19ee8dd2-035b-4d42-a587-bc97547dad46",
+      "prompt": "2) **The Ethicist:** What are the primary ethical considerations surrounding the use of data analytics in food systems, particularly concerning data privacy, equitable access to technology and resources, and the potential for exacerbating existing inequalities within the agricultural sector?",
+      "depth": 1,
+      "color": "\u001b[32m",
+      "rag_context": null
+    },
+    {
+      "id": "12c6c066-6521-43af-b7c2-453426891de9",
+      "prompt": "3) **The Economist:** How can we best leverage data analytics to create a sustainable and resilient food system, factoring in the economic viability of farmers, the reduction of food waste, and the overall impact on global food prices and market stability?",
+      "depth": 1,
+      "color": "\u001b[92m",
+      "rag_context": null
+    },
+    {
+      "id": "22108bc9-5927-4ae7-b50b-3a16a550a94f",
+      "prompt": "1)  **Economist:** Considering the current state of global economies and market volatility, what are the most effective financial mechanisms and trade policies to ensure equitable distribution and economic stability in the food supply chain, while mitigating negative impacts on vulnerable populations?",
+      "depth": 2,
+      "color": "\u001b[37m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.58): 2) Agricultural Scientist: Beyond increasing yields, how can we leverage advancements in biotechnology, sustainable farming practices, and climate-resilient crops to build more robust and adaptable food systems that can withstand environmental challenges and ensure long-term food security in diverse geographical contexts?\n**Biotechnology & Climate-Resilient Crops:**\n\n1.  **Develop:** Drought/flood-resistant, pest-resistant, and heat-tolerant crops.\n2.  **Enhance:** Nutrient use efficiency via genetic modification.\n3.  **Implement:** Precision breeding for regional adaptation.\n\n**Sustainable Farming:**\n\n1.  **Promote:** Integrated pest management to reduce pesticide use by 40%.\n2.  **Implement:** Crop rotation/cover cropping to improve soil health and reduce erosion by 30%.\n3.  **Adopt:** Water-efficient irrigation; reduce water usage by 25%.\n\n**Adaptable Food Systems:**\n\n1.  **Diversify:** Crop portfolios; implement 3-5 diverse crops per region.\n2.  **Establish:** Early warning systems for climate impacts.\n3.  **Improve:** Storage/transport infrastructure, reducing food loss by 15%.\n\n\nSource 2 (relevance: 0.52): 4) Technologist: Given the rapid evolution of digital technologies, how can we best utilize data analytics, precision agriculture, and supply chain optimization tools to improve the efficiency, transparency, and resilience of food production and distribution, particularly in resource-constrained environments?\n**Data Analytics for Food Systems**\n\n1.  **Implement Predictive Analytics:** Forecast crop yields, demand, and potential disruptions.\n2.  **Use Real-time Data:** Monitor environmental factors, soil conditions, and market prices.\n3.  **Integrate Data Platforms:** Connect farm management software, weather services, and market data.\n\n**Precision Agriculture Techniques**\n\n1.  **Deploy Sensor Networks:** Monitor moisture, nutrients, and pest presence.\n2.  **Use Drones & Satellite Imagery:** Map fields, assess crop health, and optimize resource allocation.\n3.  **Implement Variable Rate Technology:** Apply inputs (water, fertilizer) based on specific needs.\n\n**Supply Chain Optimization**\n\n1.  **Adopt Blockchain Technology:** Improve traceability and transparency.\n2.  **Use Route Optimization Software:** Minimize transportation costs and reduce waste.\n3.  **Establish Cold Chain Management:** Maintain product quality during storage and transport.\n\n\n"
+    },
+    {
+      "id": "ff26b99a-1ec0-4e76-8736-5914cb18ac7b",
+      "prompt": "2)  **Ethical Philosopher:** How can financial mechanisms and trade policies be designed to balance economic efficiency with moral obligations to ensure food security and protect the rights of vulnerable populations within the global food system?",
+      "depth": 2,
+      "color": "\u001b[97m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.58): 2) Agricultural Scientist: Beyond increasing yields, how can we leverage advancements in biotechnology, sustainable farming practices, and climate-resilient crops to build more robust and adaptable food systems that can withstand environmental challenges and ensure long-term food security in diverse geographical contexts?\n**Biotechnology & Climate-Resilient Crops:**\n\n1.  **Develop:** Drought/flood-resistant, pest-resistant, and heat-tolerant crops.\n2.  **Enhance:** Nutrient use efficiency via genetic modification.\n3.  **Implement:** Precision breeding for regional adaptation.\n\n**Sustainable Farming:**\n\n1.  **Promote:** Integrated pest management to reduce pesticide use by 40%.\n2.  **Implement:** Crop rotation/cover cropping to improve soil health and reduce erosion by 30%.\n3.  **Adopt:** Water-efficient irrigation; reduce water usage by 25%.\n\n**Adaptable Food Systems:**\n\n1.  **Diversify:** Crop portfolios; implement 3-5 diverse crops per region.\n2.  **Establish:** Early warning systems for climate impacts.\n3.  **Improve:** Storage/transport infrastructure, reducing food loss by 15%.\n\n\nSource 2 (relevance: 0.52): 4) Technologist: Given the rapid evolution of digital technologies, how can we best utilize data analytics, precision agriculture, and supply chain optimization tools to improve the efficiency, transparency, and resilience of food production and distribution, particularly in resource-constrained environments?\n**Data Analytics for Food Systems**\n\n1.  **Implement Predictive Analytics:** Forecast crop yields, demand, and potential disruptions.\n2.  **Use Real-time Data:** Monitor environmental factors, soil conditions, and market prices.\n3.  **Integrate Data Platforms:** Connect farm management software, weather services, and market data.\n\n**Precision Agriculture Techniques**\n\n1.  **Deploy Sensor Networks:** Monitor moisture, nutrients, and pest presence.\n2.  **Use Drones & Satellite Imagery:** Map fields, assess crop health, and optimize resource allocation.\n3.  **Implement Variable Rate Technology:** Apply inputs (water, fertilizer) based on specific needs.\n\n**Supply Chain Optimization**\n\n1.  **Adopt Blockchain Technology:** Improve traceability and transparency.\n2.  **Use Route Optimization Software:** Minimize transportation costs and reduce waste.\n3.  **Establish Cold Chain Management:** Maintain product quality during storage and transport.\n\n\n"
+    },
+    {
+      "id": "4da732e8-13f1-40e9-aaa9-bfaa9ead61de",
+      "prompt": "3)  **Agricultural Scientist:** How can financial mechanisms and trade policies be tailored to promote and support climate-resilient agriculture, enhance global food production, and minimize environmental impact, ensuring long-term food security for all populations?",
+      "depth": 2,
+      "color": "\u001b[31m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.58): 2) Agricultural Scientist: Beyond increasing yields, how can we leverage advancements in biotechnology, sustainable farming practices, and climate-resilient crops to build more robust and adaptable food systems that can withstand environmental challenges and ensure long-term food security in diverse geographical contexts?\n**Biotechnology & Climate-Resilient Crops:**\n\n1.  **Develop:** Drought/flood-resistant, pest-resistant, and heat-tolerant crops.\n2.  **Enhance:** Nutrient use efficiency via genetic modification.\n3.  **Implement:** Precision breeding for regional adaptation.\n\n**Sustainable Farming:**\n\n1.  **Promote:** Integrated pest management to reduce pesticide use by 40%.\n2.  **Implement:** Crop rotation/cover cropping to improve soil health and reduce erosion by 30%.\n3.  **Adopt:** Water-efficient irrigation; reduce water usage by 25%.\n\n**Adaptable Food Systems:**\n\n1.  **Diversify:** Crop portfolios; implement 3-5 diverse crops per region.\n2.  **Establish:** Early warning systems for climate impacts.\n3.  **Improve:** Storage/transport infrastructure, reducing food loss by 15%.\n\n\nSource 2 (relevance: 0.52): 4) Technologist: Given the rapid evolution of digital technologies, how can we best utilize data analytics, precision agriculture, and supply chain optimization tools to improve the efficiency, transparency, and resilience of food production and distribution, particularly in resource-constrained environments?\n**Data Analytics for Food Systems**\n\n1.  **Implement Predictive Analytics:** Forecast crop yields, demand, and potential disruptions.\n2.  **Use Real-time Data:** Monitor environmental factors, soil conditions, and market prices.\n3.  **Integrate Data Platforms:** Connect farm management software, weather services, and market data.\n\n**Precision Agriculture Techniques**\n\n1.  **Deploy Sensor Networks:** Monitor moisture, nutrients, and pest presence.\n2.  **Use Drones & Satellite Imagery:** Map fields, assess crop health, and optimize resource allocation.\n3.  **Implement Variable Rate Technology:** Apply inputs (water, fertilizer) based on specific needs.\n\n**Supply Chain Optimization**\n\n1.  **Adopt Blockchain Technology:** Improve traceability and transparency.\n2.  **Use Route Optimization Software:** Minimize transportation costs and reduce waste.\n3.  **Establish Cold Chain Management:** Maintain product quality during storage and transport.\n\n\n"
+    }
+  ],
+  "links": [
+    {
+      "source": "root",
+      "target": "c6b34285-7b18-4d32-b6f8-51551cb19178",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "c6b34285-7b18-4d32-b6f8-51551cb19178",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "db5949b5-c79a-47c2-949e-397b170abfb5",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "db5949b5-c79a-47c2-949e-397b170abfb5",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "a108fac7-04ec-4411-8b3e-98fdb3b982b0",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "a108fac7-04ec-4411-8b3e-98fdb3b982b0",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "5c8ded40-cb6c-4bc4-8eff-e7c229a8a981",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "5c8ded40-cb6c-4bc4-8eff-e7c229a8a981",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "c6b34285-7b18-4d32-b6f8-51551cb19178",
+      "target": "6a84de7f-477c-4018-8021-c0765eff9285",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "c6b34285-7b18-4d32-b6f8-51551cb19178",
+      "target": "6a84de7f-477c-4018-8021-c0765eff9285",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "c6b34285-7b18-4d32-b6f8-51551cb19178",
+      "target": "ab43bc86-6dd9-438c-a572-a51ff289705f",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "c6b34285-7b18-4d32-b6f8-51551cb19178",
+      "target": "ab43bc86-6dd9-438c-a572-a51ff289705f",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "c6b34285-7b18-4d32-b6f8-51551cb19178",
+      "target": "100f73ab-5094-4222-81ba-f0e0efbcdf80",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "c6b34285-7b18-4d32-b6f8-51551cb19178",
+      "target": "100f73ab-5094-4222-81ba-f0e0efbcdf80",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "c6b34285-7b18-4d32-b6f8-51551cb19178",
+      "target": "dfdd466d-4c95-42bd-bac5-b9f324cd886e",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6652264"
+    },
+    {
+      "source": "db5949b5-c79a-47c2-949e-397b170abfb5",
+      "target": "ab43bc86-6dd9-438c-a572-a51ff289705f",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.4672651"
+    },
+    {
+      "source": "db5949b5-c79a-47c2-949e-397b170abfb5",
+      "target": "6a84de7f-477c-4018-8021-c0765eff9285",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.58386034"
+    },
+    {
+      "source": "db5949b5-c79a-47c2-949e-397b170abfb5",
+      "target": "100f73ab-5094-4222-81ba-f0e0efbcdf80",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.72814465"
+    },
+    {
+      "source": "db5949b5-c79a-47c2-949e-397b170abfb5",
+      "target": "dfdd466d-4c95-42bd-bac5-b9f324cd886e",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "db5949b5-c79a-47c2-949e-397b170abfb5",
+      "target": "dfdd466d-4c95-42bd-bac5-b9f324cd886e",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "db5949b5-c79a-47c2-949e-397b170abfb5",
+      "target": "a3ca7282-ea4d-4de0-bcfa-6fe877d98d74",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "db5949b5-c79a-47c2-949e-397b170abfb5",
+      "target": "a3ca7282-ea4d-4de0-bcfa-6fe877d98d74",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "db5949b5-c79a-47c2-949e-397b170abfb5",
+      "target": "3f873ff6-e98d-4a15-9c19-7d3f1f175527",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "db5949b5-c79a-47c2-949e-397b170abfb5",
+      "target": "3f873ff6-e98d-4a15-9c19-7d3f1f175527",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "db5949b5-c79a-47c2-949e-397b170abfb5",
+      "target": "0626d437-129d-4bed-aa6d-c54cd4c05355",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5191253"
+    },
+    {
+      "source": "db5949b5-c79a-47c2-949e-397b170abfb5",
+      "target": "22108bc9-5927-4ae7-b50b-3a16a550a94f",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.58386034"
+    },
+    {
+      "source": "db5949b5-c79a-47c2-949e-397b170abfb5",
+      "target": "ff26b99a-1ec0-4e76-8736-5914cb18ac7b",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.58386034"
+    },
+    {
+      "source": "db5949b5-c79a-47c2-949e-397b170abfb5",
+      "target": "4da732e8-13f1-40e9-aaa9-bfaa9ead61de",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.58386034"
+    },
+    {
+      "source": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "target": "ab43bc86-6dd9-438c-a572-a51ff289705f",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.42087317"
+    },
+    {
+      "source": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "target": "6a84de7f-477c-4018-8021-c0765eff9285",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5197251"
+    },
+    {
+      "source": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "target": "100f73ab-5094-4222-81ba-f0e0efbcdf80",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6395751"
+    },
+    {
+      "source": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "target": "303968d1-05d4-4668-aa25-7f810a0245df",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "target": "19ee8dd2-035b-4d42-a587-bc97547dad46",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "target": "12c6c066-6521-43af-b7c2-453426891de9",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "target": "0626d437-129d-4bed-aa6d-c54cd4c05355",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.67944145"
+    },
+    {
+      "source": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "target": "a3ca7282-ea4d-4de0-bcfa-6fe877d98d74",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6790178"
+    },
+    {
+      "source": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "target": "cd545bf6-f847-4522-966d-e876feb88893",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6679394"
+    },
+    {
+      "source": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "target": "3f873ff6-e98d-4a15-9c19-7d3f1f175527",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6125449"
+    },
+    {
+      "source": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "target": "95b57f0b-4e3f-4a20-8de6-8d366217662c",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6818907"
+    },
+    {
+      "source": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "target": "22108bc9-5927-4ae7-b50b-3a16a550a94f",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5197251"
+    },
+    {
+      "source": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "target": "ff26b99a-1ec0-4e76-8736-5914cb18ac7b",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5197251"
+    },
+    {
+      "source": "5a341ef5-ea96-42dc-9748-137cc4c71ab0",
+      "target": "4da732e8-13f1-40e9-aaa9-bfaa9ead61de",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5197251"
+    },
+    {
+      "source": "5c8ded40-cb6c-4bc4-8eff-e7c229a8a981",
+      "target": "0626d437-129d-4bed-aa6d-c54cd4c05355",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "5c8ded40-cb6c-4bc4-8eff-e7c229a8a981",
+      "target": "0626d437-129d-4bed-aa6d-c54cd4c05355",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "5c8ded40-cb6c-4bc4-8eff-e7c229a8a981",
+      "target": "cd545bf6-f847-4522-966d-e876feb88893",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "5c8ded40-cb6c-4bc4-8eff-e7c229a8a981",
+      "target": "cd545bf6-f847-4522-966d-e876feb88893",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "5c8ded40-cb6c-4bc4-8eff-e7c229a8a981",
+      "target": "95b57f0b-4e3f-4a20-8de6-8d366217662c",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "5c8ded40-cb6c-4bc4-8eff-e7c229a8a981",
+      "target": "95b57f0b-4e3f-4a20-8de6-8d366217662c",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "6a84de7f-477c-4018-8021-c0765eff9285",
+      "target": "22108bc9-5927-4ae7-b50b-3a16a550a94f",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "6a84de7f-477c-4018-8021-c0765eff9285",
+      "target": "ff26b99a-1ec0-4e76-8736-5914cb18ac7b",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "6a84de7f-477c-4018-8021-c0765eff9285",
+      "target": "4da732e8-13f1-40e9-aaa9-bfaa9ead61de",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "100f73ab-5094-4222-81ba-f0e0efbcdf80",
+      "target": "dfdd466d-4c95-42bd-bac5-b9f324cd886e",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.69857734"
+    },
+    {
+      "source": "100f73ab-5094-4222-81ba-f0e0efbcdf80",
+      "target": "a3ca7282-ea4d-4de0-bcfa-6fe877d98d74",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6628543"
+    },
+    {
+      "source": "100f73ab-5094-4222-81ba-f0e0efbcdf80",
+      "target": "3f873ff6-e98d-4a15-9c19-7d3f1f175527",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.7332629"
+    },
+    {
+      "source": "dfdd466d-4c95-42bd-bac5-b9f324cd886e",
+      "target": "cd545bf6-f847-4522-966d-e876feb88893",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.5390537"
+    },
+    {
+      "source": "dfdd466d-4c95-42bd-bac5-b9f324cd886e",
+      "target": "95b57f0b-4e3f-4a20-8de6-8d366217662c",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.51757395"
+    }
+  ]
+}
