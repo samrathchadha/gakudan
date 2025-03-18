@@ -5,6 +5,7 @@ gunicorn==21.2.0
 
 # Google Generative AI
 google-generativeai==0.4.0
+google==3.0.0  # Required for proper imports in contract.py
 
 # Data Processing & Analysis
 numpy==1.26.0
@@ -27,8 +28,8 @@ colorlog==6.7.0
 colorama==0.4.6
 
 # Threading & Concurrent Processing
-futures==3.3.0
-concurrent-futures==2.1.0
+# Note: concurrent.futures is part of the Python standard library in Python 3
+# No additional package required
 
 # Graph Visualization Dependencies
 graphviz==0.20.1
@@ -45,6 +46,7 @@ faiss-cpu==1.7.4
 # Search Utils
 duckduckgo-search==3.9.5
 beautifulsoup4==4.12.2
+lxml==4.9.3  # Required by beautifulsoup4 for HTML parsing
 
 # Testing
 pytest==7.4.2
@@ -53,6 +55,6 @@ pytest-mock==3.12.0
 # Utilities
 tqdm==4.66.1
 python-dotenv==1.0.0
-asyncio==3.4.3
+# asyncio is part of the standard library in Python 3.7+
 click==8.1.7
 attrs==23.1.0
