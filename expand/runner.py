@@ -6,14 +6,23 @@ Dumps JSON files regularly to track progress.
 
 import os
 import sys
-import orjson
 import time
 import uuid
 import logging
 import argparse
 import colorlog
+import numpy as np
 from prompt_processor import GeminiPromptProcessor
 from prompt_graph import PromptGraph
+
+# Try importing orjson, fall back to standard json
+try:
+    import orjson
+    USE_ORJSON = True
+except ImportError:
+    import json
+    USE_ORJSON = False
+    logging.warning("orjson not found, falling back to standard json library. Consider installing orjson for better performance.")
 
 # Configure Colorful Logging
 handler = colorlog.StreamHandler()
@@ -30,10 +39,21 @@ handler.setFormatter(colorlog.ColoredFormatter(
 logging.basicConfig(level=logging.INFO, handlers=[handler])
 logger = logging.getLogger(__name__)
 
+def convert_numpy(obj):
+    """Convert numpy types to Python native types."""
+    if isinstance(obj, np.integer):
+        return int(obj)
+    elif isinstance(obj, np.floating):
+        return float(obj)
+    elif isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif hasattr(obj, 'item'):  # Handle other numpy scalar types
+        return obj.item()
+    return obj
+
 def dump_json(processor, iteration, output_dir):
     """
     Dump the current state of the graph to a JSON file with improved reliability.
-    Uses orjson for better performance and handles file writing atomically.
     
     Args:
         processor: The processor with the prompt_graph
@@ -43,49 +63,58 @@ def dump_json(processor, iteration, output_dir):
     Returns:
         Path to the created file or None on failure
     """
-    try:
-        # Create a filename with timestamp and iteration
-        timestamp = int(time.time())
-        filename = f"expand_{timestamp}_{iteration}.json"
-        json_dir = os.path.join(output_dir, "json")
-        filepath = os.path.join(json_dir, filename)
-        
-        # Make sure the json directory exists
-        os.makedirs(json_dir, exist_ok=True)
-        
-        # Log current graph stats before saving
-        node_count = len(processor.prompt_graph.graph.nodes())
-        edge_count = len(processor.prompt_graph.graph.edges())
-        logger.info(f"Dumping graph with {node_count} nodes and {edge_count} edges to {filepath}")
-        
-        # Use the graph's save_to_json method (now using orjson)
-        success = processor.prompt_graph.save_to_json(filepath)
-        
-        # Also save a consistent filename that always has the latest data
-        latest_filepath = os.path.join(output_dir, "expand.json")
-        success2 = processor.prompt_graph.save_to_json(latest_filepath)
-        
-        if success and success2:
-            # Verify the files were created and have content
-            if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
-                file_size_kb = os.path.getsize(filepath) / 1024
-                logger.info(f"Successfully saved graph to {filepath} ({file_size_kb:.2f} KB)")
-                
-                # Also verify latest file
-                latest_size_kb = os.path.getsize(latest_filepath) / 1024
-                logger.info(f"Also saved to {latest_filepath} ({latest_size_kb:.2f} KB)")
-                
-                return filepath
-            else:
-                logger.error(f"Failed to create file {filepath} or file is empty")
-                return None
-        else:
-            logger.error(f"Failed to save one or both JSON files")
-            return None
+    max_retries = 3
+    retry_count = 0
+    
+    while retry_count < max_retries:
+        try:
+            # Create a filename with timestamp and iteration
+            timestamp = int(time.time())
+            filename = f"expand_{timestamp}_{iteration}.json"
+            json_dir = os.path.join(output_dir, "json")
+            filepath = os.path.join(json_dir, filename)
             
-    except Exception as e:
-        logger.error(f"Error dumping JSON: {e}", exc_info=True)
-        return None
+            # Make sure the json directory exists
+            os.makedirs(json_dir, exist_ok=True)
+            
+            # Log current graph stats before saving
+            node_count = len(processor.prompt_graph.graph.nodes())
+            edge_count = len(processor.prompt_graph.graph.edges())
+            logger.info(f"Dumping graph with {node_count} nodes and {edge_count} edges to {filepath}")
+            
+            # Use the graph's save_to_json method (now with numpy handling)
+            success = processor.prompt_graph.save_to_json(filepath)
+            
+            # Also save a consistent filename that always has the latest data
+            latest_filepath = os.path.join(output_dir, "expand.json")
+            success2 = processor.prompt_graph.save_to_json(latest_filepath)
+            
+            if success and success2:
+                # Verify the files were created and have content
+                if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
+                    file_size_kb = os.path.getsize(filepath) / 1024
+                    logger.info(f"Successfully saved graph to {filepath} ({file_size_kb:.2f} KB)")
+                    
+                    # Also verify latest file
+                    latest_size_kb = os.path.getsize(latest_filepath) / 1024
+                    logger.info(f"Also saved to {latest_filepath} ({latest_size_kb:.2f} KB)")
+                    
+                    return filepath
+                else:
+                    logger.error(f"Failed to create file {filepath} or file is empty")
+                    retry_count += 1
+            else:
+                logger.error(f"Failed to save one or both JSON files (attempt {retry_count+1}/{max_retries})")
+                retry_count += 1
+                time.sleep(2)  # Wait before retrying
+                
+        except Exception as e:
+            logger.error(f"Error dumping JSON (attempt {retry_count+1}/{max_retries}): {e}", exc_info=True)
+            retry_count += 1
+            time.sleep(2)  # Wait before retrying
+    
+    logger.critical(f"Failed to dump JSON after {max_retries} attempts")
+    return None
 
 # Create a subclass of GeminiPromptProcessor that dumps JSON after each prompt
 class DumpingPromptProcessor(GeminiPromptProcessor):
@@ -98,14 +127,9 @@ class DumpingPromptProcessor(GeminiPromptProcessor):
         # Call the original method
         result = super().process_sub_prompt(task_info)
         
-        for i in range(0,3):
-            try:
-                # Dump JSON after processing
-                self.json_iteration += 1
-                dump_json(self, self.json_iteration, self.output_dir)
-                break
-            except:
-                logger.error("Error dumping JSON after sub-prompt processing", exc_info=True)
+        # Dump JSON after processing
+        self.json_iteration += 1
+        dump_json(self, self.json_iteration, self.output_dir)
         
         return result
 
@@ -118,6 +142,39 @@ def parse_arguments():
     
     return parser.parse_args()
 
+def verify_session_dir(output_dir):
+    """Verify the session directory is properly set up."""
+    try:
+        # Test write permissions by creating a test file
+        test_file = os.path.join(output_dir, "test_write.txt")
+        with open(test_file, 'w') as f:
+            f.write("Testing write permissions")
+        
+        # Cleanup test file
+        os.remove(test_file)
+        
+        # Create json directory
+        json_dir = os.path.join(output_dir, "json")
+        os.makedirs(json_dir, exist_ok=True)
+        
+        # Test json directory write
+        test_json = os.path.join(json_dir, "test.json")
+        if USE_ORJSON:
+            with open(test_json, 'wb') as f:
+                f.write(orjson.dumps({"test": "data"}))
+        else:
+            with open(test_json, 'w') as f:
+                json.dump({"test": "data"}, f)
+                
+        # Cleanup test json
+        os.remove(test_json)
+        
+        logger.info(f"Successfully verified write permissions in {output_dir}")
+        return True
+    except Exception as e:
+        logger.critical(f"Failed to verify session directory: {e}", exc_info=True)
+        return False
+
 def main():
     """Main function to run the prompt processor with command line arguments."""
     # Parse command line arguments
@@ -125,11 +182,17 @@ def main():
     
     # Change to the specified working directory
     output_dir = args.cwd
-    os.chdir(output_dir)
-    logger.info(f"Changed working directory to: {output_dir}")
+    try:
+        os.chdir(output_dir)
+        logger.info(f"Changed working directory to: {output_dir}")
+    except Exception as e:
+        logger.critical(f"Failed to change to directory {output_dir}: {e}")
+        sys.exit(1)
     
-    # Create directories for output
-    os.makedirs(os.path.join(output_dir, "json"), exist_ok=True)
+    # Verify session directory setup
+    if not verify_session_dir(output_dir):
+        logger.critical("Session directory verification failed. Exiting.")
+        sys.exit(1)
     
     # Initialize our custom processor that automatically dumps JSON
     processor = DumpingPromptProcessor(args.api_key, output_dir)
@@ -151,6 +214,16 @@ def main():
         logger.critical(f"Unexpected error: {e}")
         import traceback
         traceback.print_exc()
+        
+        # Attempt emergency dump
+        try:
+            emergency_dump = os.path.join(output_dir, "emergency_dump.json")
+            logger.info(f"Attempting emergency dump to {emergency_dump}")
+            processor.prompt_graph.save_to_json(emergency_dump)
+            logger.info(f"Emergency dump successful")
+        except Exception as dump_error:
+            logger.critical(f"Emergency dump failed: {dump_error}")
+        
         sys.exit(1)
 
 if __name__ == "__main__":
