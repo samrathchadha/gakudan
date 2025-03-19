@@ -1,0 +1,619 @@
+{
+  "directed": true,
+  "multigraph": true,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "root",
+      "prompt": "Howdo we fix collaboration issues for global teams?",
+      "depth": -1
+    },
+    {
+      "id": "9d6bbe45-e7b6-44de-b52a-17ce1d8f1685",
+      "prompt": "1) **Personality: The Strategist** : Considering the current global landscape, what are the key systemic and structural challenges hindering effective collaboration within international teams, and how can these be addressed through high-level strategic initiatives?",
+      "depth": 0,
+      "response": "1.  **Implement a Global Talent Mapping Initiative**: Conduct a comprehensive assessment of the organization's global talent pool to identify individuals with strong cross-cultural communication skills, experience in diverse environments, and a proven ability to collaborate effectively. This will facilitate the formation of teams with members who can proactively address and mitigate cultural misunderstandings and communication barriers.\n\n2.  **Establish a Centralized Knowledge Management System**: Develop a unified digital platform where all team members can access project documentation, meeting notes, and relevant research. Ensure the system is accessible across different time zones and languages, allowing real-time information sharing to overcome geographical and linguistic challenges.\n\n3.  **Design a Flexible and Adaptable Project Management Framework**: Develop a project management methodology that is adaptable to different cultural norms and working styles. This should involve clear guidelines for communication, decision-making processes, and conflict resolution, allowing teams to navigate differences in project execution approaches effectively.\n\n4.  **Promote Cross-Cultural Training and Awareness Programs**: Launch ongoing training programs that focus on cultural intelligence, unconscious bias, and inclusive leadership. This initiative should empower team members to recognize and navigate cultural differences, promoting empathy and understanding within the team.\n\n5.  **Establish a Global Leadership Development Program**: Invest in leadership programs that specifically equip leaders with the skills to manage and motivate international teams. This should include training on leading diverse teams, promoting inclusivity, and facilitating effective cross-cultural communication.\n",
+      "rag_results": []
+    },
+    {
+      "id": "58b4fcc9-b771-403b-9ddb-993f2de2ecef",
+      "prompt": "2) **Personality: The Empathetic Communicator**: From your experience, how can we foster a deeper sense of understanding and trust between team members from different cultural backgrounds, thereby facilitating more open and collaborative communication?",
+      "depth": 0,
+      "response": "1.  **Implement Cross-Cultural Training:** Organize workshops focusing on cultural sensitivity, communication styles, and non-verbal cues prevalent in diverse cultures within the team to equip members with the knowledge to understand and interpret behaviors of their colleagues.\n2.  **Establish Mentorship Programs:** Pair team members from different cultural backgrounds to foster one-on-one interactions. Mentors can share insights into their cultures, experiences, and perspectives, while mentees gain personal understanding and build trust.\n3.  **Encourage Active Listening:** Promote active listening exercises during team meetings, where members paraphrase and validate each other's viewpoints, to ensure all voices are heard and understood, reducing misunderstandings.\n4.  **Create Inclusive Team-Building Activities:** Plan team-building activities that celebrate diverse cultures, such as potlucks featuring cuisines from different backgrounds or cultural sharing sessions, to create opportunities for shared experiences and building rapport.\n5.  **Establish Clear Communication Guidelines:** Develop and distribute a communication guide that addresses common cultural differences in communication styles (direct vs. indirect, formal vs. informal), promoting respectful and effective communication.\n6.  **Use Inclusive Language:** Train team members on the use of inclusive language, avoiding jargon, idioms, or slang that may not be universally understood and ensuring messages are clear and accessible to all.\n7.  **Encourage Feedback and Dialogue:** Establish regular feedback sessions where team members can share their experiences and discuss communication challenges. Encourage an open-door policy for conflict resolution and addressing any cultural misunderstandings that arise.\n8.  **Share Personal Stories and Experiences:** Create opportunities for team members to share personal stories about their cultural backgrounds, holidays, and traditions to promote empathy and understanding, humanizing cultural differences.\n9.  **Rotate Meeting Facilitators:** Rotate the role of meeting facilitator among team members from different cultural backgrounds to expose diverse leadership styles and communication preferences, promoting broader participation.\n10. **Celebrate Cultural Events and Holidays:** Recognize and celebrate cultural events and holidays from various backgrounds to create a sense of inclusion and appreciation for diversity within the team.\n",
+      "rag_results": []
+    },
+    {
+      "id": "72300dcc-a0ae-48ea-b7cb-1f0af6663b95",
+      "prompt": "3) **Personality: The Tech-Savvy Facilitator**: In what innovative ways can we leverage technology and digital tools to improve communication, project management, and knowledge sharing across geographically dispersed teams, ensuring equitable access and usability for all?",
+      "depth": 0,
+      "response": "1.  **Implement a Unified Communication Platform**: Adopt a platform like Microsoft Teams or Slack, integrating features such as instant messaging, video conferencing, screen sharing, and file sharing, ensuring accessibility through mobile and desktop applications.\n2.  **Utilize Project Management Software with Real-Time Collaboration**: Employ tools such as Asana, Trello, or Monday.com, enabling task assignment, progress tracking, deadline management, and collaborative document editing with features like activity logs and notification systems.\n3.  **Establish a Centralized Knowledge Repository**: Create a digital library using platforms like Confluence or SharePoint for storing documents, FAQs, training materials, and project documentation, structured for easy searching and categorized for efficient information retrieval.\n4.  **Conduct Regular Virtual Team-Building Activities**: Organize virtual events such as online games, virtual coffee breaks, or team quizzes using platforms like Zoom or Gather.town, promoting informal communication and team cohesion.\n5.  **Employ Automated Translation Services**: Integrate translation tools within communication platforms to facilitate understanding across teams with diverse language backgrounds, removing language barriers in real-time or through post-communication translations.\n6.  **Use Interactive Whiteboards for Collaborative Brainstorming**: Utilize virtual whiteboard tools like Miro or Mural for real-time brainstorming sessions, allowing remote team members to contribute visually and engage with ideas collaboratively.\n7.  **Establish a Dedicated IT Support Channel**: Create a help desk or support channel for providing technical assistance and troubleshooting issues related to software, hardware, or network connectivity, ensuring equitable access and usability for all team members.\n8.  **Implement Regular Training Sessions**: Offer regular training sessions on the usage of chosen technology and digital tools, ensuring all team members are proficient and comfortable with the systems. Record sessions for later access.\n9.  **Conduct Accessibility Audits**: Regularly assess the accessibility of all used digital tools, ensuring they comply with accessibility standards (WCAG) to accommodate team members with disabilities.\n10. **Use Polling and Feedback Tools**: Implement tools like SurveyMonkey or Google Forms to gather feedback on communication effectiveness, usability, and any challenges team members face, using this data to refine approaches and improve tools.\n",
+      "rag_results": []
+    },
+    {
+      "id": "fb537477-5a27-4b48-8a16-e391a99549cc",
+      "prompt": "4) **Personality: The Conflict Resolver**: What proactive measures can be implemented to identify and mitigate potential conflicts arising from differing work styles, expectations, or cultural norms within global teams, and how can we establish effective conflict resolution processes?",
+      "depth": 0,
+      "response": "1.  **Implement a Comprehensive Onboarding Program:** Develop a detailed onboarding process that includes cultural sensitivity training, communication style assessments (e.g., DISC, Myers-Briggs), and team-building exercises to help members understand each other's preferences and potential areas of friction from the outset.\n\n2.  **Establish Clear Communication Protocols:** Define specific communication channels (e.g., Slack, email, project management tools) and response time expectations for different types of communication to avoid misunderstandings stemming from asynchronous work environments and varying time zones.\n\n3.  **Foster Regular Cross-Cultural Training:** Provide ongoing training sessions focusing on cultural awareness, including communication nuances, nonverbal cues, and conflict resolution styles to help team members recognize and navigate differences effectively.\n\n4.  **Create a Conflict Resolution Toolkit:** Develop a readily accessible toolkit that includes a step-by-step guide for addressing conflicts, sample scripts for initiating conversations, and a list of internal and external resources (e.g., HR, mediators) available to assist in resolving disputes.\n\n5.  **Encourage Proactive Feedback Mechanisms:** Implement regular feedback sessions (both formal and informal) where team members can openly share their observations about potential conflicts or misunderstandings, and discuss strategies for improvement.\n\n6.  **Assign Cross-Cultural Mentors/Buddies:** Pair team members from different cultural backgrounds as mentors or buddies to facilitate cross-cultural understanding, provide support in navigating workplace challenges, and promote informal conflict resolution.\n\n7.  **Establish a Neutral Mediation Process:** Designate trained mediators (either internal or external) who can facilitate discussions between conflicting parties in a neutral and confidential setting, helping them identify common ground and reach mutually acceptable solutions.\n\n8.  **Implement a \"No-Blame\" Culture:** Encourage a culture where team members feel safe to raise concerns without fear of retribution, focusing on finding solutions rather than assigning blame, and promoting a growth mindset where mistakes are seen as learning opportunities.\n",
+      "rag_results": []
+    },
+    {
+      "id": "8a87cd4e-130e-4404-a11b-4fe586c98e8b",
+      "prompt": "5) **Personality: The Process Optimizer**: How can we streamline existing workflows and processes to reduce friction and improve efficiency in the collaboration process, taking into consideration the challenges introduced by time zone differences and varied work practices?",
+      "depth": 0,
+      "response": "1.  **Standardize Communication Channels**: Mandate the use of a single, company-approved platform for all project-related communication (e.g., Slack, Microsoft Teams), and establish clear guidelines for its use, including response times and preferred communication methods for different types of information (urgent vs. non-urgent).\n2.  **Implement Asynchronous Communication Protocols**: Encourage the use of tools and techniques that do not require real-time interaction, such as detailed documentation, video recordings, and comprehensive project management software, especially for tasks that span across different time zones.\n3.  **Establish a Centralized Knowledge Repository**: Create a single source of truth for all project-related information, including documents, templates, guidelines, and meeting minutes, making it easily accessible to all team members regardless of their location.\n4.  **Optimize Meeting Schedules**: Schedule recurring meetings to accommodate the overlap of working hours across different time zones and rotate meeting times to ensure fairness. Record all meetings and make them available to those unable to attend live.\n5.  **Define Clear Roles and Responsibilities**: Document and communicate each team member's roles and responsibilities, along with clear expectations for task completion and reporting, to minimize confusion and ensure accountability.\n6.  **Automate Repetitive Tasks**: Identify and automate time-consuming, repetitive tasks, such as report generation or data entry, using scripting or workflow automation tools to free up team members' time for more strategic work.\n7.  **Utilize Project Management Software**: Implement project management software with features such as task assignment, progress tracking, and deadline management, to provide visibility into the status of each project and identify potential bottlenecks.\n8.  **Conduct Regular Process Audits**: Periodically review workflows and processes to identify inefficiencies and areas for improvement. Solicit feedback from team members to identify pain points and suggest solutions.\n9.  **Provide Training and Documentation**: Offer training on all tools and processes, and provide readily available documentation, including how-to guides and FAQs, to ensure that all team members are proficient in their use.\n10. **Promote a Culture of Transparency**: Foster open communication and information sharing by encouraging team members to proactively share updates, challenges, and solutions, ensuring everyone is informed and aligned, regardless of their location or time zone.\n",
+      "rag_results": []
+    },
+    {
+      "id": "31b8d4d0-1b58-45e3-b774-2afabe2f010b",
+      "prompt": "1.  **Implement a Global Talent Mapping Initiative**: Conduct a comprehensive assessment of the organization's global talent pool to identify individuals with strong cross-cultural communication skills, experience in diverse environments, and a proven ability to collaborate effectively. This will facilitate the formation of teams with members who can proactively address and mitigate cultural misunderstandings and communication barriers.\n\n2.  **Establish a Centralized Knowledge Management System**: Develop a unified digital platform where all team members can access project documentation, meeting notes, and relevant research. Ensure the system is accessible across different time zones and languages, allowing real-time information sharing to overcome geographical and linguistic challenges.\n\n3.  **Design a Flexible and Adaptable Project Management Framework**: Develop a project management methodology that is adaptable to different cultural norms and working styles. This should involve clear guidelines for communication, decision-making processes, and conflict resolution, allowing teams to navigate differences in project execution approaches effectively.\n\n4.  **Promote Cross-Cultural Training and Awareness Programs**: Launch ongoing training programs that focus on cultural intelligence, unconscious bias, and inclusive leadership. This initiative should empower team members to recognize and navigate cultural differences, promoting empathy and understanding within the team.\n\n5.  **Establish a Global Leadership Development Program**: Invest in leadership programs that specifically equip leaders with the skills to manage and motivate international teams. This should include training on leading diverse teams, promoting inclusivity, and facilitating effective cross-cultural communication.\n\n1) Project Manager: How can project management methodologies be adapted to accommodate varied cultural norms and working styles effectively?",
+      "depth": 1,
+      "color": "\u001b[31m",
+      "rag_context": null,
+      "response": "1.  **Integrate Cultural Sensitivity into Project Planning**: Include cultural considerations in the initial project planning phase, such as preferred communication styles, decision-making processes, and meeting etiquette, to tailor project workflows to the team's cultural diversity.\n2.  **Customize Communication Strategies**: Adapt communication frequency, channels, and content to suit the preferences of different cultural groups within the team, considering factors like directness, formality, and the use of non-verbal cues.\n3.  **Incorporate Flexible Work Arrangements**: Offer flexibility in work hours, deadlines, and project milestones to accommodate diverse cultural expectations regarding work-life balance and preferred working patterns.\n4.  **Facilitate Inclusive Decision-Making Processes**: Implement decision-making models that value input from all team members, considering cultural norms around hierarchy, consensus-building, and individual autonomy to ensure equitable participation.\n5.  **Establish Culturally-Aware Conflict Resolution**: Develop a conflict resolution process that acknowledges and respects cultural differences in addressing disagreements, emphasizing mediation, and seeking solutions that are acceptable across the diverse team.\n6.  **Use a Global Project Management Platform**: Adopt a project management tool that supports multiple languages, time zones, and communication preferences, enabling real-time collaboration and information sharing across distributed teams.\n7.  **Promote Cultural Awareness in Training**: Provide regular training sessions on cultural intelligence, communication styles, and conflict resolution techniques to improve team members' ability to navigate cultural differences and work effectively together.\n8.  **Encourage Cross-Cultural Mentorship**: Pair team members from different cultural backgrounds to foster understanding, share insights, and address challenges that may arise from cultural differences.\n9.  **Implement Regular Feedback Loops**: Establish feedback mechanisms that consider cultural nuances in communication, providing opportunities for team members to share their experiences and suggest improvements to project workflows.\n10. **Celebrate Cultural Events and Contributions**: Recognize and celebrate cultural diversity within the project team by acknowledging cultural events, holidays, and the unique contributions of each team member, fostering a sense of inclusion and belonging.\n",
+      "rag_results": "[{'text': \"2) **Personality: The Empathetic Communicator**: From your experience, how can we foster a deeper sense of understanding and trust between team members from different cultural backgrounds, thereby facilitating more open and collaborative communication?\\n1.  **Implement Cross-Cultural Training:** Organize workshops focusing on cultural sensitivity, communication styles, and non-verbal cues prevalent in diverse cultures within the team to equip members with the knowledge to understand and interpret behaviors of their colleagues.\\n2.  **Establish Mentorship Programs:** Pair team members from different cultural backgrounds to foster one-on-one interactions. Mentors can share insights into their cultures, experiences, and perspectives, while mentees gain personal understanding and build trust.\\n3.  **Encourage Active Listening:** Promote active listening exercises during team meetings, where members paraphrase and validate each other's viewpoints, to ensure all voices are heard and understood, reducing misunderstandings.\\n4.  **Create Inclusive Team-Building Activities:** Plan team-building activities that celebrate diverse cultures, such as potlucks featuring cuisines from different backgrounds or cultural sharing sessions, to create opportunities for shared experiences and building rapport.\\n5.  **Establish Clear Communication Guidelines:** Develop and distribute a communication guide that addresses common cultural differences in communication styles (direct vs. indirect, formal vs. informal), promoting respectful and effective communication.\\n6.  **Use Inclusive Language:** Train team members on the use of inclusive language, avoiding jargon, idioms, or slang that may not be universally understood and ensuring messages are clear and accessible to all.\\n7.  **Encourage Feedback and Dialogue:** Establish regular feedback sessions where team members can share their experiences and discuss communication challenges. Encourage an open-door policy for conflict resolution and addressing any cultural misunderstandings that arise.\\n8.  **Share Personal Stories and Experiences:** Create opportunities for team members to share personal stories about their cultural backgrounds, holidays, and traditions to promote empathy and understanding, humanizing cultural differences.\\n9.  **Rotate Meeting Facilitators:** Rotate the role of meeting facilitator among team members from different cultural backgrounds to expose diverse leadership styles and communication preferences, promoting broader participation.\\n10. **Celebrate Cultural Events and Holidays:** Recognize and celebrate cultural events and holidays from various backgrounds to create a sense of inclusion and appreciation for diversity within the team.\\n\", 'node_id': '58b4fcc9-b771-403b-9ddb-993f2de2ecef', 'similarity': 0.71251965}, {'text': '4) **Personality: The Conflict Resolver**: What proactive measures can be implemented to identify and mitigate potential conflicts arising from differing work styles, expectations, or cultural norms within global teams, and how can we establish effective conflict resolution processes?\\n1.  **Implement a Comprehensive Onboarding Program:** Develop a detailed onboarding process that includes cultural sensitivity training, communication style assessments (e.g., DISC, Myers-Briggs), and team-building exercises to help members understand each other\\'s preferences and potential areas of friction from the outset.\\n\\n2.  **Establish Clear Communication Protocols:** Define specific communication channels (e.g., Slack, email, project management tools) and response time expectations for different types of communication to avoid misunderstandings stemming from asynchronous work environments and varying time zones.\\n\\n3.  **Foster Regular Cross-Cultural Training:** Provide ongoing training sessions focusing on cultural awareness, including communication nuances, nonverbal cues, and conflict resolution styles to help team members recognize and navigate differences effectively.\\n\\n4.  **Create a Conflict Resolution Toolkit:** Develop a readily accessible toolkit that includes a step-by-step guide for addressing conflicts, sample scripts for initiating conversations, and a list of internal and external resources (e.g., HR, mediators) available to assist in resolving disputes.\\n\\n5.  **Encourage Proactive Feedback Mechanisms:** Implement regular feedback sessions (both formal and informal) where team members can openly share their observations about potential conflicts or misunderstandings, and discuss strategies for improvement.\\n\\n6.  **Assign Cross-Cultural Mentors/Buddies:** Pair team members from different cultural backgrounds as mentors or buddies to facilitate cross-cultural understanding, provide support in navigating workplace challenges, and promote informal conflict resolution.\\n\\n7.  **Establish a Neutral Mediation Process:** Designate trained mediators (either internal or external) who can facilitate discussions between conflicting parties in a neutral and confidential setting, helping them identify common ground and reach mutually acceptable solutions.\\n\\n8.  **Implement a \"No-Blame\" Culture:** Encourage a culture where team members feel safe to raise concerns without fear of retribution, focusing on finding solutions rather than assigning blame, and promoting a growth mindset where mistakes are seen as learning opportunities.\\n', 'node_id': 'fb537477-5a27-4b48-8a16-e391a99549cc', 'similarity': 0.7005191}]"
+    },
+    {
+      "id": "9220ad32-0e39-4095-b18e-fd64d11adfa2",
+      "prompt": "1.  **Implement a Global Talent Mapping Initiative**: Conduct a comprehensive assessment of the organization's global talent pool to identify individuals with strong cross-cultural communication skills, experience in diverse environments, and a proven ability to collaborate effectively. This will facilitate the formation of teams with members who can proactively address and mitigate cultural misunderstandings and communication barriers.\n\n2.  **Establish a Centralized Knowledge Management System**: Develop a unified digital platform where all team members can access project documentation, meeting notes, and relevant research. Ensure the system is accessible across different time zones and languages, allowing real-time information sharing to overcome geographical and linguistic challenges.\n\n3.  **Design a Flexible and Adaptable Project Management Framework**: Develop a project management methodology that is adaptable to different cultural norms and working styles. This should involve clear guidelines for communication, decision-making processes, and conflict resolution, allowing teams to navigate differences in project execution approaches effectively.\n\n4.  **Promote Cross-Cultural Training and Awareness Programs**: Launch ongoing training programs that focus on cultural intelligence, unconscious bias, and inclusive leadership. This initiative should empower team members to recognize and navigate cultural differences, promoting empathy and understanding within the team.\n\n5.  **Establish a Global Leadership Development Program**: Invest in leadership programs that specifically equip leaders with the skills to manage and motivate international teams. This should include training on leading diverse teams, promoting inclusivity, and facilitating effective cross-cultural communication.\n\n2) Cultural Anthropologist: What are the most common cultural misunderstandings that may arise in global teams and how can these be proactively addressed?",
+      "depth": 1,
+      "color": "\u001b[91m",
+      "rag_context": null,
+      "response": "1.  **Implement Comprehensive Onboarding:** Integrate cultural sensitivity training into the onboarding process, covering communication styles, non-verbal cues, and conflict resolution approaches.\n2.  **Establish Clear Communication Protocols:** Define communication channels, response times, and preferred methods for various tasks to mitigate misunderstandings.\n3.  **Foster Regular Cross-Cultural Training:** Conduct ongoing training sessions on cultural awareness, including communication nuances and conflict resolution styles.\n4.  **Create a Conflict Resolution Toolkit:** Develop a readily accessible toolkit with guides, scripts, and resources for addressing and resolving conflicts effectively.\n5.  **Encourage Proactive Feedback Mechanisms:** Establish regular feedback sessions, both formal and informal, to address potential conflicts and misunderstandings.\n6.  **Assign Cross-Cultural Mentors:** Pair team members from different backgrounds to facilitate cross-cultural understanding and conflict resolution.\n7.  **Establish a Neutral Mediation Process:** Designate trained mediators to facilitate discussions between conflicting parties in a neutral setting.\n8.  **Implement a \"No-Blame\" Culture:** Encourage a culture where concerns can be raised without fear of retribution, focusing on finding solutions.\n9.  **Implement a Global Talent Mapping Initiative:** Assess the organization's talent pool to identify individuals with strong cross-cultural communication skills.\n10. **Establish a Centralized Knowledge Management System:** Develop a unified digital platform for information sharing, accessible across time zones and languages.\n11. **Design a Flexible Project Management Framework:** Adapt project management methodologies to accommodate different cultural norms and working styles.\n12. **Promote Cross-Cultural Training and Awareness Programs:** Launch ongoing training programs that focus on cultural intelligence, unconscious bias, and inclusive leadership.\n13. **Establish a Global Leadership Development Program:** Invest in leadership programs to equip leaders with skills for managing and motivating international teams.\n",
+      "rag_results": "[{'text': \"2) **Personality: The Empathetic Communicator**: From your experience, how can we foster a deeper sense of understanding and trust between team members from different cultural backgrounds, thereby facilitating more open and collaborative communication?\\n1.  **Implement Cross-Cultural Training:** Organize workshops focusing on cultural sensitivity, communication styles, and non-verbal cues prevalent in diverse cultures within the team to equip members with the knowledge to understand and interpret behaviors of their colleagues.\\n2.  **Establish Mentorship Programs:** Pair team members from different cultural backgrounds to foster one-on-one interactions. Mentors can share insights into their cultures, experiences, and perspectives, while mentees gain personal understanding and build trust.\\n3.  **Encourage Active Listening:** Promote active listening exercises during team meetings, where members paraphrase and validate each other's viewpoints, to ensure all voices are heard and understood, reducing misunderstandings.\\n4.  **Create Inclusive Team-Building Activities:** Plan team-building activities that celebrate diverse cultures, such as potlucks featuring cuisines from different backgrounds or cultural sharing sessions, to create opportunities for shared experiences and building rapport.\\n5.  **Establish Clear Communication Guidelines:** Develop and distribute a communication guide that addresses common cultural differences in communication styles (direct vs. indirect, formal vs. informal), promoting respectful and effective communication.\\n6.  **Use Inclusive Language:** Train team members on the use of inclusive language, avoiding jargon, idioms, or slang that may not be universally understood and ensuring messages are clear and accessible to all.\\n7.  **Encourage Feedback and Dialogue:** Establish regular feedback sessions where team members can share their experiences and discuss communication challenges. Encourage an open-door policy for conflict resolution and addressing any cultural misunderstandings that arise.\\n8.  **Share Personal Stories and Experiences:** Create opportunities for team members to share personal stories about their cultural backgrounds, holidays, and traditions to promote empathy and understanding, humanizing cultural differences.\\n9.  **Rotate Meeting Facilitators:** Rotate the role of meeting facilitator among team members from different cultural backgrounds to expose diverse leadership styles and communication preferences, promoting broader participation.\\n10. **Celebrate Cultural Events and Holidays:** Recognize and celebrate cultural events and holidays from various backgrounds to create a sense of inclusion and appreciation for diversity within the team.\\n\", 'node_id': '58b4fcc9-b771-403b-9ddb-993f2de2ecef', 'similarity': 0.71251965}, {'text': '4) **Personality: The Conflict Resolver**: What proactive measures can be implemented to identify and mitigate potential conflicts arising from differing work styles, expectations, or cultural norms within global teams, and how can we establish effective conflict resolution processes?\\n1.  **Implement a Comprehensive Onboarding Program:** Develop a detailed onboarding process that includes cultural sensitivity training, communication style assessments (e.g., DISC, Myers-Briggs), and team-building exercises to help members understand each other\\'s preferences and potential areas of friction from the outset.\\n\\n2.  **Establish Clear Communication Protocols:** Define specific communication channels (e.g., Slack, email, project management tools) and response time expectations for different types of communication to avoid misunderstandings stemming from asynchronous work environments and varying time zones.\\n\\n3.  **Foster Regular Cross-Cultural Training:** Provide ongoing training sessions focusing on cultural awareness, including communication nuances, nonverbal cues, and conflict resolution styles to help team members recognize and navigate differences effectively.\\n\\n4.  **Create a Conflict Resolution Toolkit:** Develop a readily accessible toolkit that includes a step-by-step guide for addressing conflicts, sample scripts for initiating conversations, and a list of internal and external resources (e.g., HR, mediators) available to assist in resolving disputes.\\n\\n5.  **Encourage Proactive Feedback Mechanisms:** Implement regular feedback sessions (both formal and informal) where team members can openly share their observations about potential conflicts or misunderstandings, and discuss strategies for improvement.\\n\\n6.  **Assign Cross-Cultural Mentors/Buddies:** Pair team members from different cultural backgrounds as mentors or buddies to facilitate cross-cultural understanding, provide support in navigating workplace challenges, and promote informal conflict resolution.\\n\\n7.  **Establish a Neutral Mediation Process:** Designate trained mediators (either internal or external) who can facilitate discussions between conflicting parties in a neutral and confidential setting, helping them identify common ground and reach mutually acceptable solutions.\\n\\n8.  **Implement a \"No-Blame\" Culture:** Encourage a culture where team members feel safe to raise concerns without fear of retribution, focusing on finding solutions rather than assigning blame, and promoting a growth mindset where mistakes are seen as learning opportunities.\\n', 'node_id': 'fb537477-5a27-4b48-8a16-e391a99549cc', 'similarity': 0.7005191}]"
+    },
+    {
+      "id": "0c1b51e2-112f-44ed-ac25-d695d5d51412",
+      "prompt": "1.  **Implement a Global Talent Mapping Initiative**: Conduct a comprehensive assessment of the organization's global talent pool to identify individuals with strong cross-cultural communication skills, experience in diverse environments, and a proven ability to collaborate effectively. This will facilitate the formation of teams with members who can proactively address and mitigate cultural misunderstandings and communication barriers.\n\n2.  **Establish a Centralized Knowledge Management System**: Develop a unified digital platform where all team members can access project documentation, meeting notes, and relevant research. Ensure the system is accessible across different time zones and languages, allowing real-time information sharing to overcome geographical and linguistic challenges.\n\n3.  **Design a Flexible and Adaptable Project Management Framework**: Develop a project management methodology that is adaptable to different cultural norms and working styles. This should involve clear guidelines for communication, decision-making processes, and conflict resolution, allowing teams to navigate differences in project execution approaches effectively.\n\n4.  **Promote Cross-Cultural Training and Awareness Programs**: Launch ongoing training programs that focus on cultural intelligence, unconscious bias, and inclusive leadership. This initiative should empower team members to recognize and navigate cultural differences, promoting empathy and understanding within the team.\n\n5.  **Establish a Global Leadership Development Program**: Invest in leadership programs that specifically equip leaders with the skills to manage and motivate international teams. This should include training on leading diverse teams, promoting inclusivity, and facilitating effective cross-cultural communication.\n\n3) Organizational Psychologist: How can we foster a psychologically safe environment to encourage open communication and collaboration among team members from diverse backgrounds?",
+      "depth": 1,
+      "color": "\u001b[33m",
+      "rag_context": null,
+      "response": "1.  **Implement Diversity and Inclusion Training:** Conduct mandatory workshops focusing on unconscious bias, microaggressions, and inclusive communication to raise awareness and promote respectful interactions among team members.\n\n2.  **Establish Anonymous Feedback Mechanisms:** Create a system for anonymous feedback, such as suggestion boxes or online surveys, where team members can voice concerns, share experiences, and report instances of bias or discrimination without fear of reprisal.\n\n3.  **Foster Psychological Safety Through Leadership:** Train leaders to model vulnerability, actively listen to diverse perspectives, and respond constructively to feedback, creating a safe environment where team members feel comfortable taking risks and sharing ideas.\n\n4.  **Encourage Active Listening and Empathetic Communication:** Promote active listening skills through training and workshops, emphasizing the importance of paraphrasing, summarizing, and validating others' viewpoints to ensure everyone feels heard and understood.\n\n5.  **Implement Inclusive Team-Building Activities:** Organize team-building exercises that focus on shared experiences and cultural exchange, such as potlucks, cultural sharing sessions, or collaborative problem-solving activities, to build rapport and break down barriers.\n\n6.  **Establish Clear Guidelines for Respectful Communication:** Develop and distribute a communication guide that outlines expectations for respectful language, tone, and behavior, including guidelines for addressing conflicts and misunderstandings in a constructive manner.\n\n7.  **Create Opportunities for Cross-Cultural Mentorship:** Pair team members from different backgrounds as mentors and mentees to facilitate one-on-one interactions, share personal stories, and build trust, fostering a deeper understanding of cultural nuances.\n\n8.  **Celebrate Cultural Events and Holidays:** Recognize and celebrate cultural events and holidays from various backgrounds to create a sense of inclusion and appreciation for diversity within the team, promoting a welcoming atmosphere.\n\n9.  **Encourage Storytelling and Personal Sharing:** Facilitate opportunities for team members to share personal stories about their cultural backgrounds, experiences, and perspectives, humanizing cultural differences and fostering empathy.\n\n10. **Establish a \"No-Blame\" Culture:** Encourage a culture where team members feel safe to raise concerns without fear of retribution, focusing on finding solutions rather than assigning blame, and promoting a growth mindset where mistakes are seen as learning opportunities.\n",
+      "rag_results": "[{'text': \"2) **Personality: The Empathetic Communicator**: From your experience, how can we foster a deeper sense of understanding and trust between team members from different cultural backgrounds, thereby facilitating more open and collaborative communication?\\n1.  **Implement Cross-Cultural Training:** Organize workshops focusing on cultural sensitivity, communication styles, and non-verbal cues prevalent in diverse cultures within the team to equip members with the knowledge to understand and interpret behaviors of their colleagues.\\n2.  **Establish Mentorship Programs:** Pair team members from different cultural backgrounds to foster one-on-one interactions. Mentors can share insights into their cultures, experiences, and perspectives, while mentees gain personal understanding and build trust.\\n3.  **Encourage Active Listening:** Promote active listening exercises during team meetings, where members paraphrase and validate each other's viewpoints, to ensure all voices are heard and understood, reducing misunderstandings.\\n4.  **Create Inclusive Team-Building Activities:** Plan team-building activities that celebrate diverse cultures, such as potlucks featuring cuisines from different backgrounds or cultural sharing sessions, to create opportunities for shared experiences and building rapport.\\n5.  **Establish Clear Communication Guidelines:** Develop and distribute a communication guide that addresses common cultural differences in communication styles (direct vs. indirect, formal vs. informal), promoting respectful and effective communication.\\n6.  **Use Inclusive Language:** Train team members on the use of inclusive language, avoiding jargon, idioms, or slang that may not be universally understood and ensuring messages are clear and accessible to all.\\n7.  **Encourage Feedback and Dialogue:** Establish regular feedback sessions where team members can share their experiences and discuss communication challenges. Encourage an open-door policy for conflict resolution and addressing any cultural misunderstandings that arise.\\n8.  **Share Personal Stories and Experiences:** Create opportunities for team members to share personal stories about their cultural backgrounds, holidays, and traditions to promote empathy and understanding, humanizing cultural differences.\\n9.  **Rotate Meeting Facilitators:** Rotate the role of meeting facilitator among team members from different cultural backgrounds to expose diverse leadership styles and communication preferences, promoting broader participation.\\n10. **Celebrate Cultural Events and Holidays:** Recognize and celebrate cultural events and holidays from various backgrounds to create a sense of inclusion and appreciation for diversity within the team.\\n\", 'node_id': '58b4fcc9-b771-403b-9ddb-993f2de2ecef', 'similarity': 0.71251965}, {'text': '4) **Personality: The Conflict Resolver**: What proactive measures can be implemented to identify and mitigate potential conflicts arising from differing work styles, expectations, or cultural norms within global teams, and how can we establish effective conflict resolution processes?\\n1.  **Implement a Comprehensive Onboarding Program:** Develop a detailed onboarding process that includes cultural sensitivity training, communication style assessments (e.g., DISC, Myers-Briggs), and team-building exercises to help members understand each other\\'s preferences and potential areas of friction from the outset.\\n\\n2.  **Establish Clear Communication Protocols:** Define specific communication channels (e.g., Slack, email, project management tools) and response time expectations for different types of communication to avoid misunderstandings stemming from asynchronous work environments and varying time zones.\\n\\n3.  **Foster Regular Cross-Cultural Training:** Provide ongoing training sessions focusing on cultural awareness, including communication nuances, nonverbal cues, and conflict resolution styles to help team members recognize and navigate differences effectively.\\n\\n4.  **Create a Conflict Resolution Toolkit:** Develop a readily accessible toolkit that includes a step-by-step guide for addressing conflicts, sample scripts for initiating conversations, and a list of internal and external resources (e.g., HR, mediators) available to assist in resolving disputes.\\n\\n5.  **Encourage Proactive Feedback Mechanisms:** Implement regular feedback sessions (both formal and informal) where team members can openly share their observations about potential conflicts or misunderstandings, and discuss strategies for improvement.\\n\\n6.  **Assign Cross-Cultural Mentors/Buddies:** Pair team members from different cultural backgrounds as mentors or buddies to facilitate cross-cultural understanding, provide support in navigating workplace challenges, and promote informal conflict resolution.\\n\\n7.  **Establish a Neutral Mediation Process:** Designate trained mediators (either internal or external) who can facilitate discussions between conflicting parties in a neutral and confidential setting, helping them identify common ground and reach mutually acceptable solutions.\\n\\n8.  **Implement a \"No-Blame\" Culture:** Encourage a culture where team members feel safe to raise concerns without fear of retribution, focusing on finding solutions rather than assigning blame, and promoting a growth mindset where mistakes are seen as learning opportunities.\\n', 'node_id': 'fb537477-5a27-4b48-8a16-e391a99549cc', 'similarity': 0.7005191}]"
+    },
+    {
+      "id": "4eccd732-fc13-4e75-8af6-89043a324784",
+      "prompt": "1.  **Implement a Comprehensive Onboarding Program:** Develop a detailed onboarding process that includes cultural sensitivity training, communication style assessments (e.g., DISC, Myers-Briggs), and team-building exercises to help members understand each other's preferences and potential areas of friction from the outset.\n\n2.  **Establish Clear Communication Protocols:** Define specific communication channels (e.g., Slack, email, project management tools) and response time expectations for different types of communication to avoid misunderstandings stemming from asynchronous work environments and varying time zones.\n\n3.  **Foster Regular Cross-Cultural Training:** Provide ongoing training sessions focusing on cultural awareness, including communication nuances, nonverbal cues, and conflict resolution styles to help team members recognize and navigate differences effectively.\n\n4.  **Create a Conflict Resolution Toolkit:** Develop a readily accessible toolkit that includes a step-by-step guide for addressing conflicts, sample scripts for initiating conversations, and a list of internal and external resources (e.g., HR, mediators) available to assist in resolving disputes.\n\n5.  **Encourage Proactive Feedback Mechanisms:** Implement regular feedback sessions (both formal and informal) where team members can openly share their observations about potential conflicts or misunderstandings, and discuss strategies for improvement.\n\n6.  **Assign Cross-Cultural Mentors/Buddies:** Pair team members from different cultural backgrounds as mentors or buddies to facilitate cross-cultural understanding, provide support in navigating workplace challenges, and promote informal conflict resolution.\n\n7.  **Establish a Neutral Mediation Process:** Designate trained mediators (either internal or external) who can facilitate discussions between conflicting parties in a neutral and confidential setting, helping them identify common ground and reach mutually acceptable solutions.\n\n8.  **Implement a \"No-Blame\" Culture:** Encourage a culture where team members feel safe to raise concerns without fear of retribution, focusing on finding solutions rather than assigning blame, and promoting a growth mindset where mistakes are seen as learning opportunities.\n\n1) Project Manager: How can we ensure a smooth, on-time, and within-budget implementation of the proposed solutions while considering potential cultural sensitivities and communication barriers?",
+      "depth": 1,
+      "color": "\u001b[93m",
+      "rag_context": null
+    },
+    {
+      "id": "836ad627-4e99-40a7-91c6-ac0ee25b3b21",
+      "prompt": "1.  **Implement a Comprehensive Onboarding Program:** Develop a detailed onboarding process that includes cultural sensitivity training, communication style assessments (e.g., DISC, Myers-Briggs), and team-building exercises to help members understand each other's preferences and potential areas of friction from the outset.\n\n2.  **Establish Clear Communication Protocols:** Define specific communication channels (e.g., Slack, email, project management tools) and response time expectations for different types of communication to avoid misunderstandings stemming from asynchronous work environments and varying time zones.\n\n3.  **Foster Regular Cross-Cultural Training:** Provide ongoing training sessions focusing on cultural awareness, including communication nuances, nonverbal cues, and conflict resolution styles to help team members recognize and navigate differences effectively.\n\n4.  **Create a Conflict Resolution Toolkit:** Develop a readily accessible toolkit that includes a step-by-step guide for addressing conflicts, sample scripts for initiating conversations, and a list of internal and external resources (e.g., HR, mediators) available to assist in resolving disputes.\n\n5.  **Encourage Proactive Feedback Mechanisms:** Implement regular feedback sessions (both formal and informal) where team members can openly share their observations about potential conflicts or misunderstandings, and discuss strategies for improvement.\n\n6.  **Assign Cross-Cultural Mentors/Buddies:** Pair team members from different cultural backgrounds as mentors or buddies to facilitate cross-cultural understanding, provide support in navigating workplace challenges, and promote informal conflict resolution.\n\n7.  **Establish a Neutral Mediation Process:** Designate trained mediators (either internal or external) who can facilitate discussions between conflicting parties in a neutral and confidential setting, helping them identify common ground and reach mutually acceptable solutions.\n\n8.  **Implement a \"No-Blame\" Culture:** Encourage a culture where team members feel safe to raise concerns without fear of retribution, focusing on finding solutions rather than assigning blame, and promoting a growth mindset where mistakes are seen as learning opportunities.\n\n2) Ethicist: What ethical considerations should guide the development and implementation of these solutions, especially regarding privacy, fairness, and potential biases in assessments or training programs?",
+      "depth": 1,
+      "color": "\u001b[34m",
+      "rag_context": null
+    },
+    {
+      "id": "50078299-4ec6-470f-b4b5-a58960dad4f4",
+      "prompt": "1.  **Implement a Comprehensive Onboarding Program:** Develop a detailed onboarding process that includes cultural sensitivity training, communication style assessments (e.g., DISC, Myers-Briggs), and team-building exercises to help members understand each other's preferences and potential areas of friction from the outset.\n\n2.  **Establish Clear Communication Protocols:** Define specific communication channels (e.g., Slack, email, project management tools) and response time expectations for different types of communication to avoid misunderstandings stemming from asynchronous work environments and varying time zones.\n\n3.  **Foster Regular Cross-Cultural Training:** Provide ongoing training sessions focusing on cultural awareness, including communication nuances, nonverbal cues, and conflict resolution styles to help team members recognize and navigate differences effectively.\n\n4.  **Create a Conflict Resolution Toolkit:** Develop a readily accessible toolkit that includes a step-by-step guide for addressing conflicts, sample scripts for initiating conversations, and a list of internal and external resources (e.g., HR, mediators) available to assist in resolving disputes.\n\n5.  **Encourage Proactive Feedback Mechanisms:** Implement regular feedback sessions (both formal and informal) where team members can openly share their observations about potential conflicts or misunderstandings, and discuss strategies for improvement.\n\n6.  **Assign Cross-Cultural Mentors/Buddies:** Pair team members from different cultural backgrounds as mentors or buddies to facilitate cross-cultural understanding, provide support in navigating workplace challenges, and promote informal conflict resolution.\n\n7.  **Establish a Neutral Mediation Process:** Designate trained mediators (either internal or external) who can facilitate discussions between conflicting parties in a neutral and confidential setting, helping them identify common ground and reach mutually acceptable solutions.\n\n8.  **Implement a \"No-Blame\" Culture:** Encourage a culture where team members feel safe to raise concerns without fear of retribution, focusing on finding solutions rather than assigning blame, and promoting a growth mindset where mistakes are seen as learning opportunities.\n\n3) Employee Advocate: How can we measure the effectiveness of these solutions from an employee perspective, ensuring they are perceived as helpful and fair across diverse cultural backgrounds?",
+      "depth": 1,
+      "color": "\u001b[94m",
+      "rag_context": null
+    },
+    {
+      "id": "e6eb8823-42e0-4d09-b254-81ad62eded08",
+      "prompt": "1.  **Implement a Unified Communication Platform**: Adopt a platform like Microsoft Teams or Slack, integrating features such as instant messaging, video conferencing, screen sharing, and file sharing, ensuring accessibility through mobile and desktop applications.\n2.  **Utilize Project Management Software with Real-Time Collaboration**: Employ tools such as Asana, Trello, or Monday.com, enabling task assignment, progress tracking, deadline management, and collaborative document editing with features like activity logs and notification systems.\n3.  **Establish a Centralized Knowledge Repository**: Create a digital library using platforms like Confluence or SharePoint for storing documents, FAQs, training materials, and project documentation, structured for easy searching and categorized for efficient information retrieval.\n4.  **Conduct Regular Virtual Team-Building Activities**: Organize virtual events such as online games, virtual coffee breaks, or team quizzes using platforms like Zoom or Gather.town, promoting informal communication and team cohesion.\n5.  **Employ Automated Translation Services**: Integrate translation tools within communication platforms to facilitate understanding across teams with diverse language backgrounds, removing language barriers in real-time or through post-communication translations.\n6.  **Use Interactive Whiteboards for Collaborative Brainstorming**: Utilize virtual whiteboard tools like Miro or Mural for real-time brainstorming sessions, allowing remote team members to contribute visually and engage with ideas collaboratively.\n7.  **Establish a Dedicated IT Support Channel**: Create a help desk or support channel for providing technical assistance and troubleshooting issues related to software, hardware, or network connectivity, ensuring equitable access and usability for all team members.\n8.  **Implement Regular Training Sessions**: Offer regular training sessions on the usage of chosen technology and digital tools, ensuring all team members are proficient and comfortable with the systems. Record sessions for later access.\n9.  **Conduct Accessibility Audits**: Regularly assess the accessibility of all used digital tools, ensuring they comply with accessibility standards (WCAG) to accommodate team members with disabilities.\n10. **Use Polling and Feedback Tools**: Implement tools like SurveyMonkey or Google Forms to gather feedback on communication effectiveness, usability, and any challenges team members face, using this data to refine approaches and improve tools.\n\n1) IT specialist: how should security and data privacy be prioritized when choosing and implementing these tools?",
+      "depth": 1,
+      "color": "\u001b[35m",
+      "rag_context": null
+    },
+    {
+      "id": "b1cdf9dc-894a-4488-bfa0-c5209c84a10c",
+      "prompt": "1.  **Implement a Unified Communication Platform**: Adopt a platform like Microsoft Teams or Slack, integrating features such as instant messaging, video conferencing, screen sharing, and file sharing, ensuring accessibility through mobile and desktop applications.\n2.  **Utilize Project Management Software with Real-Time Collaboration**: Employ tools such as Asana, Trello, or Monday.com, enabling task assignment, progress tracking, deadline management, and collaborative document editing with features like activity logs and notification systems.\n3.  **Establish a Centralized Knowledge Repository**: Create a digital library using platforms like Confluence or SharePoint for storing documents, FAQs, training materials, and project documentation, structured for easy searching and categorized for efficient information retrieval.\n4.  **Conduct Regular Virtual Team-Building Activities**: Organize virtual events such as online games, virtual coffee breaks, or team quizzes using platforms like Zoom or Gather.town, promoting informal communication and team cohesion.\n5.  **Employ Automated Translation Services**: Integrate translation tools within communication platforms to facilitate understanding across teams with diverse language backgrounds, removing language barriers in real-time or through post-communication translations.\n6.  **Use Interactive Whiteboards for Collaborative Brainstorming**: Utilize virtual whiteboard tools like Miro or Mural for real-time brainstorming sessions, allowing remote team members to contribute visually and engage with ideas collaboratively.\n7.  **Establish a Dedicated IT Support Channel**: Create a help desk or support channel for providing technical assistance and troubleshooting issues related to software, hardware, or network connectivity, ensuring equitable access and usability for all team members.\n8.  **Implement Regular Training Sessions**: Offer regular training sessions on the usage of chosen technology and digital tools, ensuring all team members are proficient and comfortable with the systems. Record sessions for later access.\n9.  **Conduct Accessibility Audits**: Regularly assess the accessibility of all used digital tools, ensuring they comply with accessibility standards (WCAG) to accommodate team members with disabilities.\n10. **Use Polling and Feedback Tools**: Implement tools like SurveyMonkey or Google Forms to gather feedback on communication effectiveness, usability, and any challenges team members face, using this data to refine approaches and improve tools.\n\n2) Team lead: How do we measure the effectiveness of these tools in improving team communication and collaboration?",
+      "depth": 1,
+      "color": "\u001b[95m",
+      "rag_context": null
+    },
+    {
+      "id": "6c4accec-172d-4260-b1b9-8c0a12121ca8",
+      "prompt": "1.  **Implement a Unified Communication Platform**: Adopt a platform like Microsoft Teams or Slack, integrating features such as instant messaging, video conferencing, screen sharing, and file sharing, ensuring accessibility through mobile and desktop applications.\n2.  **Utilize Project Management Software with Real-Time Collaboration**: Employ tools such as Asana, Trello, or Monday.com, enabling task assignment, progress tracking, deadline management, and collaborative document editing with features like activity logs and notification systems.\n3.  **Establish a Centralized Knowledge Repository**: Create a digital library using platforms like Confluence or SharePoint for storing documents, FAQs, training materials, and project documentation, structured for easy searching and categorized for efficient information retrieval.\n4.  **Conduct Regular Virtual Team-Building Activities**: Organize virtual events such as online games, virtual coffee breaks, or team quizzes using platforms like Zoom or Gather.town, promoting informal communication and team cohesion.\n5.  **Employ Automated Translation Services**: Integrate translation tools within communication platforms to facilitate understanding across teams with diverse language backgrounds, removing language barriers in real-time or through post-communication translations.\n6.  **Use Interactive Whiteboards for Collaborative Brainstorming**: Utilize virtual whiteboard tools like Miro or Mural for real-time brainstorming sessions, allowing remote team members to contribute visually and engage with ideas collaboratively.\n7.  **Establish a Dedicated IT Support Channel**: Create a help desk or support channel for providing technical assistance and troubleshooting issues related to software, hardware, or network connectivity, ensuring equitable access and usability for all team members.\n8.  **Implement Regular Training Sessions**: Offer regular training sessions on the usage of chosen technology and digital tools, ensuring all team members are proficient and comfortable with the systems. Record sessions for later access.\n9.  **Conduct Accessibility Audits**: Regularly assess the accessibility of all used digital tools, ensuring they comply with accessibility standards (WCAG) to accommodate team members with disabilities.\n10. **Use Polling and Feedback Tools**: Implement tools like SurveyMonkey or Google Forms to gather feedback on communication effectiveness, usability, and any challenges team members face, using this data to refine approaches and improve tools.\n\n3) HR representative: what considerations are necessary to ensure these tools are accessible and inclusive for all team members, considering diversity in skills and needs?",
+      "depth": 1,
+      "color": "\u001b[36m",
+      "rag_context": null
+    },
+    {
+      "id": "9e4864c0-b266-4213-9949-0a9151c608d4",
+      "prompt": "1.  **Standardize Communication Channels**: Mandate the use of a single, company-approved platform for all project-related communication (e.g., Slack, Microsoft Teams), and establish clear guidelines for its use, including response times and preferred communication methods for different types of information (urgent vs. non-urgent).\n2.  **Implement Asynchronous Communication Protocols**: Encourage the use of tools and techniques that do not require real-time interaction, such as detailed documentation, video recordings, and comprehensive project management software, especially for tasks that span across different time zones.\n3.  **Establish a Centralized Knowledge Repository**: Create a single source of truth for all project-related information, including documents, templates, guidelines, and meeting minutes, making it easily accessible to all team members regardless of their location.\n4.  **Optimize Meeting Schedules**: Schedule recurring meetings to accommodate the overlap of working hours across different time zones and rotate meeting times to ensure fairness. Record all meetings and make them available to those unable to attend live.\n5.  **Define Clear Roles and Responsibilities**: Document and communicate each team member's roles and responsibilities, along with clear expectations for task completion and reporting, to minimize confusion and ensure accountability.\n6.  **Automate Repetitive Tasks**: Identify and automate time-consuming, repetitive tasks, such as report generation or data entry, using scripting or workflow automation tools to free up team members' time for more strategic work.\n7.  **Utilize Project Management Software**: Implement project management software with features such as task assignment, progress tracking, and deadline management, to provide visibility into the status of each project and identify potential bottlenecks.\n8.  **Conduct Regular Process Audits**: Periodically review workflows and processes to identify inefficiencies and areas for improvement. Solicit feedback from team members to identify pain points and suggest solutions.\n9.  **Provide Training and Documentation**: Offer training on all tools and processes, and provide readily available documentation, including how-to guides and FAQs, to ensure that all team members are proficient in their use.\n10. **Promote a Culture of Transparency**: Foster open communication and information sharing by encouraging team members to proactively share updates, challenges, and solutions, ensuring everyone is informed and aligned, regardless of their location or time zone.\n\n1) Project Manager: How can we prioritize these changes to have the biggest impact?",
+      "depth": 1,
+      "color": "\u001b[96m",
+      "rag_context": null,
+      "response": "1.  **Prioritize the Unified Communication Platform and Project Management Software:** Implement these first, as they are foundational for team collaboration and project execution. Start with a platform like Microsoft Teams or Slack for communication and Asana or Trello for project management.\n2.  **Establish a Centralized Knowledge Repository:** Immediately create a digital library using Confluence or SharePoint to store essential documents, FAQs, and training materials. This ensures easy access to crucial information.\n3.  **Implement Regular Training Sessions**: Conduct initial training sessions on the adopted communication and project management tools, ensuring all team members are proficient and comfortable using the systems. Record these sessions for later access.\n4.  **Establish a Dedicated IT Support Channel**: Create a help desk or support channel to provide technical assistance and troubleshoot issues related to software, hardware, or network connectivity.\n5.  **Conduct Accessibility Audits**: Regularly assess the accessibility of all used digital tools, ensuring they comply with accessibility standards (WCAG) to accommodate team members with disabilities.\n6.  **Optimize Meeting Schedules:** Schedule recurring meetings to accommodate overlapping working hours and rotate times to ensure fairness, recording all meetings for those unable to attend live.\n7.  **Use Polling and Feedback Tools**: Implement tools like SurveyMonkey or Google Forms to gather feedback on communication effectiveness, usability, and any challenges team members face, using this data to refine approaches and improve tools.\n8.  **Automate Repetitive Tasks**: Identify and automate time-consuming, repetitive tasks, such as report generation or data entry, using scripting or workflow automation tools to free up team members' time for more strategic work.\n9.  **Implement Asynchronous Communication Protocols**: Encourage the use of tools and techniques that do not require real-time interaction, such as detailed documentation and comprehensive project management software, especially for tasks that span across different time zones.\n10. **Conduct Regular Virtual Team-Building Activities:** Organize virtual events like online games or virtual coffee breaks using platforms like Zoom or Gather.town to promote informal communication and team cohesion.\n",
+      "rag_results": "[{'text': '3) **Personality: The Tech-Savvy Facilitator**: In what innovative ways can we leverage technology and digital tools to improve communication, project management, and knowledge sharing across geographically dispersed teams, ensuring equitable access and usability for all?\\n1.  **Implement a Unified Communication Platform**: Adopt a platform like Microsoft Teams or Slack, integrating features such as instant messaging, video conferencing, screen sharing, and file sharing, ensuring accessibility through mobile and desktop applications.\\n2.  **Utilize Project Management Software with Real-Time Collaboration**: Employ tools such as Asana, Trello, or Monday.com, enabling task assignment, progress tracking, deadline management, and collaborative document editing with features like activity logs and notification systems.\\n3.  **Establish a Centralized Knowledge Repository**: Create a digital library using platforms like Confluence or SharePoint for storing documents, FAQs, training materials, and project documentation, structured for easy searching and categorized for efficient information retrieval.\\n4.  **Conduct Regular Virtual Team-Building Activities**: Organize virtual events such as online games, virtual coffee breaks, or team quizzes using platforms like Zoom or Gather.town, promoting informal communication and team cohesion.\\n5.  **Employ Automated Translation Services**: Integrate translation tools within communication platforms to facilitate understanding across teams with diverse language backgrounds, removing language barriers in real-time or through post-communication translations.\\n6.  **Use Interactive Whiteboards for Collaborative Brainstorming**: Utilize virtual whiteboard tools like Miro or Mural for real-time brainstorming sessions, allowing remote team members to contribute visually and engage with ideas collaboratively.\\n7.  **Establish a Dedicated IT Support Channel**: Create a help desk or support channel for providing technical assistance and troubleshooting issues related to software, hardware, or network connectivity, ensuring equitable access and usability for all team members.\\n8.  **Implement Regular Training Sessions**: Offer regular training sessions on the usage of chosen technology and digital tools, ensuring all team members are proficient and comfortable with the systems. Record sessions for later access.\\n9.  **Conduct Accessibility Audits**: Regularly assess the accessibility of all used digital tools, ensuring they comply with accessibility standards (WCAG) to accommodate team members with disabilities.\\n10. **Use Polling and Feedback Tools**: Implement tools like SurveyMonkey or Google Forms to gather feedback on communication effectiveness, usability, and any challenges team members face, using this data to refine approaches and improve tools.\\n', 'node_id': '72300dcc-a0ae-48ea-b7cb-1f0af6663b95', 'similarity': 0.76449335}, {'text': '1.  **Implement a Unified Communication Platform**: Adopt a platform like Microsoft Teams or Slack, integrating features such as instant messaging, video conferencing, screen sharing, and file sharing, ensuring accessibility through mobile and desktop applications.\\n2.  **Utilize Project Management Software with Real-Time Collaboration**: Employ tools such as Asana, Trello, or Monday.com, enabling task assignment, progress tracking, deadline management, and collaborative document editing with features like activity logs and notification systems.\\n3.  **Establish a Centralized Knowledge Repository**: Create a digital library using platforms like Confluence or SharePoint for storing documents, FAQs, training materials, and project documentation, structured for easy searching and categorized for efficient information retrieval.\\n4.  **Conduct Regular Virtual Team-Building Activities**: Organize virtual events such as online games, virtual coffee breaks, or team quizzes using platforms like Zoom or Gather.town, promoting informal communication and team cohesion.\\n5.  **Employ Automated Translation Services**: Integrate translation tools within communication platforms to facilitate understanding across teams with diverse language backgrounds, removing language barriers in real-time or through post-communication translations.\\n6.  **Use Interactive Whiteboards for Collaborative Brainstorming**: Utilize virtual whiteboard tools like Miro or Mural for real-time brainstorming sessions, allowing remote team members to contribute visually and engage with ideas collaboratively.\\n7.  **Establish a Dedicated IT Support Channel**: Create a help desk or support channel for providing technical assistance and troubleshooting issues related to software, hardware, or network connectivity, ensuring equitable access and usability for all team members.\\n8.  **Implement Regular Training Sessions**: Offer regular training sessions on the usage of chosen technology and digital tools, ensuring all team members are proficient and comfortable with the systems. Record sessions for later access.\\n9.  **Conduct Accessibility Audits**: Regularly assess the accessibility of all used digital tools, ensuring they comply with accessibility standards (WCAG) to accommodate team members with disabilities.\\n10. **Use Polling and Feedback Tools**: Implement tools like SurveyMonkey or Google Forms to gather feedback on communication effectiveness, usability, and any challenges team members face, using this data to refine approaches and improve tools.\\n\\n3) HR representative: what considerations are necessary to ensure these tools are accessible and inclusive for all team members, considering diversity in skills and needs?', 'node_id': '6c4accec-172d-4260-b1b9-8c0a12121ca8', 'similarity': 0.7601749}]"
+    },
+    {
+      "id": "288a8cfa-545d-4da5-af1b-3ea4906c0b28",
+      "prompt": "2) Team Member: How will this affect day to day workflow?",
+      "depth": 1,
+      "color": "\u001b[32m",
+      "rag_context": null
+    },
+    {
+      "id": "e27b14fa-0364-4f29-866a-f75e9abcaf45",
+      "prompt": "3) Legal Counsel: What potential legal issues may arise?",
+      "depth": 1,
+      "color": "\u001b[92m",
+      "rag_context": null
+    },
+    {
+      "id": "b108fcb1-4bc0-4db1-be33-01b4816c79e9",
+      "prompt": "1.  **Organizational Psychologist**: In what ways do the proposed strategies account for potential resistance to change or discomfort among team members, and how can these be addressed to ensure effective implementation and adoption of the new practices?",
+      "depth": 1,
+      "color": "\u001b[37m",
+      "rag_context": null
+    },
+    {
+      "id": "ae3eb5a1-03d9-4e60-9cd8-6c9fb2aaaa21",
+      "prompt": "2.  **Diversity Consultant**: To what extent do the suggested strategies address the nuances of intersectionality (e.g., how race, gender, and socioeconomic status interact) within the team, and how can the plans be enhanced to be truly inclusive?",
+      "depth": 1,
+      "color": "\u001b[97m",
+      "rag_context": null
+    },
+    {
+      "id": "9fe61278-1c88-4ce8-a5a8-43e99156d168",
+      "prompt": "3.  **Team Lead**: How might the implementation of these strategies impact the team's workflow and productivity in the short and long term, and what adjustments might be needed to maintain efficiency while fostering a more inclusive environment?",
+      "depth": 1,
+      "color": "\u001b[31m",
+      "rag_context": null
+    },
+    {
+      "id": "52bf2cc0-eea8-4b9b-8b71-03de6a5c2a3e",
+      "prompt": "1) Ethicist: How do these strategies affect the autonomy and dignity of each individual, and how can we ensure these solutions maintain ethical integrity?",
+      "depth": 2,
+      "color": "\u001b[91m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.71): 2) **Personality: The Empathetic Communicator**: From your experience, how can we foster a deeper sense of understanding and trust between team members from different cultural backgrounds, thereby facilitating more open and collaborative communication?\n1.  **Implement Cross-Cultural Training:** Organize workshops focusing on cultural sensitivity, communication styles, and non-verbal cues prevalent in diverse cultures within the team to equip members with the knowledge to understand and interpret behaviors of their colleagues.\n2.  **Establish Mentorship Programs:** Pair team members from different cultural backgrounds to foster one-on-one interactions. Mentors can share insights into their cultures, experiences, and perspectives, while mentees gain personal understanding and build trust.\n3.  **Encourage Active Listening:** Promote active listening exercises during team meetings, where members paraphrase and validate each other's viewpoints, to ensure all voices are heard and understood, reducing misunderstandings.\n4.  **Create Inclusive Team-Building Activities:** Plan team-building activities that celebrate diverse cultures, such as potlucks featuring cuisines from different backgrounds or cultural sharing sessions, to create opportunities for shared experiences and building rapport.\n5.  **Establish Clear Communication Guidelines:** Develop and distribute a communication guide that addresses common cultural differences in communication styles (direct vs. indirect, formal vs. informal), promoting respectful and effective communication.\n6.  **Use Inclusive Language:** Train team members on the use of inclusive language, avoiding jargon, idioms, or slang that may not be universally understood and ensuring messages are clear and accessible to all.\n7.  **Encourage Feedback and Dialogue:** Establish regular feedback sessions where team members can share their experiences and discuss communication challenges. Encourage an open-door policy for conflict resolution and addressing any cultural misunderstandings that arise.\n8.  **Share Personal Stories and Experiences:** Create opportunities for team members to share personal stories about their cultural backgrounds, holidays, and traditions to promote empathy and understanding, humanizing cultural differences.\n9.  **Rotate Meeting Facilitators:** Rotate the role of meeting facilitator among team members from different cultural backgrounds to expose diverse leadership styles and communication preferences, promoting broader participation.\n10. **Celebrate Cultural Events and Holidays:** Recognize and celebrate cultural events and holidays from various backgrounds to create a sense of inclusion and appreciation for diversity within the team.\n\n\nSource 2 (relevance: 0.70): 4) **Personality: The Conflict Resolver**: What proactive measures can be implemented to identify and mitigate potential conflicts arising from differing work styles, expectations, or cultural norms within global teams, and how can we establish effective conflict resolution processes?\n1.  **Implement a Comprehensive Onboarding Program:** Develop a detailed onboarding process that includes cultural sensitivity training, communication style assessments (e.g., DISC, Myers-Briggs), and team-building exercises to help members understand each other's preferences and potential areas of friction from the outset.\n\n2.  **Establish Clear Communication Protocols:** Define specific communication channels (e.g., Slack, email, project management tools) and response time expectations for different types of communication to avoid misunderstandings stemming from asynchronous work environments and varying time zones.\n\n3.  **Foster Regular Cross-Cultural Training:** Provide ongoing training sessions focusing on cultural awareness, including communication nuances, nonverbal cues, and conflict resolution styles to help team members recognize and navigate differences effectively.\n\n4.  **Create a Conflict Resolution Toolkit:** Develop a readily accessible toolkit that includes a step-by-step guide for addressing conflicts, sample scripts for initiating conversations, and a list of internal and external resources (e.g., HR, mediators) available to assist in resolving disputes.\n\n5.  **Encourage Proactive Feedback Mechanisms:** Implement regular feedback sessions (both formal and informal) where team members can openly share their observations about potential conflicts or misunderstandings, and discuss strategies for improvement.\n\n6.  **Assign Cross-Cultural Mentors/Buddies:** Pair team members from different cultural backgrounds as mentors or buddies to facilitate cross-cultural understanding, provide support in navigating workplace challenges, and promote informal conflict resolution.\n\n7.  **Establish a Neutral Mediation Process:** Designate trained mediators (either internal or external) who can facilitate discussions between conflicting parties in a neutral and confidential setting, helping them identify common ground and reach mutually acceptable solutions.\n\n8.  **Implement a \"No-Blame\" Culture:** Encourage a culture where team members feel safe to raise concerns without fear of retribution, focusing on finding solutions rather than assigning blame, and promoting a growth mindset where mistakes are seen as learning opportunities.\n\n\n"
+    },
+    {
+      "id": "1accf53a-a403-4680-9650-e8e21049ce20",
+      "prompt": "2) Project Manager: Considering the need for global operations, what is the most efficient way to phase in the proposed solutions across all departments and teams without disrupting current operations?",
+      "depth": 2,
+      "color": "\u001b[33m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.71): 2) **Personality: The Empathetic Communicator**: From your experience, how can we foster a deeper sense of understanding and trust between team members from different cultural backgrounds, thereby facilitating more open and collaborative communication?\n1.  **Implement Cross-Cultural Training:** Organize workshops focusing on cultural sensitivity, communication styles, and non-verbal cues prevalent in diverse cultures within the team to equip members with the knowledge to understand and interpret behaviors of their colleagues.\n2.  **Establish Mentorship Programs:** Pair team members from different cultural backgrounds to foster one-on-one interactions. Mentors can share insights into their cultures, experiences, and perspectives, while mentees gain personal understanding and build trust.\n3.  **Encourage Active Listening:** Promote active listening exercises during team meetings, where members paraphrase and validate each other's viewpoints, to ensure all voices are heard and understood, reducing misunderstandings.\n4.  **Create Inclusive Team-Building Activities:** Plan team-building activities that celebrate diverse cultures, such as potlucks featuring cuisines from different backgrounds or cultural sharing sessions, to create opportunities for shared experiences and building rapport.\n5.  **Establish Clear Communication Guidelines:** Develop and distribute a communication guide that addresses common cultural differences in communication styles (direct vs. indirect, formal vs. informal), promoting respectful and effective communication.\n6.  **Use Inclusive Language:** Train team members on the use of inclusive language, avoiding jargon, idioms, or slang that may not be universally understood and ensuring messages are clear and accessible to all.\n7.  **Encourage Feedback and Dialogue:** Establish regular feedback sessions where team members can share their experiences and discuss communication challenges. Encourage an open-door policy for conflict resolution and addressing any cultural misunderstandings that arise.\n8.  **Share Personal Stories and Experiences:** Create opportunities for team members to share personal stories about their cultural backgrounds, holidays, and traditions to promote empathy and understanding, humanizing cultural differences.\n9.  **Rotate Meeting Facilitators:** Rotate the role of meeting facilitator among team members from different cultural backgrounds to expose diverse leadership styles and communication preferences, promoting broader participation.\n10. **Celebrate Cultural Events and Holidays:** Recognize and celebrate cultural events and holidays from various backgrounds to create a sense of inclusion and appreciation for diversity within the team.\n\n\nSource 2 (relevance: 0.70): 4) **Personality: The Conflict Resolver**: What proactive measures can be implemented to identify and mitigate potential conflicts arising from differing work styles, expectations, or cultural norms within global teams, and how can we establish effective conflict resolution processes?\n1.  **Implement a Comprehensive Onboarding Program:** Develop a detailed onboarding process that includes cultural sensitivity training, communication style assessments (e.g., DISC, Myers-Briggs), and team-building exercises to help members understand each other's preferences and potential areas of friction from the outset.\n\n2.  **Establish Clear Communication Protocols:** Define specific communication channels (e.g., Slack, email, project management tools) and response time expectations for different types of communication to avoid misunderstandings stemming from asynchronous work environments and varying time zones.\n\n3.  **Foster Regular Cross-Cultural Training:** Provide ongoing training sessions focusing on cultural awareness, including communication nuances, nonverbal cues, and conflict resolution styles to help team members recognize and navigate differences effectively.\n\n4.  **Create a Conflict Resolution Toolkit:** Develop a readily accessible toolkit that includes a step-by-step guide for addressing conflicts, sample scripts for initiating conversations, and a list of internal and external resources (e.g., HR, mediators) available to assist in resolving disputes.\n\n5.  **Encourage Proactive Feedback Mechanisms:** Implement regular feedback sessions (both formal and informal) where team members can openly share their observations about potential conflicts or misunderstandings, and discuss strategies for improvement.\n\n6.  **Assign Cross-Cultural Mentors/Buddies:** Pair team members from different cultural backgrounds as mentors or buddies to facilitate cross-cultural understanding, provide support in navigating workplace challenges, and promote informal conflict resolution.\n\n7.  **Establish a Neutral Mediation Process:** Designate trained mediators (either internal or external) who can facilitate discussions between conflicting parties in a neutral and confidential setting, helping them identify common ground and reach mutually acceptable solutions.\n\n8.  **Implement a \"No-Blame\" Culture:** Encourage a culture where team members feel safe to raise concerns without fear of retribution, focusing on finding solutions rather than assigning blame, and promoting a growth mindset where mistakes are seen as learning opportunities.\n\n\n"
+    },
+    {
+      "id": "eefff92e-6b4e-4716-a02b-5867cad305bd",
+      "prompt": "3) Cultural Anthropologist: To what extent do these proposed solutions reflect a deep understanding of cultural nuances, and how can they be adapted to reflect the dynamic nature of cultural differences?",
+      "depth": 2,
+      "color": "\u001b[93m",
+      "rag_context": "Previous relevant information:\nSource 1 (relevance: 0.71): 2) **Personality: The Empathetic Communicator**: From your experience, how can we foster a deeper sense of understanding and trust between team members from different cultural backgrounds, thereby facilitating more open and collaborative communication?\n1.  **Implement Cross-Cultural Training:** Organize workshops focusing on cultural sensitivity, communication styles, and non-verbal cues prevalent in diverse cultures within the team to equip members with the knowledge to understand and interpret behaviors of their colleagues.\n2.  **Establish Mentorship Programs:** Pair team members from different cultural backgrounds to foster one-on-one interactions. Mentors can share insights into their cultures, experiences, and perspectives, while mentees gain personal understanding and build trust.\n3.  **Encourage Active Listening:** Promote active listening exercises during team meetings, where members paraphrase and validate each other's viewpoints, to ensure all voices are heard and understood, reducing misunderstandings.\n4.  **Create Inclusive Team-Building Activities:** Plan team-building activities that celebrate diverse cultures, such as potlucks featuring cuisines from different backgrounds or cultural sharing sessions, to create opportunities for shared experiences and building rapport.\n5.  **Establish Clear Communication Guidelines:** Develop and distribute a communication guide that addresses common cultural differences in communication styles (direct vs. indirect, formal vs. informal), promoting respectful and effective communication.\n6.  **Use Inclusive Language:** Train team members on the use of inclusive language, avoiding jargon, idioms, or slang that may not be universally understood and ensuring messages are clear and accessible to all.\n7.  **Encourage Feedback and Dialogue:** Establish regular feedback sessions where team members can share their experiences and discuss communication challenges. Encourage an open-door policy for conflict resolution and addressing any cultural misunderstandings that arise.\n8.  **Share Personal Stories and Experiences:** Create opportunities for team members to share personal stories about their cultural backgrounds, holidays, and traditions to promote empathy and understanding, humanizing cultural differences.\n9.  **Rotate Meeting Facilitators:** Rotate the role of meeting facilitator among team members from different cultural backgrounds to expose diverse leadership styles and communication preferences, promoting broader participation.\n10. **Celebrate Cultural Events and Holidays:** Recognize and celebrate cultural events and holidays from various backgrounds to create a sense of inclusion and appreciation for diversity within the team.\n\n\nSource 2 (relevance: 0.70): 4) **Personality: The Conflict Resolver**: What proactive measures can be implemented to identify and mitigate potential conflicts arising from differing work styles, expectations, or cultural norms within global teams, and how can we establish effective conflict resolution processes?\n1.  **Implement a Comprehensive Onboarding Program:** Develop a detailed onboarding process that includes cultural sensitivity training, communication style assessments (e.g., DISC, Myers-Briggs), and team-building exercises to help members understand each other's preferences and potential areas of friction from the outset.\n\n2.  **Establish Clear Communication Protocols:** Define specific communication channels (e.g., Slack, email, project management tools) and response time expectations for different types of communication to avoid misunderstandings stemming from asynchronous work environments and varying time zones.\n\n3.  **Foster Regular Cross-Cultural Training:** Provide ongoing training sessions focusing on cultural awareness, including communication nuances, nonverbal cues, and conflict resolution styles to help team members recognize and navigate differences effectively.\n\n4.  **Create a Conflict Resolution Toolkit:** Develop a readily accessible toolkit that includes a step-by-step guide for addressing conflicts, sample scripts for initiating conversations, and a list of internal and external resources (e.g., HR, mediators) available to assist in resolving disputes.\n\n5.  **Encourage Proactive Feedback Mechanisms:** Implement regular feedback sessions (both formal and informal) where team members can openly share their observations about potential conflicts or misunderstandings, and discuss strategies for improvement.\n\n6.  **Assign Cross-Cultural Mentors/Buddies:** Pair team members from different cultural backgrounds as mentors or buddies to facilitate cross-cultural understanding, provide support in navigating workplace challenges, and promote informal conflict resolution.\n\n7.  **Establish a Neutral Mediation Process:** Designate trained mediators (either internal or external) who can facilitate discussions between conflicting parties in a neutral and confidential setting, helping them identify common ground and reach mutually acceptable solutions.\n\n8.  **Implement a \"No-Blame\" Culture:** Encourage a culture where team members feel safe to raise concerns without fear of retribution, focusing on finding solutions rather than assigning blame, and promoting a growth mindset where mistakes are seen as learning opportunities.\n\n\n"
+    }
+  ],
+  "links": [
+    {
+      "source": "root",
+      "target": "9d6bbe45-e7b6-44de-b52a-17ce1d8f1685",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "9d6bbe45-e7b6-44de-b52a-17ce1d8f1685",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "58b4fcc9-b771-403b-9ddb-993f2de2ecef",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "58b4fcc9-b771-403b-9ddb-993f2de2ecef",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "72300dcc-a0ae-48ea-b7cb-1f0af6663b95",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "72300dcc-a0ae-48ea-b7cb-1f0af6663b95",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "fb537477-5a27-4b48-8a16-e391a99549cc",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "fb537477-5a27-4b48-8a16-e391a99549cc",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "8a87cd4e-130e-4404-a11b-4fe586c98e8b",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "root",
+      "target": "8a87cd4e-130e-4404-a11b-4fe586c98e8b",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "9d6bbe45-e7b6-44de-b52a-17ce1d8f1685",
+      "target": "31b8d4d0-1b58-45e3-b774-2afabe2f010b",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "9d6bbe45-e7b6-44de-b52a-17ce1d8f1685",
+      "target": "31b8d4d0-1b58-45e3-b774-2afabe2f010b",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "9d6bbe45-e7b6-44de-b52a-17ce1d8f1685",
+      "target": "9220ad32-0e39-4095-b18e-fd64d11adfa2",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "9d6bbe45-e7b6-44de-b52a-17ce1d8f1685",
+      "target": "9220ad32-0e39-4095-b18e-fd64d11adfa2",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "9d6bbe45-e7b6-44de-b52a-17ce1d8f1685",
+      "target": "0c1b51e2-112f-44ed-ac25-d695d5d51412",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "9d6bbe45-e7b6-44de-b52a-17ce1d8f1685",
+      "target": "0c1b51e2-112f-44ed-ac25-d695d5d51412",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "9d6bbe45-e7b6-44de-b52a-17ce1d8f1685",
+      "target": "e6eb8823-42e0-4d09-b254-81ad62eded08",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6809863"
+    },
+    {
+      "source": "9d6bbe45-e7b6-44de-b52a-17ce1d8f1685",
+      "target": "b1cdf9dc-894a-4488-bfa0-c5209c84a10c",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6809863"
+    },
+    {
+      "source": "9d6bbe45-e7b6-44de-b52a-17ce1d8f1685",
+      "target": "6c4accec-172d-4260-b1b9-8c0a12121ca8",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.6809863"
+    },
+    {
+      "source": "58b4fcc9-b771-403b-9ddb-993f2de2ecef",
+      "target": "31b8d4d0-1b58-45e3-b774-2afabe2f010b",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.71251965"
+    },
+    {
+      "source": "58b4fcc9-b771-403b-9ddb-993f2de2ecef",
+      "target": "0c1b51e2-112f-44ed-ac25-d695d5d51412",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.71251965"
+    },
+    {
+      "source": "58b4fcc9-b771-403b-9ddb-993f2de2ecef",
+      "target": "9220ad32-0e39-4095-b18e-fd64d11adfa2",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.71251965"
+    },
+    {
+      "source": "58b4fcc9-b771-403b-9ddb-993f2de2ecef",
+      "target": "836ad627-4e99-40a7-91c6-ac0ee25b3b21",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.76180977"
+    },
+    {
+      "source": "58b4fcc9-b771-403b-9ddb-993f2de2ecef",
+      "target": "4eccd732-fc13-4e75-8af6-89043a324784",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.76180977"
+    },
+    {
+      "source": "58b4fcc9-b771-403b-9ddb-993f2de2ecef",
+      "target": "50078299-4ec6-470f-b4b5-a58960dad4f4",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.76180977"
+    },
+    {
+      "source": "58b4fcc9-b771-403b-9ddb-993f2de2ecef",
+      "target": "b108fcb1-4bc0-4db1-be33-01b4816c79e9",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "58b4fcc9-b771-403b-9ddb-993f2de2ecef",
+      "target": "ae3eb5a1-03d9-4e60-9cd8-6c9fb2aaaa21",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "58b4fcc9-b771-403b-9ddb-993f2de2ecef",
+      "target": "9fe61278-1c88-4ce8-a5a8-43e99156d168",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "58b4fcc9-b771-403b-9ddb-993f2de2ecef",
+      "target": "52bf2cc0-eea8-4b9b-8b71-03de6a5c2a3e",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.71251965"
+    },
+    {
+      "source": "58b4fcc9-b771-403b-9ddb-993f2de2ecef",
+      "target": "1accf53a-a403-4680-9650-e8e21049ce20",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.71251965"
+    },
+    {
+      "source": "58b4fcc9-b771-403b-9ddb-993f2de2ecef",
+      "target": "eefff92e-6b4e-4716-a02b-5867cad305bd",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.71251965"
+    },
+    {
+      "source": "72300dcc-a0ae-48ea-b7cb-1f0af6663b95",
+      "target": "e6eb8823-42e0-4d09-b254-81ad62eded08",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "72300dcc-a0ae-48ea-b7cb-1f0af6663b95",
+      "target": "e6eb8823-42e0-4d09-b254-81ad62eded08",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "72300dcc-a0ae-48ea-b7cb-1f0af6663b95",
+      "target": "b1cdf9dc-894a-4488-bfa0-c5209c84a10c",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "72300dcc-a0ae-48ea-b7cb-1f0af6663b95",
+      "target": "b1cdf9dc-894a-4488-bfa0-c5209c84a10c",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "72300dcc-a0ae-48ea-b7cb-1f0af6663b95",
+      "target": "6c4accec-172d-4260-b1b9-8c0a12121ca8",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "72300dcc-a0ae-48ea-b7cb-1f0af6663b95",
+      "target": "6c4accec-172d-4260-b1b9-8c0a12121ca8",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "72300dcc-a0ae-48ea-b7cb-1f0af6663b95",
+      "target": "9e4864c0-b266-4213-9949-0a9151c608d4",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.76449335"
+    },
+    {
+      "source": "fb537477-5a27-4b48-8a16-e391a99549cc",
+      "target": "31b8d4d0-1b58-45e3-b774-2afabe2f010b",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.7005191"
+    },
+    {
+      "source": "fb537477-5a27-4b48-8a16-e391a99549cc",
+      "target": "0c1b51e2-112f-44ed-ac25-d695d5d51412",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.7005191"
+    },
+    {
+      "source": "fb537477-5a27-4b48-8a16-e391a99549cc",
+      "target": "9220ad32-0e39-4095-b18e-fd64d11adfa2",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.7005191"
+    },
+    {
+      "source": "fb537477-5a27-4b48-8a16-e391a99549cc",
+      "target": "4eccd732-fc13-4e75-8af6-89043a324784",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "fb537477-5a27-4b48-8a16-e391a99549cc",
+      "target": "4eccd732-fc13-4e75-8af6-89043a324784",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "fb537477-5a27-4b48-8a16-e391a99549cc",
+      "target": "836ad627-4e99-40a7-91c6-ac0ee25b3b21",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "fb537477-5a27-4b48-8a16-e391a99549cc",
+      "target": "836ad627-4e99-40a7-91c6-ac0ee25b3b21",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "fb537477-5a27-4b48-8a16-e391a99549cc",
+      "target": "50078299-4ec6-470f-b4b5-a58960dad4f4",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "fb537477-5a27-4b48-8a16-e391a99549cc",
+      "target": "50078299-4ec6-470f-b4b5-a58960dad4f4",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "fb537477-5a27-4b48-8a16-e391a99549cc",
+      "target": "52bf2cc0-eea8-4b9b-8b71-03de6a5c2a3e",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.7005191"
+    },
+    {
+      "source": "fb537477-5a27-4b48-8a16-e391a99549cc",
+      "target": "1accf53a-a403-4680-9650-e8e21049ce20",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.7005191"
+    },
+    {
+      "source": "fb537477-5a27-4b48-8a16-e391a99549cc",
+      "target": "eefff92e-6b4e-4716-a02b-5867cad305bd",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.7005191"
+    },
+    {
+      "source": "8a87cd4e-130e-4404-a11b-4fe586c98e8b",
+      "target": "e6eb8823-42e0-4d09-b254-81ad62eded08",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.70673954"
+    },
+    {
+      "source": "8a87cd4e-130e-4404-a11b-4fe586c98e8b",
+      "target": "9e4864c0-b266-4213-9949-0a9151c608d4",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "8a87cd4e-130e-4404-a11b-4fe586c98e8b",
+      "target": "9e4864c0-b266-4213-9949-0a9151c608d4",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "8a87cd4e-130e-4404-a11b-4fe586c98e8b",
+      "target": "288a8cfa-545d-4da5-af1b-3ea4906c0b28",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "8a87cd4e-130e-4404-a11b-4fe586c98e8b",
+      "target": "e27b14fa-0364-4f29-866a-f75e9abcaf45",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "8a87cd4e-130e-4404-a11b-4fe586c98e8b",
+      "target": "b1cdf9dc-894a-4488-bfa0-c5209c84a10c",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.70673954"
+    },
+    {
+      "source": "8a87cd4e-130e-4404-a11b-4fe586c98e8b",
+      "target": "6c4accec-172d-4260-b1b9-8c0a12121ca8",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.70673954"
+    },
+    {
+      "source": "9220ad32-0e39-4095-b18e-fd64d11adfa2",
+      "target": "836ad627-4e99-40a7-91c6-ac0ee25b3b21",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.70874476"
+    },
+    {
+      "source": "9220ad32-0e39-4095-b18e-fd64d11adfa2",
+      "target": "4eccd732-fc13-4e75-8af6-89043a324784",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.70874476"
+    },
+    {
+      "source": "9220ad32-0e39-4095-b18e-fd64d11adfa2",
+      "target": "50078299-4ec6-470f-b4b5-a58960dad4f4",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.70874476"
+    },
+    {
+      "source": "9220ad32-0e39-4095-b18e-fd64d11adfa2",
+      "target": "52bf2cc0-eea8-4b9b-8b71-03de6a5c2a3e",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "9220ad32-0e39-4095-b18e-fd64d11adfa2",
+      "target": "1accf53a-a403-4680-9650-e8e21049ce20",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "9220ad32-0e39-4095-b18e-fd64d11adfa2",
+      "target": "eefff92e-6b4e-4716-a02b-5867cad305bd",
+      "edge_type": "hierarchy",
+      "link_type": "hierarchy"
+    },
+    {
+      "source": "6c4accec-172d-4260-b1b9-8c0a12121ca8",
+      "target": "9e4864c0-b266-4213-9949-0a9151c608d4",
+      "rag_connection": true,
+      "edge_type": "rag",
+      "link_type": "rag",
+      "similarity": "0.7601749"
+    }
+  ]
+}

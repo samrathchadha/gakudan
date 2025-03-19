@@ -395,6 +395,7 @@ class PromptGraph:
         5. Keep your response focused on addressing the main question with specific details
         6. DO NOT gentrify the emotion - maintain the original tone and specificity
         7. DO NOT show the end user what insights you use to create your synthesis.
+        8. You do not need to quote or show the users what insights/sources you are using btw. LIKE DO NOT USE ANY QUOTES, JUST USE THEM AS CONTEXT AND BEAUTIFULLY SYNTHESIZE THEM. if applicable, use the insight word for word but DO not quote it and use bullet points wherever you need where necessary
 
         Synthesized response:
         """
