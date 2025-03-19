@@ -6,7 +6,7 @@ Dumps JSON files regularly to track progress.
 
 import os
 import sys
-import json
+import orjson
 import time
 import uuid
 import logging
@@ -31,28 +31,60 @@ logging.basicConfig(level=logging.INFO, handlers=[handler])
 logger = logging.getLogger(__name__)
 
 def dump_json(processor, iteration, output_dir):
-    """Dump the current state of the graph to a JSON file."""
+    """
+    Dump the current state of the graph to a JSON file with improved reliability.
+    Uses orjson for better performance and handles file writing atomically.
+    
+    Args:
+        processor: The processor with the prompt_graph
+        iteration: Current iteration number 
+        output_dir: Directory to save files
+        
+    Returns:
+        Path to the created file or None on failure
+    """
     try:
         # Create a filename with timestamp and iteration
         timestamp = int(time.time())
         filename = f"expand_{timestamp}_{iteration}.json"
-        filepath = os.path.join(output_dir, "json", filename)
+        json_dir = os.path.join(output_dir, "json")
+        filepath = os.path.join(json_dir, filename)
         
         # Make sure the json directory exists
-        os.makedirs(os.path.join(output_dir, "json"), exist_ok=True)
+        os.makedirs(json_dir, exist_ok=True)
         
-        # Use the graph's save_to_json method
-        processor.prompt_graph.save_to_json(filepath)
+        # Log current graph stats before saving
+        node_count = len(processor.prompt_graph.graph.nodes())
+        edge_count = len(processor.prompt_graph.graph.edges())
+        logger.info(f"Dumping graph with {node_count} nodes and {edge_count} edges to {filepath}")
+        
+        # Use the graph's save_to_json method (now using orjson)
+        success = processor.prompt_graph.save_to_json(filepath)
         
         # Also save a consistent filename that always has the latest data
         latest_filepath = os.path.join(output_dir, "expand.json")
-        processor.prompt_graph.save_to_json(latest_filepath)
+        success2 = processor.prompt_graph.save_to_json(latest_filepath)
         
-        logger.info(f"Saved graph to {filepath}")
-        
-        return filepath
+        if success and success2:
+            # Verify the files were created and have content
+            if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
+                file_size_kb = os.path.getsize(filepath) / 1024
+                logger.info(f"Successfully saved graph to {filepath} ({file_size_kb:.2f} KB)")
+                
+                # Also verify latest file
+                latest_size_kb = os.path.getsize(latest_filepath) / 1024
+                logger.info(f"Also saved to {latest_filepath} ({latest_size_kb:.2f} KB)")
+                
+                return filepath
+            else:
+                logger.error(f"Failed to create file {filepath} or file is empty")
+                return None
+        else:
+            logger.error(f"Failed to save one or both JSON files")
+            return None
+            
     except Exception as e:
-        logger.error(f"Error dumping JSON: {e}")
+        logger.error(f"Error dumping JSON: {e}", exc_info=True)
         return None
 
 # Create a subclass of GeminiPromptProcessor that dumps JSON after each prompt
@@ -66,9 +98,14 @@ class DumpingPromptProcessor(GeminiPromptProcessor):
         # Call the original method
         result = super().process_sub_prompt(task_info)
         
-        # Dump JSON after processing
-        self.json_iteration += 1
-        dump_json(self, self.json_iteration, self.output_dir)
+        for i in range(0,3):
+            try:
+                # Dump JSON after processing
+                self.json_iteration += 1
+                dump_json(self, self.json_iteration, self.output_dir)
+                break
+            except:
+                logger.error("Error dumping JSON after sub-prompt processing", exc_info=True)
         
         return result
 
