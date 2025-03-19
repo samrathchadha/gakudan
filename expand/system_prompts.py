@@ -22,8 +22,7 @@ THOUGHT_GENERATOR_SYSTEM_PROMPT = """Generate an appropriate number of sub-promp
     ...
 - format end
 do not deviate from format at all 
-do not give further asks about personality just two words in the exact format given
-under no circumstance can you ever deviate. no new lines, no weird formatting, only exactly how it is given
+under no circumstance can you ever deviate. no new lines, no weird formatting, only EXACTLY how it is given, personality AND prompt on the SAME line for each question 
 """
 
 SUB_THOUGHT_GENERATOR_SYSTEM_PROMPT = """
