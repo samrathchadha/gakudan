@@ -1,3 +1,10 @@
+-- Drop existing tables in reverse order of dependencies
+DROP TABLE IF EXISTS contract_results CASCADE;
+DROP TABLE IF EXISTS client_tracking CASCADE;
+DROP TABLE IF EXISTS links CASCADE;
+DROP TABLE IF EXISTS nodes CASCADE;
+DROP TABLE IF EXISTS sessions CASCADE;
+
 -- Sessions table
 CREATE TABLE sessions (
   session_id TEXT PRIMARY KEY,
@@ -11,22 +18,23 @@ CREATE TABLE sessions (
   contract_error TEXT
 );
 
--- Nodes table
+-- Nodes table with composite primary key
 CREATE TABLE nodes (
-  node_id TEXT PRIMARY KEY,
-  session_id TEXT REFERENCES sessions(session_id) ON DELETE CASCADE,
+  session_id TEXT NOT NULL REFERENCES sessions(session_id) ON DELETE CASCADE,
+  node_id TEXT NOT NULL,
   prompt TEXT,
   response TEXT,
   depth INTEGER,
   created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  attributes JSONB -- For any additional node attributes
+  attributes JSONB,
+  PRIMARY KEY (session_id, node_id)
 );
 
 -- Links table
 CREATE TABLE links (
   id SERIAL PRIMARY KEY,
-  session_id TEXT REFERENCES sessions(session_id) ON DELETE CASCADE,
+  session_id TEXT NOT NULL REFERENCES sessions(session_id) ON DELETE CASCADE,
   source_id TEXT NOT NULL, 
   target_id TEXT NOT NULL,
   edge_type TEXT, -- 'hierarchy' or 'rag'
@@ -39,7 +47,7 @@ CREATE TABLE links (
 -- Client tracking table
 CREATE TABLE client_tracking (
   client_id TEXT PRIMARY KEY,
-  session_id TEXT REFERENCES sessions(session_id) ON DELETE CASCADE,
+  session_id TEXT NOT NULL REFERENCES sessions(session_id) ON DELETE CASCADE,
   last_check TIMESTAMPTZ NOT NULL
 );
 

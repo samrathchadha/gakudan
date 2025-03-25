@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """
 Flask API using PostgreSQL database for storage instead of local files.
+With improved connection management.
 """
 
 import os
@@ -12,12 +13,13 @@ import threading
 import subprocess
 from typing import Dict, Any, Optional
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, g
 from flask_cors import CORS
 
 # Import database modules
 import db
 from db_manager import db_manager
+from connection_middleware import setup_db_middleware
 
 # Configure logging with timestamps
 logging.basicConfig(
@@ -32,6 +34,9 @@ logger = logging.getLogger("api_server")
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
+
+# Setup database connection middleware
+setup_db_middleware(app, db)
 
 # Get Python executable
 PYTHON_EXECUTABLE = sys.executable
@@ -52,10 +57,12 @@ def run_expand(session_id: str, prompt: str, api_key: str):
         env = os.environ.copy()
         env["SESSION_ID"] = session_id
         env["DB_HOST"] = db.DB_HOST
-        env["DB_PORT"] = db.DB_PORT
+        env["DB_PORT"] = str(db.DB_PORT)  # Ensure port is a string
         env["DB_NAME"] = db.DB_NAME
         env["DB_USER"] = db.DB_USER
         env["DB_PASSWORD"] = db.DB_PASSWORD
+        
+        logger.info(f"Running expand with env: HOST={env['DB_HOST']}, PORT={env['DB_PORT']}, DB={env['DB_NAME']}")
         
         with expand_process_lock:
             expand_process = subprocess.Popen(
@@ -104,11 +111,14 @@ def run_expand(session_id: str, prompt: str, api_key: str):
             # Update session status
             if expand_process.returncode == 0:
                 db_manager.update_session_status(session_id, "expand_completed")
+                logger.info(f"Session {session_id} marked as expand_completed")
             else:
+                error_msg = f"Expand process failed with code {expand_process.returncode}"
+                logger.error(error_msg)
                 db_manager.update_session_status(
                     session_id, 
                     "expand_error", 
-                    f"Expand process failed with code {expand_process.returncode}"
+                    error_msg
                 )
             
             logger.info(f"Expand process handler completed for session {session_id}")
@@ -133,10 +143,12 @@ def run_contract(session_id: str, api_key: str):
         env = os.environ.copy()
         env["SESSION_ID"] = session_id
         env["DB_HOST"] = db.DB_HOST
-        env["DB_PORT"] = db.DB_PORT
+        env["DB_PORT"] = str(db.DB_PORT)  # Ensure port is a string
         env["DB_NAME"] = db.DB_NAME
         env["DB_USER"] = db.DB_USER
         env["DB_PASSWORD"] = db.DB_PASSWORD
+        
+        logger.info(f"Running contract with env: HOST={env['DB_HOST']}, PORT={env['DB_PORT']}, DB={env['DB_NAME']}")
         
         with contract_process_lock:
             contract_process = subprocess.Popen(
@@ -185,11 +197,14 @@ def run_contract(session_id: str, api_key: str):
             if contract_process.returncode == 0:
                 db_manager.update_contract_status(session_id, "completed")
                 db_manager.update_session_status(session_id, "completed")
+                logger.info(f"Session {session_id} marked as completed")
             else:
+                error_msg = f"Contract process failed with code {contract_process.returncode}"
+                logger.error(error_msg)
                 db_manager.update_contract_status(
                     session_id,
                     "error",
-                    f"Contract process failed with code {contract_process.returncode}"
+                    error_msg
                 )
             
             logger.info(f"Contract process handler completed for session {session_id}")
@@ -205,7 +220,8 @@ def status():
     return jsonify({
         "status": "online",
         "python_executable": PYTHON_EXECUTABLE,
-        "database": db_manager.get_database_stats()
+        "database": db_manager.get_database_stats(),
+        "db_connections": db.get_connection_stats() if hasattr(db, 'get_connection_stats') else None
     })
 
 @app.route('/api/sessions', methods=['GET'])
@@ -361,15 +377,14 @@ def debug_stats(session_id):
 def health_check():
     """Simple health check endpoint."""
     try:
-        # Initialize the database if not already connected
-        if db.database.is_closed():
-            db.initialize_db()
-        
         # Test database connection with a simple query
-        db.Session.select(db.Session.session_id).limit(1).execute()
+        db.database.execute_sql("SELECT 1").fetchone()
         
         # Get database stats
         db_stats = db_manager.get_database_stats()
+        
+        # Get connection stats
+        conn_stats = db.get_connection_stats() if hasattr(db, 'get_connection_stats') else None
         
         return jsonify({
             "status": "healthy",
@@ -377,7 +392,8 @@ def health_check():
             "database": {
                 "connected": True,
                 "stats": db_stats
-            }
+            },
+            "connections": conn_stats
         })
     except Exception as e:
         logger.error(f"Health check failed: {e}", exc_info=True)
@@ -389,11 +405,21 @@ def health_check():
 
 def cleanup_old_sessions_job():
     """Periodically clean up old sessions."""
-    while True:
-        time.sleep(3600)  # Run once per hour
+    from connection_middleware import with_database
+    
+    @with_database
+    def do_cleanup():
         logger.info("Running cleanup of old sessions")
         deleted_count = db_manager.cleanup_old_sessions(hours=24)
         logger.info(f"Deleted {deleted_count} old sessions")
+    
+    while True:
+        try:
+            time.sleep(3600)  # Run once per hour
+            do_cleanup()
+        except Exception as e:
+            logger.error(f"Error in cleanup job: {e}", exc_info=True)
+            time.sleep(60)  # Wait a minute before retrying
 
 if __name__ == "__main__":
     # Initialize the database
@@ -408,6 +434,9 @@ if __name__ == "__main__":
     logger.info("Starting API server")
     logger.info(f"Python executable: {PYTHON_EXECUTABLE}")
     logger.info(f"Database host: {db.DB_HOST}")
+    logger.info(f"Database port: {db.DB_PORT}")
+    logger.info(f"Database name: {db.DB_NAME}")
+    logger.info(f"Database user: {db.DB_USER}")
     
     # Start the server
     port = int(os.environ.get("PORT", 5000))

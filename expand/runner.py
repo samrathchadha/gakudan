@@ -12,16 +12,6 @@ import argparse
 import colorlog
 import numpy as np
 from typing import Dict, Any, Optional
-from prompt_processor import GeminiPromptProcessor
-from prompt_graph import PromptGraph
-
-# Add parent directory to path to import database modules
-parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, parent_dir)
-
-# Import database modules
-import db
-from db_manager import db_manager
 
 # Configure Colorful Logging
 handler = colorlog.StreamHandler()
@@ -37,6 +27,30 @@ handler.setFormatter(colorlog.ColoredFormatter(
 ))
 logging.basicConfig(level=logging.INFO, handlers=[handler])
 logger = logging.getLogger(__name__)
+
+# Add parent directory to path to import database modules
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, parent_dir)
+
+# Debug environment variables
+logger.info(f"Environment variables for database:")
+for key in ['DB_HOST', 'DB_PORT', 'DB_NAME', 'DB_USER', 'DB_PASSWORD']:
+    logger.info(f"{key}={os.environ.get(key, 'NOT SET')}")
+
+try:
+    # Import required libraries
+    from google import genai
+    from prompt_processor import GeminiPromptProcessor
+    from prompt_graph import PromptGraph
+    
+    # Import database modules
+    import db
+    from db_manager import db_manager
+    
+    logger.info("All modules imported successfully")
+except Exception as e:
+    logger.critical(f"Failed to import required modules: {e}", exc_info=True)
+    sys.exit(1)
 
 class DatabasePromptGraph(PromptGraph):
     """
@@ -76,18 +90,27 @@ class DatabasePromptGraph(PromptGraph):
             if key in db_attributes:
                 del db_attributes[key]
         
-        # Add to database
-        db_success = self.db_manager.add_node(
-            node_id=node_id,
-            session_id=self.session_id,
-            prompt=prompt,
-            response=response,
-            depth=depth,
-            attributes=db_attributes if db_attributes else None
-        )
-        
-        if not db_success:
-            logger.warning(f"Failed to add node {node_id} to database for session {self.session_id}")
+        # Add to database with explicit transaction
+        try:
+            # Ensure DB connection is active
+            if db.database.is_closed():
+                db.initialize_db()
+                
+            db_success = self.db_manager.add_node(
+                node_id=node_id,
+                session_id=self.session_id,
+                prompt=prompt,
+                response=response,
+                depth=depth,
+                attributes=db_attributes if db_attributes else None
+            )
+            
+            if db_success:
+                logger.info(f"Node {node_id} saved to database")
+            else:
+                logger.warning(f"Failed to add node {node_id} to database for session {self.session_id}")
+        except Exception as e:
+            logger.error(f"Error adding node {node_id} to database: {e}", exc_info=True)
     
     def add_edge(self, parent_id: str, child_id: str, edge_attrs: Dict = None, edge_type: str = "hierarchy"):
         """
@@ -113,19 +136,28 @@ class DatabasePromptGraph(PromptGraph):
             if key in db_attributes:
                 del db_attributes[key]
         
-        # Add to database
-        db_success = self.db_manager.add_link(
-            session_id=self.session_id,
-            source_id=parent_id,
-            target_id=child_id,
-            edge_type=edge_type,
-            link_type=edge_type,  # Use edge_type as link_type for compatibility
-            similarity=similarity,
-            attributes=db_attributes if db_attributes else None
-        )
-        
-        if not db_success:
-            logger.warning(f"Failed to add edge from {parent_id} to {child_id} in database for session {self.session_id}")
+        # Add to database with explicit transaction
+        try:
+            # Ensure DB connection is active
+            if db.database.is_closed():
+                db.initialize_db()
+                
+            db_success = self.db_manager.add_link(
+                session_id=self.session_id,
+                source_id=parent_id,
+                target_id=child_id,
+                edge_type=edge_type,
+                link_type=edge_type,  # Use edge_type as link_type for compatibility
+                similarity=similarity,
+                attributes=db_attributes if db_attributes else None
+            )
+            
+            if db_success:
+                logger.info(f"Edge from {parent_id} to {child_id} saved to database")
+            else:
+                logger.warning(f"Failed to add edge from {parent_id} to {child_id} in database for session {self.session_id}")
+        except Exception as e:
+            logger.error(f"Error adding edge from {parent_id} to {child_id} to database: {e}", exc_info=True)
     
     def add_rag_connection(self, source_id: str, target_id: str, similarity: float = None):
         """
@@ -139,18 +171,27 @@ class DatabasePromptGraph(PromptGraph):
         # Call parent method to update in-memory graph
         super().add_rag_connection(source_id, target_id, similarity)
         
-        # Add to database
-        db_success = self.db_manager.add_link(
-            session_id=self.session_id,
-            source_id=source_id,
-            target_id=target_id,
-            edge_type="rag",
-            link_type="rag",
-            similarity=similarity
-        )
-        
-        if not db_success:
-            logger.warning(f"Failed to add RAG connection from {source_id} to {target_id} in database for session {self.session_id}")
+        # Add to database with explicit transaction
+        try:
+            # Ensure DB connection is active
+            if db.database.is_closed():
+                db.initialize_db()
+                
+            db_success = self.db_manager.add_link(
+                session_id=self.session_id,
+                source_id=source_id,
+                target_id=target_id,
+                edge_type="rag",
+                link_type="rag",
+                similarity=similarity
+            )
+            
+            if db_success:
+                logger.info(f"RAG connection from {source_id} to {target_id} saved to database")
+            else:
+                logger.warning(f"Failed to add RAG connection from {source_id} to {target_id} in database for session {self.session_id}")
+        except Exception as e:
+            logger.error(f"Error adding RAG connection to database: {e}", exc_info=True)
     
     def save_to_database(self):
         """
@@ -159,10 +200,70 @@ class DatabasePromptGraph(PromptGraph):
         """
         graph_data = self.to_dict()
         
-        # Log stats
-        node_count = len(self.graph.nodes())
-        edge_count = len(self.graph.edges())
-        logger.info(f"Saved graph to database: {node_count} nodes, {edge_count} edges")
+        # Explicitly save each node and edge to ensure nothing is missed
+        try:
+            # Ensure DB connection is active
+            if db.database.is_closed():
+                db.initialize_db()
+                
+            # Count successful operations
+            node_count = 0
+            edge_count = 0
+            
+            # Process all nodes
+            for node_id, node_data in self.graph.nodes(data=True):
+                # Extract key attributes
+                prompt = node_data.get('prompt')
+                response = node_data.get('response')
+                depth = node_data.get('depth')
+                
+                # Create a copy of attributes without key fields for JSONB storage
+                db_attributes = dict(node_data)
+                for key in ['prompt', 'response', 'depth']:
+                    if key in db_attributes:
+                        db_attributes.pop(key, None)
+                
+                # Save to database
+                if self.db_manager.add_node(
+                    node_id=node_id,
+                    session_id=self.session_id,
+                    prompt=prompt,
+                    response=response,
+                    depth=depth,
+                    attributes=db_attributes if db_attributes else None
+                ):
+                    node_count += 1
+            
+            # Process all edges
+            for source_id, target_id, edge_data in self.graph.edges(data=True):
+                # Extract key attributes
+                edge_type = edge_data.get('edge_type', 'hierarchy')
+                similarity = edge_data.get('similarity')
+                
+                # Create a copy of attributes without key fields for JSONB storage
+                db_attributes = dict(edge_data)
+                for key in ['edge_type', 'similarity']:
+                    if key in db_attributes:
+                        db_attributes.pop(key, None)
+                
+                # Save to database
+                if self.db_manager.add_link(
+                    session_id=self.session_id,
+                    source_id=source_id,
+                    target_id=target_id,
+                    edge_type=edge_type,
+                    link_type=edge_type,  # Use edge_type as link_type for compatibility
+                    similarity=similarity,
+                    attributes=db_attributes if db_attributes else None
+                ):
+                    edge_count += 1
+            
+            # Log stats
+            logger.info(f"Saved graph to database: {node_count}/{len(self.graph.nodes())} nodes, {edge_count}/{len(self.graph.edges())} edges")
+            return True
+        except Exception as e:
+            logger.error(f"Error saving graph to database: {e}", exc_info=True)
+            return False
 
 # Create a subclass of GeminiPromptProcessor that uses our DatabasePromptGraph
 class DatabasePromptProcessor(GeminiPromptProcessor):
@@ -184,6 +285,27 @@ class DatabasePromptProcessor(GeminiPromptProcessor):
         self.prompt_graph.save_to_database()
         
         return result
+    
+    def add_to_queue(self, sub_prompt, parent_id, depth=0):
+        result = super().add_to_queue(sub_prompt, parent_id, depth)
+        # Save changes to database after each queue addition
+        self.prompt_graph.save_to_database()
+        return result
+    
+    def process_main_prompt(self, main_prompt):
+        # Set root prompt
+        self.prompt_graph.add_node('root', prompt=main_prompt, depth=-1)
+        
+        # Save immediately to ensure root node is in database
+        self.prompt_graph.save_to_database()
+        
+        # Process normally
+        results = super().process_main_prompt(main_prompt)
+        
+        # Save final state
+        self.prompt_graph.save_to_database()
+        
+        return results
 
 def parse_arguments():
     """Parse command line arguments."""
@@ -218,6 +340,9 @@ def main():
     args = parse_arguments()
     session_id = args.session_id
     
+    logger.info(f"Runner starting for session {session_id}")
+    logger.info(f"Prompt: {args.prompt}")
+    
     # Verify database connection
     if not verify_database_connection(session_id):
         logger.critical("Database verification failed. Exiting.")
@@ -237,10 +362,11 @@ def main():
         # Update session status
         db_manager.update_session_status(session_id, "expand_completed")
         
-        logger.info("Processing completed")
+        logger.info("Processing completed successfully")
+        return 0
         
     except Exception as e:
-        logger.critical(f"Unexpected error: {e}")
+        logger.critical(f"Unexpected error: {e}", exc_info=True)
         import traceback
         traceback.print_exc()
         
@@ -250,4 +376,9 @@ def main():
         sys.exit(1)
 
 if __name__ == "__main__":
-    main()
+    try:
+        exit_code = main()
+        sys.exit(exit_code)
+    except Exception as e:
+        logger.critical(f"Fatal error in main: {e}", exc_info=True)
+        sys.exit(1)

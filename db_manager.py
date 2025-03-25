@@ -10,7 +10,7 @@ import json
 import time
 import uuid
 from typing import Dict, List, Any, Optional, Tuple
-from peewee import fn, SQL
+from peewee import fn, SQL, DoesNotExist
 import db
 
 logger = logging.getLogger("db_manager")
@@ -37,9 +37,13 @@ class DatabaseManager:
         client_id = str(uuid.uuid4())
         current_time = datetime.datetime.now()
         
-        with db.db_transaction():
+        # Ensure DB is connected
+        if self.db.is_closed():
+            db.initialize_db()
+        
+        with db.db_transaction() as transaction:
             # Create session
-            db.Session.create(
+            session = db.Session.create(
                 session_id=session_id,
                 client_id=client_id,
                 prompt=prompt,
@@ -50,10 +54,20 @@ class DatabaseManager:
             )
             
             # Create client tracking
-            db.ClientTracking.create(
+            client_tracking = db.ClientTracking.create(
                 client_id=client_id,
                 session_id=session_id,
                 last_check=current_time
+            )
+            
+            # Create root node for the session
+            db.Node.create(
+                node_id='root',
+                session_id=session_id,
+                prompt=prompt,
+                depth=-1,
+                created_at=current_time,
+                updated_at=current_time
             )
             
             logger.info(f"Created new session {session_id} for client {client_id}")
@@ -73,7 +87,11 @@ class DatabaseManager:
             True if successful, False otherwise
         """
         try:
-            with db.db_transaction():
+            # Ensure DB is connected
+            if self.db.is_closed():
+                db.initialize_db()
+                
+            with db.db_transaction() as transaction:
                 session = db.Session.get(db.Session.session_id == session_id)
                 session.status = status
                 session.last_updated = datetime.datetime.now()
@@ -84,11 +102,12 @@ class DatabaseManager:
                 session.save()
                 logger.info(f"Updated session {session_id} status to {status}")
                 return True
-        except db.Session.DoesNotExist:
+                
+        except DoesNotExist:
             logger.error(f"Session {session_id} not found")
             return False
         except Exception as e:
-            logger.error(f"Error updating session {session_id}: {e}")
+            logger.error(f"Error updating session {session_id}: {e}", exc_info=True)
             return False
 
     def update_contract_status(self, session_id: str, status: str, error: str = None) -> bool:
@@ -104,7 +123,11 @@ class DatabaseManager:
             True if successful, False otherwise
         """
         try:
-            with db.db_transaction():
+            # Ensure DB is connected
+            if self.db.is_closed():
+                db.initialize_db()
+                
+            with db.db_transaction() as transaction:
                 session = db.Session.get(db.Session.session_id == session_id)
                 session.contract_status = status
                 session.last_updated = datetime.datetime.now()
@@ -115,21 +138,22 @@ class DatabaseManager:
                 session.save()
                 logger.info(f"Updated session {session_id} contract status to {status}")
                 return True
-        except db.Session.DoesNotExist:
+                
+        except DoesNotExist:
             logger.error(f"Session {session_id} not found")
             return False
         except Exception as e:
-            logger.error(f"Error updating contract status for session {session_id}: {e}")
+            logger.error(f"Error updating contract status for session {session_id}: {e}", exc_info=True)
             return False
     
     def add_node(self, node_id: str, session_id: str, prompt: str = None, 
                  response: str = None, depth: int = None, 
                  attributes: Dict = None) -> bool:
         """
-        Add or update a node in the database.
+        Add or update a node in the database using composite primary key.
         
         Args:
-            node_id: Unique identifier for the node
+            node_id: Node identifier (now part of composite key with session_id)
             session_id: ID of the session this node belongs to
             prompt: Node prompt text
             response: Node response text
@@ -142,10 +166,17 @@ class DatabaseManager:
         try:
             current_time = datetime.datetime.now()
             
-            with db.db_transaction():
-                # Check if node exists
+            # Ensure DB is connected
+            if self.db.is_closed():
+                db.initialize_db()
+                
+            with db.db_transaction() as transaction:
+                # Check if node exists using composite key
                 try:
-                    node = db.Node.get(db.Node.node_id == node_id)
+                    node = db.Node.get(
+                        (db.Node.session_id == session_id) & 
+                        (db.Node.node_id == node_id)
+                    )
                     # Update existing node
                     if prompt is not None:
                         node.prompt = prompt
@@ -159,9 +190,10 @@ class DatabaseManager:
                     node.updated_at = current_time
                     node.save()
                     logger.debug(f"Updated node {node_id} in session {session_id}")
-                except db.Node.DoesNotExist:
+                    
+                except DoesNotExist:
                     # Create new node
-                    db.Node.create(
+                    node = db.Node.create(
                         node_id=node_id,
                         session_id=session_id,
                         prompt=prompt,
@@ -174,8 +206,9 @@ class DatabaseManager:
                     logger.debug(f"Created node {node_id} in session {session_id}")
                 
                 return True
+                
         except Exception as e:
-            logger.error(f"Error adding/updating node {node_id}: {e}")
+            logger.error(f"Error adding/updating node {node_id} in session {session_id}: {e}", exc_info=True)
             return False
     
     def add_link(self, session_id: str, source_id: str, target_id: str,
@@ -197,58 +230,73 @@ class DatabaseManager:
             True if successful, False otherwise
         """
         try:
-            # Check if the same link already exists
-            existing_link = db.Link.select().where(
-                (db.Link.session_id == session_id) &
-                (db.Link.source_id == source_id) &
-                (db.Link.target_id == target_id) &
-                (db.Link.edge_type == edge_type)
-            ).first()
-            
-            if existing_link:
-                # Link already exists, update attributes if provided
-                if attributes:
-                    existing_link.attributes = attributes
-                if similarity is not None:
-                    existing_link.similarity = similarity
-                if link_type is not None:
-                    existing_link.link_type = link_type
+            # Ensure DB is connected
+            if self.db.is_closed():
+                db.initialize_db()
                 
-                existing_link.save()
-                logger.debug(f"Updated link from {source_id} to {target_id} in session {session_id}")
-            else:
-                # Create new link
-                db.Link.create(
-                    session_id=session_id,
-                    source_id=source_id,
-                    target_id=target_id,
-                    edge_type=edge_type,
-                    link_type=link_type or edge_type,  # Use edge_type as link_type if not provided
-                    similarity=similarity,
-                    attributes=attributes,
-                    created_at=datetime.datetime.now()
-                )
-                logger.debug(f"Created link from {source_id} to {target_id} in session {session_id}")
-            
-            return True
+            with db.db_transaction() as transaction:
+                # Check if the same link already exists
+                existing_link = db.Link.select().where(
+                    (db.Link.session_id == session_id) &
+                    (db.Link.source_id == source_id) &
+                    (db.Link.target_id == target_id) &
+                    (db.Link.edge_type == edge_type)
+                ).first()
+                
+                if existing_link:
+                    # Link already exists, update attributes if provided
+                    if attributes:
+                        existing_link.attributes = attributes
+                    if similarity is not None:
+                        existing_link.similarity = similarity
+                    if link_type is not None:
+                        existing_link.link_type = link_type
+                    
+                    existing_link.save()
+                    logger.debug(f"Updated link from {source_id} to {target_id} in session {session_id}")
+                else:
+                    # Create new link
+                    link = db.Link.create(
+                        session_id=session_id,
+                        source_id=source_id,
+                        target_id=target_id,
+                        edge_type=edge_type,
+                        link_type=link_type or edge_type,  # Use edge_type as link_type if not provided
+                        similarity=similarity,
+                        attributes=attributes,
+                        created_at=datetime.datetime.now()
+                    )
+                    logger.debug(f"Created link from {source_id} to {target_id} in session {session_id}")
+                
+                return True
+                
         except Exception as e:
-            logger.error(f"Error adding link from {source_id} to {target_id}: {e}")
+            logger.error(f"Error adding link from {source_id} to {target_id} in session {session_id}: {e}", exc_info=True)
             return False
     
-    def get_node_data(self, node_id: str) -> Dict:
+    def get_node_data(self, node_id: str, session_id: str) -> Dict:
         """
-        Get data for a specific node.
+        Get data for a specific node using composite key.
         
         Args:
             node_id: ID of the node to retrieve
+            session_id: ID of the session the node belongs to
             
         Returns:
             Dictionary with node data
         """
         try:
-            node = db.Node.get(db.Node.node_id == node_id)
+            # Ensure DB is connected
+            if self.db.is_closed():
+                db.initialize_db()
+                
+            node = db.Node.get(
+                (db.Node.session_id == session_id) & 
+                (db.Node.node_id == node_id)
+            )
+            
             node_data = {
-                'id': node.node_id,
+                'id': node.node_id,  # Return just the node_id to the user
                 'prompt': node.prompt,
                 'response': node.response,
                 'depth': node.depth
@@ -260,11 +308,11 @@ class DatabaseManager:
                     node_data[key] = value
                     
             return node_data
-        except db.Node.DoesNotExist:
-            logger.warning(f"Node {node_id} not found")
+        except DoesNotExist:
+            logger.warning(f"Node {node_id} in session {session_id} not found")
             return {}
         except Exception as e:
-            logger.error(f"Error getting node data for {node_id}: {e}")
+            logger.error(f"Error getting node data for {node_id} in session {session_id}: {e}", exc_info=True)
             return {}
     
     def get_session_data(self, session_id: str) -> Dict:
@@ -278,6 +326,10 @@ class DatabaseManager:
             Dictionary with session data
         """
         try:
+            # Ensure DB is connected
+            if self.db.is_closed():
+                db.initialize_db()
+                
             session = db.Session.get(db.Session.session_id == session_id)
             return {
                 'session_id': session.session_id,
@@ -290,11 +342,11 @@ class DatabaseManager:
                 'error': session.error,
                 'contract_error': session.contract_error
             }
-        except db.Session.DoesNotExist:
+        except DoesNotExist:
             logger.warning(f"Session {session_id} not found")
             return {}
         except Exception as e:
-            logger.error(f"Error getting session data for {session_id}: {e}")
+            logger.error(f"Error getting session data for {session_id}: {e}", exc_info=True)
             return {}
     
     def format_graph_json(self, session_id: str, 
@@ -310,6 +362,16 @@ class DatabaseManager:
             Dictionary with nodes and links in the expected format
         """
         try:
+            # Ensure DB is connected
+            if self.db.is_closed():
+                db.initialize_db()
+                
+            # Add detailed logging
+            if after_time:
+                logger.info(f"Getting graph data for session {session_id} after {after_time}")
+            else:
+                logger.info(f"Getting all graph data for session {session_id}")
+                
             nodes_query = db.Node.select().where(db.Node.session_id == session_id)
             links_query = db.Link.select().where(db.Link.session_id == session_id)
             
@@ -318,11 +380,20 @@ class DatabaseManager:
                 nodes_query = nodes_query.where(db.Node.updated_at > after_time)
                 links_query = links_query.where(db.Link.created_at > after_time)
             
+            # Log query counts before executing
+            logger.info(f"Query will retrieve nodes and links for session {session_id}")
+            
+            # Execute queries
+            nodes_list = list(nodes_query)
+            links_list = list(links_query)
+            
+            logger.info(f"Retrieved {len(nodes_list)} nodes and {len(links_list)} links for session {session_id}")
+            
             # Format nodes
             nodes = []
-            for node in nodes_query:
+            for node in nodes_list:
                 node_data = {
-                    'id': node.node_id,
+                    'id': node.node_id,  # Just show node_id to user, not the composite key
                     'prompt': node.prompt,
                     'depth': node.depth
                 }
@@ -340,7 +411,7 @@ class DatabaseManager:
             
             # Format links
             links = []
-            for link in links_query:
+            for link in links_list:
                 link_data = {
                     'source': link.source_id,
                     'target': link.target_id
@@ -371,7 +442,7 @@ class DatabaseManager:
                 'links': links
             }
         except Exception as e:
-            logger.error(f"Error formatting graph JSON for session {session_id}: {e}")
+            logger.error(f"Error formatting graph JSON for session {session_id}: {e}", exc_info=True)
             return {
                 'directed': True,
                 'multigraph': True,
@@ -394,11 +465,20 @@ class DatabaseManager:
             Dictionary with update information
         """
         try:
+            # Ensure DB is connected
+            if self.db.is_closed():
+                db.initialize_db()
+                
+            # Log detailed information
+            logger.info(f"Getting updates for session {session_id}, client {client_id}, force_full={force_full}")
+            
             # Get client tracking info
             try:
                 client = db.ClientTracking.get(db.ClientTracking.client_id == client_id)
                 last_check = client.last_check
-            except db.ClientTracking.DoesNotExist:
+                logger.info(f"Found existing client tracking for {client_id}, last check at {last_check}")
+                
+            except DoesNotExist:
                 # Create new client tracking if it doesn't exist
                 last_check = datetime.datetime.now() - datetime.timedelta(days=30)  # Get everything
                 client = db.ClientTracking.create(
@@ -430,6 +510,10 @@ class DatabaseManager:
             # Check for contract data
             contract_available = self.is_contract_available(session_id)
             
+            # Log detailed information about updates
+            logger.info(f"Updates for session {session_id}: has_updates={has_updates}, " +
+                      f"nodes={len(graph_data['nodes'])}, links={len(graph_data['links'])}")
+            
             return {
                 'session_id': session_id,
                 'client_id': client_id,
@@ -444,7 +528,7 @@ class DatabaseManager:
                 }
             }
         except Exception as e:
-            logger.error(f"Error getting session updates for {session_id}, client {client_id}: {e}")
+            logger.error(f"Error getting session updates for {session_id}, client {client_id}: {e}", exc_info=True)
             return {
                 'session_id': session_id,
                 'client_id': client_id,
@@ -470,11 +554,15 @@ class DatabaseManager:
             True if contract result is available, False otherwise
         """
         try:
+            # Ensure DB is connected
+            if self.db.is_closed():
+                db.initialize_db()
+                
             return db.ContractResult.select().where(
                 db.ContractResult.session_id == session_id
             ).exists()
         except Exception as e:
-            logger.error(f"Error checking contract availability for {session_id}: {e}")
+            logger.error(f"Error checking contract availability for {session_id}: {e}", exc_info=True)
             return False
     
     def get_contract_data(self, session_id: str) -> Optional[Dict]:
@@ -488,13 +576,17 @@ class DatabaseManager:
             Contract data dictionary or None if not available
         """
         try:
+            # Ensure DB is connected
+            if self.db.is_closed():
+                db.initialize_db()
+                
             contract = db.ContractResult.get(db.ContractResult.session_id == session_id)
             return contract.data
-        except db.ContractResult.DoesNotExist:
+        except DoesNotExist:
             logger.info(f"No contract data found for session {session_id}")
             return None
         except Exception as e:
-            logger.error(f"Error getting contract data for {session_id}: {e}")
+            logger.error(f"Error getting contract data for {session_id}: {e}", exc_info=True)
             return None
     
     def save_contract_data(self, session_id: str, data: Dict) -> bool:
@@ -509,7 +601,11 @@ class DatabaseManager:
             True if successful, False otherwise
         """
         try:
-            with db.db_transaction():
+            # Ensure DB is connected
+            if self.db.is_closed():
+                db.initialize_db()
+                
+            with db.db_transaction() as transaction:
                 # Check if contract result already exists
                 contract, created = db.ContractResult.get_or_create(
                     session_id=session_id,
@@ -531,7 +627,7 @@ class DatabaseManager:
                 logger.info(f"Saved contract data for session {session_id}")
                 return True
         except Exception as e:
-            logger.error(f"Error saving contract data for {session_id}: {e}")
+            logger.error(f"Error saving contract data for {session_id}: {e}", exc_info=True)
             return False
     
     def get_all_sessions(self) -> List[Dict]:
@@ -542,8 +638,12 @@ class DatabaseManager:
             List of session dictionaries
         """
         try:
+            # Ensure DB is connected
+            if self.db.is_closed():
+                db.initialize_db()
+                
             sessions = []
-            for session in db.Session.select():
+            for session in db.Session.select().order_by(db.Session.created_at.desc()):
                 session_data = {
                     'session_id': session.session_id,
                     'client_id': session.client_id,
@@ -570,7 +670,7 @@ class DatabaseManager:
             
             return sessions
         except Exception as e:
-            logger.error(f"Error getting all sessions: {e}")
+            logger.error(f"Error getting all sessions: {e}", exc_info=True)
             return []
     
     def cleanup_old_sessions(self, hours: int = 24) -> int:
@@ -584,13 +684,17 @@ class DatabaseManager:
             Number of sessions deleted
         """
         try:
+            # Ensure DB is connected
+            if self.db.is_closed():
+                db.initialize_db()
+                
             cutoff_time = datetime.datetime.now() - datetime.timedelta(hours=hours)
             old_sessions = db.Session.select().where(db.Session.last_updated < cutoff_time)
             
             count = 0
             for session in old_sessions:
                 session_id = session.session_id
-                with db.db_transaction():
+                with db.db_transaction() as transaction:
                     # Delete will cascade to related tables due to foreign key constraints
                     db.Session.delete().where(db.Session.session_id == session_id).execute()
                     count += 1
@@ -598,7 +702,7 @@ class DatabaseManager:
             
             return count
         except Exception as e:
-            logger.error(f"Error cleaning up old sessions: {e}")
+            logger.error(f"Error cleaning up old sessions: {e}", exc_info=True)
             return 0
     
     def get_database_stats(self) -> Dict:
@@ -609,6 +713,10 @@ class DatabaseManager:
             Dictionary with database statistics
         """
         try:
+            # Ensure DB is connected
+            if self.db.is_closed():
+                db.initialize_db()
+                
             stats = {
                 'session_count': db.Session.select().count(),
                 'node_count': db.Node.select().count(),
@@ -620,7 +728,7 @@ class DatabaseManager:
             
             return stats
         except Exception as e:
-            logger.error(f"Error getting database stats: {e}")
+            logger.error(f"Error getting database stats: {e}", exc_info=True)
             return {
                 'error': str(e),
                 'timestamp': datetime.datetime.now().timestamp()
