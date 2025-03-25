@@ -1,0 +1,5 @@
+.vercel
+expand/__pycache__
+sessions
+expand/__pycache__
+api_server.log
