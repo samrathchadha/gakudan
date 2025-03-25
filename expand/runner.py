@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 """
-Alternative main.py that takes command line arguments instead of using a UI.
-Dumps JSON files regularly to track progress.
+Modified runner.py that uses PostgreSQL database instead of local files.
 """
 
 import os
@@ -12,17 +11,17 @@ import logging
 import argparse
 import colorlog
 import numpy as np
+from typing import Dict, Any, Optional
 from prompt_processor import GeminiPromptProcessor
 from prompt_graph import PromptGraph
 
-# Try importing orjson, fall back to standard json
-try:
-    import orjson
-    USE_ORJSON = True
-except ImportError:
-    import json
-    USE_ORJSON = False
-    logging.warning("orjson not found, falling back to standard json library. Consider installing orjson for better performance.")
+# Add parent directory to path to import database modules
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, parent_dir)
+
+# Import database modules
+import db
+from db_manager import db_manager
 
 # Configure Colorful Logging
 handler = colorlog.StreamHandler()
@@ -39,174 +38,204 @@ handler.setFormatter(colorlog.ColoredFormatter(
 logging.basicConfig(level=logging.INFO, handlers=[handler])
 logger = logging.getLogger(__name__)
 
-def convert_numpy(obj):
-    """Convert numpy types to Python native types."""
-    if isinstance(obj, np.integer):
-        return int(obj)
-    elif isinstance(obj, np.floating):
-        return float(obj)
-    elif isinstance(obj, np.ndarray):
-        return obj.tolist()
-    elif hasattr(obj, 'item'):  # Handle other numpy scalar types
-        return obj.item()
-    return obj
-
-def dump_json(processor, iteration, output_dir):
+class DatabasePromptGraph(PromptGraph):
     """
-    Dump the current state of the graph to a JSON file with improved reliability.
-    
-    Args:
-        processor: The processor with the prompt_graph
-        iteration: Current iteration number 
-        output_dir: Directory to save files
+    Enhanced PromptGraph that stores nodes and links in the database.
+    """
+    def __init__(self, session_id: str):
+        """
+        Initialize with session ID for database storage.
         
-    Returns:
-        Path to the created file or None on failure
-    """
-    max_retries = 3
-    retry_count = 0
+        Args:
+            session_id: ID of the session this graph belongs to
+        """
+        super().__init__()
+        self.session_id = session_id
+        self.db_manager = db_manager
+        logger.info(f"Initialized DatabasePromptGraph for session {session_id}")
     
-    while retry_count < max_retries:
-        try:
-            # Create a filename with timestamp and iteration
-            timestamp = int(time.time())
-            filename = f"expand_{timestamp}_{iteration}.json"
-            json_dir = os.path.join(output_dir, "json")
-            filepath = os.path.join(json_dir, filename)
-            
-            # Make sure the json directory exists
-            os.makedirs(json_dir, exist_ok=True)
-            
-            # Log current graph stats before saving
-            node_count = len(processor.prompt_graph.graph.nodes())
-            edge_count = len(processor.prompt_graph.graph.edges())
-            logger.info(f"Dumping graph with {node_count} nodes and {edge_count} edges to {filepath}")
-            
-            # Use the graph's save_to_json method (now with numpy handling)
-            success = processor.prompt_graph.save_to_json(filepath)
-            
-            # Also save a consistent filename that always has the latest data
-            latest_filepath = os.path.join(output_dir, "expand.json")
-            success2 = processor.prompt_graph.save_to_json(latest_filepath)
-            
-            if success and success2:
-                # Verify the files were created and have content
-                if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
-                    file_size_kb = os.path.getsize(filepath) / 1024
-                    logger.info(f"Successfully saved graph to {filepath} ({file_size_kb:.2f} KB)")
-                    
-                    # Also verify latest file
-                    latest_size_kb = os.path.getsize(latest_filepath) / 1024
-                    logger.info(f"Also saved to {latest_filepath} ({latest_size_kb:.2f} KB)")
-                    
-                    return filepath
-                else:
-                    logger.error(f"Failed to create file {filepath} or file is empty")
-                    retry_count += 1
-            else:
-                logger.error(f"Failed to save one or both JSON files (attempt {retry_count+1}/{max_retries})")
-                retry_count += 1
-                time.sleep(2)  # Wait before retrying
-                
-        except Exception as e:
-            logger.error(f"Error dumping JSON (attempt {retry_count+1}/{max_retries}): {e}", exc_info=True)
-            retry_count += 1
-            time.sleep(2)  # Wait before retrying
+    def add_node(self, node_id: str, **attributes):
+        """
+        Add or update a node in both the graph and database.
+        
+        Args:
+            node_id: Unique identifier for the node
+            **attributes: Node attributes (prompt, response, depth, etc.)
+        """
+        # Call parent method to update in-memory graph
+        super().add_node(node_id, **attributes)
+        
+        # Extract key attributes
+        prompt = attributes.get('prompt')
+        response = attributes.get('response')
+        depth = attributes.get('depth')
+        
+        # Create a copy of attributes without key fields for JSONB storage
+        db_attributes = dict(attributes)
+        for key in ['prompt', 'response', 'depth']:
+            if key in db_attributes:
+                del db_attributes[key]
+        
+        # Add to database
+        db_success = self.db_manager.add_node(
+            node_id=node_id,
+            session_id=self.session_id,
+            prompt=prompt,
+            response=response,
+            depth=depth,
+            attributes=db_attributes if db_attributes else None
+        )
+        
+        if not db_success:
+            logger.warning(f"Failed to add node {node_id} to database for session {self.session_id}")
     
-    logger.critical(f"Failed to dump JSON after {max_retries} attempts")
-    return None
+    def add_edge(self, parent_id: str, child_id: str, edge_attrs: Dict = None, edge_type: str = "hierarchy"):
+        """
+        Add an edge between nodes in both the graph and database.
+        
+        Args:
+            parent_id: ID of the parent node
+            child_id: ID of the child node
+            edge_attrs: Optional attributes for the edge
+            edge_type: Type of edge ("hierarchy" or "rag")
+        """
+        # Call parent method to update in-memory graph
+        super().add_edge(parent_id, child_id, edge_attrs, edge_type)
+        
+        # Extract similarity if present
+        similarity = None
+        if edge_attrs and "similarity" in edge_attrs:
+            similarity = edge_attrs["similarity"]
+        
+        # Create a copy of attributes without key fields for JSONB storage
+        db_attributes = dict(edge_attrs) if edge_attrs else {}
+        for key in ['edge_type', 'similarity']:
+            if key in db_attributes:
+                del db_attributes[key]
+        
+        # Add to database
+        db_success = self.db_manager.add_link(
+            session_id=self.session_id,
+            source_id=parent_id,
+            target_id=child_id,
+            edge_type=edge_type,
+            link_type=edge_type,  # Use edge_type as link_type for compatibility
+            similarity=similarity,
+            attributes=db_attributes if db_attributes else None
+        )
+        
+        if not db_success:
+            logger.warning(f"Failed to add edge from {parent_id} to {child_id} in database for session {self.session_id}")
+    
+    def add_rag_connection(self, source_id: str, target_id: str, similarity: float = None):
+        """
+        Add an explicit RAG connection between nodes in both the graph and database.
+        
+        Args:
+            source_id: ID of the source node (providing context)
+            target_id: ID of the target node (receiving context)
+            similarity: Optional similarity score
+        """
+        # Call parent method to update in-memory graph
+        super().add_rag_connection(source_id, target_id, similarity)
+        
+        # Add to database
+        db_success = self.db_manager.add_link(
+            session_id=self.session_id,
+            source_id=source_id,
+            target_id=target_id,
+            edge_type="rag",
+            link_type="rag",
+            similarity=similarity
+        )
+        
+        if not db_success:
+            logger.warning(f"Failed to add RAG connection from {source_id} to {target_id} in database for session {self.session_id}")
+    
+    def save_to_database(self):
+        """
+        Ensure all graph data is saved to the database.
+        This replaces the save_to_json method.
+        """
+        graph_data = self.to_dict()
+        
+        # Log stats
+        node_count = len(self.graph.nodes())
+        edge_count = len(self.graph.edges())
+        logger.info(f"Saved graph to database: {node_count} nodes, {edge_count} edges")
 
-# Create a subclass of GeminiPromptProcessor that dumps JSON after each prompt
-class DumpingPromptProcessor(GeminiPromptProcessor):
-    def __init__(self, api_key, output_dir):
+# Create a subclass of GeminiPromptProcessor that uses our DatabasePromptGraph
+class DatabasePromptProcessor(GeminiPromptProcessor):
+    def __init__(self, api_key, session_id):
         super().__init__(api_key)
-        self.output_dir = output_dir
-        self.json_iteration = 0
+        self.session_id = session_id
+        
+        # Replace the PromptGraph with our database version
+        self.prompt_graph = DatabasePromptGraph(session_id)
+        self.prompt_graph.add_node('root', prompt='Main Prompt', depth=-1)
+        
+        logger.info(f"Initialized DatabasePromptProcessor for session {session_id}")
     
     def process_sub_prompt(self, task_info):
         # Call the original method
         result = super().process_sub_prompt(task_info)
         
-        # Dump JSON after processing
-        self.json_iteration += 1
-        dump_json(self, self.json_iteration, self.output_dir)
+        # Ensure data is saved to the database
+        self.prompt_graph.save_to_database()
         
         return result
 
 def parse_arguments():
     """Parse command line arguments."""
-    parser = argparse.ArgumentParser(description='Run Expand prompt processor without UI.')
-    parser.add_argument('--cwd', required=True, help='Working directory for output')
+    parser = argparse.ArgumentParser(description='Run Expand prompt processor with database storage.')
     parser.add_argument('--prompt', required=True, help='Prompt to process')
     parser.add_argument('--api-key', required=True, help='API Key for Google Generative AI')
+    parser.add_argument('--session-id', required=True, help='Session ID for database storage')
     
     return parser.parse_args()
 
-def verify_session_dir(output_dir):
-    """Verify the session directory is properly set up."""
+def verify_database_connection(session_id):
+    """Verify the database connection is working."""
     try:
-        # Test write permissions by creating a test file
-        test_file = os.path.join(output_dir, "test_write.txt")
-        with open(test_file, 'w') as f:
-            f.write("Testing write permissions")
+        # Initialize database
+        db.initialize_db()
         
-        # Cleanup test file
-        os.remove(test_file)
-        
-        # Create json directory
-        json_dir = os.path.join(output_dir, "json")
-        os.makedirs(json_dir, exist_ok=True)
-        
-        # Test json directory write
-        test_json = os.path.join(json_dir, "test.json")
-        if USE_ORJSON:
-            with open(test_json, 'wb') as f:
-                f.write(orjson.dumps({"test": "data"}))
-        else:
-            with open(test_json, 'w') as f:
-                json.dump({"test": "data"}, f)
-                
-        # Cleanup test json
-        os.remove(test_json)
-        
-        logger.info(f"Successfully verified write permissions in {output_dir}")
+        # Test connection by querying for the session
+        session_data = db_manager.get_session_data(session_id)
+        if not session_data:
+            logger.critical(f"Session {session_id} not found in database")
+            return False
+            
+        logger.info(f"Successfully verified database connection for session {session_id}")
         return True
     except Exception as e:
-        logger.critical(f"Failed to verify session directory: {e}", exc_info=True)
+        logger.critical(f"Failed to verify database connection: {e}", exc_info=True)
         return False
 
 def main():
-    """Main function to run the prompt processor with command line arguments."""
+    """Main function to run the prompt processor with database storage."""
     # Parse command line arguments
     args = parse_arguments()
+    session_id = args.session_id
     
-    # Change to the specified working directory
-    output_dir = args.cwd
-    try:
-        os.chdir(output_dir)
-        logger.info(f"Changed working directory to: {output_dir}")
-    except Exception as e:
-        logger.critical(f"Failed to change to directory {output_dir}: {e}")
+    # Verify database connection
+    if not verify_database_connection(session_id):
+        logger.critical("Database verification failed. Exiting.")
         sys.exit(1)
     
-    # Verify session directory setup
-    if not verify_session_dir(output_dir):
-        logger.critical("Session directory verification failed. Exiting.")
-        sys.exit(1)
-    
-    # Initialize our custom processor that automatically dumps JSON
-    processor = DumpingPromptProcessor(args.api_key, output_dir)
+    # Initialize our processor with database support
+    processor = DatabasePromptProcessor(args.api_key, session_id)
     
     try:
-        # Initial dump
-        dump_json(processor, 0, output_dir)
-        
         # Process the prompt
-        logger.info(f"Processing prompt: {args.prompt}")
+        logger.info(f"Processing prompt for session {session_id}: {args.prompt}")
         results = processor.process_main_prompt(args.prompt)
         
-        # Final dump
-        dump_json(processor, 999, output_dir)  # Use a high number for the final dump
+        # Final save to database
+        processor.prompt_graph.save_to_database()
+        
+        # Update session status
+        db_manager.update_session_status(session_id, "expand_completed")
         
         logger.info("Processing completed")
         
@@ -215,14 +244,8 @@ def main():
         import traceback
         traceback.print_exc()
         
-        # Attempt emergency dump
-        try:
-            emergency_dump = os.path.join(output_dir, "emergency_dump.json")
-            logger.info(f"Attempting emergency dump to {emergency_dump}")
-            processor.prompt_graph.save_to_json(emergency_dump)
-            logger.info(f"Emergency dump successful")
-        except Exception as dump_error:
-            logger.critical(f"Emergency dump failed: {dump_error}")
+        # Update session status with error
+        db_manager.update_session_status(session_id, "expand_error", str(e))
         
         sys.exit(1)
 
