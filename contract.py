@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+"""
+Modified contract.py to take command line inputs.
+"""
+
 import json
 import uuid
 import matplotlib.pyplot as plt
@@ -6,8 +11,15 @@ from typing import Dict, List, Optional
 import concurrent.futures
 import threading
 import time
+import argparse
+import os
+import logging
 from google import genai
-import time
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, 
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 class PromptGraph:
     def __init__(self, json_file=None, api_key=None):
@@ -383,6 +395,7 @@ class PromptGraph:
         5. Keep your response focused on addressing the main question with specific details
         6. DO NOT gentrify the emotion - maintain the original tone and specificity
         7. DO NOT show the end user what insights you use to create your synthesis.
+        8. You do not need to quote or show the users what insights/sources you are using btw. LIKE DO NOT USE ANY QUOTES, JUST USE THEM AS CONTEXT AND BEAUTIFULLY SYNTHESIZE THEM. if applicable, use the insight word for word but DO not quote it and use bullet points wherever you need where necessary
 
         Synthesized response:
         """
@@ -497,132 +510,6 @@ class PromptGraph:
                 print(f"Warning: No successful syntheses at depth {depth}")
             
             processed_depths.add(depth)  # Mark this depth as processed
-        
-                    
-    def visualize(self):
-        """Visualize the graph using NetworkX and Matplotlib"""
-        G = nx.DiGraph()
-        
-        # Add nodes with colors based on type
-        for node in self.graph["nodes"]:
-            node_id = node["id"]
-            
-            # Determine node type
-            if node_id == "ROOT":
-                node_type = "root"
-            elif node_id.lower() == "s_root":
-                node_type = "final"
-            elif node_id.startswith("S_"):
-                node_type = "summary"
-            else:
-                node_type = "regular"
-            
-            # Check if the node has a response (completed)
-            has_response = "response" in node and node["response"]
-            
-            # Set color based on type and completion
-            if node_type == "root":
-                color = "darkred" if has_response else "red"
-            elif node_type == "final":
-                color = "purple" if has_response else "plum"
-            elif node_type == "summary":
-                color = "darkgreen" if has_response else "lightgreen"
-            else:
-                color = "royalblue" if has_response else "lightblue"
-            
-            G.add_node(node_id, label=node_id, prompt=node.get("prompt", ""), color=color)
-        
-        # Add edges
-        for link in self.graph["links"]:
-            G.add_edge(link["source"], link["target"])
-        
-        # Get node colors
-        node_colors = [G.nodes[n]["color"] for n in G.nodes]
-        
-        # Create positions using hierarchical layout
-        depth_map = {node["id"]: node.get("depth", 0) for node in self.graph["nodes"]}
-        pos = nx.multipartite_layout(G, subset_key=lambda x: depth_map.get(x, 0))
-        
-        # Draw the graph
-        plt.figure(figsize=(1500, 1000))
-        
-        # Draw nodes
-        nx.draw_networkx_nodes(G, pos, node_size=500, node_color=node_colors)
-        
-        # Draw edges
-        nx.draw_networkx_edges(G, pos, arrows=True)
-        
-        # Draw labels
-        # nx.draw_networkx_labels(G, pos)
-        
-        plt.title("Prompt Graph Visualization")
-        plt.axis("off")
-        plt.tight_layout()
-        plt.savefig("prompt_graph.png", dpi=300)
-        plt.show()
-        
-        print("Graph visualization saved as prompt_graph.png")
-    
-    def visualize_hierarchical(self):
-        """Visualize the graph as a hierarchical tree"""
-        G = nx.DiGraph()
-
-        # Add nodes with colors based on type
-        for node in self.graph["nodes"]:
-            node_id = node["id"]
-
-            # Determine node type
-            if node_id == "ROOT":
-                node_type = "root"
-            elif node_id.lower() == "s_root":
-                node_type = "final"
-            elif node_id.startswith("S_"):
-                node_type = "summary"
-            else:
-                node_type = "regular"
-
-            # Check if the node has a response (completed)
-            has_response = "response" in node and node["response"]
-
-            # Set color based on type and completion
-            if node_type == "root":
-                color = "darkred" if has_response else "red"
-            elif node_type == "final":
-                color = "purple" if has_response else "plum"
-            elif node_type == "summary":
-                color = "darkgreen" if has_response else "lightgreen"
-            else:
-                color = "royalblue" if has_response else "lightblue"
-
-            G.add_node(node_id, label=node_id, prompt=node.get("prompt", ""), color=color)
-
-        # Add edges
-        for link in self.graph["links"]:
-            G.add_edge(link["source"], link["target"])
-
-        # Get node colors
-        node_colors = [G.nodes[n]["color"] for n in G.nodes]
-
-        # Create a more tree-like layout
-        pos = nx.nx_agraph.graphviz_layout(G, prog="dot")
-
-        # Draw the graph
-        plt.figure(figsize=(150, 150)) # Make plot 20 times bigger
-
-        # Draw nodes
-        nx.draw_networkx_nodes(G, pos, node_size=500, node_color=node_colors)
-
-        # Draw edges
-        nx.draw_networkx_edges(G, pos, arrows=True)
-
-        # Draw labels
-        nx.draw_networkx_labels(G, pos)
-
-        plt.axis("off")
-        plt.tight_layout()
-        plt.savefig("prompt_graph_tree.png", dpi=150)
-
-        print("Hierarchical visualization saved as prompt_graph_tree.png")
     
     def save_to_json(self, filename):
         """Save the graph to a JSON file"""
@@ -631,13 +518,52 @@ class PromptGraph:
         print(f"Graph saved to {filename}")
 
 
-# Example usage
-if __name__ == "__main__":
-    # Load an existing graph, create the synthesis structure, and run synthesis
-    api_key = "AIzaSyBmJg-SksvZIPa0AxBcb8fFRX7CAfmLcd8"  # Replace with your actual API key
-    graph = PromptGraph("./expand.json", api_key=api_key)
+def parse_arguments():
+    """Parse command line arguments."""
+    parser = argparse.ArgumentParser(description='Process expand.json into contract.json.')
+    parser.add_argument('--cwd', required=True, help='Working directory containing expand.json')
+    parser.add_argument('--input', default='expand.json', help='Input JSON file (default: expand.json)')
+    parser.add_argument('--output', default='contract.json', help='Output JSON file (default: contract.json)')
+    parser.add_argument('--api-key', required=True, help='API Key for Google Generative AI')
+    
+    return parser.parse_args()
+
+
+def main():
+    """Main entry point for the script."""
+    args = parse_arguments()
+    
+    # Change to the specified working directory
+    os.chdir(args.cwd)
+    logger.info(f"Changed working directory to: {args.cwd}")
+    
+    # Construct input and output paths
+    input_path = args.input
+    output_path = args.output
+    
+    logger.info(f"Processing {input_path} into {output_path}")
+    
+    # Initialize the PromptGraph with the input file and API key
+    graph = PromptGraph(json_file=input_path, api_key=args.api_key)
+    
+    # Create the synthesis structure
     graph.create_synthesis_structure()
+    
+    # Run the synthesis process
     graph.run_synthesis(model="gemini-2.0-flash-lite")
-    time.sleep(60)
-    graph.visualize_hierarchical()
-    graph.save_to_json("contract.json")
+    
+    # Save the results
+    graph.save_to_json(output_path)
+    
+    # Generate visualization if possible
+    try:
+        # graph.visualize_hierarchical()
+        logger.info("Generated hierarchical visualization")
+    except Exception as e:
+        logger.error(f"Error generating visualization: {e}")
+    
+    logger.info(f"Processing complete. Results saved to {output_path}")
+
+
+if __name__ == "__main__":
+    main()

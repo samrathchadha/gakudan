@@ -4,13 +4,22 @@ RAG connections are treated as first-class citizens, ensuring they're always vis
 """
 
 import threading
-import json
 import logging
 import os
 import networkx as nx
 import matplotlib.pyplot as plt
+import numpy as np
 from typing import List, Dict, Any
 from knowledge_base import KnowledgeBase
+
+# Import orjson with fallback to standard json
+try:
+    import orjson
+    USE_ORJSON = True
+except ImportError:
+    import json
+    USE_ORJSON = False
+    logging.warning("orjson not found, falling back to standard json library. Consider installing orjson for better performance.")
 
 class PromptGraph:
     """
@@ -93,6 +102,9 @@ class PromptGraph:
             }
             
             if similarity is not None:
+                # Convert numpy float to Python float if needed
+                if hasattr(similarity, "item"):  # Check if it's a numpy type
+                    similarity = similarity.item()
                 attrs["similarity"] = similarity
                 
             # Add the RAG edge
@@ -244,78 +256,182 @@ class PromptGraph:
                 if attrs.get('depth') == depth
             ]
     
-    def save_to_json(self, filename: str = "../expand.json"):
+    def _convert_numpy(self, obj):
+        """Convert numpy types to Python native types."""
+        if isinstance(obj, np.integer):
+            return int(obj)
+        elif isinstance(obj, np.floating):
+            return float(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        elif hasattr(obj, 'item'):  # Handle other numpy scalar types
+            return obj.item()
+        return obj
+    
+    def save_to_json(self, filename: str = "./expand.json"):
         """
         Save the graph to a JSON file with explicit RAG connections.
+        Uses orjson for better performance and reliability.
+        Handles NumPy data types properly.
         
         Args:
             filename: Path to save the JSON file
         """
+        temp_filename = f"{filename}.tmp"
+        backup_filename = f"{filename}.bak"
+        
         with self.lock:
-            # Format the data explicitly for visualization
-            data = {
-                "directed": True,
-                "multigraph": True,  # Changed to True to support multiple edge types
-                "graph": {},
-                "nodes": [],
-                "links": []
-            }
-            
-            # Add nodes with all their attributes
-            for node_id, attrs in self.graph.nodes(data=True):
-                node_data = {"id": node_id}
-                # Add all attributes, ensuring they're JSON serializable
-                for key, value in attrs.items():
-                    try:
-                        json.dumps({key: value})  # Test JSON serialization
-                        node_data[key] = value
-                    except:
-                        node_data[key] = str(value)
-                data["nodes"].append(node_data)
-            
-            # Add all edges, explicitly marking edge types
-            for u, v, attrs in self.graph.edges(data=True):
-                link_data = {
-                    "source": u, 
-                    "target": v
+            try:
+                # Format the data explicitly for visualization
+                data = {
+                    "directed": True,
+                    "multigraph": True,
+                    "graph": {},
+                    "nodes": [],
+                    "links": []
                 }
                 
-                # Determine edge type and set appropriate flags
-                edge_type = attrs.get("edge_type", "hierarchy")
-                
-                if edge_type == "rag":
-                    link_data["rag_connection"] = True
-                    link_data["edge_type"] = "rag"
-                    link_data["link_type"] = "rag"  # For visualizer compatibility
-                else:
-                    link_data["edge_type"] = "hierarchy"
-                    link_data["link_type"] = "hierarchy"  # For visualizer compatibility
-                
-                # Add all other attributes
-                for key, value in attrs.items():
-                    if key not in link_data:  # Don't overwrite
+                # Add nodes with all their attributes
+                for node_id, attrs in self.graph.nodes(data=True):
+                    node_data = {"id": node_id}
+                    # Add all attributes, ensuring they're serializable
+                    for key, value in attrs.items():
                         try:
-                            json.dumps({key: value})  # Test serialization
-                            link_data[key] = value
+                            # Convert NumPy types
+                            value = self._convert_numpy(value)
+                            
+                            # Handle large string attributes
+                            if isinstance(value, str) and len(value) > 100000:
+                                node_data[key] = value[:100000] + "... [truncated]"
+                            else:
+                                node_data[key] = value
                         except:
-                            link_data[key] = str(value)
+                            # Convert to string as fallback
+                            try:
+                                node_data[key] = str(value)
+                            except:
+                                logging.warning(f"Skipping unserializable attribute {key} for node {node_id}")
+                    
+                    data["nodes"].append(node_data)
                 
-                data["links"].append(link_data)
-            
-            # Ensure directory exists
-            os.makedirs(os.path.dirname(filename) if os.path.dirname(filename) else '.', exist_ok=True)
-            
-            # Save to file
-            with open(filename, 'w') as f:
-                json.dump(data, f, indent=2)
-            
-            hierarchy_count = sum(1 for link in data["links"] if link.get("edge_type") == "hierarchy")
-            rag_count = sum(1 for link in data["links"] if link.get("edge_type") == "rag")
-            
-            logging.info(f"Graph saved to {filename} with {len(data['nodes'])} nodes, "
-                       f"{hierarchy_count} hierarchy connections, and {rag_count} RAG connections")
-            
-    def visualize(self, output_file: str = "../prompt_graph.png"):
+                # Add all edges, explicitly marking edge types
+                for u, v, attrs in self.graph.edges(data=True):
+                    link_data = {
+                        "source": u, 
+                        "target": v
+                    }
+                    
+                    # Determine edge type and set appropriate flags
+                    edge_type = attrs.get("edge_type", "hierarchy")
+                    
+                    if edge_type == "rag":
+                        link_data["rag_connection"] = True
+                        link_data["edge_type"] = "rag"
+                        link_data["link_type"] = "rag"  # For visualizer compatibility
+                    else:
+                        link_data["edge_type"] = "hierarchy"
+                        link_data["link_type"] = "hierarchy"  # For visualizer compatibility
+                    
+                    # Add all other attributes with NumPy conversion
+                    for key, value in attrs.items():
+                        if key not in link_data:  # Don't overwrite
+                            try:
+                                # Convert NumPy types
+                                value = self._convert_numpy(value)
+                                link_data[key] = value
+                            except:
+                                try:
+                                    link_data[key] = str(value)
+                                except:
+                                    logging.warning(f"Skipping unserializable attribute {key} for link {u}->{v}")
+                    
+                    data["links"].append(link_data)
+                
+                # Ensure directory exists
+                os.makedirs(os.path.dirname(filename) if os.path.dirname(filename) else '.', exist_ok=True)
+                
+                # Create a backup of the existing file if it exists
+                if os.path.exists(filename):
+                    try:
+                        if os.path.exists(backup_filename):
+                            os.remove(backup_filename)
+                        os.rename(filename, backup_filename)
+                    except Exception as e:
+                        logging.warning(f"Failed to create backup of {filename}: {e}")
+                
+                # Use orjson if available, otherwise use standard json
+                if USE_ORJSON:
+                    try:
+                        # Use orjson with NumPy support
+                        json_bytes = orjson.dumps(
+                            data,
+                            option=orjson.OPT_INDENT_2 | orjson.OPT_SERIALIZE_NUMPY
+                        )
+                        
+                        # Write to temporary file
+                        with open(temp_filename, 'wb') as f:
+                            f.write(json_bytes)
+                            f.flush()
+                            os.fsync(f.fileno())
+                    except TypeError as e:
+                        # If orjson fails with NumPy types, fall back to standard json
+                        logging.warning(f"orjson serialization failed: {e}. Falling back to standard json.")
+                        raise
+                else:
+                    # Custom JSON encoder for NumPy types
+                    class NumpyEncoder(json.JSONEncoder):
+                        def default(self, obj):
+                            if isinstance(obj, np.integer):
+                                return int(obj)
+                            elif isinstance(obj, np.floating):
+                                return float(obj)
+                            elif isinstance(obj, np.ndarray):
+                                return obj.tolist()
+                            elif hasattr(obj, 'item'):  # Handle other numpy scalar types
+                                return obj.item()
+                            return json.JSONEncoder.default(self, obj)
+                    
+                    # Use standard json with custom encoder
+                    with open(temp_filename, 'w') as f:
+                        json.dump(data, f, indent=2, cls=NumpyEncoder)
+                        f.flush()
+                        os.fsync(f.fileno())
+                
+                # Atomically replace the target file
+                os.replace(temp_filename, filename)
+                
+                # Log stats
+                hierarchy_count = sum(1 for link in data["links"] if link.get("edge_type") == "hierarchy")
+                rag_count = sum(1 for link in data["links"] if link.get("edge_type") == "rag")
+                
+                logging.info(f"Graph saved to {filename} with {len(data['nodes'])} nodes, "
+                           f"{hierarchy_count} hierarchy connections, and {rag_count} RAG connections")
+                logging.info(f"Saved file size: {os.path.getsize(filename) / 1024:.2f} KB")
+                
+                return True
+                
+            except Exception as e:
+                logging.error(f"Error saving graph to {filename}: {e}", exc_info=True)
+                
+                # Try backup recovery
+                if os.path.exists(backup_filename):
+                    try:
+                        logging.info(f"Attempting to restore from backup {backup_filename}")
+                        os.replace(backup_filename, filename)
+                        logging.info(f"Restored from backup successfully")
+                    except Exception as restore_error:
+                        logging.error(f"Failed to restore from backup: {restore_error}")
+                
+                # Clean up temp file if it exists
+                if os.path.exists(temp_filename):
+                    try:
+                        os.remove(temp_filename)
+                    except:
+                        pass
+                        
+                return False
+    
+    def visualize(self, output_file: str = "./prompt_graph.png"):
         """
         Create a visualization of the graph and save to file with RAG connections.
         """
