@@ -12,8 +12,9 @@ from playhouse.pool import PooledPostgresqlExtDatabase
 from peewee import (
     Model, TextField, DateTimeField, BooleanField,
     FloatField, ForeignKeyField, IntegerField, 
-    SQL, JsonField, PrimaryKeyField
+    SQL, PrimaryKeyField
 )
+from playhouse.postgres_ext import JSONField
 
 # Configure logging
 logging.basicConfig(level=logging.INFO,
@@ -68,7 +69,7 @@ class Node(BaseModel):
     depth = IntegerField(null=True)
     created_at = DateTimeField(default=datetime.datetime.now)
     updated_at = DateTimeField(default=datetime.datetime.now)
-    attributes = JsonField(null=True)
+    attributes = JSONField(null=True)
 
     class Meta:
         table_name = 'nodes'
@@ -86,7 +87,7 @@ class Link(BaseModel):
     link_type = TextField(null=True)  # For compatibility
     similarity = FloatField(null=True)  # For RAG connections
     created_at = DateTimeField(default=datetime.datetime.now)
-    attributes = JsonField(null=True)
+    attributes = JSONField(null=True)
 
     class Meta:
         table_name = 'links'
@@ -107,7 +108,7 @@ class ClientTracking(BaseModel):
 class ContractResult(BaseModel):
     """Model for storing contract results."""
     session_id = TextField(primary_key=True)
-    data = JsonField()
+    data = JSONField()
     created_at = DateTimeField(default=datetime.datetime.now)
 
     class Meta:

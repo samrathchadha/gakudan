@@ -1,6 +1,5 @@
 """
-Graph data structure for tracking relationships between prompts.
-RAG connections are treated as first-class citizens, ensuring they're always visible.
+Modified Graph data structure with added database compatibility.
 """
 
 import threading
@@ -525,3 +524,12 @@ class PromptGraph:
             plt.savefig(output_file)
             plt.close()
             logging.info(f"Enhanced graph visualization saved to {output_file}")
+            
+    # Add database compatibility method
+    def save_to_database(self):
+        """
+        Compatibility method for database storage.
+        This default implementation saves to a JSON file instead.
+        Database-aware subclasses will override this method.
+        """
+        return self.save_to_json()
