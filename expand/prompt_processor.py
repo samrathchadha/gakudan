@@ -6,6 +6,7 @@ Features:
 - Hierarchical prompt exploration
 - Knowledge base integration for context retrieval
 - Graph-based tracking of prompt relationships
+- Database storage for all data (no file operations)
 """
 
 import threading
@@ -13,10 +14,16 @@ import queue
 import logging
 import uuid
 import time
-import json
 import concurrent.futures
 from typing import List, Dict, Any, Tuple
 from google import genai
+import os
+import sys
+
+# Add parent directory to path for database imports if needed
+parent_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
 
 from prompt_graph import PromptGraph
 from rate_limiter import RateLimiter
@@ -27,23 +34,14 @@ from system_prompts import (
     COMBINER_SYSTEM_PROMPT
 )
 
-import threading
-import queue
-import logging
-import uuid
-import time
-import json
-from typing import List, Dict, Any, Tuple
-from google import genai
-
-from prompt_graph import PromptGraph
-from rate_limiter import RateLimiter
-from system_prompts import (
-    THOUGHT_GENERATOR_SYSTEM_PROMPT,
-    SUB_THOUGHT_GENERATOR_SYSTEM_PROMPT,
-    SUB_PROMPT_SYSTEM_INSTRUCTION,
-    COMBINER_SYSTEM_PROMPT
-)
+# Optional database imports - will be used by subclasses
+try:
+    import db
+    from db_manager import db_manager
+    HAS_DB = True
+except ImportError:
+    HAS_DB = False
+    logging.warning("Database modules not available. Using in-memory storage only.")
 
 class GeminiPromptProcessor:
     """
@@ -172,12 +170,12 @@ class GeminiPromptProcessor:
             
             logging.info("\033[37m[COMBINER] Comprehensive synthesis complete\033[0m")
             
-
+            graph_data = self.prompt_graph.to_dict()
             
             return {
                 'main_prompt': main_prompt,
                 'combined_response': combined_response.text,
-                'graph': self.prompt_graph.to_dict()
+                'graph': graph_data
             }
         except Exception as e:
             logging.error(f"Response combination error: {e}")
@@ -260,7 +258,7 @@ class GeminiPromptProcessor:
 
         return f"Modifications to prompts:\nTHOUGHT_GENERATOR_SYSTEM_PROMPT: {new_thought_generator}\nSUB_PROMPT_SYSTEM_INSTRUCTION: {new_sub_prompt}\nCOMBINER_SYSTEM_PROMPT: {new_combiner}"
 
-    def process_main_prompt(self, main_prompt: str) -> tuple:
+    def process_main_prompt(self, main_prompt: str) -> List[Dict[str, Any]]:
         """
         Main orchestration method for prompt processing.
         
@@ -268,7 +266,7 @@ class GeminiPromptProcessor:
             main_prompt: The main question/prompt
             
         Returns:
-            Tuple of (all_results, combined_output)
+            List of all results
         """
         # Reset state for new run
         self.all_results = []
@@ -339,19 +337,27 @@ class GeminiPromptProcessor:
         for worker in workers:
             worker.join(timeout=1)
         
-        # Combine responses
-        print("# Woohoo!! You're so sigma king!!!")
-        try:
-            self.prompt_graph.save_to_json()
-        except:
-            print("Failed to save graph to JSON")
-        
-        # try:
-        #     self.prompt_graph.visualize()
-        # except:
-        #     print("Failed to visualize graph")
+        # Save results to database (implemented by subclasses)
+        self.save_results(main_prompt, self.all_results)
         
         return self.all_results
+    
+    def save_results(self, main_prompt: str, results: List[Dict[str, Any]]) -> bool:
+        """
+        Save results for later use.
+        
+        Base implementation does nothing. Override in database-aware subclasses.
+        
+        Args:
+            main_prompt: The main prompt
+            results: The results to save
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        # Base implementation does nothing
+        # This will be overridden in database-aware subclasses
+        return True
     
     def rate_limited_generate_content(self, model: str, config: Any, contents: List[str]) -> Any:
         """
@@ -681,3 +687,130 @@ class GeminiPromptProcessor:
                     'prompt': fallback
                 })
             return approach_list
+
+
+class DatabasePromptProcessor(GeminiPromptProcessor):
+    """
+    Extended prompt processor that uses database for all storage.
+    """
+    def __init__(self, api_key: str, session_id: str = None):
+        """
+        Initialize with database support.
+        
+        Args:
+            api_key: Google API key
+            session_id: Optional session ID for database operations
+        """
+        super().__init__(api_key)
+        self.session_id = session_id
+        
+        # Ensure we have database support
+        if not HAS_DB:
+            raise ImportError("Database modules not available. Cannot use DatabasePromptProcessor.")
+            
+        # Initialize database connection
+        db.initialize_db()
+        
+        # Use a database-aware PromptGraph if available
+        if hasattr(db_manager, 'get_graph_for_session') and self.session_id:
+            self.prompt_graph = db_manager.get_graph_for_session(self.session_id)
+        
+        logging.info(f"DatabasePromptProcessor initialized with session {session_id}")
+    
+    def save_results(self, main_prompt: str, results: List[Dict[str, Any]]) -> bool:
+        """
+        Save results to database.
+        
+        Args:
+            main_prompt: The main prompt
+            results: The results to save
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            # Create a session if we don't have one
+            if not self.session_id:
+                self.session_id, client_id = db_manager.create_session(main_prompt, "local_run")
+                logging.info(f"Created new session {self.session_id} for database storage")
+            
+            # Format the data for database
+            data = self.prompt_graph.format_for_database()
+            
+            # Save contract data
+            db_manager.save_contract_data(self.session_id, data)
+            
+            # Update session status
+            db_manager.update_session_status(self.session_id, "completed")
+            
+            logging.info(f"Results saved to database for session {self.session_id}")
+            return True
+        except Exception as e:
+            logging.error(f"Error saving results to database: {e}")
+            return False
+    
+    def process_sub_prompt(self, task_info: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Override to ensure database updates.
+        """
+        # Process normally
+        result = super().process_sub_prompt(task_info)
+        
+        # Save intermediate results to database
+        if self.session_id:
+            try:
+                node_id = result['id']
+                prompt = result.get('sub_prompt')
+                response = result.get('response')
+                depth = result.get('depth')
+                
+                # Create a copy of attributes without key fields for JSONB storage
+                attributes = dict(result)
+                for key in ['id', 'sub_prompt', 'response', 'depth', 'parent_id']:
+                    if key in attributes:
+                        attributes.pop(key, None)
+                
+                # Add to database
+                db_manager.add_node(
+                    node_id=node_id,
+                    session_id=self.session_id,
+                    prompt=prompt,
+                    response=response,
+                    depth=depth,
+                    attributes=attributes
+                )
+                
+                # Add link to parent
+                parent_id = result.get('parent_id')
+                if parent_id and parent_id != node_id:
+                    db_manager.add_link(
+                        session_id=self.session_id,
+                        source_id=parent_id,
+                        target_id=node_id,
+                        edge_type="hierarchy"
+                    )
+                
+                # Add RAG connections
+                rag_sources = result.get('rag_sources', [])
+                for source_id in rag_sources:
+                    if source_id != node_id:
+                        # Try to get similarity score
+                        similarity = None
+                        rag_results = result.get('rag_results', [])
+                        for rag_result in rag_results:
+                            if rag_result.get('node_id') == source_id:
+                                similarity = rag_result.get('similarity')
+                                break
+                        
+                        db_manager.add_link(
+                            session_id=self.session_id,
+                            source_id=source_id,
+                            target_id=node_id,
+                            edge_type="rag",
+                            similarity=similarity
+                        )
+                
+            except Exception as e:
+                logging.error(f"Error updating database during sub-prompt processing: {e}")
+        
+        return result

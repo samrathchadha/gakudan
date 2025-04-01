@@ -1,62 +1,94 @@
 """
-Modified Graph data structure with added database compatibility.
+Fixed DatabasePromptGraph that properly saves all nodes and links.
 """
 
 import threading
 import logging
-import os
 import networkx as nx
-import matplotlib.pyplot as plt
 import numpy as np
 from typing import List, Dict, Any
 from knowledge_base import KnowledgeBase
 
-# Import orjson with fallback to standard json
-try:
-    import orjson
-    USE_ORJSON = True
-except ImportError:
-    import json
-    USE_ORJSON = False
-    logging.warning("orjson not found, falling back to standard json library. Consider installing orjson for better performance.")
+# Include NumPy conversion locally
+def convert_numpy_types(obj):
+    """Convert NumPy types to Python native types."""
+    if isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif isinstance(obj, np.integer):
+        return int(obj)
+    elif isinstance(obj, np.floating):
+        return float(obj)
+    elif hasattr(obj, 'item'):  # Handle other numpy scalar types
+        return obj.item()
+    elif isinstance(obj, dict):
+        return {k: convert_numpy_types(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [convert_numpy_types(item) for item in obj]
+    elif isinstance(obj, tuple):
+        return tuple(convert_numpy_types(item) for item in obj)
+    elif isinstance(obj, set):
+        return set(convert_numpy_types(item) for item in obj)
+    else:
+        return obj
 
-class PromptGraph:
+class DatabasePromptGraph:
     """
-    Enhanced graph data structure for tracking relationships between prompts.
-    RAG connections are treated as first-class citizens, ensuring they're always visible.
+    Database-first graph data structure for tracking relationships between prompts.
+    Explicitly saves all nodes and links to the database.
     """
-    def __init__(self):
+    def __init__(self, session_id: str):
+        """
+        Initialize with session ID for database storage.
+        
+        Args:
+            session_id: ID of the session this graph belongs to
+        """
         self.graph = nx.MultiDiGraph()  # Changed to MultiDiGraph to support multiple edge types
         self.lock = threading.Lock()
         self.knowledge_base = KnowledgeBase()
+        self.session_id = session_id
+        self.dirty = False  # Track if there are unsaved changes
         
+        # Import db_manager here to avoid circular imports
+        from db_manager import db_manager
+        self.db_manager = db_manager
+        
+        logger.info(f"Initialized DatabasePromptGraph for session {session_id}")
+    
     def add_node(self, node_id: str, **attributes):
         """
         Add or update a node in the graph.
+        Does not save to database until explicitly requested.
         
         Args:
             node_id: Unique identifier for the node
             **attributes: Node attributes (prompt, response, depth, etc.)
         """
         with self.lock:
+            # Convert any NumPy types in attributes
+            clean_attributes = {k: convert_numpy_types(v) for k, v in attributes.items()}
+            
             if node_id in self.graph:
                 # Update existing node attributes
-                for key, value in attributes.items():
+                for key, value in clean_attributes.items():
                     self.graph.nodes[node_id][key] = value
             else:
                 # Add new node
-                self.graph.add_node(node_id, **attributes)
+                self.graph.add_node(node_id, **clean_attributes)
                 
             # If response is provided, add to knowledge base
-            if 'response' in attributes and 'prompt' in self.graph.nodes[node_id]:
+            if 'response' in clean_attributes and 'prompt' in self.graph.nodes[node_id]:
                 prompt_text = self.graph.nodes[node_id]['prompt']
-                response_text = attributes['response']
+                response_text = clean_attributes['response']
                 combined_text = f"{prompt_text}\n{response_text}"
                 self.knowledge_base.add_document(combined_text, node_id)
+                
+            self.dirty = True
     
     def add_edge(self, parent_id: str, child_id: str, edge_attrs: Dict = None, edge_type: str = "hierarchy"):
         """
         Add an edge between nodes with explicit edge type.
+        Does not save to database until explicitly requested.
         
         Args:
             parent_id: ID of the parent node
@@ -67,6 +99,9 @@ class PromptGraph:
         with self.lock:
             if edge_attrs is None:
                 edge_attrs = {}
+            else:
+                # Convert any NumPy types in edge attributes
+                edge_attrs = {k: convert_numpy_types(v) for k, v in edge_attrs.items()}
                 
             # Always set the edge type explicitly
             edge_attrs["edge_type"] = edge_type
@@ -83,10 +118,13 @@ class PromptGraph:
                 
                 if child_depth <= parent_depth:
                     self.graph.nodes[child_id]['depth'] = parent_depth + 1
+                    
+            self.dirty = True
     
     def add_rag_connection(self, source_id: str, target_id: str, similarity: float = None):
         """
         Add an explicit RAG connection between nodes.
+        Does not save to database until explicitly requested.
         
         Args:
             source_id: ID of the source node (providing context)
@@ -101,15 +139,16 @@ class PromptGraph:
             }
             
             if similarity is not None:
-                # Convert numpy float to Python float if needed
-                if hasattr(similarity, "item"):  # Check if it's a numpy type
-                    similarity = similarity.item()
+                # Convert NumPy float to Python float
+                similarity = convert_numpy_types(similarity)
                 attrs["similarity"] = similarity
                 
             # Add the RAG edge
             self.graph.add_edge(source_id, target_id, **attrs)
             logging.debug(f"Added explicit RAG edge: {source_id} -> {target_id} (similarity: {similarity})")
-
+            
+            self.dirty = True
+    
     def get_children(self, node_id: str, edge_type: str = None) -> List[str]:
         """
         Get child nodes of the given node, optionally filtered by edge type.
@@ -130,39 +169,6 @@ class PromptGraph:
                     
             return children
     
-    def to_dict(self) -> Dict[str, Dict]:
-        """Convert graph to dictionary format for serialization."""
-        with self.lock:
-            nodes = {}
-            for node in self.graph.nodes():
-                # Get hierarchy connections
-                hierarchy_children = [target for target, data in self.graph.adj[node].items() 
-                                    for _, edge_data in data.items() 
-                                    if edge_data.get('edge_type') == 'hierarchy']
-                
-                hierarchy_parents = [source for source, edges in self.graph.pred[node].items() 
-                                    for _, edge_data in edges.items() 
-                                    if edge_data.get('edge_type') == 'hierarchy']
-                
-                # Get RAG connections
-                rag_sources = [source for source, edges in self.graph.pred[node].items() 
-                            for _, edge_data in edges.items() 
-                            if edge_data.get('edge_type') == 'rag' or edge_data.get('rag_connection', False)]
-                
-                rag_targets = [target for target, data in self.graph.adj[node].items() 
-                            for _, edge_data in data.items() 
-                            if edge_data.get('edge_type') == 'rag' or edge_data.get('rag_connection', False)]
-                
-                # Store in dictionary format
-                nodes[node] = {
-                    'attributes': dict(self.graph.nodes[node]),
-                    'children': hierarchy_children,
-                    'parents': hierarchy_parents,
-                    'rag_sources': rag_sources,
-                    'rag_targets': rag_targets
-                }
-            return nodes
-
     def get_parents(self, node_id: str, edge_type: str = None) -> List[str]:
         """
         Get parent nodes of the given node, optionally filtered by edge type.
@@ -232,19 +238,27 @@ class PromptGraph:
                     logging.debug(f"Updated KB relationship for {current_node_id} with parent {parent_id}")
         
         # Forward the query to the knowledge base with relationship exclusion
-        return self.knowledge_base.query(
+        results = self.knowledge_base.query(
             query_text, 
             top_k=top_k,
             exclude_ids=exclude_ids,
             exclude_related=exclude_related,
             current_node_id=current_node_id
         )
+        
+        # Convert NumPy types in results
+        for result in results:
+            if 'similarity' in result and hasattr(result['similarity'], 'item'):
+                result['similarity'] = float(result['similarity'].item())
+        
+        return results
     
     def get_node_data(self, node_id: str) -> Dict[str, Any]:
         """Get all attributes for a specific node."""
         with self.lock:
             if node_id in self.graph:
-                return dict(self.graph.nodes[node_id])
+                # Convert NumPy types to ensure JSON compatibility
+                return {k: convert_numpy_types(v) for k, v in self.graph.nodes[node_id].items()}
             return {}
     
     def get_nodes_at_depth(self, depth: int) -> List[str]:
@@ -255,281 +269,176 @@ class PromptGraph:
                 if attrs.get('depth') == depth
             ]
     
-    def _convert_numpy(self, obj):
-        """Convert numpy types to Python native types."""
-        if isinstance(obj, np.integer):
-            return int(obj)
-        elif isinstance(obj, np.floating):
-            return float(obj)
-        elif isinstance(obj, np.ndarray):
-            return obj.tolist()
-        elif hasattr(obj, 'item'):  # Handle other numpy scalar types
-            return obj.item()
-        return obj
-    
-    def save_to_json(self, filename: str = "./expand.json"):
+    def format_for_database(self) -> Dict[str, Any]:
         """
-        Save the graph to a JSON file with explicit RAG connections.
-        Uses orjson for better performance and reliability.
-        Handles NumPy data types properly.
+        Format the graph data for database storage.
         
-        Args:
-            filename: Path to save the JSON file
+        Returns:
+            Dictionary formatted for database storage
         """
-        temp_filename = f"{filename}.tmp"
-        backup_filename = f"{filename}.bak"
-        
         with self.lock:
-            try:
-                # Format the data explicitly for visualization
-                data = {
-                    "directed": True,
-                    "multigraph": True,
-                    "graph": {},
-                    "nodes": [],
-                    "links": []
+            data = {
+                "directed": True,
+                "multigraph": True,
+                "graph": {},
+                "nodes": [],
+                "links": []
+            }
+            
+            # Add nodes with all their attributes
+            for node_id, attrs in self.graph.nodes(data=True):
+                # Convert NumPy types in attributes
+                clean_attrs = {k: convert_numpy_types(v) for k, v in attrs.items()}
+                
+                node_data = {"id": node_id}
+                node_data.update(clean_attrs)
+                
+                # Handle large string attributes
+                for key, value in node_data.items():
+                    if isinstance(value, str) and len(value) > 100000:
+                        node_data[key] = value[:100000] + "... [truncated]"
+                
+                data["nodes"].append(node_data)
+            
+            # Add all edges, explicitly marking edge types
+            for u, v, attrs in self.graph.edges(data=True):
+                # Convert NumPy types in attributes
+                clean_attrs = {k: convert_numpy_types(v) for k, v in attrs.items()}
+                
+                link_data = {
+                    "source": u, 
+                    "target": v
                 }
                 
-                # Add nodes with all their attributes
-                for node_id, attrs in self.graph.nodes(data=True):
-                    node_data = {"id": node_id}
-                    # Add all attributes, ensuring they're serializable
-                    for key, value in attrs.items():
-                        try:
-                            # Convert NumPy types
-                            value = self._convert_numpy(value)
-                            
-                            # Handle large string attributes
-                            if isinstance(value, str) and len(value) > 100000:
-                                node_data[key] = value[:100000] + "... [truncated]"
-                            else:
-                                node_data[key] = value
-                        except:
-                            # Convert to string as fallback
-                            try:
-                                node_data[key] = str(value)
-                            except:
-                                logging.warning(f"Skipping unserializable attribute {key} for node {node_id}")
-                    
-                    data["nodes"].append(node_data)
+                # Determine edge type and set appropriate flags
+                edge_type = clean_attrs.get("edge_type", "hierarchy")
                 
-                # Add all edges, explicitly marking edge types
-                for u, v, attrs in self.graph.edges(data=True):
-                    link_data = {
-                        "source": u, 
-                        "target": v
-                    }
-                    
-                    # Determine edge type and set appropriate flags
-                    edge_type = attrs.get("edge_type", "hierarchy")
-                    
-                    if edge_type == "rag":
-                        link_data["rag_connection"] = True
-                        link_data["edge_type"] = "rag"
-                        link_data["link_type"] = "rag"  # For visualizer compatibility
-                    else:
-                        link_data["edge_type"] = "hierarchy"
-                        link_data["link_type"] = "hierarchy"  # For visualizer compatibility
-                    
-                    # Add all other attributes with NumPy conversion
-                    for key, value in attrs.items():
-                        if key not in link_data:  # Don't overwrite
-                            try:
-                                # Convert NumPy types
-                                value = self._convert_numpy(value)
-                                link_data[key] = value
-                            except:
-                                try:
-                                    link_data[key] = str(value)
-                                except:
-                                    logging.warning(f"Skipping unserializable attribute {key} for link {u}->{v}")
-                    
-                    data["links"].append(link_data)
-                
-                # Ensure directory exists
-                os.makedirs(os.path.dirname(filename) if os.path.dirname(filename) else '.', exist_ok=True)
-                
-                # Create a backup of the existing file if it exists
-                if os.path.exists(filename):
-                    try:
-                        if os.path.exists(backup_filename):
-                            os.remove(backup_filename)
-                        os.rename(filename, backup_filename)
-                    except Exception as e:
-                        logging.warning(f"Failed to create backup of {filename}: {e}")
-                
-                # Use orjson if available, otherwise use standard json
-                if USE_ORJSON:
-                    try:
-                        # Use orjson with NumPy support
-                        json_bytes = orjson.dumps(
-                            data,
-                            option=orjson.OPT_INDENT_2 | orjson.OPT_SERIALIZE_NUMPY
-                        )
-                        
-                        # Write to temporary file
-                        with open(temp_filename, 'wb') as f:
-                            f.write(json_bytes)
-                            f.flush()
-                            os.fsync(f.fileno())
-                    except TypeError as e:
-                        # If orjson fails with NumPy types, fall back to standard json
-                        logging.warning(f"orjson serialization failed: {e}. Falling back to standard json.")
-                        raise
+                if edge_type == "rag":
+                    link_data["rag_connection"] = True
+                    link_data["edge_type"] = "rag"
+                    link_data["link_type"] = "rag"  # For visualizer compatibility
                 else:
-                    # Custom JSON encoder for NumPy types
-                    class NumpyEncoder(json.JSONEncoder):
-                        def default(self, obj):
-                            if isinstance(obj, np.integer):
-                                return int(obj)
-                            elif isinstance(obj, np.floating):
-                                return float(obj)
-                            elif isinstance(obj, np.ndarray):
-                                return obj.tolist()
-                            elif hasattr(obj, 'item'):  # Handle other numpy scalar types
-                                return obj.item()
-                            return json.JSONEncoder.default(self, obj)
-                    
-                    # Use standard json with custom encoder
-                    with open(temp_filename, 'w') as f:
-                        json.dump(data, f, indent=2, cls=NumpyEncoder)
-                        f.flush()
-                        os.fsync(f.fileno())
+                    link_data["edge_type"] = "hierarchy"
+                    link_data["link_type"] = "hierarchy"  # For visualizer compatibility
                 
-                # Atomically replace the target file
-                os.replace(temp_filename, filename)
+                # Add all other attributes
+                for key, value in clean_attrs.items():
+                    if key not in link_data:  # Don't overwrite
+                        link_data[key] = value
                 
-                # Log stats
-                hierarchy_count = sum(1 for link in data["links"] if link.get("edge_type") == "hierarchy")
-                rag_count = sum(1 for link in data["links"] if link.get("edge_type") == "rag")
+                data["links"].append(link_data)
                 
-                logging.info(f"Graph saved to {filename} with {len(data['nodes'])} nodes, "
-                           f"{hierarchy_count} hierarchy connections, and {rag_count} RAG connections")
-                logging.info(f"Saved file size: {os.path.getsize(filename) / 1024:.2f} KB")
-                
-                return True
-                
-            except Exception as e:
-                logging.error(f"Error saving graph to {filename}: {e}", exc_info=True)
-                
-                # Try backup recovery
-                if os.path.exists(backup_filename):
-                    try:
-                        logging.info(f"Attempting to restore from backup {backup_filename}")
-                        os.replace(backup_filename, filename)
-                        logging.info(f"Restored from backup successfully")
-                    except Exception as restore_error:
-                        logging.error(f"Failed to restore from backup: {restore_error}")
-                
-                # Clean up temp file if it exists
-                if os.path.exists(temp_filename):
-                    try:
-                        os.remove(temp_filename)
-                    except:
-                        pass
-                        
-                return False
+            return data
     
-    def visualize(self, output_file: str = "./prompt_graph.png"):
-        """
-        Create a visualization of the graph and save to file with RAG connections.
-        """
-        with self.lock:
-            plt.figure(figsize=(15, 12))  # Larger figure for better visibility
-            
-            # Create a copy of the graph with explicit RAG connections
-            temp_graph = self.graph.copy()
-            
-            # Add explicit edges for RAG connections
-            for u, v, data in list(temp_graph.edges(data=True)):
-                if 'origins' in data and data['origins']:
-                    for origin in data['origins']:
-                        # Add direct RAG connection edges if they don't already exist
-                        if not temp_graph.has_edge(origin, v):
-                            temp_graph.add_edge(origin, v, rag_connection=True)
-            
-            # Create node colors based on depth
-            node_colors = []
-            for node in temp_graph.nodes():
-                if node == 'root':
-                    node_colors.append('red')
-                else:
-                    depth = temp_graph.nodes[node].get('depth', 0)
-                    if depth == 0:
-                        node_colors.append('orange')
-                    elif depth == 1:
-                        node_colors.append('yellow')
-                    else:
-                        node_colors.append('green')
-            
-            # Create node labels
-            node_labels = {}
-            for node in temp_graph.nodes():
-                if node == 'root':
-                    node_labels[node] = 'Main Prompt'
-                else:
-                    label = temp_graph.nodes[node].get('prompt', '')
-                    if label and len(label) > 20:
-                        label = label[:17] + "..."
-                    node_labels[node] = f"{node[:4]}...: {label}"
-            
-            # Get edge colors and styles
-            edge_colors = []
-            edge_styles = []
-            for u, v, data in temp_graph.edges(data=True):
-                if data.get('rag_connection', False):
-                    edge_colors.append('blue')  # RAG connection
-                    edge_styles.append('dashed')  # Dashed line for RAG
-                elif data and 'origins' in data and data['origins']:
-                    edge_colors.append('purple')  # Edge with RAG origins
-                    edge_styles.append('solid')
-                else:
-                    edge_colors.append('black')  # Regular edge
-                    edge_styles.append('solid')
-            
-            # Generate layout and draw the graph
-            pos = nx.spring_layout(temp_graph, seed=42)
-            
-            # Draw edges with different styles
-            for i, (u, v, data) in enumerate(temp_graph.edges(data=True)):
-                if edge_styles[i] == 'dashed':
-                    nx.draw_networkx_edges(
-                        temp_graph, pos, edgelist=[(u, v)], 
-                        edge_color=[edge_colors[i]], style='dashed',
-                        width=1.5, alpha=0.7, arrowsize=15
-                    )
-                else:
-                    nx.draw_networkx_edges(
-                        temp_graph, pos, edgelist=[(u, v)], 
-                        edge_color=[edge_colors[i]], style='solid',
-                        width=2.0, arrowsize=15
-                    )
-            
-            # Draw nodes
-            nx.draw_networkx_nodes(temp_graph, pos, node_color=node_colors, node_size=500)
-            nx.draw_networkx_labels(temp_graph, pos, labels=node_labels, font_size=8)
-            
-            # Add legend for edge types
-            import matplotlib.patches as mpatches
-            from matplotlib.lines import Line2D
-            
-            legend_elements = [
-                Line2D([0], [0], color='black', lw=2, label='Regular Connection'),
-                Line2D([0], [0], color='purple', lw=2, label='Edge with RAG Origins'),
-                Line2D([0], [0], color='blue', ls='--', lw=1.5, label='RAG Connection')
-            ]
-            
-            plt.legend(handles=legend_elements, loc='upper right')
-            plt.title("Prompt Hierarchy Graph with Enhanced RAG Connections")
-            plt.savefig(output_file)
-            plt.close()
-            logging.info(f"Enhanced graph visualization saved to {output_file}")
-            
-    # Add database compatibility method
     def save_to_database(self):
         """
-        Compatibility method for database storage.
-        This default implementation saves to a JSON file instead.
-        Database-aware subclasses will override this method.
+        Save all graph data to the database.
+        Saves both to contract_results and to the individual nodes and links tables.
+        
+        Returns:
+            True if successful, False otherwise
         """
-        return self.save_to_json()
+        if not self.dirty:
+            logger.info(f"No changes to save for session {self.session_id}")
+            return True
+            
+        try:
+            # Format data for database
+            data = self.format_for_database()
+            
+            # Save contract data in one operation (will overwrite existing)
+            self.db_manager.save_contract_data(self.session_id, data)
+            
+            # Save individual nodes and links
+            self.save_nodes_and_links(data)
+            
+            # Reset dirty flag
+            self.dirty = False
+            
+            logger.info(f"All graph data saved to database for session {self.session_id}")
+            return True
+        except Exception as e:
+            logger.error(f"Error saving graph to database: {e}", exc_info=True)
+            return False
+    
+    def save_nodes_and_links(self, formatted_data=None):
+        """
+        Save all nodes and links to their respective database tables.
+        
+        Args:
+            formatted_data: Optional pre-formatted data, will generate if not provided
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        import db  # Local import to avoid circular dependencies
+        
+        try:
+            # Get formatted data if not provided
+            if formatted_data is None:
+                formatted_data = self.format_for_database()
+            
+            nodes = formatted_data["nodes"]
+            links = formatted_data["links"]
+            
+            # Log the count of nodes and links to be saved
+            logger.info(f"Saving {len(nodes)} nodes and {len(links)} links to database for session {self.session_id}")
+            
+            with db.db_transaction() as transaction:
+                # First, clear existing data for this session to avoid duplicates
+                db.Node.delete().where(db.Node.session_id == self.session_id).execute()
+                db.Link.delete().where(db.Link.session_id == self.session_id).execute()
+                
+                # Bulk insert nodes
+                for node in nodes:
+                    node_id = node["id"]
+                    prompt = node.get("prompt")
+                    response = node.get("response")
+                    depth = node.get("depth")
+                    
+                    # Extract attributes (everything else)
+                    attributes = dict(node)
+                    for key in ["id", "prompt", "response", "depth"]:
+                        if key in attributes:
+                            attributes.pop(key, None)
+                    
+                    # Add or update node in database
+                    db.Node.create(
+                        node_id=node_id,
+                        session_id=self.session_id,
+                        prompt=prompt,
+                        response=response,
+                        depth=depth,
+                        attributes=attributes if attributes else None
+                    )
+                
+                # Bulk insert links
+                for link in links:
+                    source = link["source"]
+                    target = link["target"]
+                    edge_type = link.get("edge_type", "hierarchy")
+                    link_type = link.get("link_type", edge_type)
+                    similarity = link.get("similarity")
+                    
+                    # Extract attributes (everything else)
+                    attributes = dict(link)
+                    for key in ["source", "target", "edge_type", "link_type", "similarity"]:
+                        if key in attributes:
+                            attributes.pop(key, None)
+                    
+                    # Add link to database
+                    db.Link.create(
+                        session_id=self.session_id,
+                        source_id=source,
+                        target_id=target,
+                        edge_type=edge_type,
+                        link_type=link_type,
+                        similarity=similarity,
+                        attributes=attributes if attributes else None
+                    )
+            
+            logger.info(f"Successfully saved {len(nodes)} nodes and {len(links)} links to database")
+            return True
+        except Exception as e:
+            logger.error(f"Error saving nodes and links to database: {e}", exc_info=True)
+            return False

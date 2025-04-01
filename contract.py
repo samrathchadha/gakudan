@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 """
-Modified contract.py that uses PostgreSQL database instead of files.
+Modified contract.py that uses PostgreSQL database exclusively.
+Only writes to the database at the end, not on every operation.
+NumPy type handling implemented locally.
 """
 
-import json
 import uuid
 import logging
 import threading
@@ -12,7 +13,8 @@ import argparse
 import os
 import sys
 import networkx as nx
-from typing import Dict, List, Optional
+import numpy as np
+from typing import Dict, List, Any, Optional
 import concurrent.futures
 from google import genai
 
@@ -28,6 +30,28 @@ from db_manager import db_manager
 logging.basicConfig(level=logging.INFO, 
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+# Define NumPy type conversion locally
+def convert_numpy_types(obj):
+    """Convert NumPy types to Python native types."""
+    if isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif isinstance(obj, np.integer):
+        return int(obj)
+    elif isinstance(obj, np.floating):
+        return float(obj)
+    elif hasattr(obj, 'item'):  # Handle other numpy scalar types
+        return obj.item()
+    elif isinstance(obj, dict):
+        return {k: convert_numpy_types(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [convert_numpy_types(item) for item in obj]
+    elif isinstance(obj, tuple):
+        return tuple(convert_numpy_types(item) for item in obj)
+    elif isinstance(obj, set):
+        return set(convert_numpy_types(item) for item in obj)
+    else:
+        return obj
 
 class PromptGraph:
     def __init__(self, session_id=None, api_key=None):
@@ -45,6 +69,9 @@ class PromptGraph:
         else:
             logger.warning("No API key provided for Google Generative AI")
             self.client = None
+        
+        # Flag to track changes
+        self.dirty = False
         
         if session_id:
             self.load_from_database(session_id)
@@ -71,7 +98,8 @@ class PromptGraph:
                 # Add any additional attributes from JSONB
                 if node.attributes:
                     for key, value in node.attributes.items():
-                        node_data[key] = value
+                        # Convert any NumPy types
+                        node_data[key] = convert_numpy_types(value)
                 
                 # Add to graph and node map
                 self.graph.add_node(node.node_id, **node_data)
@@ -91,12 +119,14 @@ class PromptGraph:
                     attrs["link_type"] = link.link_type
                 
                 if link.similarity is not None:
-                    attrs["similarity"] = link.similarity
+                    # Convert NumPy float to Python float if needed
+                    attrs["similarity"] = convert_numpy_types(link.similarity)
                 
                 # Add any additional attributes from JSONB
                 if link.attributes:
                     for key, value in link.attributes.items():
-                        attrs[key] = value
+                        # Convert any NumPy types
+                        attrs[key] = convert_numpy_types(value)
                 
                 # Add edge to graph
                 self.graph.add_edge(link.source_id, link.target_id, **attrs)
@@ -162,9 +192,9 @@ class PromptGraph:
         
         logger.info(f"Removed {len(orphaned_nodes)} orphaned nodes")
         
-        # Rebuild node map
+        # Rebuild node map, converting any NumPy types
         self.node_map = {
-            node_id: dict(data) 
+            node_id: {k: convert_numpy_types(v) for k, v in data.items()} 
             for node_id, data in self.graph.nodes(data=True)
         }
     
@@ -201,7 +231,10 @@ class PromptGraph:
         return list(self.graph.predecessors(node_id))
     
     def add_node(self, id, prompt, depth, response=None):
-        """Add a new node to the graph with specified ID"""
+        """
+        Add a new node to the graph with specified ID.
+        Does not save to database immediately.
+        """
         node = {
             "id": id,
             "prompt": prompt,
@@ -213,22 +246,17 @@ class PromptGraph:
             
         with self.lock:
             self.graph.add_node(id, **node)
-            self.node_map[id] = node
-            
-            # Save to database if session_id is provided
-            if self.session_id:
-                db_manager.add_node(
-                    node_id=id,
-                    session_id=self.session_id,
-                    prompt=prompt,
-                    response=response,
-                    depth=depth
-                )
+            # Convert any potential NumPy types
+            self.node_map[id] = {k: convert_numpy_types(v) for k, v in node.items()}
+            self.dirty = True
             
         return id
     
     def add_link(self, source_id, target_id, edge_type="hierarchy"):
-        """Add a link between nodes"""
+        """
+        Add a link between nodes.
+        Does not save to database immediately.
+        """
         with self.lock:
             # Check if this link already exists
             if not self.graph.has_edge(source_id, target_id):
@@ -238,19 +266,13 @@ class PromptGraph:
                     edge_type=edge_type,
                     link_type=edge_type
                 )
-                
-                # Save to database if session_id is provided
-                if self.session_id:
-                    db_manager.add_link(
-                        session_id=self.session_id,
-                        source_id=source_id,
-                        target_id=target_id,
-                        edge_type=edge_type,
-                        link_type=edge_type
-                    )
+                self.dirty = True
     
     def edit_node(self, node_id, prompt=None, response=None, depth=None):
-        """Edit an existing node"""
+        """
+        Edit an existing node.
+        Does not save to database immediately.
+        """
         if node_id not in self.node_map:
             logger.warning(f"Node {node_id} not found")
             return False
@@ -267,18 +289,9 @@ class PromptGraph:
             if depth is not None:
                 node_data["depth"] = depth
 
-            # Update the node map
-            self.node_map[node_id] = dict(node_data)
-            
-            # Save to database if session_id is provided
-            if self.session_id:
-                db_manager.add_node(
-                    node_id=node_id,
-                    session_id=self.session_id,
-                    prompt=prompt if prompt is not None else node_data.get("prompt"),
-                    response=response if response is not None else node_data.get("response"),
-                    depth=depth if depth is not None else node_data.get("depth")
-                )
+            # Update the node map, converting any NumPy types
+            self.node_map[node_id] = {k: convert_numpy_types(v) for k, v in node_data.items()}
+            self.dirty = True
 
         return True
     
@@ -587,7 +600,7 @@ class PromptGraph:
             return False
         
         try:
-            # Convert the graph to a format suitable for JSON
+            # Convert the graph to a format suitable for the database
             result_data = {
                 "directed": True,
                 "multigraph": True,
@@ -599,22 +612,29 @@ class PromptGraph:
             # Add nodes
             for node_id, data in self.graph.nodes(data=True):
                 node_data = {"id": node_id}
-                node_data.update(data)
+                # Make a clean copy of data with NumPy types converted
+                for k, v in data.items():
+                    node_data[k] = convert_numpy_types(v)
                 result_data["nodes"].append(node_data)
             
             # Add links
             for source, target, data in self.graph.edges(data=True):
                 link_data = {"source": source, "target": target}
-                link_data.update(data)
+                # Make a clean copy of data with NumPy types converted
+                for k, v in data.items():
+                    link_data[k] = convert_numpy_types(v)
                 result_data["links"].append(link_data)
             
-            # Save to the database
+            # Save to the database - overwrite existing data
             db_manager.save_contract_data(self.session_id, result_data)
             logger.info(f"Contract data saved to database for session {self.session_id}")
             
             # Update session status
             db_manager.update_contract_status(self.session_id, "completed")
             db_manager.update_session_status(self.session_id, "completed")
+            
+            # Reset dirty flag
+            self.dirty = False
             
             return True
         except Exception as e:
@@ -657,7 +677,7 @@ def main():
         # Run the synthesis process
         graph.run_synthesis(model="gemini-2.0-flash-lite")
         
-        # Save the results to the database
+        # Save the results to the database - only at the end
         graph.save_to_database()
         
         logger.info(f"Processing complete for session {session_id}")
