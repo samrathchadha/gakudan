@@ -4,3 +4,4 @@ sessions
 expand/__pycache__
 api_server.log
 venv/
+revenv/
